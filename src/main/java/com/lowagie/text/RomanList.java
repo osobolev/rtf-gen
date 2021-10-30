@@ -85,7 +85,8 @@ public class RomanList extends List {
      * @return true if adding the object succeeded
      * @param    o    the object to add.
      */
-    public boolean add(Object o) {
+    @Override
+    public boolean add(Element o) {
         if (o instanceof ListItem) {
             ListItem item = (ListItem) o;
             Chunk chunk = new Chunk(preSymbol, symbol.getFont());
@@ -100,8 +101,6 @@ public class RomanList extends List {
             nested.setIndentationLeft(nested.getIndentationLeft() + symbolIndent);
             first--;
             return list.add(nested);
-        } else if (o instanceof String) {
-            return this.add(new ListItem((String) o));
         }
         return false;
     }
