@@ -454,7 +454,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
                     }
                     this.document.outputDebugLinebreak(result);
                 } else if (thisRtfElement instanceof RtfList) {
-                    ((RtfList) thisRtfElement).writeContent(result);
+                    thisRtfElement.writeContent(result);
 //            	((RtfList)thisRtfElement).writeListBeginning(result);
                     writeListNumbers(result);
                     this.document.outputDebugLinebreak(result);

@@ -680,10 +680,9 @@ public abstract class Image extends Rectangle {
         if (image == null)
             return null;
         try {
-            Class cs = image.getClass();
-            Constructor constructor = cs
-                .getDeclaredConstructor(new Class[] {Image.class});
-            return (Image) constructor.newInstance(new Object[] {image});
+            Class<? extends Image> cs = image.getClass();
+            Constructor<? extends Image> constructor = cs.getDeclaredConstructor(Image.class);
+            return constructor.newInstance(image);
         } catch (Exception e) {
             throw new ExceptionConverter(e);
         }

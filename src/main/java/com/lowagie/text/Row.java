@@ -238,7 +238,7 @@ public class Row implements Element {
         if ((column < 0) || (column > columns)) throw new IndexOutOfBoundsException("addCell - illegal column argument");
         if (!((getObjectID(element) == CELL) || (getObjectID(element) == TABLE))) throw new IllegalArgumentException("addCell - only Cells or Tables allowed");
 
-        int lColspan = Cell.class.isInstance(element) ? ((Cell) element).getColspan() : 1;
+        int lColspan = element instanceof Cell ? ((Cell) element).getColspan() : 1;
 
         if (!reserve(column, lColspan)) {
             return -1;
@@ -318,8 +318,8 @@ public class Row implements Element {
      */
     int getElementID(int column) {
         if (cells[column] == null) return NULL;
-        else if (Cell.class.isInstance(cells[column])) return CELL;
-        else if (Table.class.isInstance(cells[column])) return TABLE;
+        else if (cells[column] instanceof Cell) return CELL;
+        else if (cells[column] instanceof Table) return TABLE;
 
         return -1;
     }
@@ -332,8 +332,8 @@ public class Row implements Element {
      */
     int getObjectID(Object element) {
         if (element == null) return NULL;
-        else if (Cell.class.isInstance(element)) return CELL;
-        else if (Table.class.isInstance(element)) return TABLE;
+        else if (element instanceof Cell) return CELL;
+        else if (element instanceof Table) return TABLE;
         return -1;
     }
 
