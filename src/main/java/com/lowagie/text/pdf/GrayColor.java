@@ -48,25 +48,32 @@
  */
 package com.lowagie.text.pdf;
 
+import java.awt.Color;
+
 /**
  * @author Paulo Soares (psoares@consiste.pt)
  */
-public class GrayColor extends ExtendedColor {
+public class GrayColor extends Color {
 
     private static final long serialVersionUID = -6571835680819282746L;
 
     private final float gray;
 
-    public static final GrayColor GRAYBLACK = new GrayColor(0f);
-    public static final GrayColor GRAYWHITE = new GrayColor(1f);
+    private GrayColor(float normalized, boolean empty) {
+        super(normalized, normalized, normalized);
+        gray = normalized;
+    }
 
-    public GrayColor(int intGray) {
-        this(intGray / 255f);
+    private static float normalize(float value) {
+        if (value < 0)
+            return 0;
+        if (value > 1)
+            return 1;
+        return value;
     }
 
     public GrayColor(float floatGray) {
-        super(TYPE_GRAY, floatGray, floatGray, floatGray);
-        gray = normalize(floatGray);
+        this(normalize(floatGray), true);
     }
 
     public float getGray() {
