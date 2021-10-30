@@ -302,7 +302,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
                 setToDefaultFamily(font.getFamilyname());
             }
 
-            if (this.fontName.equalsIgnoreCase("unknown")) {
+            if ("unknown".equalsIgnoreCase(this.fontName)) {
                 this.fontName = DEFAULT_FONT;
             }
 
@@ -673,7 +673,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
      */
     public Font difference(Font font) {
         String dFamilyname = font.getFamilyname();
-        if (dFamilyname == null || dFamilyname.trim().equals("") || dFamilyname.trim().equalsIgnoreCase("unknown")) {
+        if (dFamilyname == null || "".equals(dFamilyname.trim()) || "unknown".equalsIgnoreCase(dFamilyname.trim())) {
             dFamilyname = this.fontName;
         }
 

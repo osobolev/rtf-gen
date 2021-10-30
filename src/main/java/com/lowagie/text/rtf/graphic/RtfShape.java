@@ -317,7 +317,7 @@ public class RtfShape extends RtfAddableElement {
             rsp.setRtfDocument(this.doc);
             rsp.writeContent(result);
         }
-        if (!this.shapeText.equals("")) {
+        if (!"".equals(this.shapeText)) {
             result.write(OPEN_GROUP);
             result.write(DocWriter.getISOBytes("\\shptxt"));
             result.write(DELIMITER);
