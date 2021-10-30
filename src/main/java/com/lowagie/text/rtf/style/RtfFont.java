@@ -297,17 +297,6 @@ public class RtfFont extends Font implements RtfExtendedElement {
             } else {
                 setToDefaultFamily(font.getFamilyname());
             }
-            if(font.getBaseFont() != null) {
-                String[][] fontNames = font.getBaseFont().getFullFontName();
-                for(int i = 0; i < fontNames.length; i++) {
-                    if(fontNames[i][2].equals("0")) {
-                        this.fontName = fontNames[i][3];
-                        break;
-                    } else if(fontNames[i][2].equals("1033") || fontNames[i][2].equals("")) {
-                        this.fontName = fontNames[i][3];
-                    }
-                }
-            }
 
             if(this.fontName.equalsIgnoreCase("unknown")) {
                 this.fontName = DEFAULT_FONT;

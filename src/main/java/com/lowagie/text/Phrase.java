@@ -561,7 +561,7 @@ public class Phrase extends ArrayList implements TextElementArray {
     	Phrase p = new Phrase(true);
     	p.setLeading(leading);
     	p.font = font;
-    	if (font.getFamily() != Font.SYMBOL && font.getFamily() != Font.ZAPFDINGBATS && font.getBaseFont() == null) {
+    	if (font.getFamily() != Font.SYMBOL && font.getFamily() != Font.ZAPFDINGBATS) {
             int index;
             while((index = SpecialSymbol.index(string)) > -1) {
                 if (index > 0) {

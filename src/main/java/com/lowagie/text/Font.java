@@ -130,9 +130,6 @@ public class Font implements Comparable {
 	/** the value of the color. */
 	private Color color = null;
 
-	/** the external font */
-	private BaseFont baseFont = null;
-
 	// constructors
 
 	/**
@@ -146,7 +143,6 @@ public class Font implements Comparable {
 		this.size = other.size;
 		this.style = other.style;
 		this.color = other.color;
-		this.baseFont = other.baseFont;
 	}
 
 	/**
@@ -167,62 +163,6 @@ public class Font implements Comparable {
 		this.size = size;
 		this.style = style;
 		this.color = color;
-	}
-
-	/**
-	 * Constructs a Font.
-	 * 
-	 * @param bf
-	 *            the external font
-	 * @param size
-	 *            the size of this font
-	 * @param style
-	 *            the style of this font
-	 * @param color
-	 *            the <CODE>Color</CODE> of this font.
-	 */
-
-	public Font(BaseFont bf, float size, int style, Color color) {
-		this.baseFont = bf;
-		this.size = size;
-		this.style = style;
-		this.color = color;
-	}
-
-	/**
-	 * Constructs a Font.
-	 * 
-	 * @param bf
-	 *            the external font
-	 * @param size
-	 *            the size of this font
-	 * @param style
-	 *            the style of this font
-	 */
-	public Font(BaseFont bf, float size, int style) {
-		this(bf, size, style, null);
-	}
-
-	/**
-	 * Constructs a Font.
-	 * 
-	 * @param bf
-	 *            the external font
-	 * @param size
-	 *            the size of this font
-	 */
-	public Font(BaseFont bf, float size) {
-		this(bf, size, UNDEFINED, null);
-	}
-
-	/**
-	 * Constructs a Font.
-	 * 
-	 * @param bf
-	 *            the external font
-	 */
-	public Font(BaseFont bf) {
-		this(bf, UNDEFINED, UNDEFINED, null);
 	}
 
 	/**
@@ -288,9 +228,6 @@ public class Font implements Comparable {
 		Font font;
 		try {
 			font = (Font) object;
-			if (baseFont != null && !baseFont.equals(font.getBaseFont())) {
-				return -2;
-			}
 			if (this.family != font.getFamily()) {
 				return 1;
 			}
@@ -347,21 +284,6 @@ public class Font implements Comparable {
 			return FontFactory.SYMBOL;
 		case Font.ZAPFDINGBATS:
 			return FontFactory.ZAPFDINGBATS;
-		default:
-			if (baseFont != null) {
-				String[][] names = baseFont.getFamilyFontName();
-				for (int i = 0; i < names.length; i++) {
-					if ("0".equals(names[i][2])) {
-						return names[i][3];
-					}
-					if ("1033".equals(names[i][2])) {
-						tmp = names[i][3];
-					}
-					if ("".equals(names[i][2])) {
-						tmp = names[i][3];
-					}
-				}
-			}
 		}
 		return tmp;
 	}
@@ -474,8 +396,6 @@ public class Font implements Comparable {
 		if (style == UNDEFINED) {
 			style = NORMAL;
 		}
-		if (baseFont != null)
-			return style;
 		if (family == SYMBOL || family == ZAPFDINGBATS)
 			return style;
 		else
@@ -623,15 +543,6 @@ public class Font implements Comparable {
 	// BASEFONT
 
 	/**
-	 * Gets the <CODE>BaseFont</CODE> inside this object.
-	 * 
-	 * @return the <CODE>BaseFont</CODE>
-	 */
-	public BaseFont getBaseFont() {
-		return baseFont;
-	}
-
-	/**
 	 * Gets the <CODE>BaseFont</CODE> this class represents. For the built-in
 	 * fonts a <CODE>BaseFont</CODE> is calculated.
 	 * 
@@ -642,8 +553,6 @@ public class Font implements Comparable {
 	 * @return the <CODE>BaseFont</CODE> this class represents
 	 */
 	public BaseFont getCalculatedBaseFont(boolean specialEncoding) {
-		if (baseFont != null)
-			return baseFont;
 		int style = this.style;
 		if (style == UNDEFINED) {
 			style = NORMAL;
@@ -735,7 +644,7 @@ public class Font implements Comparable {
 	 */
 	public boolean isStandardFont() {
 		return (family == UNDEFINED && size == UNDEFINED && style == UNDEFINED
-				&& color == null && baseFont == null);
+				&& color == null);
 	}
 
 	/**
@@ -770,19 +679,8 @@ public class Font implements Comparable {
 			dColor = this.color;
 		}
 		// family
-		if (font.baseFont != null) {
-			return new Font(font.baseFont, dSize, dStyle, dColor);
-		}
 		if (font.getFamily() != UNDEFINED) {
 			return new Font(font.family, dSize, dStyle, dColor);
-		}
-		if (this.baseFont != null) {
-			if (dStyle == style1) {
-				return new Font(this.baseFont, dSize, dStyle, dColor);
-			} else {
-				return FontFactory.getFont(this.getFamilyname(), dSize, dStyle,
-						dColor);
-			}
 		}
 		return new Font(this.family, dSize, dStyle, dColor);
 	}
