@@ -558,7 +558,7 @@ public abstract class Image extends Rectangle {
                     } else {
                         pixelsByte[index++] = (byte) ((pixels[j] >> 16) & 0xff);
                         pixelsByte[index++] = (byte) ((pixels[j] >> 8) & 0xff);
-                        pixelsByte[index++] = (byte) ((pixels[j]) & 0xff);
+                        pixelsByte[index++] = (byte) (pixels[j] & 0xff);
                     }
                 }
             } else {
@@ -585,7 +585,7 @@ public abstract class Image extends Rectangle {
                     }
                     pixelsByte[index++] = (byte) ((pixels[j] >> 16) & 0xff);
                     pixelsByte[index++] = (byte) ((pixels[j] >> 8) & 0xff);
-                    pixelsByte[index++] = (byte) ((pixels[j]) & 0xff);
+                    pixelsByte[index++] = (byte) (pixels[j] & 0xff);
                 }
                 if (shades)
                     transparency = null;
@@ -1007,7 +1007,7 @@ public abstract class Image extends Rectangle {
         float sinX = (float) Math.sin(rotationRadians);
         matrix[AX] = plainWidth * cosX;
         matrix[AY] = plainWidth * sinX;
-        matrix[BX] = (-plainHeight) * sinX;
+        matrix[BX] = -plainHeight * sinX;
         matrix[BY] = plainHeight * cosX;
         if (rotationRadians < Math.PI / 2f) {
             matrix[CX] = matrix[BX];
@@ -1504,7 +1504,7 @@ public abstract class Image extends Rectangle {
      * @return the ICC profile or <CODE>null</CODE>
      */
     public boolean hasICCProfile() {
-        return (this.profile != null);
+        return this.profile != null;
     }
 
     /**
@@ -1588,7 +1588,7 @@ public abstract class Image extends Rectangle {
             throw new DocumentException(
                 "The image mask is not a mask. Did you do makeMask()?");
         imageMask = mask;
-        smask = (mask.bpc > 1 && mask.bpc <= 8);
+        smask = mask.bpc > 1 && mask.bpc <= 8;
     }
 
     /**

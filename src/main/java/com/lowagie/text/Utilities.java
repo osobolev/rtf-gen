@@ -275,7 +275,7 @@ public class Utilities {
      * @since 2.1.2
      */
     public static int convertToUtf32(char highSurrogate, char lowSurrogate) {
-        return (((highSurrogate - 0xd800) * 0x400) + (lowSurrogate - 0xdc00)) + 0x10000;
+        return ((highSurrogate - 0xd800) * 0x400) + (lowSurrogate - 0xdc00) + 0x10000;
     }
 
     /**
@@ -287,7 +287,7 @@ public class Utilities {
      * @since 2.1.2
      */
     public static int convertToUtf32(char[] text, int idx) {
-        return (((text[idx] - 0xd800) * 0x400) + (text[idx + 1] - 0xdc00)) + 0x10000;
+        return ((text[idx] - 0xd800) * 0x400) + (text[idx + 1] - 0xdc00) + 0x10000;
     }
 
     /**
@@ -299,7 +299,7 @@ public class Utilities {
      * @since 2.1.2
      */
     public static int convertToUtf32(String text, int idx) {
-        return (((text.charAt(idx) - 0xd800) * 0x400) + (text.charAt(idx + 1) - 0xdc00)) + 0x10000;
+        return ((text.charAt(idx) - 0xd800) * 0x400) + (text.charAt(idx + 1) - 0xdc00) + 0x10000;
     }
 
     /**

@@ -197,7 +197,7 @@ public class Anchor extends Phrase {
         try {
             Chunk chunk;
             Iterator i = getChunks().iterator();
-            boolean localDestination = (reference != null && reference.startsWith("#"));
+            boolean localDestination = reference != null && reference.startsWith("#");
             boolean notGotoOK = true;
             while (i.hasNext()) {
                 chunk = (Chunk) i.next();
@@ -225,7 +225,7 @@ public class Anchor extends Phrase {
         ArrayList tmp = new ArrayList();
         Chunk chunk;
         Iterator i = iterator();
-        boolean localDestination = (reference != null && reference.startsWith("#"));
+        boolean localDestination = reference != null && reference.startsWith("#");
         boolean notGotoOK = true;
         while (i.hasNext()) {
             chunk = (Chunk) i.next();

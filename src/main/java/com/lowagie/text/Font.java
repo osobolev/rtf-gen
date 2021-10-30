@@ -416,7 +416,7 @@ public class Font implements Comparable {
         if (family == SYMBOL || family == ZAPFDINGBATS)
             return style;
         else
-            return style & (~BOLDITALIC);
+            return style & ~BOLDITALIC;
     }
 
     /**
@@ -562,8 +562,7 @@ public class Font implements Comparable {
      * @return a <CODE>boolean</CODE>
      */
     public boolean isStandardFont() {
-        return (family == UNDEFINED && size == UNDEFINED && style == UNDEFINED
-                && color == null);
+        return family == UNDEFINED && size == UNDEFINED && style == UNDEFINED && color == null;
     }
 
     /**

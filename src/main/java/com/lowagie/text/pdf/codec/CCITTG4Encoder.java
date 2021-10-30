@@ -164,8 +164,8 @@ public class CCITTG4Encoder {
 
     private void Fax3Encode2DRow() {
         int a0 = 0;
-        int a1 = (pixel(dataBp, offsetData, 0) != 0 ? 0 : finddiff(dataBp, offsetData, 0, rowpixels, 0));
-        int b1 = (pixel(refline, 0, 0) != 0 ? 0 : finddiff(refline, 0, 0, rowpixels, 0));
+        int a1 = pixel(dataBp, offsetData, 0) != 0 ? 0 : finddiff(dataBp, offsetData, 0, rowpixels, 0);
+        int b1 = pixel(refline, 0, 0) != 0 ? 0 : finddiff(refline, 0, 0, rowpixels, 0);
         int a2, b2;
 
         for (; ; ) {
@@ -222,7 +222,7 @@ public class CCITTG4Encoder {
     private int pixel(byte[] data, int offset, int bit) {
         if (bit >= rowpixels)
             return 0;
-        return ((data[offset + (bit >> 3)] & 0xff) >> (7 - ((bit) & 7))) & 1;
+        return ((data[offset + (bit >> 3)] & 0xff) >> (7 - (bit & 7))) & 1;
     }
 
     private static int find1span(byte[] bp, int offset, int bs, int be) {
@@ -233,7 +233,7 @@ public class CCITTG4Encoder {
         /*
          * Check partial byte on lhs.
          */
-        if (bits > 0 && (n = (bs & 7)) != 0) {
+        if (bits > 0 && (n = bs & 7) != 0) {
             span = oneruns[(bp[pos] << n) & 0xff];
             if (span > 8 - n)        /* table value too generous */
                 span = 8 - n;
@@ -250,7 +250,7 @@ public class CCITTG4Encoder {
          */
         while (bits >= 8) {
             if (bp[pos] != -1)    /* end of run */
-                return (span + oneruns[bp[pos] & 0xff]);
+                return span + oneruns[bp[pos] & 0xff];
             span += 8;
             bits -= 8;
             pos++;
@@ -260,7 +260,7 @@ public class CCITTG4Encoder {
          */
         if (bits > 0) {
             n = oneruns[bp[pos] & 0xff];
-            span += (n > bits ? bits : n);
+            span += n > bits ? bits : n;
         }
         return span;
     }
@@ -273,7 +273,7 @@ public class CCITTG4Encoder {
         /*
          * Check partial byte on lhs.
          */
-        if (bits > 0 && (n = (bs & 7)) != 0) {
+        if (bits > 0 && (n = bs & 7) != 0) {
             span = zeroruns[(bp[pos] << n) & 0xff];
             if (span > 8 - n)        /* table value too generous */
                 span = 8 - n;
@@ -290,7 +290,7 @@ public class CCITTG4Encoder {
          */
         while (bits >= 8) {
             if (bp[pos] != 0)    /* end of run */
-                return (span + zeroruns[bp[pos] & 0xff]);
+                return span + zeroruns[bp[pos] & 0xff];
             span += 8;
             bits -= 8;
             pos++;
@@ -300,7 +300,7 @@ public class CCITTG4Encoder {
          */
         if (bits > 0) {
             n = zeroruns[bp[pos] & 0xff];
-            span += (n > bits ? bits : n);
+            span += n > bits ? bits : n;
         }
         return span;
     }

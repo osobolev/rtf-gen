@@ -238,7 +238,7 @@ public class Row implements Element {
         if ((column < 0) || (column > columns)) throw new IndexOutOfBoundsException("addCell - illegal column argument");
         if (!((getObjectID(element) == CELL) || (getObjectID(element) == TABLE))) throw new IllegalArgumentException("addCell - only Cells or Tables allowed");
 
-        int lColspan = ((Cell.class.isInstance(element)) ? ((Cell) element).getColspan() : 1);
+        int lColspan = Cell.class.isInstance(element) ? ((Cell) element).getColspan() : 1;
 
         if (!reserve(column, lColspan)) {
             return -1;

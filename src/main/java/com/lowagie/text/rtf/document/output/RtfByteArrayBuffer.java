@@ -91,7 +91,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
     }
 
     public String toString() {
-        return ("RtfByteArrayBuffer: size=" + size() + " #arrays=" + arrays.size() + " pos=" + pos);
+        return "RtfByteArrayBuffer: size=" + size() + " #arrays=" + arrays.size() + " pos=" + pos;
     }
 
     /**
@@ -214,7 +214,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
             size += n;
             if (pos == buffer.length) flushBuffer();
         }
-        return (size - sizeStart);
+        return size - sizeStart;
     }
 
     /**

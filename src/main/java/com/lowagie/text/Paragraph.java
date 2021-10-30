@@ -255,7 +255,7 @@ public class Paragraph extends Phrase {
             super.add(o);
             java.util.List chunks = getChunks();
             if (!chunks.isEmpty()) {
-                Chunk tmp = ((Chunk) chunks.get(chunks.size() - 1));
+                Chunk tmp = (Chunk) chunks.get(chunks.size() - 1);
                 super.add(new Chunk("\n", tmp.getFont()));
             } else {
                 super.add(Chunk.NEWLINE);

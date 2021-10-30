@@ -1019,7 +1019,7 @@ public class Table extends Rectangle implements LargeElement {
             for (i = 0; i < rows.size(); i++) {
                 if (Table.class.isInstance(((Row) rows.get(i)).getCell(j))) {
                     isTable = true;
-                    lDummyTable = ((Table) ((Row) rows.get(i)).getCell(j));
+                    lDummyTable = (Table) ((Row) rows.get(i)).getCell(j);
                     if (tmpWidths == null) {
                         tmpWidths = lDummyTable.widths;
                         lNewMaxColumns = tmpWidths.length;
@@ -1183,7 +1183,7 @@ public class Table extends Rectangle implements LargeElement {
                             ((Cell) aElement).setColspan(((Cell) ((Row) rows.get(i)).getCell(j)).getColspan() + lDummyWidths[j] - 1);
 
                             // most likely this cell covers a larger area because of the row/cols splits : define not-to-be-filled cells
-                            placeCell(newRows, ((Cell) aElement), new Point(lDummyRow, lDummyColumn));
+                            placeCell(newRows, (Cell) aElement, new Point(lDummyRow, lDummyColumn));
                         }
                     }
                     lDummyColumn += lDummyWidths[j];
@@ -1329,7 +1329,7 @@ public class Table extends Rectangle implements LargeElement {
             }
         }
         while (
-            (i < rows.size()) && (j < columns) && (((Row) rows.get(i)).isReserved(j))
+            (i < rows.size()) && (j < columns) && ((Row) rows.get(i)).isReserved(j)
         );
         curPosition = new Point(i, j);
     }

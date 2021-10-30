@@ -117,7 +117,7 @@ public class GreekAlphabetFactory {
             bytes--;
             value[bytes] = (char) (c % 24);
             if (value[bytes] > 16) value[bytes]++;
-            value[bytes] += (lowercase ? 945 : 913);
+            value[bytes] += lowercase ? 945 : 913;
             value[bytes] = SpecialSymbol.getCorrespondingSymbol(value[bytes]);
             c /= 24;
         }
