@@ -48,7 +48,7 @@
  */
 package com.lowagie.text.pdf.codec;
 
-import com.lowagie.text.pdf.ByteBuffer;
+import java.io.ByteArrayOutputStream;
 
 /**
  * Encodes data in the CCITT G4 FAX format.
@@ -59,7 +59,7 @@ public class CCITTG4Encoder {
     private int bit = 8;
     private int data;
     private byte[] refline;
-    private ByteBuffer outBuf = new ByteBuffer(1024);
+    private ByteArrayOutputStream outBuf = new ByteArrayOutputStream(1024);
     private byte[] dataBp;
     private int offsetData;
     private int sizeData;
@@ -145,14 +145,14 @@ public class CCITTG4Encoder {
         while (length > bit) {
             data |= bits >> (length - bit);
             length -= bit;
-            outBuf.append((byte)data);
+            outBuf.write((byte)data);
             data = 0;
             bit = 8;
         }
         data |= (bits & msbmask[length]) << (bit - length);
         bit -= length;
         if (bit == 0) {
-            outBuf.append((byte)data);
+            outBuf.write((byte)data);
             data = 0;
             bit = 8;
         }
@@ -199,7 +199,7 @@ public class CCITTG4Encoder {
         putBits(EOL, 12);
         putBits(EOL, 12);
         if (bit != 8) {
-            outBuf.append((byte)data);
+            outBuf.write((byte)data);
             data = 0;
             bit = 8;
         }
