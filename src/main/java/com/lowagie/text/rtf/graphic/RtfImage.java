@@ -231,7 +231,7 @@ public class RtfImage extends RtfElement {
      * lookup table used for converting bytes to hex chars.
      * TODO Should probably be refactored into a helper class
      */
-    public final static byte[] byte2charLUT = new byte[512]; //'0001020304050607 ... fafbfcfdfeff'
+    public static final byte[] byte2charLUT = new byte[512]; //'0001020304050607 ... fafbfcfdfeff'
 
     static {
         char c = '0';

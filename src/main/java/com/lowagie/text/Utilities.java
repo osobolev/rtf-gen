@@ -133,7 +133,7 @@ public class Utilities {
      * @param size the number of bytes to skip
      * @throws IOException
      */
-    static public void skip(InputStream is, int size) throws IOException {
+    public static void skip(InputStream is, int size) throws IOException {
         long n;
         while (size > 0) {
             n = is.skip(size);
