@@ -198,8 +198,7 @@ public class Chunk implements Element {
         this(OBJECT_REPLACEMENT_CHARACTER, new Font());
         Image copyImage = Image.getInstance(image);
         copyImage.setAbsolutePosition(Float.NaN, Float.NaN);
-        setAttribute(IMAGE, new Object[] {copyImage, new Float(offsetX),
-            new Float(offsetY), Boolean.FALSE});
+        setAttribute(IMAGE, new Object[] {copyImage, offsetX, offsetY, Boolean.FALSE});
     }
 
     /**
@@ -227,8 +226,7 @@ public class Chunk implements Element {
     public Chunk(Image image, float offsetX, float offsetY,
                  boolean changeLeading) {
         this(OBJECT_REPLACEMENT_CHARACTER, new Font());
-        setAttribute(IMAGE, new Object[] {image, new Float(offsetX),
-            new Float(offsetY), Boolean.valueOf(changeLeading)});
+        setAttribute(IMAGE, new Object[] {image, offsetX, offsetY, changeLeading});
     }
 
     // implementation of the Element-methods
@@ -390,7 +388,7 @@ public class Chunk implements Element {
      * @return this <CODE>Chunk</CODE>
      */
     public Chunk setHorizontalScaling(float scale) {
-        return setAttribute(HSCALE, new Float(scale));
+        return setAttribute(HSCALE, scale);
     }
 
     /**
@@ -423,8 +421,7 @@ public class Chunk implements Element {
      * @return this <CODE>Chunk</CODE>
      */
     public Chunk setUnderline(float thickness, float yPosition) {
-        return setUnderline(null, thickness, 0f, yPosition, 0f,
-            0);
+        return setUnderline(null, thickness, 0f, yPosition, 0f, 0);
     }
 
     /**
@@ -450,9 +447,9 @@ public class Chunk implements Element {
             attributes = new HashMap<>();
         Object[] obj = {
             color,
-            new float[] {thickness, thicknessMul, yPosition, yPositionMul, cap}};
-        Object[][] unders = Utilities.addToArray((Object[][]) attributes.get(UNDERLINE),
-            obj);
+            new float[] {thickness, thicknessMul, yPosition, yPositionMul, cap}
+        };
+        Object[][] unders = Utilities.addToArray((Object[][]) attributes.get(UNDERLINE), obj);
         return setAttribute(UNDERLINE, unders);
     }
 
@@ -471,7 +468,7 @@ public class Chunk implements Element {
      * @return this <CODE>Chunk</CODE>
      */
     public Chunk setTextRise(float rise) {
-        return setAttribute(SUBSUPSCRIPT, new Float(rise));
+        return setAttribute(SUBSUPSCRIPT, rise);
     }
 
     /**
@@ -533,8 +530,10 @@ public class Chunk implements Element {
      */
     public Chunk setBackground(Color color, float extraLeft, float extraBottom,
                                float extraRight, float extraTop) {
-        return setAttribute(BACKGROUND, new Object[] {color,
-            new float[] {extraLeft, extraBottom, extraRight, extraTop}});
+        return setAttribute(BACKGROUND, new Object[] {
+            color,
+            new float[] {extraLeft, extraBottom, extraRight, extraTop}
+        });
     }
 
     /**
@@ -560,8 +559,7 @@ public class Chunk implements Element {
      */
     public Chunk setTextRenderMode(int mode, float strokeWidth,
                                    Color strokeColor) {
-        return setAttribute(TEXTRENDERMODE, new Object[] {new Integer(mode),
-            new Float(strokeWidth), strokeColor});
+        return setAttribute(TEXTRENDERMODE, new Object[] {mode, strokeWidth, strokeColor});
     }
 
     /**
@@ -588,8 +586,7 @@ public class Chunk implements Element {
      * @return this <CODE>Chunk</CODE>
      */
     public Chunk setRemoteGoto(String filename, int page) {
-        return setAttribute(REMOTEGOTO, new Object[] {filename,
-            new Integer(page)});
+        return setAttribute(REMOTEGOTO, new Object[] {filename, page});
     }
 
     /**
@@ -655,9 +652,9 @@ public class Chunk implements Element {
         if (attributes == null)
             return null;
         Object[] obj = (Object[]) attributes.get(IMAGE);
-        if (obj == null)
+        if (obj == null) {
             return null;
-        else {
+        } else {
             return (Image) obj[0];
         }
     }
