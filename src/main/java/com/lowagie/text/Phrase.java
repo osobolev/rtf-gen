@@ -362,7 +362,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
                 Chunk previous = (Chunk) get(size() - 1);
                 if (!previous.hasAttributes()
                     && (f == null
-                        || f.compareTo(previous.getFont()) == 0)
+                        || f.same(previous.getFont()))
                     && !"".equals(previous.getContent().trim())
                     && !"".equals(c.trim())) {
                     previous.append(c);

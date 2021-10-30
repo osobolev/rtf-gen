@@ -56,6 +56,7 @@ import com.lowagie.text.rtf.document.RtfDocument;
 import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Objects;
 
 import static com.lowagie.text.rtf.RtfElement.intToByteArray;
 
@@ -700,21 +701,14 @@ public class RtfFont extends Font implements RtfExtendedElement {
         return false;
     }
 
-    /**
-     * Compares this <code>RtfFont</code> to either a {@link com.lowagie.text.Font} or
-     * an <code>RtfFont</code>.
-     *
-     * @since 2.1.0
-     */
-    public int compareTo(Font font) {
-        if (font instanceof RtfFont) {
-            if (this.getFontName().compareTo(((RtfFont) font).getFontName()) != 0) {
-                return 1;
-            } else {
-                return super.compareTo(font);
-            }
-        } else {
-            return super.compareTo(font);
+    @Override
+    public boolean same(Font that) {
+        if (this == that)
+            return true;
+        if (that instanceof RtfFont) {
+            if (!Objects.equals(this.fontName, ((RtfFont) that).fontName))
+                return false;
         }
+        return super.same(that);
     }
 }

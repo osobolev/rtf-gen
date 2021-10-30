@@ -49,6 +49,7 @@
 package com.lowagie.text;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Contains all the specifications of a font: fontfamily, size, style and color.
@@ -64,7 +65,7 @@ import java.awt.*;
  *
  * </BLOCKQUOTE>
  */
-public class Font implements Comparable<Font> {
+public class Font {
 
     // static membervariables for the different families
 
@@ -225,44 +226,19 @@ public class Font implements Comparable<Font> {
         this(UNDEFINED, UNDEFINED, UNDEFINED, null);
     }
 
-    // implementation of the Comparable interface
-
     /**
      * Compares this <CODE>Font</CODE> with another
      *
-     * @param font the other <CODE>Font</CODE>
+     * @param that the other <CODE>Font</CODE>
      * @return a value
      */
-    public int compareTo(Font font) {
-        if (font == null) {
-            return -1;
-        }
-        try {
-            if (this.family != font.getFamily()) {
-                return 1;
-            }
-            if (this.size != font.getSize()) {
-                return 2;
-            }
-            if (this.style != font.getStyle()) {
-                return 3;
-            }
-            if (this.color == null) {
-                if (font.color == null) {
-                    return 0;
-                }
-                return 4;
-            }
-            if (font.color == null) {
-                return 4;
-            }
-            if (this.color.equals(font.getColor())) {
-                return 0;
-            }
-            return 4;
-        } catch (ClassCastException cce) {
-            return -3;
-        }
+    public boolean same(Font that) {
+        if (this == that)
+            return true;
+        return this.family == that.family &&
+               this.size == that.size &&
+               this.style == that.style &&
+               Objects.equals(this.color, that.color);
     }
 
     // FAMILY
