@@ -313,7 +313,7 @@ public class CCITTG4Encoder {
         return bs < be ? finddiff(bp, offset, bs, be, color) : be;
     }
 
-    private static byte[] zeroruns = {
+    private static final byte[] zeroruns = {
         8, 7, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4,    /* 0x00 - 0x0f */
         3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,    /* 0x10 - 0x1f */
         2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,    /* 0x20 - 0x2f */
@@ -332,7 +332,7 @@ public class CCITTG4Encoder {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0    /* 0xf0 - 0xff */
     };
 
-    private static byte[] oneruns = {
+    private static final byte[] oneruns = {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,    /* 0x00 - 0x0f */
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,    /* 0x10 - 0x1f */
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,    /* 0x20 - 0x2f */
@@ -363,7 +363,7 @@ public class CCITTG4Encoder {
     private static final int G3CODE_EOF = -3;     /* end of input data */
     private static final int G3CODE_INCOMP = -4;  /* incomplete run code */
 
-    private int[][] TIFFFaxWhiteCodes = {
+    private static final int[][] TIFFFaxWhiteCodes = {
         {8, 0x35, 0},    /* 0011 0101 */
         {6, 0x7, 1},    /* 0001 11 */
         {4, 0x7, 2},    /* 0111 */
@@ -475,7 +475,7 @@ public class CCITTG4Encoder {
         {12, 0x0, G3CODE_INVALID}    /* 0000 0000 0000 */
     };
 
-    private int[][] TIFFFaxBlackCodes = {
+    private static final int[][] TIFFFaxBlackCodes = {
         {10, 0x37, 0},    /* 0000 1101 11 */
         {3, 0x2, 1},    /* 010 */
         {2, 0x3, 2},    /* 11 */
@@ -587,11 +587,11 @@ public class CCITTG4Encoder {
         {12, 0x0, G3CODE_INVALID}    /* 0000 0000 0000 */
     };
 
-    private int[] horizcode =
+    private static final int[] horizcode =
         {3, 0x1, 0};        /* 001 */
-    private int[] passcode =
+    private static final int[] passcode =
         {4, 0x1, 0};        /* 0001 */
-    private int[][] vcodes = {
+    private static final int[][] vcodes = {
         {7, 0x03, 0},    /* 0000 011 */
         {6, 0x03, 0},    /* 0000 11 */
         {3, 0x03, 0},    /* 011 */
@@ -600,6 +600,6 @@ public class CCITTG4Encoder {
         {6, 0x02, 0},    /* 0000 10 */
         {7, 0x02, 0}        /* 0000 010 */
     };
-    private int[] msbmask =
+    private static final int[] msbmask =
         {0x00, 0x01, 0x03, 0x07, 0x0f, 0x1f, 0x3f, 0x7f, 0xff};
 }
