@@ -127,8 +127,6 @@ public class List implements TextElementArray {
     protected boolean lettered = false;
     /** Indicates if the listsymbols are lowercase or uppercase. */
     protected boolean lowercase = false;
-    /** Indicates if the indentation has to be set automatically. */
-    protected boolean autoindent = false;
     /** Indicates if the indentation of all the items has to be aligned. */
     protected boolean alignindent = false;
     
@@ -156,11 +154,6 @@ public class List implements TextElementArray {
     
     // constructors
 
-    /** Constructs a <CODE>List</CODE>. */
-    public List() {
-        this(false, false);
-    }
-    
     /**
      * Constructs a <CODE>List</CODE> with a specific symbol indentation.
      * @param	symbolIndent	the symbol indentation
@@ -168,26 +161,6 @@ public class List implements TextElementArray {
      */
     public List(float symbolIndent) {
     	this.symbolIndent = symbolIndent;
-    }
-    
-    /**
-     * Constructs a <CODE>List</CODE>.
-     * @param	numbered		a boolean
-     */
-    public List(boolean numbered) {
-      	this(numbered, false);
-    }
-        
-    /**
-     * Constructs a <CODE>List</CODE>.
-     * @param	numbered		a boolean
-     * @param lettered has the list to be 'numbered' with letters
-     */
-    public List(boolean numbered, boolean lettered) {
-    	this.numbered = numbered;
-        this.lettered = lettered;
-        this.autoindent = true;
-        this.alignindent = true;
     }
     
     /**
@@ -283,7 +256,7 @@ public class List implements TextElementArray {
             else {
                 item.setListSymbol(symbol);
             }
-            item.setIndentationLeft(symbolIndent, autoindent);
+            item.setIndentationLeft(symbolIndent);
             item.setIndentationRight(0);
             return list.add(item);
         }
@@ -342,13 +315,7 @@ public class List implements TextElementArray {
 		this.lowercase = uppercase;
 	}
 
-	/**
-	 * @param autoindent the autoindent to set
-	 */
-	public void setAutoindent(boolean autoindent) {
-		this.autoindent = autoindent;
-	}
-	/**
+    /**
 	 * @param alignindent the alignindent to set
 	 */
 	public void setAlignindent(boolean alignindent) {
@@ -477,16 +444,8 @@ public class List implements TextElementArray {
     public boolean isLowercase() {
         return lowercase;
     }
-    
+
     /**
-     * Checks if the indentation of list items is done automatically.
-	 * @return the autoindent
-	 */
-	public boolean isAutoindent() {
-		return autoindent;
-	}
-	
-	/**
 	 * Checks if all the listitems should be aligned.
 	 * @return the alignindent
 	 */

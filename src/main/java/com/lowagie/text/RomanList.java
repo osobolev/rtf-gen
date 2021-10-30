@@ -61,13 +61,6 @@ public class RomanList extends List {
 	
 	/**
 	 * Initialization
-	 */
-	public RomanList() {
-		super(true);
-	}
-
-	/**
-	 * Initialization
 	 * 
 	 * @param symbolIndent	indent
 	 */
@@ -101,7 +94,7 @@ public class RomanList extends List {
 			chunk.append(RomanNumberFactory.getString(first + list.size(), lowercase));
 			chunk.append(postSymbol);
 			item.setListSymbol(chunk);
-			item.setIndentationLeft(symbolIndent, autoindent);
+			item.setIndentationLeft(symbolIndent);
 			item.setIndentationRight(0);
 			list.add(item);
 		} else if (o instanceof List) {

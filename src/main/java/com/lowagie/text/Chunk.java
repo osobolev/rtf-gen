@@ -330,20 +330,6 @@ public class Chunk implements Element {
 				&& (attributes == null);
 	}
 
-	/**
-	 * Gets the width of the Chunk in points.
-	 * 
-	 * @return a width in points
-	 */
-	public float getWidthPoint() {
-		if (getImage() != null) {
-			return getImage().getScaledWidth();
-		}
-		return font.getCalculatedBaseFont(true).getWidthPoint(getContent(),
-				font.getCalculatedSize())
-				* getHorizontalScaling();
-	}
-
 	// attributes
 
 	/**
