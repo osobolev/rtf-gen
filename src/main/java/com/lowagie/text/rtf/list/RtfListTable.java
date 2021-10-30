@@ -118,7 +118,6 @@ public class RtfListTable extends RtfElement implements RtfExtendedElement {
         this.document.outputDebugLinebreak(result);
 
         for (RtfPictureList l : picturelists) {
-//        	l.setID(document.getRandomInt());
             l.writeDefinition(result);
             this.document.outputDebugLinebreak(result);
         }

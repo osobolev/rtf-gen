@@ -565,7 +565,6 @@ public class RtfListLevel extends RtfElement implements RtfExtendedElement {
             result.write(intToByteArray(fontBullet.getFontNumber()));
         }
         result.write(DocWriter.getISOBytes("\\cf"));
-//        document.getDocumentHeader().getColorNumber(new RtfColor(this.document,this.getFontNumber().getColor()));
         result.write(intToByteArray(document.getDocumentHeader().getColorNumber(new RtfColor(this.document, this.getFontNumber().getColor()))));
 
         writeIndentation(result);

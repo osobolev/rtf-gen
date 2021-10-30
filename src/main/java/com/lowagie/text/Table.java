@@ -1049,24 +1049,10 @@ public class Table extends Rectangle implements LargeElement {
                             totW += tmpWidthsN[totI];
                             totI++;
                         }
-                       /*if( tpI<tmpWidths.length)
-                       {
-                           System.arraycopy(tmpWidths, tpI, tmpWidthsN, totI, tmpWidths.length-tpI);
-                           totI +=tmpWidths.length-tpI;
-                       }
-                       else if(btI<cols)
-                       {
-                           System.arraycopy(lDummyTable.widths, btI, tmpWidthsN, totI, lDummyTable.widths.length-btI);
-                           totI +=lDummyTable.widths.length-btI;                                                  }*/
                         tmpWidths = new float[totI];
                         System.arraycopy(tmpWidthsN, 0, tmpWidths, 0, totI);
                         lNewMaxColumns = totI;
                     }
-                                     /*if ( lDummyTable.getDimension().width > lNewMaxColumns )
-                   {
-                       lNewMaxColumns = lDummyTable.getDimension().width;
-                       lDummyColumnWidths[j] = lDummyTable.widths; // bugfix Tony Copping
-                   }*/
                 }
             }
             lDummyColumnWidths[j] = tmpWidths;
@@ -1104,7 +1090,6 @@ public class Table extends Rectangle implements LargeElement {
                 if (lDummyWidths[tel] != 1) {
                     // divide
                     for (int tel2 = 0; tel2 < lDummyWidths[tel]; tel2++) {
-                        // lNewWidths[lDummy] = widths[tel] / lDummyWidths[tel];
                         lNewWidths[lDummy] = widths[tel] * lDummyColumnWidths[tel][tel2] / 100f; // bugfix Tony Copping
                         lDummy++;
                     }

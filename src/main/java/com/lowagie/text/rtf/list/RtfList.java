@@ -302,11 +302,6 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
                 ll.setListType(RtfListLevel.LIST_TYPE_UPPER_LETTERS);
             }
         } else {
-//			Paragraph p = new Paragraph();
-//			p.add(new Chunk(list.getPreSymbol()) );
-//			p.add(list.getSymbol());
-//			p.add(new Chunk(list.getPostSymbol()) );
-//			ll.setBulletChunk(list.getSymbol());
             ll.setBulletCharacter(list.getPreSymbol() + list.getSymbol().getContent() + list.getPostSymbol());
             ll.setListType(RtfListLevel.LIST_TYPE_BULLET);
         }
@@ -430,7 +425,6 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
             for (int i = 0; i < items.size(); i++) {
 
                 RtfElement thisRtfElement = (RtfElement) items.get(i);
-                //thisRtfElement.writeContent(result);
                 if (thisRtfElement instanceof RtfListItem) {
                     itemNr++;
                     RtfListItem rtfElement = (RtfListItem) thisRtfElement;
@@ -454,7 +448,6 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
                     this.document.outputDebugLinebreak(result);
                 } else if (thisRtfElement instanceof RtfList) {
                     thisRtfElement.writeContent(result);
-//            	((RtfList)thisRtfElement).writeListBeginning(result);
                     writeListNumbers(result);
                     this.document.outputDebugLinebreak(result);
                 }

@@ -164,7 +164,6 @@ public class RtfListItem extends RtfParagraph {
             if (rtfElement instanceof RtfList) {
                 ((RtfList) rtfElement).setListNumber(listNumber);
                 setLevel(listLevel);
-//                ((RtfList) rtfElement).setParent(this.parentList);
             }
         }
     }

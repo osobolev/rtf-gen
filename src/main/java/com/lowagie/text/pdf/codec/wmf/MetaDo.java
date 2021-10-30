@@ -115,22 +115,6 @@ public class MetaDo {
         os.write(data, 14, data.length - 14);
         if ((data.length & 1) == 1)
             os.write(0);
-//        writeDWord(os, 14 + sizeBmpWords);
-//        writeWord(os, META_STRETCHDIB);
-//        writeDWord(os, 0x00cc0020);
-//        writeWord(os, 0);
-//        writeWord(os, (int)image.height());
-//        writeWord(os, (int)image.width());
-//        writeWord(os, 0);
-//        writeWord(os, 0);
-//        writeWord(os, (int)image.height());
-//        writeWord(os, (int)image.width());
-//        writeWord(os, 0);
-//        writeWord(os, 0);
-//        os.write(data, 14, data.length - 14);
-//        if ((data.length & 1) == 1)
-//            os.write(0);
-
         writeDWord(os, 3);
         writeWord(os, 0);
         os.close();
