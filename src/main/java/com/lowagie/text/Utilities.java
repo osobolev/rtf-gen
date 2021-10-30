@@ -58,8 +58,6 @@ import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Set;
 
-import com.lowagie.text.pdf.PRTokeniser;
-
 /**
  * A collection of convenience methods that were present in many different iText
  * classes.
@@ -108,36 +106,6 @@ public class Utilities {
 	 */
 	public static boolean checkTrueOrFalse(Properties attributes, String key) {
 		return "true".equalsIgnoreCase(attributes.getProperty(key));
-	}
-
-	/**
-	 * Unescapes an URL. All the "%xx" are replaced by the 'xx' hex char value.
-	 * @param src the url to unescape
-	 * @return the unescaped value
-	 */    
-	public static String unEscapeURL(String src) {
-	    StringBuffer bf = new StringBuffer();
-	    char[] s = src.toCharArray();
-	    for (int k = 0; k < s.length; ++k) {
-	        char c = s[k];
-	        if (c == '%') {
-	            if (k + 2 >= s.length) {
-	                bf.append(c);
-	                continue;
-	            }
-	            int a0 = PRTokeniser.getHex(s[k + 1]);
-	            int a1 = PRTokeniser.getHex(s[k + 2]);
-	            if (a0 < 0 || a1 < 0) {
-	                bf.append(c);
-	                continue;
-	            }
-	            bf.append((char)(a0 * 16 + a1));
-	            k += 2;
-	        }
-	        else
-	            bf.append(c);
-	    }
-	    return bf.toString();
 	}
 
 	/**

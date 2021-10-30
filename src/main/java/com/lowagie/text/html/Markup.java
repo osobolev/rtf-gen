@@ -408,27 +408,6 @@ public class Markup {
 	}
 
 	/**
-	 * Converts a <CODE>Color</CODE> into a HTML representation of this <CODE>
-	 * Color</CODE>.
-	 * 
-	 * @param s
-	 *            the <CODE>Color</CODE> that has to be converted.
-	 * @return the HTML representation of this <COLOR>Color </COLOR>
-	 */
-
-	public static Color decodeColor(String s) {
-		if (s == null)
-			return null;
-		s = s.toLowerCase().trim();
-		try {
-			return WebColors.getRGBColor(s);
-		}
-		catch(IllegalArgumentException iae) {
-			return null;
-		}
-	}
-
-	/**
 	 * This method parses a String with attributes and returns a Properties
 	 * object.
 	 * 
