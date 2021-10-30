@@ -195,7 +195,7 @@ public class Anchor extends Phrase {
      */
     public boolean process(ElementListener listener) {
         try {
-            Iterator i = getChunks().iterator();
+            Iterator<Element> i = getChunks().iterator();
             boolean localDestination = reference != null && reference.startsWith("#");
             boolean notGotoOK = true;
             while (i.hasNext()) {
@@ -220,9 +220,9 @@ public class Anchor extends Phrase {
      *
      * @return an <CODE>ArrayList</CODE>
      */
-    public ArrayList getChunks() {
-        ArrayList tmp = new ArrayList();
-        Iterator i = iterator();
+    public java.util.List<Element> getChunks() {
+        java.util.List<Element> tmp = new ArrayList<>();
+        Iterator<Element> i = iterator();
         boolean localDestination = reference != null && reference.startsWith("#");
         boolean notGotoOK = true;
         while (i.hasNext()) {

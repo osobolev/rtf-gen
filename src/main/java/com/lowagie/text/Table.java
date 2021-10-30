@@ -55,6 +55,7 @@ package com.lowagie.text;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * A <CODE>Table</CODE> is a <CODE>Rectangle</CODE> that contains <CODE>Cell</CODE>s,
@@ -158,7 +159,7 @@ public class Table extends Rectangle implements LargeElement {
     /**
      * This is the list of <CODE>Row</CODE>s.
      */
-    private ArrayList rows = new ArrayList();
+    private List<Row> rows = new ArrayList<>();
 
     /**
      * The current Position in the table.
@@ -351,9 +352,8 @@ public class Table extends Rectangle implements LargeElement {
      *
      * @return an <CODE>ArrayList</CODE>
      */
-
-    public ArrayList getChunks() {
-        return new ArrayList();
+    public List<Element> getChunks() {
+        return new ArrayList<>();
     }
 
     /**
@@ -868,7 +868,7 @@ public class Table extends Rectangle implements LargeElement {
             }
         }
 
-        ((Row) rows.get(aLocation.x)).setElement(aTable, aLocation.y);
+        rows.get(aLocation.x).setElement(aTable, aLocation.y);
 
         setCurrentLocationToNextValidPosition(aLocation);
     }
@@ -879,13 +879,13 @@ public class Table extends Rectangle implements LargeElement {
      * @param aColumns the number of columns to add
      */
     public void addColumns(int aColumns) {
-        ArrayList newRows = new ArrayList(rows.size());
+        List<Row> newRows = new ArrayList<>(rows.size());
 
         int newColumns = columns + aColumns;
         for (int i = 0; i < rows.size(); i++) {
             Row row = new Row(newColumns);
             for (int j = 0; j < columns; j++) {
-                row.setElement(((Row) rows.get(i)).getCell(j), j);
+                row.setElement(rows.get(i).getCell(j), j);
             }
             for (int j = columns; j < newColumns && i < curPosition.x; j++) {
                 row.setElement(null, j);
@@ -918,7 +918,7 @@ public class Table extends Rectangle implements LargeElement {
         widths = newWidths;
         int size = rows.size();
         for (int i = 0; i < size; i++) {
-            Row row = (Row) rows.get(i);
+            Row row = rows.get(i);
             row.deleteColumn(column);
             rows.set(i, row);
         }
@@ -987,7 +987,7 @@ public class Table extends Rectangle implements LargeElement {
      * @since 2.1.0 (was made private in 2.0.3)
      */
     public Object getElement(int row, int column) {
-        return ((Row) rows.get(row)).getCell(column);
+        return rows.get(row).getCell(column);
     }
 
     /**
@@ -1012,9 +1012,9 @@ public class Table extends Rectangle implements LargeElement {
             int lNewMaxColumns = 1;
             float[] tmpWidths = null;
             for (i = 0; i < rows.size(); i++) {
-                if (((Row) rows.get(i)).getCell(j) instanceof Table) {
+                if (rows.get(i).getCell(j) instanceof Table) {
                     isTable = true;
-                    lDummyTable = (Table) ((Row) rows.get(i)).getCell(j);
+                    lDummyTable = (Table) rows.get(i).getCell(j);
                     if (tmpWidths == null) {
                         tmpWidths = lDummyTable.widths;
                         lNewMaxColumns = tmpWidths.length;
@@ -1083,9 +1083,9 @@ public class Table extends Rectangle implements LargeElement {
             // holds value in how many rows the current one will be split
             int lNewMaxRows = 1;
             for (j = 0; j < columns; j++) {
-                if (((Row) rows.get(i)).getCell(j) instanceof Table) {
+                if (rows.get(i).getCell(j) instanceof Table) {
                     isTable = true;
-                    lDummyTable = (Table) ((Row) rows.get(i)).getCell(j);
+                    lDummyTable = (Table) rows.get(i).getCell(j);
                     if (lDummyTable.getDimension().height > lNewMaxRows) {
                         lNewMaxRows = lDummyTable.getDimension().height;
                     }
@@ -1121,7 +1121,7 @@ public class Table extends Rectangle implements LargeElement {
             // generate new table
             // set new widths
             // copy old values
-            ArrayList newRows = new ArrayList(lTotalRows);
+            List<Row> newRows = new ArrayList<>(lTotalRows);
             for (i = 0; i < lTotalRows; i++) {
                 newRows.add(new Row(lTotalColumns));
             }
@@ -1129,9 +1129,9 @@ public class Table extends Rectangle implements LargeElement {
             for (i = 0; i < rows.size(); i++) {
                 int lDummyColumn = 0;
                 for (j = 0; j < columns; j++) {
-                    if (((Row) rows.get(i)).getCell(j) instanceof Table)       // copy values from embedded table
+                    if (rows.get(i).getCell(j) instanceof Table)       // copy values from embedded table
                     {
-                        lDummyTable = (Table) ((Row) rows.get(i)).getCell(j);
+                        lDummyTable = (Table) rows.get(i).getCell(j);
 
                         // Work out where columns in table table correspond to columns in current table
                         int[] colMap = new int[lDummyTable.widths.length + 1];
@@ -1167,7 +1167,7 @@ public class Table extends Rectangle implements LargeElement {
                                         lDummyC.setColspan(ot - col);
                                     }
 
-                                    ((Row) newRows.get(k + lDummyRow)).addElement(lDummyElement, col);  // use addElement to set reserved status ok in row
+                                    newRows.get(k + lDummyRow).addElement(lDummyElement, col);  // use addElement to set reserved status ok in row
                                 }
                             }
                         }
@@ -1178,8 +1178,8 @@ public class Table extends Rectangle implements LargeElement {
                         if (aElement instanceof Cell) {
 
                             // adjust spans for cell
-                            ((Cell) aElement).setRowspan(((Cell) ((Row) rows.get(i)).getCell(j)).getRowspan() + lDummyHeights[i] - 1);
-                            ((Cell) aElement).setColspan(((Cell) ((Row) rows.get(i)).getCell(j)).getColspan() + lDummyWidths[j] - 1);
+                            ((Cell) aElement).setRowspan(((Cell) rows.get(i).getCell(j)).getRowspan() + lDummyHeights[i] - 1);
+                            ((Cell) aElement).setColspan(((Cell) rows.get(i).getCell(j)).getColspan() + lDummyWidths[j] - 1);
 
                             // most likely this cell covers a larger area because of the row/cols splits : define not-to-be-filled cells
                             placeCell(newRows, (Cell) aElement, new Point(lDummyRow, lDummyColumn));
@@ -1204,7 +1204,7 @@ public class Table extends Rectangle implements LargeElement {
         try {
             for (int i = 0; i < rows.size(); i++) {
                 for (int j = 0; j < columns; j++) {
-                    if (!((Row) rows.get(i)).isReserved(j)) {
+                    if (!rows.get(i).isReserved(j)) {
                         addCell(defaultCell, new Point(i, j));
                     }
                 }
@@ -1237,7 +1237,7 @@ public class Table extends Rectangle implements LargeElement {
             // no other content at cells targeted by rowspan/colspan
             for (int i = aLocation.x; i < (aLocation.x + difx); i++) {
                 for (int j = aLocation.y; j < (aLocation.y + dify); j++) {
-                    if (((Row) rows.get(i)).isReserved(j)) {
+                    if (rows.get(i).isReserved(j)) {
                         return false;
                     }
                 }
@@ -1285,7 +1285,7 @@ public class Table extends Rectangle implements LargeElement {
      * @param aCell     the cell that has to be inserted
      * @param aPosition the position where the cell has to be placed
      */
-    private void placeCell(ArrayList someRows, Cell aCell, Point aPosition) {
+    private void placeCell(List<Row> someRows, Cell aCell, Point aPosition) {
         int rowCount = aPosition.x + aCell.getRowspan() - someRows.size();
         assumeTableDefaults(aCell);
         int i;
@@ -1299,13 +1299,13 @@ public class Table extends Rectangle implements LargeElement {
 
         // reserve cell in rows below
         for (i = aPosition.x + 1; i < (aPosition.x + aCell.getRowspan()); i++) {
-            if (!((Row) someRows.get(i)).reserve(aPosition.y, aCell.getColspan())) {
+            if (!someRows.get(i).reserve(aPosition.y, aCell.getColspan())) {
 
                 // should be impossible to come here :-)
                 throw new RuntimeException("addCell - error in reserve");
             }
         }
-        row = (Row) someRows.get(aPosition.x);
+        row = someRows.get(aPosition.x);
         row.addElement(aCell, aPosition.y);
     }
 
@@ -1327,7 +1327,7 @@ public class Table extends Rectangle implements LargeElement {
             }
         }
         while (
-            (i < rows.size()) && (j < columns) && ((Row) rows.get(i)).isReserved(j)
+            (i < rows.size()) && (j < columns) && rows.get(i).isReserved(j)
         );
         curPosition = new Point(i, j);
     }
@@ -1382,7 +1382,7 @@ public class Table extends Rectangle implements LargeElement {
      *
      * @return an <CODE>Iterator</CODE>
      */
-    public Iterator iterator() {
+    public Iterator<Row> iterator() {
         return rows.iterator();
     }
 
@@ -1413,7 +1413,7 @@ public class Table extends Rectangle implements LargeElement {
      */
     public void flushContent() {
         this.setNotAddedYet(false);
-        ArrayList headerrows = new ArrayList();
+        List<Row> headerrows = new ArrayList<>();
         for (int i = 0; i < getLastHeaderRow() + 1; i++) {
             headerrows.add(rows.get(i));
         }

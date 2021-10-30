@@ -71,7 +71,7 @@ public class SimpleCell extends Rectangle implements TextElementArray {
     /**
      * the content of the Cell.
      */
-    private ArrayList content = new ArrayList();
+    private java.util.List<Element> content = new ArrayList<>();
     /**
      * the width of the Cell.
      */
@@ -210,8 +210,8 @@ public class SimpleCell extends Rectangle implements TextElementArray {
         cell.setUseAscender(useAscender);
         cell.setUseBorderPadding(useBorderPadding);
         cell.setUseDescender(useDescender);
-        for (Iterator i = content.iterator(); i.hasNext(); ) {
-            Element element = (Element) i.next();
+        for (Iterator<Element> i = content.iterator(); i.hasNext(); ) {
+            Element element = i.next();
             cell.addElement(element);
         }
         return cell;
@@ -488,16 +488,16 @@ public class SimpleCell extends Rectangle implements TextElementArray {
     /**
      * @return Returns the content.
      */
-    ArrayList getContent() {
+    java.util.List<Element> getContent() {
         return content;
     }
 
     /**
-     * @see com.lowagie.text.TextElementArray#add(java.lang.Object)
+     * @see com.lowagie.text.TextElementArray#add(Element)
      */
-    public boolean add(Object o) {
+    public boolean add(Element o) {
         try {
-            addElement((Element) o);
+            addElement(o);
             return true;
         } catch (ClassCastException e) {
             return false;

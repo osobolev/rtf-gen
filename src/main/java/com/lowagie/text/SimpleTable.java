@@ -60,7 +60,7 @@ public class SimpleTable extends Rectangle implements TextElementArray {
     /**
      * the content of a Table.
      */
-    private ArrayList content = new ArrayList();
+    private java.util.List<SimpleCell> content = new ArrayList<>();
     /**
      * the width of the Table.
      */
@@ -113,10 +113,10 @@ public class SimpleTable extends Rectangle implements TextElementArray {
      */
     public Table createTable() throws BadElementException {
         if (content.isEmpty()) throw new BadElementException("Trying to create a table without rows.");
-        SimpleCell row = (SimpleCell) content.get(0);
+        SimpleCell row = content.get(0);
         SimpleCell cell;
         int columns = 0;
-        for (Iterator i = row.getContent().iterator(); i.hasNext(); ) {
+        for (Iterator<Element> i = row.getContent().iterator(); i.hasNext(); ) {
             cell = (SimpleCell) i.next();
             columns += cell.getColspan();
         }
@@ -127,10 +127,10 @@ public class SimpleTable extends Rectangle implements TextElementArray {
         table.setSpacing(cellspacing);
         table.setPadding(cellpadding);
         table.cloneNonPositionParameters(this);
-        for (Iterator rows = content.iterator(); rows.hasNext(); ) {
-            row = (SimpleCell) rows.next();
+        for (Iterator<SimpleCell> rows = content.iterator(); rows.hasNext(); ) {
+            row = rows.next();
             int pos = 0;
-            for (Iterator cells = row.getContent().iterator(); cells.hasNext(); ) {
+            for (Iterator<Element> cells = row.getContent().iterator(); cells.hasNext(); ) {
                 cell = (SimpleCell) cells.next();
                 table.addCell(cell.createCell(row));
                 if (cell.getColspan() == 1) {
@@ -259,9 +259,9 @@ public class SimpleTable extends Rectangle implements TextElementArray {
     }
 
     /**
-     * @see com.lowagie.text.TextElementArray#add(java.lang.Object)
+     * @see com.lowagie.text.TextElementArray#add(Element)
      */
-    public boolean add(Object o) {
+    public boolean add(Element o) {
         try {
             addElement((SimpleCell) o);
             return true;

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * The RtfShape provides the interface for adding shapes to
@@ -184,7 +185,7 @@ public class RtfShape extends RtfAddableElement {
     /**
      * A HashMap with RtfShapePropertys that define further shape properties.
      */
-    private HashMap properties;
+    private Map<String, RtfShapeProperty> properties;
     /**
      * The wrapping mode. Defaults to SHAPE_WRAP_NONE;
      */
@@ -203,7 +204,7 @@ public class RtfShape extends RtfAddableElement {
     public RtfShape(int type, RtfShapePosition position) {
         this.type = type;
         this.position = position;
-        this.properties = new HashMap();
+        this.properties = new HashMap<>();
     }
 
     /**
@@ -311,9 +312,9 @@ public class RtfShape extends RtfAddableElement {
         this.doc.outputDebugLinebreak(result);
         result.write(OPEN_GROUP);
         result.write(DocWriter.getISOBytes("\\*\\shpinst"));
-        Iterator it = this.properties.values().iterator();
+        Iterator<RtfShapeProperty> it = this.properties.values().iterator();
         while (it.hasNext()) {
-            RtfShapeProperty rsp = (RtfShapeProperty) it.next();
+            RtfShapeProperty rsp = it.next();
             rsp.setRtfDocument(this.doc);
             rsp.writeContent(result);
         }

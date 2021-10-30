@@ -471,9 +471,9 @@ public abstract class DocWriter implements DocListener {
     protected boolean writeMarkupAttributes(Properties markup)
         throws IOException {
         if (markup == null) return false;
-        Iterator attributeIterator = markup.keySet().iterator();
+        Iterator<String> attributeIterator = markup.stringPropertyNames().iterator();
         while (attributeIterator.hasNext()) {
-            String name = String.valueOf(attributeIterator.next());
+            String name = attributeIterator.next();
             write(name, markup.getProperty(name));
         }
         markup.clear();

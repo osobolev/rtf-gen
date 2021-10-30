@@ -95,7 +95,7 @@ public class Cell extends Rectangle implements TextElementArray {
      * The <CODE>ArrayList</CODE> of <CODE>Element</CODE>s
      * that are part of the content of the Cell.
      */
-    protected ArrayList arrayList;
+    protected java.util.List<Element> arrayList;
 
     /**
      * The horizontal alignment of the cell content.
@@ -186,7 +186,7 @@ public class Cell extends Rectangle implements TextElementArray {
         setBorder(UNDEFINED);
         setBorderWidth(0.5f);
         // initializes the arraylist
-        arrayList = new ArrayList();
+        arrayList = new ArrayList<>();
     }
 
     /**
@@ -260,10 +260,10 @@ public class Cell extends Rectangle implements TextElementArray {
      *
      * @return an <CODE>ArrayList</CODE>
      */
-    public ArrayList getChunks() {
-        ArrayList tmp = new ArrayList();
-        for (Iterator i = arrayList.iterator(); i.hasNext(); ) {
-            tmp.addAll(((Element) i.next()).getChunks());
+    public java.util.List<Element> getChunks() {
+        java.util.List<Element> tmp = new ArrayList<>();
+        for (Iterator<Element> i = arrayList.iterator(); i.hasNext(); ) {
+            tmp.addAll(i.next().getChunks());
         }
         return tmp;
     }
@@ -566,7 +566,7 @@ public class Cell extends Rectangle implements TextElementArray {
      *
      * @return an <CODE>Iterator</CODE>.
      */
-    public Iterator getElements() {
+    public Iterator<Element> getElements() {
         return arrayList.iterator();
     }
 
@@ -587,7 +587,7 @@ public class Cell extends Rectangle implements TextElementArray {
         case 0:
             return true;
         case 1:
-            Element element = (Element) arrayList.get(0);
+            Element element = arrayList.get(0);
             switch (element.type()) {
             case Element.CHUNK:
                 return ((Chunk) element).isEmpty();
@@ -620,7 +620,7 @@ public class Cell extends Rectangle implements TextElementArray {
      */
     public boolean isTable() {
         return (size() == 1)
-               && (((Element) arrayList.get(0)).type() == Element.TABLE);
+               && (arrayList.get(0).type() == Element.TABLE);
     }
 
     /**
@@ -693,7 +693,7 @@ public class Cell extends Rectangle implements TextElementArray {
                 tmp = new Cell();
                 tmp.setBorder(NO_BORDER);
                 tmp.setColspan(3);
-                for (Iterator i = arrayList.iterator(); i.hasNext(); ) {
+                for (Iterator<Element> i = arrayList.iterator(); i.hasNext(); ) {
                     tmp.add(i.next());
                 }
                 table.addCell(tmp);
@@ -720,9 +720,9 @@ public class Cell extends Rectangle implements TextElementArray {
      * @param o the object to add
      * @return always <CODE>true</CODE>
      */
-    public boolean add(Object o) {
+    public boolean add(Element o) {
         try {
-            this.addElement((Element) o);
+            this.addElement(o);
             return true;
         } catch (ClassCastException cce) {
             throw new ClassCastException("You can only add objects that implement the Element interface.");

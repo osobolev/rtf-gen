@@ -61,6 +61,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * The RtfTable wraps a Table.
@@ -77,7 +78,7 @@ public class RtfTable extends RtfElement {
     /**
      * The rows of this RtfTable
      */
-    private ArrayList rows = null;
+    private List<RtfRow> rows = null;
     /**
      * The percentage of the page width that this RtfTable covers
      */
@@ -139,7 +140,7 @@ public class RtfTable extends RtfElement {
      * @param table The source Table
      */
     private void importTable(Table table) {
-        this.rows = new ArrayList();
+        this.rows = new ArrayList<>();
         this.tableWidthPercent = table.getWidth();
         this.proportionalWidths = table.getProportionalWidths();
         this.cellPadding = (float) (table.getPadding() * TWIPS_FACTOR);
@@ -148,14 +149,14 @@ public class RtfTable extends RtfElement {
         this.alignment = table.getAlignment();
 
         int i = 0;
-        Iterator rowIterator = table.iterator();
+        Iterator<Row> rowIterator = table.iterator();
         while (rowIterator.hasNext()) {
-            this.rows.add(new RtfRow(this.document, this, (Row) rowIterator.next(), i));
+            this.rows.add(new RtfRow(this.document, this, rowIterator.next(), i));
             i++;
         }
         for (i = 0; i < this.rows.size(); i++) {
-            ((RtfRow) this.rows.get(i)).handleCellSpanning();
-            ((RtfRow) this.rows.get(i)).cleanRow();
+            this.rows.get(i).handleCellSpanning();
+            this.rows.get(i).cleanRow();
         }
         this.headerRows = table.getLastHeaderRow();
         this.cellsFitToPage = table.isCellsFitPage();
@@ -178,7 +179,7 @@ public class RtfTable extends RtfElement {
         }
 
         for (int i = 0; i < this.rows.size(); i++) {
-            RtfElement re = (RtfElement) this.rows.get(i);
+            RtfElement re = this.rows.get(i);
             //.result.write(re.write());
             re.writeContent(result);
         }
@@ -245,7 +246,7 @@ public class RtfTable extends RtfElement {
      *
      * @return The rows of this RtfTable
      */
-    protected ArrayList getRows() {
+    protected List<RtfRow> getRows() {
         return this.rows;
     }
 

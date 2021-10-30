@@ -133,8 +133,8 @@ public class Meta implements Element {
      *
      * @return an <CODE>ArrayList</CODE>
      */
-    public ArrayList getChunks() {
-        return new ArrayList();
+    public java.util.List<Element> getChunks() {
+        return new ArrayList<>();
     }
 
     /**

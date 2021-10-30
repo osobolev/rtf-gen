@@ -133,7 +133,7 @@ public class List implements TextElementArray {
     /**
      * This is the <CODE>ArrayList</CODE> containing the different <CODE>ListItem</CODE>s.
      */
-    protected ArrayList list = new ArrayList();
+    protected java.util.List<Element> list = new ArrayList<>();
 
     /**
      * Indicates if the list has to be numbered.
@@ -236,8 +236,8 @@ public class List implements TextElementArray {
      */
     public boolean process(ElementListener listener) {
         try {
-            for (Iterator i = list.iterator(); i.hasNext(); ) {
-                listener.add((Element) i.next());
+            for (Iterator<Element> i = list.iterator(); i.hasNext(); ) {
+                listener.add(i.next());
             }
             return true;
         } catch (DocumentException de) {
@@ -259,10 +259,10 @@ public class List implements TextElementArray {
      *
      * @return an <CODE>ArrayList</CODE>
      */
-    public ArrayList getChunks() {
-        ArrayList tmp = new ArrayList();
-        for (Iterator i = list.iterator(); i.hasNext(); ) {
-            tmp.addAll(((Element) i.next()).getChunks());
+    public java.util.List<Element> getChunks() {
+        java.util.List<Element> tmp = new ArrayList<>();
+        for (Iterator<Element> i = list.iterator(); i.hasNext(); ) {
+            tmp.addAll(i.next().getChunks());
         }
         return tmp;
     }
@@ -275,7 +275,7 @@ public class List implements TextElementArray {
      * @return true if adding the object succeeded
      * @param    o        the object to add.
      */
-    public boolean add(Object o) {
+    public boolean add(Element o) {
         if (o instanceof ListItem) {
             ListItem item = (ListItem) o;
             if (numbered || lettered) {
@@ -298,10 +298,12 @@ public class List implements TextElementArray {
             nested.setIndentationLeft(nested.getIndentationLeft() + symbolIndent);
             first--;
             return list.add(nested);
-        } else if (o instanceof String) {
-            return this.add(new ListItem((String) o));
         }
         return false;
+    }
+
+    public boolean add(String o) {
+        return this.add(new ListItem(o));
     }
 
     // extra methods
@@ -311,15 +313,14 @@ public class List implements TextElementArray {
      */
     public void normalizeIndentation() {
         float max = 0;
-        Element o;
-        for (Iterator i = list.iterator(); i.hasNext(); ) {
-            o = (Element) i.next();
+        for (Iterator<Element> i = list.iterator(); i.hasNext(); ) {
+            Element o = i.next();
             if (o instanceof ListItem) {
                 max = Math.max(max, ((ListItem) o).getIndentationLeft());
             }
         }
-        for (Iterator i = list.iterator(); i.hasNext(); ) {
-            o = (Element) i.next();
+        for (Iterator<Element> i = list.iterator(); i.hasNext(); ) {
+            Element o = i.next();
             if (o instanceof ListItem) {
                 ((ListItem) o).setIndentationLeft(max);
             }
@@ -417,7 +418,7 @@ public class List implements TextElementArray {
      *
      * @return an <CODE>ArrayList</CODE> containing <CODE>ListItem</CODE>s.
      */
-    public ArrayList getItems() {
+    public java.util.List<Element> getItems() {
         return list;
     }
 

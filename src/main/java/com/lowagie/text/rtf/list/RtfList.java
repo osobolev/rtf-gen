@@ -156,7 +156,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * The subitems of this RtfList
      */
-    private ArrayList items;
+    private java.util.List<RtfBasicElement> items;
 
     /**
      * The parent list if there is one.
@@ -207,7 +207,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * The RtfList lists managed by this RtfListTable
      */
-    private ArrayList listLevels = null;
+    private java.util.List<RtfListLevel> listLevels = null;
 
     /**
      * Constructs an empty RtfList object.
@@ -262,8 +262,8 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
 
         createDefaultLevels();
 
-        this.items = new ArrayList();        // list content
-        RtfListLevel ll = (RtfListLevel) this.listLevels.get(0);
+        this.items = new ArrayList<>();        // list content
+        RtfListLevel ll = this.listLevels.get(0);
 
         // get the list number or create a new one adding it to the table
         this.listNumber = document.getDocumentHeader().getListNumber(this);
@@ -313,7 +313,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
         // now setup the actual list contents.
         for (int i = 0; i < list.getItems().size(); i++) {
             try {
-                Element element = (Element) list.getItems().get(i);
+                Element element = list.getItems().get(i);
 
                 if (element.type() == Element.CHUNK) {
                     element = new ListItem((Chunk) element);
@@ -393,7 +393,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
 
         // write the listlevels here
         for (int i = 0; i < levelsToWrite; i++) {
-            ((RtfListLevel) listLevels.get(i)).writeDefinition(result);
+            listLevels.get(i).writeDefinition(result);
             this.document.outputDebugLinebreak(result);
         }
 
@@ -534,7 +534,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
      * @since 2.1.3
      */
     protected void createDefaultLevels() {
-        this.listLevels = new ArrayList();    // listlevels
+        this.listLevels = new ArrayList<>();    // listlevels
         for (int i = 0; i <= 8; i++) {
             // create a list level
             RtfListLevel ll = new RtfListLevel(this.document);
@@ -578,10 +578,10 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     public void setInTable(boolean inTable) {
         super.setInTable(inTable);
         for (int i = 0; i < this.items.size(); i++) {
-            ((RtfBasicElement) this.items.get(i)).setInTable(inTable);
+            this.items.get(i).setInTable(inTable);
         }
         for (int i = 0; i < this.listLevels.size(); i++) {
-            ((RtfListLevel) this.listLevels.get(i)).setInTable(inTable);
+            this.listLevels.get(i).setInTable(inTable);
         }
     }
 
@@ -595,7 +595,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     public void setInHeader(boolean inHeader) {
         super.setInHeader(inHeader);
         for (int i = 0; i < this.items.size(); i++) {
-            ((RtfBasicElement) this.items.get(i)).setInHeader(inHeader);
+            this.items.get(i).setInHeader(inHeader);
         }
     }
 
@@ -705,7 +705,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
      */
     public RtfListLevel getListLevel(int index) {
         if (listLevels != null) {
-            return (RtfListLevel) this.listLevels.get(index);
+            return this.listLevels.get(index);
         } else
             return null;
     }

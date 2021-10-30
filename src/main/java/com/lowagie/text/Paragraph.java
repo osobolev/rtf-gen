@@ -241,7 +241,7 @@ public class Paragraph extends Phrase {
      * @return true is adding the object succeeded
      * @param    o object		the object to add.
      */
-    public boolean add(Object o) {
+    public boolean add(Element o) {
         if (o instanceof List) {
             List list = (List) o;
             list.setIndentationLeft(list.getIndentationLeft() + indentationLeft);
@@ -252,7 +252,7 @@ public class Paragraph extends Phrase {
             return true;
         } else if (o instanceof Paragraph) {
             super.add(o);
-            java.util.List chunks = getChunks();
+            java.util.List<Element> chunks = getChunks();
             if (!chunks.isEmpty()) {
                 Chunk tmp = (Chunk) chunks.get(chunks.size() - 1);
                 super.add(new Chunk("\n", tmp.getFont()));

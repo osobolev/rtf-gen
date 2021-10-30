@@ -52,6 +52,7 @@ package com.lowagie.text;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * An <CODE>Annotation</CODE> is a little note that can be added to a page on
@@ -193,7 +194,7 @@ public class Annotation implements Element {
     /**
      * This is the title of the <CODE>Annotation</CODE>.
      */
-    protected HashMap annotationAttributes = new HashMap();
+    protected Map<String, Object> annotationAttributes = new HashMap<>();
 
     /**
      * This is the lower left x-value
@@ -433,9 +434,8 @@ public class Annotation implements Element {
      *
      * @return an <CODE>ArrayList</CODE>
      */
-
-    public ArrayList getChunks() {
-        return new ArrayList();
+    public java.util.List<Element> getChunks() {
+        return new ArrayList<>();
     }
 
     // methods
@@ -579,7 +579,7 @@ public class Annotation implements Element {
      *
      * @return a reference
      */
-    public HashMap attributes() {
+    public Map<String, Object> attributes() {
         return annotationAttributes;
     }
 

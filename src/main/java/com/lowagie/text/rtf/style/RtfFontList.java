@@ -57,6 +57,7 @@ import com.lowagie.text.rtf.document.RtfDocument;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The RtfFontList stores the list of fonts used in the rtf document. It also
@@ -85,7 +86,7 @@ public class RtfFontList extends RtfElement implements RtfExtendedElement {
     /**
      * The list of fonts
      */
-    private ArrayList fontList = new ArrayList();
+    private List<RtfFont> fontList = new ArrayList<>();
 
     /**
      * Creates a RtfFontList
@@ -139,7 +140,7 @@ public class RtfFontList extends RtfElement implements RtfExtendedElement {
             result.write(OPEN_GROUP);
             result.write(FONT_NUMBER);
             result.write(intToByteArray(i));
-            RtfFont rf = (RtfFont) fontList.get(i);
+            RtfFont rf = fontList.get(i);
             rf.writeDefinition(result);
             result.write(COMMA_DELIMITER);
             result.write(CLOSE_GROUP);

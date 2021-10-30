@@ -68,7 +68,7 @@ import java.awt.*;
  * </BLOCKQUOTE>
  */
 
-public class Font implements Comparable {
+public class Font implements Comparable<Font> {
 
     // static membervariables for the different families
 
@@ -239,15 +239,14 @@ public class Font implements Comparable {
     /**
      * Compares this <CODE>Font</CODE> with another
      *
-     * @param object the other <CODE>Font</CODE>
+     * @param font the other <CODE>Font</CODE>
      * @return a value
      */
-    public int compareTo(Object object) {
-        if (object == null) {
+    public int compareTo(Font font) {
+        if (font == null) {
             return -1;
         }
         try {
-            Font font = (Font) object;
             if (this.family != font.getFamily()) {
                 return 1;
             }

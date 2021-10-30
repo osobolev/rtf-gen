@@ -53,6 +53,8 @@ import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This is the smallest significant part of text that can be added to a
@@ -114,7 +116,7 @@ public class Chunk implements Element {
     /**
      * Contains some of the attributes for this Chunk.
      */
-    protected HashMap attributes = null;
+    protected Map<String, Object> attributes = null;
 
     // constructors
 
@@ -139,7 +141,7 @@ public class Chunk implements Element {
             font = new Font(ck.font);
         }
         if (ck.attributes != null) {
-            attributes = new HashMap(ck.attributes);
+            attributes = new HashMap<>(ck.attributes);
         }
     }
 
@@ -262,8 +264,8 @@ public class Chunk implements Element {
      *
      * @return an <CODE>ArrayList</CODE>
      */
-    public ArrayList getChunks() {
-        ArrayList tmp = new ArrayList();
+    public List<Element> getChunks() {
+        List<Element> tmp = new ArrayList<>();
         tmp.add(this);
         return tmp;
     }
@@ -350,7 +352,7 @@ public class Chunk implements Element {
      * @return the attributes for this <CODE>Chunk</CODE>
      */
 
-    public HashMap getAttributes() {
+    public Map<String, Object> getAttributes() {
         return attributes;
     }
 
@@ -359,7 +361,7 @@ public class Chunk implements Element {
      *
      * @param    attributes    the attributes of a Chunk
      */
-    public void setAttributes(HashMap attributes) {
+    public void setAttributes(Map<String, Object> attributes) {
         this.attributes = attributes;
     }
 
@@ -373,7 +375,7 @@ public class Chunk implements Element {
 
     private Chunk setAttribute(String name, Object obj) {
         if (attributes == null)
-            attributes = new HashMap();
+            attributes = new HashMap<>();
         attributes.put(name, obj);
         return this;
     }
@@ -450,7 +452,7 @@ public class Chunk implements Element {
     public Chunk setUnderline(Color color, float thickness, float thicknessMul,
                               float yPosition, float yPositionMul, int cap) {
         if (attributes == null)
-            attributes = new HashMap();
+            attributes = new HashMap<>();
         Object[] obj = {
             color,
             new float[] {thickness, thicknessMul, yPosition, yPositionMul, cap}};

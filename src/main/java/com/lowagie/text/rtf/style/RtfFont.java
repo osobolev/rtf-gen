@@ -716,20 +716,15 @@ public class RtfFont extends Font implements RtfExtendedElement {
      *
      * @since 2.1.0
      */
-    public int compareTo(Object object) {
-        if (object == null) {
-            return -1;
-        }
-        if (object instanceof RtfFont) {
-            if (this.getFontName().compareTo(((RtfFont) object).getFontName()) != 0) {
+    public int compareTo(Font font) {
+        if (font instanceof RtfFont) {
+            if (this.getFontName().compareTo(((RtfFont) font).getFontName()) != 0) {
                 return 1;
             } else {
-                return super.compareTo(object);
+                return super.compareTo(font);
             }
-        } else if (object instanceof Font) {
-            return super.compareTo(object);
         } else {
-            return -3;
+            return super.compareTo(font);
         }
     }
 }

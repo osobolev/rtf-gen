@@ -106,7 +106,7 @@ public class RtfListItem extends RtfParagraph {
             result.write(intToByteArray(this.paragraphStyle.getLineLeading()));
         }
         for (int i = 0; i < chunks.size(); i++) {
-            RtfBasicElement rtfElement = (RtfBasicElement) chunks.get(i);
+            RtfBasicElement rtfElement = chunks.get(i);
             if (rtfElement instanceof RtfChunk) {
                 ((RtfChunk) rtfElement).setSoftLineBreaks(true);
             } else if (rtfElement instanceof RtfList) {
@@ -143,7 +143,7 @@ public class RtfListItem extends RtfParagraph {
      */
     public boolean writeDefinition(OutputStream out) throws IOException {
         for (int i = 0; i < chunks.size(); i++) {
-            RtfBasicElement rtfElement = (RtfBasicElement) chunks.get(i);
+            RtfBasicElement rtfElement = chunks.get(i);
             if (rtfElement instanceof RtfList) {
                 RtfList rl = (RtfList) rtfElement;
                 rl.writeDefinition(out);
@@ -164,7 +164,7 @@ public class RtfListItem extends RtfParagraph {
      */
     public void inheritListSettings(int listNumber, int listLevel) {
         for (int i = 0; i < chunks.size(); i++) {
-            RtfBasicElement rtfElement = (RtfBasicElement) chunks.get(i);
+            RtfBasicElement rtfElement = chunks.get(i);
             if (rtfElement instanceof RtfList) {
                 ((RtfList) rtfElement).setListNumber(listNumber);
                 setLevel(listLevel);
@@ -179,7 +179,7 @@ public class RtfListItem extends RtfParagraph {
      */
     protected void correctIndentation() {
         for (int i = 0; i < chunks.size(); i++) {
-            RtfBasicElement rtfElement = (RtfBasicElement) chunks.get(i);
+            RtfBasicElement rtfElement = chunks.get(i);
             if (rtfElement instanceof RtfList) {
                 ((RtfList) rtfElement).correctIndentation();
             }

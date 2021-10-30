@@ -63,7 +63,7 @@ import java.util.List;
  */
 public final class RtfByteArrayBuffer extends OutputStream {
 
-    private final List arrays = new ArrayList();
+    private final List<byte[]> arrays = new ArrayList<>();
     private byte[] buffer;
     private int pos = 0;
     private int size = 0;
@@ -257,7 +257,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
      */
     public byte[][] toByteArrayArray() {
         flushBuffer();
-        return (byte[][]) arrays.toArray(new byte[arrays.size()][]);
+        return arrays.toArray(new byte[arrays.size()][]);
     }
 
     /**
@@ -270,7 +270,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
         int off = 0;
         int n = arrays.size();
         for (int k = 0; k < n; k++) {
-            byte[] src = (byte[]) arrays.get(k);
+            byte[] src = arrays.get(k);
             System.arraycopy(src, 0, r, off, src.length);
             off += src.length;
         }
@@ -289,7 +289,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
 
         int n = arrays.size();
         for (int k = 0; k < n; k++) {
-            byte[] src = (byte[]) arrays.get(k);
+            byte[] src = arrays.get(k);
             out.write(src);
         }
         if (pos > 0) out.write(buffer, 0, pos);

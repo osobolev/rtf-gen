@@ -136,7 +136,7 @@ public class Document implements DocListener {
     /**
      * The DocListener.
      */
-    private ArrayList listeners = new ArrayList();
+    private java.util.List<DocListener> listeners = new ArrayList<>();
 
     /**
      * Is the document open or not?
@@ -309,8 +309,8 @@ public class Document implements DocListener {
             chapternumber = ((ChapterAutoNumber) element).setAutomaticNumber(chapternumber);
         }
         boolean success = false;
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             success |= listener.add(element);
         }
         if (element instanceof LargeElement) {
@@ -333,8 +333,8 @@ public class Document implements DocListener {
         if (!close) {
             open = true;
         }
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.setPageSize(pageSize);
             listener.setMargins(marginLeft, marginRight, marginTop,
                 marginBottom);
@@ -351,8 +351,8 @@ public class Document implements DocListener {
 
     public boolean setPageSize(Rectangle pageSize) {
         this.pageSize = pageSize;
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.setPageSize(pageSize);
         }
         return true;
@@ -374,8 +374,8 @@ public class Document implements DocListener {
         this.marginRight = marginRight;
         this.marginTop = marginTop;
         this.marginBottom = marginBottom;
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.setMargins(marginLeft, marginRight, marginTop,
                 marginBottom);
         }
@@ -393,8 +393,8 @@ public class Document implements DocListener {
         if (!open || close) {
             return false;
         }
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.newPage();
         }
         return true;
@@ -408,8 +408,8 @@ public class Document implements DocListener {
 
     public void setHeader(HeaderFooter header) {
         this.header = header;
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.setHeader(header);
         }
     }
@@ -420,8 +420,8 @@ public class Document implements DocListener {
 
     public void resetHeader() {
         this.header = null;
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.resetHeader();
         }
     }
@@ -434,8 +434,8 @@ public class Document implements DocListener {
 
     public void setFooter(HeaderFooter footer) {
         this.footer = footer;
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.setFooter(footer);
         }
     }
@@ -446,8 +446,8 @@ public class Document implements DocListener {
 
     public void resetFooter() {
         this.footer = null;
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.resetFooter();
         }
     }
@@ -458,8 +458,8 @@ public class Document implements DocListener {
 
     public void resetPageCount() {
         pageN = 0;
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.resetPageCount();
         }
     }
@@ -472,8 +472,8 @@ public class Document implements DocListener {
 
     public void setPageCount(int pageN) {
         this.pageN = pageN;
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.setPageCount(pageN);
         }
     }
@@ -500,8 +500,8 @@ public class Document implements DocListener {
             open = false;
             close = true;
         }
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.close();
         }
     }
@@ -877,8 +877,8 @@ public class Document implements DocListener {
      */
     public boolean setMarginMirroring(boolean marginMirroring) {
         this.marginMirroring = marginMirroring;
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.setMarginMirroring(marginMirroring);
         }
         return true;
@@ -895,8 +895,8 @@ public class Document implements DocListener {
      */
     public boolean setMarginMirroringTopBottom(boolean marginMirroringTopBottom) {
         this.marginMirroringTopBottom = marginMirroringTopBottom;
-        for (Iterator iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = (DocListener) iterator.next();
+        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
+            DocListener listener = iterator.next();
             listener.setMarginMirroringTopBottom(marginMirroringTopBottom);
         }
         return true;

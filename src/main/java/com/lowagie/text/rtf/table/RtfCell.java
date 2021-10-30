@@ -96,7 +96,7 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     /**
      * The content of this RtfCell
      */
-    private ArrayList content = null;
+    private java.util.List<RtfBasicElement> content = null;
     /**
      * The right margin of this RtfCell
      */
@@ -217,7 +217,7 @@ public class RtfCell extends Cell implements RtfExtendedElement {
      * @param cell The Cell to import
      */
     private void importCell(Cell cell) {
-        this.content = new ArrayList();
+        this.content = new ArrayList<>();
 
         if (cell == null) {
             this.borders = new RtfBorderGroup(this.document, RtfBorder.CELL_BORDER, this.parentRow.getParentTable().getBorders());
@@ -243,11 +243,11 @@ public class RtfCell extends Cell implements RtfExtendedElement {
 
         this.cellPadding = (int) this.parentRow.getParentTable().getCellPadding();
 
-        Iterator cellIterator = cell.getElements();
+        Iterator<Element> cellIterator = cell.getElements();
         Paragraph container = null;
         while (cellIterator.hasNext()) {
             try {
-                Element element = (Element) cellIterator.next();
+                Element element = cellIterator.next();
                 // should we wrap it in a paragraph
                 if (!(element instanceof Paragraph) && !(element instanceof List)) {
                     if (container != null) {
@@ -361,7 +361,7 @@ public class RtfCell extends Cell implements RtfExtendedElement {
             result.write(RtfParagraph.IN_TABLE);
         } else {
             for (int i = 0; i < this.content.size(); i++) {
-                RtfBasicElement rtfElement = (RtfBasicElement) this.content.get(i);
+                RtfBasicElement rtfElement = this.content.get(i);
                 if (rtfElement instanceof RtfParagraph) {
                     ((RtfParagraph) rtfElement).setKeepTogetherWithNext(this.parentRow.getParentTable().getTableFitToPage());
                 }
@@ -486,7 +486,7 @@ public class RtfCell extends Cell implements RtfExtendedElement {
     public void setInHeader(boolean inHeader) {
         this.inHeader = inHeader;
         for (int i = 0; i < this.content.size(); i++) {
-            ((RtfBasicElement) this.content.get(i)).setInHeader(inHeader);
+            this.content.get(i).setInHeader(inHeader);
         }
     }
 

@@ -99,7 +99,7 @@ public class RtfMapper {
             rtfElement.setRtfDocument(this.rtfDoc);
             return new RtfBasicElement[] {rtfElement};
         }
-        ArrayList rtfElements = new ArrayList();
+        java.util.List<RtfBasicElement> rtfElements = new ArrayList<>();
         switch (element.type()) {
         case Element.CHUNK:
             Chunk chunk = (Chunk) element;
@@ -167,6 +167,6 @@ public class RtfMapper {
             break;
         }
 
-        return (RtfBasicElement[]) rtfElements.toArray(new RtfBasicElement[0]);
+        return rtfElements.toArray(new RtfBasicElement[0]);
     }
 }

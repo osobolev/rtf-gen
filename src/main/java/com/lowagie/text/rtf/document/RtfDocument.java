@@ -62,6 +62,7 @@ import com.lowagie.text.rtf.graphic.RtfImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The RtfDocument stores all document related data and also the main data stream.
@@ -90,7 +91,7 @@ public class RtfDocument extends RtfElement {
     /**
      * Stores integers that have been generated as unique random numbers
      */
-    private ArrayList previousRandomInts;
+    private List<Integer> previousRandomInts;
     /**
      * Whether to automatically generate TOC entries for Chapters and Sections. Defaults to false
      */
@@ -127,7 +128,7 @@ public class RtfDocument extends RtfElement {
         this.mapper = new RtfMapper(this);
         this.documentHeader = new RtfDocumentHeader(this);
         this.documentHeader.init();
-        this.previousRandomInts = new ArrayList();
+        this.previousRandomInts = new ArrayList<>();
         this.documentSettings = new RtfDocumentSettings(this);
     }
 

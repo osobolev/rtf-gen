@@ -55,6 +55,7 @@ import com.lowagie.text.rtf.RtfElement;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The RtfInfoGroup stores information group elements.
@@ -82,7 +83,7 @@ public class RtfInfoGroup extends RtfElement {
     /**
      * The RtfInfoElements that belong to this RtfInfoGroup
      */
-    ArrayList infoElements;
+    private List<RtfInfoElement> infoElements;
 
     /**
      * Constructs a RtfInfoGroup belonging to a RtfDocument
@@ -91,7 +92,7 @@ public class RtfInfoGroup extends RtfElement {
      */
     public RtfInfoGroup(RtfDocument doc) {
         super(doc);
-        infoElements = new ArrayList();
+        infoElements = new ArrayList<>();
     }
 
     /**
@@ -110,7 +111,7 @@ public class RtfInfoGroup extends RtfElement {
         result.write(OPEN_GROUP);
         result.write(INFO_GROUP);
         for (int i = 0; i < infoElements.size(); i++) {
-            RtfInfoElement infoElement = (RtfInfoElement) infoElements.get(i);
+            RtfInfoElement infoElement = infoElements.get(i);
             infoElement.writeContent(result);
         }
 

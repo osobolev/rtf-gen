@@ -53,6 +53,7 @@ import com.lowagie.text.pdf.GrayColor;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A <CODE>Rectangle</CODE> is the representation of a geometric figure.
@@ -268,8 +269,8 @@ public class Rectangle implements Element {
      *
      * @return an <CODE>ArrayList</CODE>
      */
-    public ArrayList getChunks() {
-        return new ArrayList();
+    public List<Element> getChunks() {
+        return new ArrayList<>();
     }
 
     /**

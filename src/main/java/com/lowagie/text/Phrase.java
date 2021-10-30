@@ -80,7 +80,7 @@ import java.util.Iterator;
  * @see        Anchor
  */
 
-public class Phrase extends ArrayList implements TextElementArray {
+public class Phrase extends ArrayList<Element> implements TextElementArray {
 
     // constants
     private static final long serialVersionUID = 2643594602455068231L;
@@ -204,8 +204,8 @@ public class Phrase extends ArrayList implements TextElementArray {
      */
     public boolean process(ElementListener listener) {
         try {
-            for (Iterator i = iterator(); i.hasNext(); ) {
-                listener.add((Element) i.next());
+            for (Iterator<Element> i = iterator(); i.hasNext(); ) {
+                listener.add(i.next());
             }
             return true;
         } catch (DocumentException de) {
@@ -227,10 +227,10 @@ public class Phrase extends ArrayList implements TextElementArray {
      *
      * @return an <CODE>ArrayList</CODE>
      */
-    public ArrayList getChunks() {
-        ArrayList tmp = new ArrayList();
-        for (Iterator i = iterator(); i.hasNext(); ) {
-            tmp.addAll(((Element) i.next()).getChunks());
+    public java.util.List<Element> getChunks() {
+        java.util.List<Element> tmp = new ArrayList<>();
+        for (Iterator<Element> i = iterator(); i.hasNext(); ) {
+            tmp.addAll(i.next().getChunks());
         }
         return tmp;
     }
@@ -261,25 +261,24 @@ public class Phrase extends ArrayList implements TextElementArray {
      * @param    o an object of type <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
      * @throws ClassCastException    when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
      */
-    public void add(int index, Object o) {
+    public void add(int index, Element o) {
         if (o == null) return;
         try {
-            Element element = (Element) o;
-            if (element.type() == Element.CHUNK) {
-                Chunk chunk = (Chunk) element;
+            if (o.type() == Element.CHUNK) {
+                Chunk chunk = (Chunk) o;
                 if (!font.isStandardFont()) {
                     chunk.setFont(font.difference(chunk.getFont()));
                 }
                 super.add(index, chunk);
-            } else if (element.type() == Element.PHRASE ||
-                       element.type() == Element.ANCHOR ||
-                       element.type() == Element.ANNOTATION ||
-                       element.type() == Element.TABLE || // line added by David Freels
-                       element.type() == Element.YMARK ||
-                       element.type() == Element.MARKED) {
-                super.add(index, element);
+            } else if (o.type() == Element.PHRASE ||
+                       o.type() == Element.ANCHOR ||
+                       o.type() == Element.ANNOTATION ||
+                       o.type() == Element.TABLE || // line added by David Freels
+                       o.type() == Element.YMARK ||
+                       o.type() == Element.MARKED) {
+                super.add(index, o);
             } else {
-                throw new ClassCastException(String.valueOf(element.type()));
+                throw new ClassCastException(String.valueOf(o.type()));
             }
         } catch (ClassCastException cce) {
             throw new ClassCastException("Insertion of illegal Element: " + cce.getMessage());
@@ -294,25 +293,18 @@ public class Phrase extends ArrayList implements TextElementArray {
      * @return a boolean
      * @throws ClassCastException    when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
      */
-    public boolean add(Object o) {
+    public boolean add(Element o) {
         if (o == null) return false;
-        if (o instanceof String) {
-            return super.add(new Chunk((String) o, font));
-        }
-        if (o instanceof RtfElementInterface) {
-            return super.add(o);
-        }
         try {
-            Element element = (Element) o;
-            switch (element.type()) {
+            switch (o.type()) {
             case Element.CHUNK:
                 return addChunk((Chunk) o);
             case Element.PHRASE:
             case Element.PARAGRAPH:
                 Phrase phrase = (Phrase) o;
                 boolean success = true;
-                for (Iterator i = phrase.iterator(); i.hasNext(); ) {
-                    Element e = (Element) i.next();
+                for (Iterator<Element> i = phrase.iterator(); i.hasNext(); ) {
+                    Element e = i.next();
                     if (e instanceof Chunk) {
                         success &= addChunk((Chunk) e);
                     } else {
@@ -328,11 +320,15 @@ public class Phrase extends ArrayList implements TextElementArray {
             case Element.YMARK:
                 return super.add(o);
             default:
-                throw new ClassCastException(String.valueOf(element.type()));
+                throw new ClassCastException(String.valueOf(o.type()));
             }
         } catch (ClassCastException cce) {
             throw new ClassCastException("Insertion of illegal Element: " + cce.getMessage());
         }
+    }
+
+    public boolean add(String o) {
+        return super.add(new Chunk(o, font));
     }
 
     /**
@@ -343,8 +339,8 @@ public class Phrase extends ArrayList implements TextElementArray {
      * @return    <CODE>true</CODE> if the action succeeded, <CODE>false</CODE> if not.
      * @throws ClassCastException    when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
      */
-    public boolean addAll(Collection collection) {
-        for (Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
+    public boolean addAll(Collection<? extends Element> collection) {
+        for (Iterator<? extends Element> iterator = collection.iterator(); iterator.hasNext(); ) {
             this.add(iterator.next());
         }
         return true;
@@ -389,7 +385,7 @@ public class Phrase extends ArrayList implements TextElementArray {
      *
      * @param    object        the object to add.
      */
-    protected void addSpecial(Object object) {
+    protected void addSpecial(Element object) {
         super.add(object);
     }
 
@@ -455,7 +451,7 @@ public class Phrase extends ArrayList implements TextElementArray {
      */
     public String getContent() {
         StringBuffer buf = new StringBuffer();
-        for (Iterator i = getChunks().iterator(); i.hasNext(); ) {
+        for (Iterator<Element> i = getChunks().iterator(); i.hasNext(); ) {
             buf.append(i.next().toString());
         }
         return buf.toString();
@@ -472,7 +468,7 @@ public class Phrase extends ArrayList implements TextElementArray {
         case 0:
             return true;
         case 1:
-            Element element = (Element) get(0);
+            Element element = get(0);
             if (element.type() == Element.CHUNK && ((Chunk) element).isEmpty()) {
                 return true;
             }
@@ -531,7 +527,7 @@ public class Phrase extends ArrayList implements TextElementArray {
             while ((index = SpecialSymbol.index(string)) > -1) {
                 if (index > 0) {
                     String firstPart = string.substring(0, index);
-                    ((ArrayList) p).add(new Chunk(firstPart, font));
+                    p.add(new Chunk(firstPart, font));
                     string = string.substring(index);
                 }
                 Font symbol = new Font(Font.SYMBOL, font.getSize(), font.getStyle(), font.getColor());
@@ -542,11 +538,11 @@ public class Phrase extends ArrayList implements TextElementArray {
                     buf.append(SpecialSymbol.getCorrespondingSymbol(string.charAt(0)));
                     string = string.substring(1);
                 }
-                ((ArrayList) p).add(new Chunk(buf.toString(), symbol));
+                p.add(new Chunk(buf.toString(), symbol));
             }
         }
         if (string != null && string.length() != 0) {
-            ((ArrayList) p).add(new Chunk(string, font));
+            p.add(new Chunk(string, font));
         }
         return p;
     }

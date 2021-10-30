@@ -108,7 +108,7 @@ public class RtfParagraph extends RtfPhrase {
             this.paragraphStyle.setKeepTogether(paragraph.getKeepTogether());
         }
         for (int i = 0; i < paragraph.size(); i++) {
-            Element chunk = (Element) paragraph.get(i);
+            Element chunk = paragraph.get(i);
             if (chunk instanceof Chunk) {
                 ((Chunk) chunk).setFont(baseFont.difference(((Chunk) chunk).getFont()));
             } else if (chunk instanceof RtfImage) {
@@ -149,7 +149,7 @@ public class RtfParagraph extends RtfPhrase {
         result.write(DocWriter.getISOBytes("\\plain"));
 
         for (int i = 0; i < chunks.size(); i++) {
-            RtfBasicElement rbe = (RtfBasicElement) chunks.get(i);
+            RtfBasicElement rbe = chunks.get(i);
             rbe.writeContent(result);
         }
 

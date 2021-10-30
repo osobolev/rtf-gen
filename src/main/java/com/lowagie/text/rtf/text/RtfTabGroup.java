@@ -56,6 +56,7 @@ import com.lowagie.text.rtf.RtfAddableElement;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The RtfTabGroup is a convenience class if the same tabs are to be added
@@ -79,13 +80,13 @@ public class RtfTabGroup extends RtfAddableElement {
     /**
      * The tabs to add.
      */
-    private ArrayList tabs;
+    private List<RtfTab> tabs;
 
     /**
      * Constructs an empty RtfTabGroup.
      */
     public RtfTabGroup() {
-        this.tabs = new ArrayList();
+        this.tabs = new ArrayList<>();
     }
 
     /**
@@ -93,13 +94,9 @@ public class RtfTabGroup extends RtfAddableElement {
      *
      * @param tabs An ArrayList with the RtfTabs to group in this RtfTabGroup.
      */
-    public RtfTabGroup(ArrayList tabs) {
-        this.tabs = new ArrayList();
-        for (int i = 0; i < tabs.size(); i++) {
-            if (tabs.get(i) instanceof RtfTab) {
-                this.tabs.add(tabs.get(i));
-            }
-        }
+    public RtfTabGroup(List<RtfTab> tabs) {
+        this.tabs = new ArrayList<>();
+        this.tabs.addAll(tabs);
     }
 
     /**
@@ -116,7 +113,7 @@ public class RtfTabGroup extends RtfAddableElement {
      */
     public void writeContent(OutputStream result) throws IOException {
         for (int i = 0; i < this.tabs.size(); i++) {
-            RtfTab rt = (RtfTab) this.tabs.get(i);
+            RtfTab rt = this.tabs.get(i);
             rt.writeContent(result);
         }
     }

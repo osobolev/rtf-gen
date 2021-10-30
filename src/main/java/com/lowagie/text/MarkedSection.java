@@ -88,7 +88,7 @@ public class MarkedSection extends MarkedObject {
      * @param    o an object of type <CODE>Paragraph</CODE>, <CODE>List</CODE> or <CODE>Table</CODE>=
      * @throws ClassCastException if the object is not a <CODE>Paragraph</CODE>, <CODE>List</CODE> or <CODE>Table</CODE>
      */
-    public void add(int index, Object o) {
+    public void add(int index, Element o) {
         ((Section) element).add(index, o);
     }
 
@@ -100,7 +100,7 @@ public class MarkedSection extends MarkedObject {
      * @return a boolean
      * @throws ClassCastException if the object is not a <CODE>Paragraph</CODE>, <CODE>List</CODE>, <CODE>Table</CODE> or <CODE>Section</CODE>
      */
-    public boolean add(Object o) {
+    public boolean add(Element o) {
         return ((Section) element).add(o);
     }
 
@@ -113,8 +113,8 @@ public class MarkedSection extends MarkedObject {
      */
     public boolean process(ElementListener listener) {
         try {
-            for (Iterator i = ((Section) this.element).iterator(); i.hasNext(); ) {
-                Element element = (Element) i.next();
+            for (Iterator<Element> i = ((Section) this.element).iterator(); i.hasNext(); ) {
+                Element element = i.next();
                 listener.add(element);
             }
             return true;
@@ -131,7 +131,7 @@ public class MarkedSection extends MarkedObject {
      * @return    <CODE>true</CODE> if the action succeeded, <CODE>false</CODE> if not.
      * @throws ClassCastException if one of the objects isn't a <CODE>Paragraph</CODE>, <CODE>List</CODE>, <CODE>Table</CODE>
      */
-    public boolean addAll(Collection collection) {
+    public boolean addAll(Collection<? extends Element> collection) {
         return ((Section) element).addAll(collection);
     }
 
