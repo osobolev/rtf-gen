@@ -998,15 +998,18 @@ public class Table extends Rectangle implements LargeElement {
      * Integrates all added tables and recalculates column widths.
      */
     private void mergeInsertedTables() {
-        int i = 0, j = 0;
+        int i = 0;
+        int j = 0;
         float[] lNewWidths = null;
         int[] lDummyWidths = new int[columns];     // to keep track in how many new cols this one will be split
         float[][] lDummyColumnWidths = new float[columns][]; // bugfix Tony Copping
         int[] lDummyHeights = new int[rows.size()]; // to keep track in how many new rows this one will be split
         ArrayList newRows = null;
         boolean isTable = false;
-        int lTotalRows = 0, lTotalColumns = 0;
-        int lNewMaxRows = 0, lNewMaxColumns = 0;
+        int lTotalRows = 0;
+        int lTotalColumns = 0;
+        int lNewMaxRows = 0;
+        int lNewMaxColumns = 0;
 
         Table lDummyTable = null;
 
@@ -1026,8 +1029,12 @@ public class Table extends Rectangle implements LargeElement {
                     } else {
                         int cols = lDummyTable.getDimension().width;
                         float[] tmpWidthsN = new float[cols * tmpWidths.length];
-                        float tpW = 0, btW = 0, totW = 0;
-                        int tpI = 0, btI = 0, totI = 0;
+                        float tpW = 0;
+                        float btW = 0;
+                        float totW = 0;
+                        int tpI = 0;
+                        int btI = 0;
+                        int totI = 0;
                         tpW += tmpWidths[0];
                         btW += lDummyTable.widths[0];
                         while (tpI < tmpWidths.length && btI < cols) {
@@ -1124,7 +1131,8 @@ public class Table extends Rectangle implements LargeElement {
             for (i = 0; i < lTotalRows; i++) {
                 newRows.add(new Row(lTotalColumns));
             }
-            int lDummyRow = 0, lDummyColumn = 0;        // to remember where we are in the new, larger table
+            int lDummyRow = 0;         // to remember where we are in the new, larger table
+            int lDummyColumn = 0;
             Object lDummyElement = null;
             for (i = 0; i < rows.size(); i++) {
                 lDummyColumn = 0;
@@ -1136,7 +1144,8 @@ public class Table extends Rectangle implements LargeElement {
 
                         // Work out where columns in table table correspond to columns in current table
                         int[] colMap = new int[lDummyTable.widths.length + 1];
-                        int cb = 0, ct = 0;
+                        int cb = 0;
+                        int ct = 0;
 
                         for (; cb < lDummyTable.widths.length; cb++) {
                             colMap[cb] = lDummyColumn + ct;
@@ -1317,7 +1326,8 @@ public class Table extends Rectangle implements LargeElement {
      */
     private void setCurrentLocationToNextValidPosition(Point aLocation) {
         // set latest location to next valid position
-        int i, j;
+        int i;
+        int j;
         i = aLocation.x;
         j = aLocation.y;
         do {

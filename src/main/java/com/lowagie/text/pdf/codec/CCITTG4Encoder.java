@@ -124,7 +124,8 @@ public class CCITTG4Encoder {
     }
 
     private void putspan(int span, int[][] tab) {
-        int code, length;
+        int code;
+        int length;
 
         while (span >= 2624) {
             int[] te = tab[63 + (2560 >> 6)];
@@ -166,7 +167,8 @@ public class CCITTG4Encoder {
         int a0 = 0;
         int a1 = pixel(dataBp, offsetData, 0) != 0 ? 0 : finddiff(dataBp, offsetData, 0, rowpixels, 0);
         int b1 = pixel(refline, 0, 0) != 0 ? 0 : finddiff(refline, 0, 0, rowpixels, 0);
-        int a2, b2;
+        int a2;
+        int b2;
 
         for (; ; ) {
             b2 = finddiff2(refline, 0, b1, rowpixels, pixel(refline, 0, b1));
@@ -227,7 +229,8 @@ public class CCITTG4Encoder {
 
     private static int find1span(byte[] bp, int offset, int bs, int be) {
         int bits = be - bs;
-        int n, span;
+        int n;
+        int span;
 
         int pos = offset + (bs >> 3);
         /*
@@ -267,7 +270,8 @@ public class CCITTG4Encoder {
 
     private static int find0span(byte[] bp, int offset, int bs, int be) {
         int bits = be - bs;
-        int n, span;
+        int n;
+        int span;
 
         int pos = offset + (bs >> 3);
         /*
