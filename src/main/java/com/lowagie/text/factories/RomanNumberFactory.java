@@ -185,13 +185,4 @@ public class RomanNumberFactory {
             return getUpperCaseString(index);
         }
     }
-
-    /**
-     * Test this class using this main method.
-     */
-    public static void main(String[] args) {
-        for (int i = 1; i < 2000; i++) {
-            System.out.println(getString(i));
-        }
-    }
 }
