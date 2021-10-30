@@ -61,6 +61,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static com.lowagie.text.rtf.RtfElement.intToByteArray;
+
 /**
  * The RtfCell wraps a Cell, but can also be added directly to a Table.
  * The RtfCell is an extension of Cell, that supports a multitude of different
@@ -497,17 +499,6 @@ public class RtfCell extends Cell implements RtfExtendedElement {
      */
     public boolean isInHeader() {
         return this.inHeader;
-    }
-
-    /**
-     * Transforms an integer into its String representation and then returns the bytes
-     * of that string.
-     *
-     * @param i The integer to convert
-     * @return A byte array representing the integer
-     */
-    private byte[] intToByteArray(int i) {
-        return DocWriter.getISOBytes(Integer.toString(i));
     }
 
     /**

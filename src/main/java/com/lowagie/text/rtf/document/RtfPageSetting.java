@@ -418,7 +418,7 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
      * @param rect2 The second Rectangle to compare
      * @return <code>True</code> if the Rectangles equal, <code>false</code> otherwise
      */
-    private boolean rectEquals(Rectangle rect1, Rectangle rect2) {
-        return (rect1.getWidth() == rect2.getWidth()) && (rect1.getHeight() == rect2.getHeight());
+    private static boolean rectEquals(Rectangle rect1, Rectangle rect2) {
+        return rect1.getWidth() == rect2.getWidth() && rect1.getHeight() == rect2.getHeight();
     }
 }

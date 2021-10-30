@@ -57,6 +57,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import static com.lowagie.text.rtf.RtfElement.intToByteArray;
+
 /**
  * The RtfFont class stores one font for an rtf document. It extends Font,
  * so can be set as a font, to allow adding of fonts with arbitrary names.
@@ -647,17 +649,6 @@ public class RtfFont extends Font implements RtfExtendedElement {
     public void setColor(int red, int green, int blue) {
         super.setColor(red, green, blue);
         this.color = new RtfColor(document, red, green, blue);
-    }
-
-    /**
-     * Transforms an integer into its String representation and then returns the bytes
-     * of that string.
-     *
-     * @param i The integer to convert
-     * @return A byte array representing the integer
-     */
-    protected byte[] intToByteArray(int i) {
-        return DocWriter.getISOBytes(Integer.toString(i));
     }
 
     /**

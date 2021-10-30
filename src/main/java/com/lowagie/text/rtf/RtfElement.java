@@ -92,7 +92,7 @@ public abstract class RtfElement implements RtfBasicElement {
      * @param i The integer to convert
      * @return A byte array representing the integer
      */
-    public byte[] intToByteArray(int i) {
+    public static byte[] intToByteArray(int i) {
         return DocWriter.getISOBytes(Integer.toString(i));
     }
 

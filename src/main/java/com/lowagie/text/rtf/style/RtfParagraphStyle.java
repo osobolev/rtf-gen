@@ -59,6 +59,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import static com.lowagie.text.rtf.RtfElement.intToByteArray;
+
 /**
  * The RtfParagraphStyle stores all style/formatting attributes of a RtfParagraph.
  * Additionally it also supports the style name system available in RTF. The RtfParagraphStyle

@@ -329,7 +329,7 @@ public class Row implements Element {
      * @param element the object of which you'd like to know the type-id, -1 if invalid
      * @return the type-id of an object
      */
-    int getObjectID(Object element) {
+    private static int getObjectID(Object element) {
         if (element == null) return NULL;
         else if (element instanceof Cell) return CELL;
         else if (element instanceof Table) return TABLE;

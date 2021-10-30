@@ -105,7 +105,7 @@ public class RectangleReadOnly extends Rectangle {
     /**
      * Throws an error because of the read only nature of this object.
      */
-    private void throwReadOnlyError() {
+    private static void throwReadOnlyError() {
         throw new UnsupportedOperationException("RectangleReadOnly: this Rectangle is read only.");
     }
 

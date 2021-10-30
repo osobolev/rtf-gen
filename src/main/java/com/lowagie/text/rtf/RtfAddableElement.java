@@ -51,7 +51,6 @@
 package com.lowagie.text.rtf;
 
 import com.lowagie.text.Chunk;
-import com.lowagie.text.DocWriter;
 import com.lowagie.text.Font;
 import com.lowagie.text.rtf.document.RtfDocument;
 
@@ -124,8 +123,8 @@ public abstract class RtfAddableElement extends Chunk implements RtfBasicElement
      * @param i The integer to convert
      * @return A byte array representing the integer
      */
-    public byte[] intToByteArray(int i) {
-        return DocWriter.getISOBytes(Integer.toString(i));
+    public static byte[] intToByteArray(int i) {
+        return RtfElement.intToByteArray(i);
     }
 
     /**

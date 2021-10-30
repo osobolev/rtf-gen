@@ -158,7 +158,7 @@ public class RtfInfoElement extends RtfElement {
      * @param date The date formated by iText
      * @return The date formated for rtf
      */
-    private String convertDate(String date) {
+    private static String convertDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         try {
             Date creationDate = sdf.parse(date);
