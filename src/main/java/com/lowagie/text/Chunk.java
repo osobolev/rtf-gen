@@ -54,11 +54,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.lowagie.text.pdf.PdfAction;
-import com.lowagie.text.pdf.PdfAnnotation;
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.draw.DrawInterface;
-
 /**
  * This is the smallest significant part of text that can be added to a
  * document.
@@ -597,21 +592,6 @@ public class Chunk implements Element {
 				new Float(strokeWidth), strokeColor });
 	}
 
-	/** Key for split character. */
-	public static final String SPLITCHARACTER = "SPLITCHARACTER";
-
-	/**
-	 * Sets the split characters.
-	 * 
-	 * @param splitCharacter
-	 *            the <CODE>SplitCharacter</CODE> interface
-	 * @return this <CODE>Chunk</CODE>
-	 */
-
-	public Chunk setSplitCharacter(SplitCharacter splitCharacter) {
-		return setAttribute(SPLITCHARACTER, splitCharacter);
-	}
-
 	/** Key for remote goto. */
 	public static final String REMOTEGOTO = "REMOTEGOTO";
 
@@ -716,18 +696,6 @@ public class Chunk implements Element {
 	public static final String ACTION = "ACTION";
 
 	/**
-	 * Sets an action for this <CODE>Chunk</CODE>.
-	 * 
-	 * @param action
-	 *            the action
-	 * @return this <CODE>Chunk</CODE>
-	 */
-
-	public Chunk setAction(PdfAction action) {
-		return setAttribute(ACTION, action);
-	}
-
-	/**
 	 * Sets an anchor for this <CODE>Chunk</CODE>.
 	 * 
 	 * @param url
@@ -736,7 +704,7 @@ public class Chunk implements Element {
 	 */
 
 	public Chunk setAnchor(URL url) {
-		return setAttribute(ACTION, new PdfAction(url.toExternalForm()));
+		return setAttribute(ACTION, url.toExternalForm());
 	}
 
 	/**
@@ -748,7 +716,7 @@ public class Chunk implements Element {
 	 */
 
 	public Chunk setAnchor(String url) {
-		return setAttribute(ACTION, new PdfAction(url));
+		return setAttribute(ACTION, url);
 	}
 	
 	/** Key for newpage. */
@@ -764,20 +732,6 @@ public class Chunk implements Element {
 		return setAttribute(NEWPAGE, null);
 	}
 
-	/** Key for annotation. */
-	public static final String PDFANNOTATION = "PDFANNOTATION";
-
-	/**
-	 * Sets a generic annotation to this <CODE>Chunk</CODE>.
-	 * 
-	 * @param annotation
-	 *            the annotation
-	 * @return this <CODE>Chunk</CODE>
-	 */
-	public Chunk setAnnotation(PdfAnnotation annotation) {
-		return setAttribute(PDFANNOTATION, annotation);
-	}
-	
 	/**
 	 * @see com.lowagie.text.Element#isContent()
 	 * @since	iText 2.0.8
