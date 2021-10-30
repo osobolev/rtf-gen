@@ -106,7 +106,7 @@ public class RomanNumberFactory {
      * @param index the original number
      * @return the roman number (lower case)
      */
-    public static final String getString(int index) {
+    public static String getString(int index) {
         StringBuffer buf = new StringBuffer();
 
         // lower than 0 ? Add minus
@@ -158,7 +158,7 @@ public class RomanNumberFactory {
      * @param index the original number
      * @return the roman number (lower case)
      */
-    public static final String getLowerCaseString(int index) {
+    public static String getLowerCaseString(int index) {
         return getString(index);
     }
 
@@ -168,7 +168,7 @@ public class RomanNumberFactory {
      * @param index the original number
      * @return the roman number (lower case)
      */
-    public static final String getUpperCaseString(int index) {
+    public static String getUpperCaseString(int index) {
         return getString(index).toUpperCase();
     }
 
@@ -178,7 +178,7 @@ public class RomanNumberFactory {
      * @param index the original number
      * @return the roman number (lower case)
      */
-    public static final String getString(int index, boolean lowercase) {
+    public static String getString(int index, boolean lowercase) {
         if (lowercase) {
             return getLowerCaseString(index);
         } else {

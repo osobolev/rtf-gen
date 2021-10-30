@@ -794,7 +794,7 @@ public class Document implements DocListener {
      * @return the product name
      * @since 2.1.6
      */
-    public static final String getProduct() {
+    public static String getProduct() {
         return ITEXT;
     }
 
@@ -805,7 +805,7 @@ public class Document implements DocListener {
      * @return the product name
      * @since 2.1.6
      */
-    public static final String getRelease() {
+    public static String getRelease() {
         return RELEASE;
     }
 
@@ -815,7 +815,7 @@ public class Document implements DocListener {
      *
      * @return iText version
      */
-    public static final String getVersion() {
+    public static String getVersion() {
         return ITEXT_VERSION;
     }
 

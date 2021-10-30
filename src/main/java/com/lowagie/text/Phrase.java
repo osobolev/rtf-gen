@@ -501,7 +501,7 @@ public class Phrase extends ArrayList implements TextElementArray {
      * @param string
      * @return a newly constructed Phrase
      */
-    public static final Phrase getInstance(String string) {
+    public static Phrase getInstance(String string) {
         return getInstance(16, string, new Font());
     }
 
@@ -512,7 +512,7 @@ public class Phrase extends ArrayList implements TextElementArray {
      * @param string
      * @return a newly constructed Phrase
      */
-    public static final Phrase getInstance(int leading, String string) {
+    public static Phrase getInstance(int leading, String string) {
         return getInstance(leading, string, new Font());
     }
 
@@ -524,7 +524,7 @@ public class Phrase extends ArrayList implements TextElementArray {
      * @param font
      * @return a newly constructed Phrase
      */
-    public static final Phrase getInstance(int leading, String string, Font font) {
+    public static Phrase getInstance(int leading, String string, Font font) {
         Phrase p = new Phrase(true);
         p.setLeading(leading);
         p.font = font;

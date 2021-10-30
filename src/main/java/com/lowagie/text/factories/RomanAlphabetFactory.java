@@ -61,7 +61,7 @@ public class RomanAlphabetFactory {
      * into a String using the letters 'a' to 'z';
      * 1 = a, 2 = b, ..., 26 = z, 27 = aa, 28 = ab,...
      */
-    public static final String getString(int index) {
+    public static String getString(int index) {
         if (index < 1) throw new NumberFormatException(
             "You can't translate a negative number into an alphabetical value.");
 
@@ -90,7 +90,7 @@ public class RomanAlphabetFactory {
      * into a String using the letters 'a' to 'z';
      * 1 = a, 2 = b, ..., 26 = z, 27 = aa, 28 = ab,...
      */
-    public static final String getLowerCaseString(int index) {
+    public static String getLowerCaseString(int index) {
         return getString(index);
     }
 
@@ -99,7 +99,7 @@ public class RomanAlphabetFactory {
      * into a String using the letters 'A' to 'Z';
      * 1 = A, 2 = B, ..., 26 = Z, 27 = AA, 28 = AB,...
      */
-    public static final String getUpperCaseString(int index) {
+    public static String getUpperCaseString(int index) {
         return getString(index).toUpperCase();
     }
 
@@ -108,7 +108,7 @@ public class RomanAlphabetFactory {
      * into a String using the letters 'a' to 'z'
      * (a = 1, b = 2, ..., z = 26, aa = 27, ab = 28,...).
      */
-    public static final String getString(int index, boolean lowercase) {
+    public static String getString(int index, boolean lowercase) {
         if (lowercase) {
             return getLowerCaseString(index);
         } else {

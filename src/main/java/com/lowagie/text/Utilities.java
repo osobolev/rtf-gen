@@ -150,7 +150,7 @@ public class Utilities {
      * @return a value in points
      * @since 2.1.2
      */
-    public static final float millimetersToPoints(float value) {
+    public static float millimetersToPoints(float value) {
         return inchesToPoints(millimetersToInches(value));
     }
 
@@ -161,7 +161,7 @@ public class Utilities {
      * @return a value in inches
      * @since 2.1.2
      */
-    public static final float millimetersToInches(float value) {
+    public static float millimetersToInches(float value) {
         return value / 25.4f;
     }
 
@@ -172,7 +172,7 @@ public class Utilities {
      * @return a value in millimeters
      * @since 2.1.2
      */
-    public static final float pointsToMillimeters(float value) {
+    public static float pointsToMillimeters(float value) {
         return inchesToMillimeters(pointsToInches(value));
     }
 
@@ -183,7 +183,7 @@ public class Utilities {
      * @return a value in inches
      * @since 2.1.2
      */
-    public static final float pointsToInches(float value) {
+    public static float pointsToInches(float value) {
         return value / 72f;
     }
 
@@ -194,7 +194,7 @@ public class Utilities {
      * @return a value in millimeters
      * @since 2.1.2
      */
-    public static final float inchesToMillimeters(float value) {
+    public static float inchesToMillimeters(float value) {
         return value * 25.4f;
     }
 
@@ -205,7 +205,7 @@ public class Utilities {
      * @return a value in points
      * @since 2.1.2
      */
-    public static final float inchesToPoints(float value) {
+    public static float inchesToPoints(float value) {
         return value * 72f;
     }
 

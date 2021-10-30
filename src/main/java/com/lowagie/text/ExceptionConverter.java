@@ -90,7 +90,7 @@ public class ExceptionConverter extends RuntimeException {
      * @return an unchecked exception
      * @since 2.1.6
      */
-    public static final RuntimeException convertException(Exception ex) {
+    public static RuntimeException convertException(Exception ex) {
         if (ex instanceof RuntimeException) {
             return (RuntimeException) ex;
         }

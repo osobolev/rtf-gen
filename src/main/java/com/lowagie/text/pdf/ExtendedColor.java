@@ -128,7 +128,7 @@ public abstract class ExtendedColor extends Color {
         return TYPE_RGB;
     }
 
-    static final float normalize(float value) {
+    static float normalize(float value) {
         if (value < 0)
             return 0;
         if (value > 1)

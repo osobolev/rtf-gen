@@ -68,7 +68,7 @@ public class GreekAlphabetFactory {
      * @param index the original number
      * @return the letter combination
      */
-    public static final String getString(int index) {
+    public static String getString(int index) {
         return getString(index, true);
     }
 
@@ -78,7 +78,7 @@ public class GreekAlphabetFactory {
      * @param index the original number
      * @return the letter combination
      */
-    public static final String getLowerCaseString(int index) {
+    public static String getLowerCaseString(int index) {
         return getString(index);
     }
 
@@ -88,7 +88,7 @@ public class GreekAlphabetFactory {
      * @param index the original number
      * @return the letter combination
      */
-    public static final String getUpperCaseString(int index) {
+    public static String getUpperCaseString(int index) {
         return getString(index).toUpperCase();
     }
 
@@ -98,7 +98,7 @@ public class GreekAlphabetFactory {
      * @param index the original number
      * @return the letter combination
      */
-    public static final String getString(int index, boolean lowercase) {
+    public static String getString(int index, boolean lowercase) {
         if (index < 1) return "";
         index--;
 
