@@ -487,22 +487,22 @@ public class Font implements Comparable<Font> {
      */
     public static int getStyleValue(String style) {
         int s = 0;
-        if (style.indexOf(Markup.CSS_VALUE_NORMAL) != -1) {
+        if (style.contains(Markup.CSS_VALUE_NORMAL)) {
             s |= NORMAL;
         }
-        if (style.indexOf(Markup.CSS_VALUE_BOLD) != -1) {
+        if (style.contains(Markup.CSS_VALUE_BOLD)) {
             s |= BOLD;
         }
-        if (style.indexOf(Markup.CSS_VALUE_ITALIC) != -1) {
+        if (style.contains(Markup.CSS_VALUE_ITALIC)) {
             s |= ITALIC;
         }
-        if (style.indexOf(Markup.CSS_VALUE_OBLIQUE) != -1) {
+        if (style.contains(Markup.CSS_VALUE_OBLIQUE)) {
             s |= ITALIC;
         }
-        if (style.indexOf(Markup.CSS_VALUE_UNDERLINE) != -1) {
+        if (style.contains(Markup.CSS_VALUE_UNDERLINE)) {
             s |= UNDERLINE;
         }
-        if (style.indexOf(Markup.CSS_VALUE_LINETHROUGH) != -1) {
+        if (style.contains(Markup.CSS_VALUE_LINETHROUGH)) {
             s |= STRIKETHRU;
         }
         return s;
