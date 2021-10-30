@@ -67,13 +67,13 @@ public class MetaDo {
             throw new IOException("Only BMP can be wrapped in WMF.");
         byte[] data;
         if (image.getOriginalData() == null) {
-            InputStream imgIn = image.getUrl().openStream();
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            int b;
-            while ((b = imgIn.read()) != -1)
-                out.write(b);
-            imgIn.close();
-            data = out.toByteArray();
+            try (InputStream imgIn = image.getUrl().openStream()) {
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                int b;
+                while ((b = imgIn.read()) != -1)
+                    out.write(b);
+                data = out.toByteArray();
+            }
         } else
             data = image.getOriginalData();
         int sizeBmpWords = (data.length - 14 + 1) >>> 1;
@@ -117,7 +117,6 @@ public class MetaDo {
             os.write(0);
         writeDWord(os, 3);
         writeWord(os, 0);
-        os.close();
         return os.toByteArray();
     }
 

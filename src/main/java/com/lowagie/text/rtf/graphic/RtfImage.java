@@ -200,15 +200,14 @@ public class RtfImage extends RtfElement {
                 byte[] iod = image.getOriginalData();
                 final int WMF_PLACEABLE_HEADER_SIZE = 22;
                 if (iod == null) {
-
-                    InputStream imageIn = image.getUrl().openStream();
-                    if (imageType == Image.ORIGINAL_WMF) { //remove the placeable header first
-                        for (int k = 0; k < WMF_PLACEABLE_HEADER_SIZE; k++) {
-                            if (imageIn.read() < 0) throw new EOFException("while removing wmf placeable header");
+                    try (InputStream imageIn = image.getUrl().openStream()) {
+                        if (imageType == Image.ORIGINAL_WMF) { //remove the placeable header first
+                            for (int k = 0; k < WMF_PLACEABLE_HEADER_SIZE; k++) {
+                                if (imageIn.read() < 0) throw new EOFException("while removing wmf placeable header");
+                            }
                         }
+                        bab.write(imageIn);
                     }
-                    bab.write(imageIn);
-                    imageIn.close();
                 } else {
 
                     if (imageType == Image.ORIGINAL_WMF) {

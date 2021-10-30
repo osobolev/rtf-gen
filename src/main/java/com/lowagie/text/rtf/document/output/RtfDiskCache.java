@@ -91,13 +91,13 @@ public class RtfDiskCache implements RtfDataCache {
      */
     public void writeTo(OutputStream target) throws IOException {
         this.data.close();
-        BufferedInputStream tempIn = new BufferedInputStream(new FileInputStream(this.tempFile));
-        byte[] buffer = new byte[8192];
-        int bytesRead;
-        while ((bytesRead = tempIn.read(buffer)) >= 0) {
-            target.write(buffer, 0, bytesRead);
+        try (BufferedInputStream tempIn = new BufferedInputStream(new FileInputStream(this.tempFile))) {
+            byte[] buffer = new byte[8192];
+            int bytesRead;
+            while ((bytesRead = tempIn.read(buffer)) >= 0) {
+                target.write(buffer, 0, bytesRead);
+            }
         }
-        tempIn.close();
         this.tempFile.delete();
     }
 }
