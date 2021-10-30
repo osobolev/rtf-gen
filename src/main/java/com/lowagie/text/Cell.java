@@ -95,7 +95,7 @@ public class Cell extends Rectangle implements TextElementArray {
      * The <CODE>ArrayList</CODE> of <CODE>Element</CODE>s
      * that are part of the content of the Cell.
      */
-    protected ArrayList arrayList = null;
+    protected ArrayList arrayList;
 
     /**
      * The horizontal alignment of the cell content.

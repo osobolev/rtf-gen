@@ -127,7 +127,7 @@ public class SimpleCell extends Rectangle implements TextElementArray {
     /**
      * indicates if these are the attributes of a single Cell (false) or a group of Cells (true).
      */
-    private boolean cellgroup = false;
+    private boolean cellgroup;
     /**
      * Indicates that the largest ascender height should be used to determine the
      * height of the first line.  Note that this only has an effect when rendered

@@ -146,22 +146,22 @@ public class Font implements Comparable {
     /**
      * the value of the fontfamily.
      */
-    private int family = UNDEFINED;
+    private int family;
 
     /**
      * the value of the fontsize.
      */
-    private float size = UNDEFINED;
+    private float size;
 
     /**
      * the value of the style.
      */
-    private int style = UNDEFINED;
+    private int style;
 
     /**
      * the value of the color.
      */
-    private Color color = null;
+    private Color color;
 
     // constructors
 

@@ -80,7 +80,7 @@ public class RtfSection extends RtfElement {
     /**
      * The sub-items of this RtfSection
      */
-    protected ArrayList items = null;
+    protected ArrayList items;
 
     /**
      * Constructs a RtfSection for a given Section. If the autogenerateTOCEntries

@@ -72,7 +72,7 @@ public class RtfStylesheetList extends RtfElement implements RtfExtendedElement 
     /**
      * The HashMap containing the RtfParagraphStyles.
      */
-    private HashMap styleMap = null;
+    private HashMap styleMap;
     /**
      * Whether the default settings have been loaded.
      */

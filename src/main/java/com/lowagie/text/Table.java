@@ -163,7 +163,7 @@ public class Table extends Rectangle implements LargeElement {
     /**
      * The current Position in the table.
      */
-    private Point curPosition = new Point(0, 0);
+    private Point curPosition;
 
     /**
      * This Empty Cell contains the DEFAULT layout of each Cell added with the method addCell(String content).
@@ -994,20 +994,20 @@ public class Table extends Rectangle implements LargeElement {
      * Integrates all added tables and recalculates column widths.
      */
     private void mergeInsertedTables() {
-        int i = 0;
-        int j = 0;
-        float[] lNewWidths = null;
+        int i;
+        int j;
+        float[] lNewWidths;
         int[] lDummyWidths = new int[columns];     // to keep track in how many new cols this one will be split
         float[][] lDummyColumnWidths = new float[columns][]; // bugfix Tony Copping
         int[] lDummyHeights = new int[rows.size()]; // to keep track in how many new rows this one will be split
-        ArrayList newRows = null;
+        ArrayList newRows;
         boolean isTable = false;
         int lTotalRows = 0;
         int lTotalColumns = 0;
-        int lNewMaxRows = 0;
-        int lNewMaxColumns = 0;
+        int lNewMaxRows;
+        int lNewMaxColumns;
 
-        Table lDummyTable = null;
+        Table lDummyTable;
 
         // first we'll add new columns when needed
         // check one column at a time, find maximum needed nr of cols
@@ -1128,11 +1128,10 @@ public class Table extends Rectangle implements LargeElement {
                 newRows.add(new Row(lTotalColumns));
             }
             int lDummyRow = 0;         // to remember where we are in the new, larger table
-            int lDummyColumn = 0;
-            Object lDummyElement = null;
+            int lDummyColumn;
+            Object lDummyElement;
             for (i = 0; i < rows.size(); i++) {
                 lDummyColumn = 0;
-                lNewMaxRows = 1;
                 for (j = 0; j < columns; j++) {
                     if (((Row) rows.get(i)).getCell(j) instanceof Table)       // copy values from embedded table
                     {
@@ -1295,7 +1294,7 @@ public class Table extends Rectangle implements LargeElement {
         int rowCount = aPosition.x + aCell.getRowspan() - someRows.size();
         assumeTableDefaults(aCell);
         int i;
-        Row row = null;
+        Row row;
         if ((aPosition.x + aCell.getRowspan()) > someRows.size()) {
             for (i = 0; i < rowCount; i++) {
                 row = new Row(columns);

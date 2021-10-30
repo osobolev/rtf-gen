@@ -67,7 +67,7 @@ public abstract class RtfElement implements RtfBasicElement {
     /**
      * The RtfDocument this RtfElement belongs to
      */
-    protected RtfDocument document = null;
+    protected RtfDocument document;
     /**
      * Whether this RtfElement is in a table
      */

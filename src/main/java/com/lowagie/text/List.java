@@ -184,7 +184,7 @@ public class List implements TextElementArray {
     /**
      * The indentation of the listitems.
      */
-    protected float symbolIndent = 0;
+    protected float symbolIndent;
 
     // constructors
 

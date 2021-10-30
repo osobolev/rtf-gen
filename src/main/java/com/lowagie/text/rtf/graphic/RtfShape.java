@@ -176,15 +176,15 @@ public class RtfShape extends RtfAddableElement {
     /**
      * The shape type.
      */
-    private int type = 0;
+    private int type;
     /**
      * The RtfShapePosition that defines position settings for this RtfShape.
      */
-    private RtfShapePosition position = null;
+    private RtfShapePosition position;
     /**
      * A HashMap with RtfShapePropertys that define further shape properties.
      */
-    private HashMap properties = null;
+    private HashMap properties;
     /**
      * The wrapping mode. Defaults to SHAPE_WRAP_NONE;
      */

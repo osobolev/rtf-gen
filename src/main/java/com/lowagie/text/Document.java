@@ -158,22 +158,22 @@ public class Document implements DocListener {
     /**
      * margin in x direction starting from the left
      */
-    protected float marginLeft = 0;
+    protected float marginLeft;
 
     /**
      * margin in x direction starting from the right
      */
-    protected float marginRight = 0;
+    protected float marginRight;
 
     /**
      * margin in y direction starting from the top
      */
-    protected float marginTop = 0;
+    protected float marginTop;
 
     /**
      * margin in y direction starting from the bottom
      */
-    protected float marginBottom = 0;
+    protected float marginBottom;
 
     /**
      * mirroring of the left/right margins
