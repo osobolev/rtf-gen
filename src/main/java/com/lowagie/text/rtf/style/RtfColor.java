@@ -94,15 +94,15 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * The red value
      */
-    private int red = 0;
+    private final int red;
     /**
      * The green value
      */
-    private int green = 0;
+    private final int green;
     /**
      * The blue value
      */
-    private int blue = 0;
+    private final int blue;
 
     /**
      * Constructor only for use when initializing the RtfColorList
@@ -133,6 +133,10 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
             this.red = col.getRed();
             this.green = col.getGreen();
             this.blue = col.getBlue();
+        } else {
+            this.red = 0;
+            this.green = 0;
+            this.blue = 0;
         }
         if (this.document != null) {
             this.colorNumber = this.document.getDocumentHeader().getColorNumber(this);
@@ -149,8 +153,12 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
         super(doc);
         if (col != null) {
             this.red = col.getRed();
-            this.blue = col.getBlue();
             this.green = col.getGreen();
+            this.blue = col.getBlue();
+        } else {
+            this.red = 0;
+            this.green = 0;
+            this.blue = 0;
         }
         if (this.document != null) {
             this.colorNumber = this.document.getDocumentHeader().getColorNumber(this);
