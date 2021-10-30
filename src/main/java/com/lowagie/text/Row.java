@@ -48,7 +48,7 @@
  */
 package com.lowagie.text;
 
-import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A <CODE>Row</CODE> is part of a <CODE>Table</CODE>
@@ -157,7 +157,7 @@ public class Row implements Element {
      * @return an <CODE>ArrayList</CODE>
      */
     public java.util.List<Element> getChunks() {
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     /**

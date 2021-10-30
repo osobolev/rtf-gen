@@ -346,15 +346,6 @@ public class Table extends Rectangle implements LargeElement {
     }
 
     /**
-     * Gets all the chunks in this element.
-     *
-     * @return an <CODE>ArrayList</CODE>
-     */
-    public List<Element> getChunks() {
-        return new ArrayList<>();
-    }
-
-    /**
      * @since iText 2.0.8
      * @see com.lowagie.text.Element#isNestable()
      */

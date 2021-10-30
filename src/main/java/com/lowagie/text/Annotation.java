@@ -49,7 +49,7 @@
 package com.lowagie.text;
 
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -433,7 +433,7 @@ public class Annotation implements Element {
      * @return an <CODE>ArrayList</CODE>
      */
     public java.util.List<Element> getChunks() {
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     // methods

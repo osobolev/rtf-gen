@@ -51,7 +51,7 @@ package com.lowagie.text;
 import com.lowagie.text.pdf.GrayColor;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -269,7 +269,7 @@ public class Rectangle implements Element {
      * @return an <CODE>ArrayList</CODE>
      */
     public List<Element> getChunks() {
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     /**
