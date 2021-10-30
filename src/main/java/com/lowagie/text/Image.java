@@ -474,11 +474,6 @@ public abstract class Image extends Rectangle {
         int h = pg.getHeight();
         int[] pixels = (int[]) pg.getPixels();
         if (forceBW) {
-            int byteWidth = (w / 8) + ((w & 7) != 0 ? 1 : 0);
-            byte[] pixelsByte = new byte[byteWidth * h];
-
-            int index = 0;
-            int size = h * w;
             int transColor = 1;
             if (color != null) {
                 transColor = (color.getRed() + color.getGreen()
@@ -488,6 +483,11 @@ public abstract class Image extends Rectangle {
             int cbyte = 0x80;
             int wMarker = 0;
             int currByte = 0;
+            int byteWidth = (w / 8) + ((w & 7) != 0 ? 1 : 0);
+            byte[] pixelsByte = new byte[byteWidth * h];
+
+            int index = 0;
+            int size = h * w;
             if (color != null) {
                 for (int j = 0; j < size; j++) {
                     int alpha = (pixels[j] >> 24) & 0xff;
@@ -533,11 +533,6 @@ public abstract class Image extends Rectangle {
             }
             return getInstance(w, h, 1, 1, pixelsByte, transparency);
         } else {
-            byte[] pixelsByte = new byte[w * h * 3];
-            byte[] smask = null;
-
-            int index = 0;
-            int size = h * w;
             int red = 255;
             int green = 255;
             int blue = 255;
@@ -547,6 +542,11 @@ public abstract class Image extends Rectangle {
                 blue = color.getBlue();
             }
             int[] transparency = null;
+            byte[] pixelsByte = new byte[w * h * 3];
+            byte[] smask = null;
+
+            int index = 0;
+            int size = h * w;
             if (color != null) {
                 for (int j = 0; j < size; j++) {
                     int alpha = (pixels[j] >> 24) & 0xff;
@@ -561,9 +561,9 @@ public abstract class Image extends Rectangle {
                     }
                 }
             } else {
-                int transparentPixel = 0;
                 smask = new byte[w * h];
                 boolean shades = false;
+                int transparentPixel = 0;
                 for (int j = 0; j < size; j++) {
                     byte alpha = smask[j] = (byte) ((pixels[j] >> 24) & 0xff);
                     /* bugfix by Chris Nokleberg */

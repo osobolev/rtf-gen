@@ -192,7 +192,6 @@ public class RtfImage extends RtfElement {
      * @throws DocumentException If an error occurs accessing the image content
      */
     private byte[][] getImageData(Image image) throws DocumentException {
-        final int WMF_PLACEABLE_HEADER_SIZE = 22;
         RtfByteArrayBuffer bab = new RtfByteArrayBuffer();
 
         try {
@@ -200,6 +199,7 @@ public class RtfImage extends RtfElement {
                 bab.append(MetaDo.wrapBMP(image));
             } else {
                 byte[] iod = image.getOriginalData();
+                final int WMF_PLACEABLE_HEADER_SIZE = 22;
                 if (iod == null) {
 
                     InputStream imageIn = image.getUrl().openStream();

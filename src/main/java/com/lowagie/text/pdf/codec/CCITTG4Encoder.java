@@ -164,18 +164,15 @@ public class CCITTG4Encoder {
     }
 
     private void Fax3Encode2DRow() {
-        int a0 = 0;
         int a1 = pixel(dataBp, offsetData, 0) != 0 ? 0 : finddiff(dataBp, offsetData, 0, rowpixels, 0);
         int b1 = pixel(refline, 0, 0) != 0 ? 0 : finddiff(refline, 0, 0, rowpixels, 0);
-        int a2;
-        int b2;
 
-        for (; ; ) {
-            b2 = finddiff2(refline, 0, b1, rowpixels, pixel(refline, 0, b1));
+        for (int a0 = 0; ; ) {
+            int b2 = finddiff2(refline, 0, b1, rowpixels, pixel(refline, 0, b1));
             if (b2 >= a1) {
                 int d = b1 - a1;
                 if (!(-3 <= d && d <= 3)) {    /* horizontal mode */
-                    a2 = finddiff2(dataBp, offsetData, a1, rowpixels, pixel(dataBp, offsetData, a1));
+                    int a2 = finddiff2(dataBp, offsetData, a1, rowpixels, pixel(dataBp, offsetData, a1));
                     putcode(horizcode);
                     if (a0 + a1 == 0 || pixel(dataBp, offsetData, a0) == 0) {
                         putspan(a1 - a0, TIFFFaxWhiteCodes);

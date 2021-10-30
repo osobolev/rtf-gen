@@ -996,16 +996,11 @@ public class Table extends Rectangle implements LargeElement {
     private void mergeInsertedTables() {
         int i;
         int j;
-        float[] lNewWidths;
         int[] lDummyWidths = new int[columns];     // to keep track in how many new cols this one will be split
         float[][] lDummyColumnWidths = new float[columns][]; // bugfix Tony Copping
         int[] lDummyHeights = new int[rows.size()]; // to keep track in how many new rows this one will be split
-        ArrayList newRows;
         boolean isTable = false;
-        int lTotalRows = 0;
         int lTotalColumns = 0;
-        int lNewMaxRows;
-        int lNewMaxColumns;
 
         Table lDummyTable;
 
@@ -1013,7 +1008,8 @@ public class Table extends Rectangle implements LargeElement {
         // check one column at a time, find maximum needed nr of cols
         // Search internal tables and find one with max columns
         for (j = 0; j < columns; j++) {
-            lNewMaxColumns = 1; // value to hold in how many columns the current one will be split
+            // value to hold in how many columns the current one will be split
+            int lNewMaxColumns = 1;
             float[] tmpWidths = null;
             for (i = 0; i < rows.size(); i++) {
                 if (((Row) rows.get(i)).getCell(j) instanceof Table) {
@@ -1026,13 +1022,13 @@ public class Table extends Rectangle implements LargeElement {
                         int cols = lDummyTable.getDimension().width;
                         float[] tmpWidthsN = new float[cols * tmpWidths.length];
                         float tpW = 0;
+                        tpW += tmpWidths[0];
                         float btW = 0;
+                        btW += lDummyTable.widths[0];
                         float totW = 0;
                         int tpI = 0;
                         int btI = 0;
                         int totI = 0;
-                        tpW += tmpWidths[0];
-                        btW += lDummyTable.widths[0];
                         while (tpI < tmpWidths.length && btI < cols) {
                             if (btW > tpW) {
                                 tmpWidthsN[totI] = tpW - totW;
@@ -1082,8 +1078,10 @@ public class Table extends Rectangle implements LargeElement {
         }
 
         // next we'll add new rows when needed
+        int lTotalRows = 0;
         for (i = 0; i < rows.size(); i++) {
-            lNewMaxRows = 1;    // holds value in how many rows the current one will be split
+            // holds value in how many rows the current one will be split
+            int lNewMaxRows = 1;
             for (j = 0; j < columns; j++) {
                 if (((Row) rows.get(i)).getCell(j) instanceof Table) {
                     isTable = true;
@@ -1103,7 +1101,7 @@ public class Table extends Rectangle implements LargeElement {
             // set correct width for new columns
             // divide width over new nr of columns
             // Take new max columns of internal table and work out widths for each col
-            lNewWidths = new float[lTotalColumns];
+            float[] lNewWidths = new float[lTotalColumns];
             int lDummy = 0;
             for (int tel = 0; tel < widths.length; tel++) {
                 if (lDummyWidths[tel] != 1) {
@@ -1123,15 +1121,13 @@ public class Table extends Rectangle implements LargeElement {
             // generate new table
             // set new widths
             // copy old values
-            newRows = new ArrayList(lTotalRows);
+            ArrayList newRows = new ArrayList(lTotalRows);
             for (i = 0; i < lTotalRows; i++) {
                 newRows.add(new Row(lTotalColumns));
             }
             int lDummyRow = 0;         // to remember where we are in the new, larger table
-            int lDummyColumn;
-            Object lDummyElement;
             for (i = 0; i < rows.size(); i++) {
-                lDummyColumn = 0;
+                int lDummyColumn = 0;
                 for (j = 0; j < columns; j++) {
                     if (((Row) rows.get(i)).getCell(j) instanceof Table)       // copy values from embedded table
                     {
@@ -1145,8 +1141,7 @@ public class Table extends Rectangle implements LargeElement {
                         for (; cb < lDummyTable.widths.length; cb++) {
                             colMap[cb] = lDummyColumn + ct;
 
-                            float wb;
-                            wb = lDummyTable.widths[cb];
+                            float wb = lDummyTable.widths[cb];
 
                             float wt = 0;
                             while (ct < lDummyWidths[j]) {
@@ -1159,7 +1154,7 @@ public class Table extends Rectangle implements LargeElement {
                         // need to change this to work out how many cols to span
                         for (int k = 0; k < lDummyTable.getDimension().height; k++) {
                             for (int l = 0; l < lDummyTable.getDimension().width; l++) {
-                                lDummyElement = lDummyTable.getElement(k, l);
+                                Object lDummyElement = lDummyTable.getElement(k, l);
                                 if (lDummyElement != null) {
                                     int col = lDummyColumn + l;
 
