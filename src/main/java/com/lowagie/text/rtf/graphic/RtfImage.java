@@ -250,10 +250,9 @@ public class RtfImage extends RtfElement {
      */
     private void writeImageDataHexEncoded(OutputStream bab) throws IOException {
         int cnt = 0;
-        for (int k = 0; k < imageData.length; k++) {
-            byte[] chunk = imageData[k];
-            for (int x = 0; x < chunk.length; x++) {
-                bab.write(byte2charLUT, (chunk[x] & 0xff) * 2, 2);
+        for (byte[] chunk : imageData) {
+            for (byte b : chunk) {
+                bab.write(byte2charLUT, (b & 0xff) * 2, 2);
                 if (++cnt == 64) {
                     bab.write('\n');
                     cnt = 0;
@@ -270,8 +269,8 @@ public class RtfImage extends RtfElement {
      */
     private int imageDataSize() {
         int size = 0;
-        for (int k = 0; k < imageData.length; k++) {
-            size += imageData[k].length;
+        for (byte[] chunk : imageData) {
+            size += chunk.length;
         }
         return size;
     }
@@ -350,8 +349,8 @@ public class RtfImage extends RtfElement {
             if (result instanceof RtfByteArrayBuffer) {
                 ((RtfByteArrayBuffer) result).append(imageData);
             } else {
-                for (int k = 0; k < imageData.length; k++) {
-                    result.write(imageData[k]);
+                for (byte[] chunk : imageData) {
+                    result.write(chunk);
                 }
             }
         } else {

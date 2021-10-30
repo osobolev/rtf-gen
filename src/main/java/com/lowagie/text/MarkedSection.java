@@ -49,7 +49,6 @@
 package com.lowagie.text;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * Wrapper that allows to add properties to a Chapter/Section object.
@@ -111,8 +110,7 @@ public class MarkedSection extends MarkedObject {
      */
     public boolean process(ElementListener listener) {
         try {
-            for (Iterator<Element> i = ((Section) this.element).iterator(); i.hasNext(); ) {
-                Element element = i.next();
+            for (Element element : (Section) this.element) {
                 listener.add(element);
             }
             return true;

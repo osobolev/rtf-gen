@@ -49,7 +49,6 @@
 package com.lowagie.text;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Rectangle that can be used for Cells.
@@ -210,8 +209,7 @@ public class SimpleCell extends Rectangle implements TextElementArray {
         cell.setUseAscender(useAscender);
         cell.setUseBorderPadding(useBorderPadding);
         cell.setUseDescender(useDescender);
-        for (Iterator<Element> i = content.iterator(); i.hasNext(); ) {
-            Element element = i.next();
+        for (Element element : content) {
             cell.addElement(element);
         }
         return cell;

@@ -178,9 +178,9 @@ public class RtfWriter2 extends DocWriter {
         }
         RtfBasicElement[] rtfElements = rtfDoc.getMapper().mapElement(element);
         if (rtfElements.length != 0) {
-            for (int i = 0; i < rtfElements.length; i++) {
-                if (rtfElements[i] != null) {
-                    rtfDoc.add(rtfElements[i]);
+            for (RtfBasicElement rtfElement : rtfElements) {
+                if (rtfElement != null) {
+                    rtfDoc.add(rtfElement);
                 }
             }
             return true;

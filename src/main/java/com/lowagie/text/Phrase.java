@@ -50,7 +50,6 @@ package com.lowagie.text;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * A <CODE>Phrase</CODE> is a series of <CODE>Chunk</CODE>s.
@@ -202,8 +201,8 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      */
     public boolean process(ElementListener listener) {
         try {
-            for (Iterator<Element> i = iterator(); i.hasNext(); ) {
-                listener.add(i.next());
+            for (Element element : this) {
+                listener.add(element);
             }
             return true;
         } catch (DocumentException de) {
@@ -227,8 +226,8 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      */
     public java.util.List<Element> getChunks() {
         java.util.List<Element> tmp = new ArrayList<>();
-        for (Iterator<Element> i = iterator(); i.hasNext(); ) {
-            tmp.addAll(i.next().getChunks());
+        for (Element element : this) {
+            tmp.addAll(element.getChunks());
         }
         return tmp;
     }
@@ -301,8 +300,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
             case Element.PARAGRAPH:
                 Phrase phrase = (Phrase) o;
                 boolean success = true;
-                for (Iterator<Element> i = phrase.iterator(); i.hasNext(); ) {
-                    Element e = i.next();
+                for (Element e : phrase) {
                     if (e instanceof Chunk) {
                         success &= addChunk((Chunk) e);
                     } else {
@@ -338,8 +336,8 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * @throws ClassCastException    when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
      */
     public boolean addAll(Collection<? extends Element> collection) {
-        for (Iterator<? extends Element> iterator = collection.iterator(); iterator.hasNext(); ) {
-            this.add(iterator.next());
+        for (Element element : collection) {
+            this.add(element);
         }
         return true;
     }
@@ -448,8 +446,8 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      */
     public String getContent() {
         StringBuffer buf = new StringBuffer();
-        for (Iterator<Element> i = getChunks().iterator(); i.hasNext(); ) {
-            buf.append(i.next().toString());
+        for (Element element : getChunks()) {
+            buf.append(element.toString());
         }
         return buf.toString();
     }

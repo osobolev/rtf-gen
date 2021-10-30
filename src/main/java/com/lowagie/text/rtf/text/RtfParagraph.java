@@ -147,8 +147,7 @@ public class RtfParagraph extends RtfPhrase {
         }
         result.write(DocWriter.getISOBytes("\\plain"));
 
-        for (int i = 0; i < chunks.size(); i++) {
-            RtfBasicElement rbe = chunks.get(i);
+        for (RtfBasicElement rbe : chunks) {
             rbe.writeContent(result);
         }
 

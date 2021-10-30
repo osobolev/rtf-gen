@@ -209,8 +209,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      */
     public boolean process(ElementListener listener) {
         try {
-            for (Iterator<Element> i = iterator(); i.hasNext(); ) {
-                Element element = i.next();
+            for (Element element : this) {
                 listener.add(element);
             }
             return true;
@@ -255,8 +254,8 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      */
     public java.util.List<Element> getChunks() {
         java.util.List<Element> tmp = new ArrayList<>();
-        for (Iterator<Element> i = iterator(); i.hasNext(); ) {
-            tmp.addAll(i.next().getChunks());
+        for (Element element : this) {
+            tmp.addAll(element.getChunks());
         }
         return tmp;
     }
@@ -343,8 +342,8 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * @throws ClassCastException if one of the objects isn't a <CODE>Paragraph</CODE>, <CODE>List</CODE>, <CODE>Table</CODE>
      */
     public boolean addAll(Collection<? extends Element> collection) {
-        for (Iterator<? extends Element> iterator = collection.iterator(); iterator.hasNext(); ) {
-            this.add(iterator.next());
+        for (Element element : collection) {
+            this.add(element);
         }
         return true;
     }
@@ -667,8 +666,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      */
     public void setChapterNumber(int number) {
         numbers.set(numbers.size() - 1, new Integer(number));
-        for (Iterator<Element> i = iterator(); i.hasNext(); ) {
-            Element s = i.next();
+        for (Element s : this) {
             if (s instanceof Section) {
                 ((Section) s).setChapterNumber(number);
             }

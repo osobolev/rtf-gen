@@ -260,8 +260,8 @@ public class Cell extends Rectangle implements TextElementArray {
      */
     public java.util.List<Element> getChunks() {
         java.util.List<Element> tmp = new ArrayList<>();
-        for (Iterator<Element> i = arrayList.iterator(); i.hasNext(); ) {
-            tmp.addAll(i.next().getChunks());
+        for (Element element : arrayList) {
+            tmp.addAll(element.getChunks());
         }
         return tmp;
     }
@@ -691,8 +691,8 @@ public class Cell extends Rectangle implements TextElementArray {
                 tmp = new Cell();
                 tmp.setBorder(NO_BORDER);
                 tmp.setColspan(3);
-                for (Iterator<Element> i = arrayList.iterator(); i.hasNext(); ) {
-                    tmp.add(i.next());
+                for (Element value : arrayList) {
+                    tmp.add(value);
                 }
                 table.addCell(tmp);
             }

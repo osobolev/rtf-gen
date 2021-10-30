@@ -60,7 +60,6 @@ import com.lowagie.text.rtf.field.RtfTOCEntry;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -99,9 +98,7 @@ public class RtfSection extends RtfElement {
             }
             if (document.getAutogenerateTOCEntries()) {
                 StringBuffer titleText = new StringBuffer();
-                Iterator<Element> it = section.getTitle().iterator();
-                while (it.hasNext()) {
-                    Element element = it.next();
+                for (Element element : section.getTitle()) {
                     if (element.type() == Element.CHUNK) {
                         titleText.append(((Chunk) element).getContent());
                     }
@@ -112,13 +109,11 @@ public class RtfSection extends RtfElement {
                     this.items.add(tocEntry);
                 }
             }
-            Iterator<Element> iterator = section.iterator();
-            while (iterator.hasNext()) {
-                Element element = iterator.next();
+            for (Element element : section) {
                 RtfBasicElement[] rtfElements = doc.getMapper().mapElement(element);
-                for (int i = 0; i < rtfElements.length; i++) {
-                    if (rtfElements[i] != null) {
-                        items.add(rtfElements[i]);
+                for (RtfBasicElement rtfElement : rtfElements) {
+                    if (rtfElement != null) {
+                        items.add(rtfElement);
                     }
                 }
             }
@@ -137,8 +132,7 @@ public class RtfSection extends RtfElement {
         if (this.title != null) {
             this.title.writeContent(result);
         }
-        for (int i = 0; i < items.size(); i++) {
-            RtfBasicElement rbe = items.get(i);
+        for (RtfBasicElement rbe : items) {
             rbe.writeContent(result);
         }
     }
@@ -151,8 +145,8 @@ public class RtfSection extends RtfElement {
      */
     public void setInTable(boolean inTable) {
         super.setInTable(inTable);
-        for (int i = 0; i < this.items.size(); i++) {
-            this.items.get(i).setInTable(inTable);
+        for (RtfBasicElement rbe : this.items) {
+            rbe.setInTable(inTable);
         }
     }
 
@@ -164,8 +158,8 @@ public class RtfSection extends RtfElement {
      */
     public void setInHeader(boolean inHeader) {
         super.setInHeader(inHeader);
-        for (int i = 0; i < this.items.size(); i++) {
-            this.items.get(i).setInHeader(inHeader);
+        for (RtfBasicElement rbe : this.items) {
+            rbe.setInHeader(inHeader);
         }
     }
 
@@ -182,8 +176,7 @@ public class RtfSection extends RtfElement {
             this.title.setIndentLeft((int) (this.title.getIndentLeft() + indentLeft * RtfElement.TWIPS_FACTOR));
             this.title.setIndentRight((int) (this.title.getIndentRight() + indentRight * RtfElement.TWIPS_FACTOR));
         }
-        for (int i = 0; i < this.items.size(); i++) {
-            RtfBasicElement rtfElement = this.items.get(i);
+        for (RtfBasicElement rtfElement : this.items) {
             if (rtfElement instanceof RtfSection) {
                 ((RtfSection) rtfElement).updateIndentation(indentLeft + indentContent, indentRight, 0);
             } else if (rtfElement instanceof RtfParagraph) {

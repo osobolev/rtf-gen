@@ -177,8 +177,7 @@ public class RtfTable extends RtfElement {
             result.write(RtfParagraph.PARAGRAPH);
         }
 
-        for (int i = 0; i < this.rows.size(); i++) {
-            RtfElement re = this.rows.get(i);
+        for (RtfElement re : this.rows) {
             //.result.write(re.write());
             re.writeContent(result);
         }

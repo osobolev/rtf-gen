@@ -109,8 +109,7 @@ public class RtfInfoGroup extends RtfElement {
     public void writeContent(OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         result.write(INFO_GROUP);
-        for (int i = 0; i < infoElements.size(); i++) {
-            RtfInfoElement infoElement = infoElements.get(i);
+        for (RtfInfoElement infoElement : infoElements) {
             infoElement.writeContent(result);
         }
 

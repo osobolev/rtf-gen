@@ -124,8 +124,7 @@ public class RtfPhrase extends RtfElement {
         }
 
         RtfFont phraseFont = new RtfFont(null, phrase.getFont());
-        for (int i = 0; i < phrase.size(); i++) {
-            Element chunk = phrase.get(i);
+        for (Element chunk : phrase) {
             if (chunk instanceof Chunk) {
                 ((Chunk) chunk).setFont(phraseFont.difference(((Chunk) chunk).getFont()));
             }
@@ -152,8 +151,7 @@ public class RtfPhrase extends RtfElement {
             result.write(LINE_SPACING);
             result.write(intToByteArray(this.lineLeading));
         }
-        for (int i = 0; i < chunks.size(); i++) {
-            RtfBasicElement rbe = chunks.get(i);
+        for (RtfBasicElement rbe : chunks) {
             rbe.writeContent(result);
         }
     }
@@ -166,8 +164,8 @@ public class RtfPhrase extends RtfElement {
      */
     public void setInTable(boolean inTable) {
         super.setInTable(inTable);
-        for (int i = 0; i < this.chunks.size(); i++) {
-            this.chunks.get(i).setInTable(inTable);
+        for (RtfBasicElement chunk : this.chunks) {
+            chunk.setInTable(inTable);
         }
     }
 
@@ -179,8 +177,8 @@ public class RtfPhrase extends RtfElement {
      */
     public void setInHeader(boolean inHeader) {
         super.setInHeader(inHeader);
-        for (int i = 0; i < this.chunks.size(); i++) {
-            this.chunks.get(i).setInHeader(inHeader);
+        for (RtfBasicElement chunk : this.chunks) {
+            chunk.setInHeader(inHeader);
         }
     }
 
@@ -192,8 +190,8 @@ public class RtfPhrase extends RtfElement {
      */
     public void setRtfDocument(RtfDocument doc) {
         super.setRtfDocument(doc);
-        for (int i = 0; i < this.chunks.size(); i++) {
-            this.chunks.get(i).setRtfDocument(this.document);
+        for (RtfBasicElement chunk : this.chunks) {
+            chunk.setRtfDocument(this.document);
         }
     }
 }

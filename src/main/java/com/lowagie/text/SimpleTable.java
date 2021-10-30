@@ -49,7 +49,6 @@
 package com.lowagie.text;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Rectangle that can be used for Cells.
@@ -116,8 +115,8 @@ public class SimpleTable extends Rectangle implements TextElementArray {
         SimpleCell row = content.get(0);
         SimpleCell cell;
         int columns = 0;
-        for (Iterator<Element> i = row.getContent().iterator(); i.hasNext(); ) {
-            cell = (SimpleCell) i.next();
+        for (Element value : row.getContent()) {
+            cell = (SimpleCell) value;
             columns += cell.getColspan();
         }
         float[] widths = new float[columns];
@@ -127,11 +126,11 @@ public class SimpleTable extends Rectangle implements TextElementArray {
         table.setSpacing(cellspacing);
         table.setPadding(cellpadding);
         table.cloneNonPositionParameters(this);
-        for (Iterator<SimpleCell> rows = content.iterator(); rows.hasNext(); ) {
-            row = rows.next();
+        for (SimpleCell simpleCell : content) {
+            row = simpleCell;
             int pos = 0;
-            for (Iterator<Element> cells = row.getContent().iterator(); cells.hasNext(); ) {
-                cell = (SimpleCell) cells.next();
+            for (Element element : row.getContent()) {
+                cell = (SimpleCell) element;
                 table.addCell(cell.createCell(row));
                 if (cell.getColspan() == 1) {
                     if (cell.getWidth() > 0) widths[pos] = cell.getWidth();

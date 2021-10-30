@@ -51,7 +51,6 @@ package com.lowagie.text;
 import com.lowagie.text.factories.RomanAlphabetFactory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * A <CODE>List</CODE> contains several <CODE>ListItem</CODE>s.
@@ -234,8 +233,8 @@ public class List implements TextElementArray {
      */
     public boolean process(ElementListener listener) {
         try {
-            for (Iterator<Element> i = list.iterator(); i.hasNext(); ) {
-                listener.add(i.next());
+            for (Element element : list) {
+                listener.add(element);
             }
             return true;
         } catch (DocumentException de) {
@@ -259,8 +258,8 @@ public class List implements TextElementArray {
      */
     public java.util.List<Element> getChunks() {
         java.util.List<Element> tmp = new ArrayList<>();
-        for (Iterator<Element> i = list.iterator(); i.hasNext(); ) {
-            tmp.addAll(i.next().getChunks());
+        for (Element element : list) {
+            tmp.addAll(element.getChunks());
         }
         return tmp;
     }
@@ -311,14 +310,12 @@ public class List implements TextElementArray {
      */
     public void normalizeIndentation() {
         float max = 0;
-        for (Iterator<Element> i = list.iterator(); i.hasNext(); ) {
-            Element o = i.next();
+        for (Element o : list) {
             if (o instanceof ListItem) {
                 max = Math.max(max, ((ListItem) o).getIndentationLeft());
             }
         }
-        for (Iterator<Element> i = list.iterator(); i.hasNext(); ) {
-            Element o = i.next();
+        for (Element o : list) {
             if (o instanceof ListItem) {
                 ((ListItem) o).setIndentationLeft(max);
             }

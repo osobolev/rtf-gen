@@ -51,7 +51,6 @@ package com.lowagie.text;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 
 /**
  * A generic Document class.
@@ -301,8 +300,7 @@ public class Document implements DocListener {
             chapternumber = ((ChapterAutoNumber) element).setAutomaticNumber(chapternumber);
         }
         boolean success = false;
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             success |= listener.add(element);
         }
         if (element instanceof LargeElement) {
@@ -324,8 +322,7 @@ public class Document implements DocListener {
         if (!close) {
             open = true;
         }
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.setPageSize(pageSize);
             listener.setMargins(marginLeft, marginRight, marginTop,
                 marginBottom);
@@ -341,8 +338,7 @@ public class Document implements DocListener {
      */
     public boolean setPageSize(Rectangle pageSize) {
         this.pageSize = pageSize;
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.setPageSize(pageSize);
         }
         return true;
@@ -363,8 +359,7 @@ public class Document implements DocListener {
         this.marginRight = marginRight;
         this.marginTop = marginTop;
         this.marginBottom = marginBottom;
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.setMargins(marginLeft, marginRight, marginTop,
                 marginBottom);
         }
@@ -381,8 +376,7 @@ public class Document implements DocListener {
         if (!open || close) {
             return false;
         }
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.newPage();
         }
         return true;
@@ -395,8 +389,7 @@ public class Document implements DocListener {
      */
     public void setHeader(HeaderFooter header) {
         this.header = header;
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.setHeader(header);
         }
     }
@@ -406,8 +399,7 @@ public class Document implements DocListener {
      */
     public void resetHeader() {
         this.header = null;
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.resetHeader();
         }
     }
@@ -419,8 +411,7 @@ public class Document implements DocListener {
      */
     public void setFooter(HeaderFooter footer) {
         this.footer = footer;
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.setFooter(footer);
         }
     }
@@ -430,8 +421,7 @@ public class Document implements DocListener {
      */
     public void resetFooter() {
         this.footer = null;
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.resetFooter();
         }
     }
@@ -441,8 +431,7 @@ public class Document implements DocListener {
      */
     public void resetPageCount() {
         pageN = 0;
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.resetPageCount();
         }
     }
@@ -454,8 +443,7 @@ public class Document implements DocListener {
      */
     public void setPageCount(int pageN) {
         this.pageN = pageN;
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.setPageCount(pageN);
         }
     }
@@ -480,8 +468,7 @@ public class Document implements DocListener {
             open = false;
             close = true;
         }
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.close();
         }
     }
@@ -830,8 +817,7 @@ public class Document implements DocListener {
      */
     public boolean setMarginMirroring(boolean marginMirroring) {
         this.marginMirroring = marginMirroring;
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.setMarginMirroring(marginMirroring);
         }
         return true;
@@ -848,8 +834,7 @@ public class Document implements DocListener {
      */
     public boolean setMarginMirroringTopBottom(boolean marginMirroringTopBottom) {
         this.marginMirroringTopBottom = marginMirroringTopBottom;
-        for (Iterator<DocListener> iterator = listeners.iterator(); iterator.hasNext(); ) {
-            DocListener listener = iterator.next();
+        for (DocListener listener : listeners) {
             listener.setMarginMirroringTopBottom(marginMirroringTopBottom);
         }
         return true;

@@ -104,8 +104,7 @@ public class RtfListItem extends RtfParagraph {
             result.write(RtfParagraph.LINE_SPACING);
             result.write(intToByteArray(this.paragraphStyle.getLineLeading()));
         }
-        for (int i = 0; i < chunks.size(); i++) {
-            RtfBasicElement rtfElement = chunks.get(i);
+        for (RtfBasicElement rtfElement : chunks) {
             if (rtfElement instanceof RtfChunk) {
                 ((RtfChunk) rtfElement).setSoftLineBreaks(true);
             } else if (rtfElement instanceof RtfList) {
@@ -141,8 +140,7 @@ public class RtfListItem extends RtfParagraph {
      * @throws IOException
      */
     public boolean writeDefinition(OutputStream out) throws IOException {
-        for (int i = 0; i < chunks.size(); i++) {
-            RtfBasicElement rtfElement = chunks.get(i);
+        for (RtfBasicElement rtfElement : chunks) {
             if (rtfElement instanceof RtfList) {
                 RtfList rl = (RtfList) rtfElement;
                 rl.writeDefinition(out);
@@ -162,8 +160,7 @@ public class RtfListItem extends RtfParagraph {
      * @param listLevel  The list level to inherit.
      */
     public void inheritListSettings(int listNumber, int listLevel) {
-        for (int i = 0; i < chunks.size(); i++) {
-            RtfBasicElement rtfElement = chunks.get(i);
+        for (RtfBasicElement rtfElement : chunks) {
             if (rtfElement instanceof RtfList) {
                 ((RtfList) rtfElement).setListNumber(listNumber);
                 setLevel(listLevel);
@@ -177,8 +174,7 @@ public class RtfListItem extends RtfParagraph {
      * from the parent RtfList. Also calls correctIndentation on all child RtfLists.
      */
     protected void correctIndentation() {
-        for (int i = 0; i < chunks.size(); i++) {
-            RtfBasicElement rtfElement = chunks.get(i);
+        for (RtfBasicElement rtfElement : chunks) {
             if (rtfElement instanceof RtfList) {
                 ((RtfList) rtfElement).correctIndentation();
             }

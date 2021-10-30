@@ -6,7 +6,6 @@ import com.lowagie.text.rtf.RtfAddableElement;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -312,9 +311,7 @@ public class RtfShape extends RtfAddableElement {
         this.doc.outputDebugLinebreak(result);
         result.write(OPEN_GROUP);
         result.write(DocWriter.getISOBytes("\\*\\shpinst"));
-        Iterator<RtfShapeProperty> it = this.properties.values().iterator();
-        while (it.hasNext()) {
-            RtfShapeProperty rsp = it.next();
+        for (RtfShapeProperty rsp : this.properties.values()) {
             rsp.setRtfDocument(this.doc);
             rsp.writeContent(result);
         }

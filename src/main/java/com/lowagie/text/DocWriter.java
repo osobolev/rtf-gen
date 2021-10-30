@@ -51,7 +51,6 @@ package com.lowagie.text;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Iterator;
 import java.util.Properties;
 
 /**
@@ -445,9 +444,7 @@ public abstract class DocWriter implements DocListener {
     protected boolean writeMarkupAttributes(Properties markup)
         throws IOException {
         if (markup == null) return false;
-        Iterator<String> attributeIterator = markup.stringPropertyNames().iterator();
-        while (attributeIterator.hasNext()) {
-            String name = attributeIterator.next();
+        for (String name : markup.stringPropertyNames()) {
             write(name, markup.getProperty(name));
         }
         markup.clear();
