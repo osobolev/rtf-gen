@@ -51,16 +51,11 @@ package com.lowagie.text;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPCellEvent;
-import com.lowagie.text.pdf.PdfPTable;
-
 /**
  * Rectangle that can be used for Cells.
  * This Rectangle is padded and knows how to draw itself in a PdfPTable or PdfPcellEvent.
  */
-public class SimpleCell extends Rectangle implements PdfPCellEvent, TextElementArray {
+public class SimpleCell extends Rectangle implements TextElementArray {
 
 	// constants
 	/** the CellAttributes object represents a row. */
@@ -183,88 +178,8 @@ public class SimpleCell extends Rectangle implements PdfPCellEvent, TextElementA
 		}
 		return cell;
 	}
-	
-	/**
-	 * Creates a PdfPCell with these attributes.
-	 * @param rowAttributes
-	 * @return a PdfPCell based on these attributes.
-	 */
-	public PdfPCell createPdfPCell(SimpleCell rowAttributes) {
-		PdfPCell cell = new PdfPCell();
-		cell.setBorder(NO_BORDER);
-		SimpleCell tmp = new SimpleCell(CELL);
-		tmp.setSpacing_left(spacing_left);
-		tmp.setSpacing_right(spacing_right);
-		tmp.setSpacing_top(spacing_top);
-		tmp.setSpacing_bottom(spacing_bottom);
-		tmp.cloneNonPositionParameters(rowAttributes);
-		tmp.softCloneNonPositionParameters(this);
-		cell.setCellEvent(tmp);
-		cell.setHorizontalAlignment(rowAttributes.horizontalAlignment);
-		cell.setVerticalAlignment(rowAttributes.verticalAlignment);
-		cell.setUseAscender(rowAttributes.useAscender);
-		cell.setUseBorderPadding(rowAttributes.useBorderPadding);
-		cell.setUseDescender(rowAttributes.useDescender);
-		cell.setColspan(colspan);
-		if (horizontalAlignment != Element.ALIGN_UNDEFINED)
-			cell.setHorizontalAlignment(horizontalAlignment);
-		if (verticalAlignment != Element.ALIGN_UNDEFINED)
-			cell.setVerticalAlignment(verticalAlignment);
-		if (useAscender)
-			cell.setUseAscender(useAscender);
-		if (useBorderPadding)
-			cell.setUseBorderPadding(useBorderPadding);
-		if (useDescender)
-			cell.setUseDescender(useDescender);
-		float p;
-		float sp_left = spacing_left;
-		if (Float.isNaN(sp_left)) sp_left = 0f;
-		float sp_right = spacing_right;
-		if (Float.isNaN(sp_right)) sp_right = 0f;
-		float sp_top = spacing_top;
-		if (Float.isNaN(sp_top)) sp_top = 0f;
-		float sp_bottom = spacing_bottom;
-		if (Float.isNaN(sp_bottom)) sp_bottom = 0f;
-		p = padding_left;
-		if (Float.isNaN(p)) p = 0f; 
-		cell.setPaddingLeft(p + sp_left);
-		p = padding_right;
-		if (Float.isNaN(p)) p = 0f; 
-		cell.setPaddingRight(p + sp_right);
-		p = padding_top;
-		if (Float.isNaN(p)) p = 0f; 
-		cell.setPaddingTop(p + sp_top);
-		p = padding_bottom;
-		if (Float.isNaN(p)) p = 0f; 
-		cell.setPaddingBottom(p + sp_bottom);
-		Element element;
-		for (Iterator i = content.iterator(); i.hasNext(); ) {
-			element = (Element)i.next();
-			cell.addElement(element);
-		}
-		return cell;
-	}
 
-	/**
-	 * @see com.lowagie.text.pdf.PdfPCellEvent#cellLayout(com.lowagie.text.pdf.PdfPCell, com.lowagie.text.Rectangle, com.lowagie.text.pdf.PdfContentByte[])
-	 */
-	public void cellLayout(PdfPCell cell, Rectangle position, PdfContentByte[] canvases) {
-		float sp_left = spacing_left;
-		if (Float.isNaN(sp_left)) sp_left = 0f;
-		float sp_right = spacing_right;
-		if (Float.isNaN(sp_right)) sp_right = 0f;
-		float sp_top = spacing_top;
-		if (Float.isNaN(sp_top)) sp_top = 0f;
-		float sp_bottom = spacing_bottom;
-		if (Float.isNaN(sp_bottom)) sp_bottom = 0f;
-		Rectangle rect = new Rectangle(position.getLeft(sp_left), position.getBottom(sp_bottom), position.getRight(sp_right), position.getTop(sp_top));
-		rect.cloneNonPositionParameters(this);
-		canvases[PdfPTable.BACKGROUNDCANVAS].rectangle(rect);
-		rect.setBackgroundColor(null);
-		canvases[PdfPTable.LINECANVAS].rectangle(rect);
-	}
-	
-	/** Sets the padding parameters if they are undefined. 
+	/** Sets the padding parameters if they are undefined.
 	 * @param padding
 	 */
 	public void setPadding(float padding) {

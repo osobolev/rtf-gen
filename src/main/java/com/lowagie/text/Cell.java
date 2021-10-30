@@ -52,8 +52,6 @@ package com.lowagie.text;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.lowagie.text.pdf.PdfPCell;
-
 /**
  * A <CODE>Cell</CODE> is a <CODE>Rectangle</CODE> containing other
  * <CODE>Element</CODE>s.
@@ -716,35 +714,6 @@ public class Cell extends Rectangle implements TextElementArray {
         cell.setColspan(3);
         cell.setBorder(NO_BORDER);
         return cell;
-	}
-
-	/**
-	 * Creates a PdfPCell based on this Cell object.
-	 * @return a PdfPCell
-	 * @throws BadElementException
-	 */
-	public PdfPCell createPdfPCell() throws BadElementException {
-		if (rowspan > 1) throw new BadElementException("PdfPCells can't have a rowspan > 1");
-		if (isTable()) return new PdfPCell(((Table)arrayList.get(0)).createPdfPTable());
-		PdfPCell cell = new PdfPCell();
-		cell.setVerticalAlignment(verticalAlignment);
-		cell.setHorizontalAlignment(horizontalAlignment);
-		cell.setColspan(colspan);
-		cell.setUseBorderPadding(useBorderPadding);
-		cell.setUseDescender(useDescender);
-		cell.setLeading(getLeading(), 0);
-		cell.cloneNonPositionParameters(this);
-		cell.setNoWrap(getMaxLines() == 1);
-		for (Iterator i = getElements(); i.hasNext(); ) {
-            Element e = (Element)i.next();
-            if (e.type() == Element.PHRASE || e.type() == Element.PARAGRAPH) {
-                Paragraph p = new Paragraph((Phrase)e);
-                p.setAlignment(horizontalAlignment);
-                e = p;
-            }
-			cell.addElement(e);
-		}
-		return cell;
 	}
 
 	// unsupported Rectangle methods

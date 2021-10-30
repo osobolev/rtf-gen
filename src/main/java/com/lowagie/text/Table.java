@@ -57,9 +57,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-
 /**
  * A <CODE>Table</CODE> is a <CODE>Rectangle</CODE> that contains <CODE>Cell</CODE>s,
  * ordered in some kind of matrix.
@@ -1363,67 +1360,6 @@ public class Table extends Rectangle implements LargeElement {
     }
 
     /**
-     * Create a PdfPTable based on this Table object.
-     * @return a PdfPTable object
-     * @throws BadElementException
-     */
-    public PdfPTable createPdfPTable() throws BadElementException {
-    	if (!convert2pdfptable) {
-    		throw new BadElementException("No error, just an old style table");
-    	}
-        setAutoFillEmptyCells(true);
-    	complete();
-    	PdfPTable pdfptable = new PdfPTable(widths);
-    	pdfptable.setComplete(complete);
-    	if (isNotAddedYet())
-    		pdfptable.setSkipFirstHeader(true);
-    	SimpleTable t_evt = new SimpleTable();
-		t_evt.cloneNonPositionParameters(this);
-		t_evt.setCellspacing(cellspacing);
-    	pdfptable.setTableEvent(t_evt);
-    	pdfptable.setHeaderRows(lastHeaderRow + 1);
-    	pdfptable.setSplitLate(cellsFitPage);
-    	pdfptable.setKeepTogether(tableFitsPage);
-    	if (!Float.isNaN(offset)) {
-    		pdfptable.setSpacingBefore(offset);
-    	}
-    	pdfptable.setHorizontalAlignment(alignment);
-    	if (locked) {
-    		pdfptable.setTotalWidth(width);
-    		pdfptable.setLockedWidth(true);
-    	}
-    	else {
-    		pdfptable.setWidthPercentage(width);
-    	}
-    	Row row;
-        for (Iterator iterator = iterator(); iterator.hasNext(); ) {
-            row = (Row) iterator.next();
-            Element cell;
-            PdfPCell pcell;
-            for (int i = 0; i < row.getColumns(); i++) {
-                if ((cell = (Element)row.getCell(i)) != null) {
-                	if (cell instanceof Table) {
-                		pcell = new PdfPCell(((Table)cell).createPdfPTable());
-                	}
-                	else if (cell instanceof Cell) {
-                		pcell = ((Cell)cell).createPdfPCell();
-                		pcell.setPadding(cellpadding + cellspacing / 2f);
-                		SimpleCell c_evt = new SimpleCell(SimpleCell.CELL);
-                		c_evt.cloneNonPositionParameters((Cell)cell);
-                		c_evt.setSpacing(cellspacing * 2f);
-                        pcell.setCellEvent(c_evt);
-                	}
-                	else {
-                		pcell = new PdfPCell();
-                	}
-                	pdfptable.addCell(pcell);
-                }
-            }
-        }
-    	return pdfptable;
-    }
-
-	/**
 	 * Indicates if this is the first time the section is added.
 	 * @since	iText2.0.8
 	 * @return	true if the section wasn't added yet
