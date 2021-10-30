@@ -125,7 +125,7 @@ public class Cell extends Rectangle implements TextElementArray {
     /**
      * The leading of the content inside the cell.
      */
-    float leading = Float.NaN;
+    protected float leading = Float.NaN;
 
     /**
      * Is this <CODE>Cell</CODE> a header?
@@ -146,7 +146,7 @@ public class Cell extends Rectangle implements TextElementArray {
      * A useful value of this property could be e.g. "..."
      * (contributed by dperezcar@fcc.es)
      */
-    String showTruncation;
+    protected String showTruncation;
 
     /**
      * Indicates that the largest ascender height should be used to determine the

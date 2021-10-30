@@ -1025,7 +1025,7 @@ public abstract class Image extends Rectangle {
     /**
      * a static that is used for attributing a unique id to each image.
      */
-    static long serialId = 0;
+    private static long serialId = 0;
 
     /**
      * Creates a new serial id.

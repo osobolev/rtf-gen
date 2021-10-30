@@ -218,17 +218,17 @@ public class Table extends Rectangle implements LargeElement {
     /**
      * If true this table may not be split over two pages.
      */
-    boolean tableFitsPage = false;
+    protected boolean tableFitsPage = false;
 
     /**
      * If true cells may not be split over two pages.
      */
-    boolean cellsFitPage = false;
+    protected boolean cellsFitPage = false;
 
     /**
      * This is the offset of the table.
      */
-    float offset = Float.NaN;
+    protected float offset = Float.NaN;
 
     /**
      * if you want to generate tables the old way, set this value to false.

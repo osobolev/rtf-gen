@@ -108,7 +108,7 @@ public class ImgCCITT extends Image {
     }
 
     // Table to be used when fillOrder = 2, for flipping bytes.
-    static final byte[] flipTable = {
+    private static final byte[] flipTable = {
         0, -128, 64, -64, 32, -96, 96, -32,
         16, -112, 80, -48, 48, -80, 112, -16,
         8, -120, 72, -56, 40, -88, 104, -24,
