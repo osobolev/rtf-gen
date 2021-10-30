@@ -114,7 +114,6 @@ public class ListItem extends Paragraph {
      * Constructs a <CODE>ListItem</CODE>.
      */
     public ListItem() {
-        super();
     }
 
     /**

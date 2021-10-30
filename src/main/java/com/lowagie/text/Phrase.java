@@ -109,7 +109,6 @@ public class Phrase extends ArrayList implements TextElementArray {
      * Copy constructor for <CODE>Phrase</CODE>.
      */
     public Phrase(Phrase phrase) {
-        super();
         this.addAll(phrase);
         leading = phrase.getLeading();
         font = phrase.getFont();

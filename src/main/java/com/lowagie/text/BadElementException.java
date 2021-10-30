@@ -76,7 +76,6 @@ public class BadElementException extends DocumentException {
      * Constructs a <CODE>BadElementException</CODE> without a message.
      */
     BadElementException() {
-        super();
     }
 
     /**

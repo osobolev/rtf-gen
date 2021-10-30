@@ -73,7 +73,6 @@ public class MarkedSection extends MarkedObject {
      * @param section the marked section
      */
     public MarkedSection(Section section) {
-        super();
         if (section.title != null) {
             title = new MarkedObject(section.title);
             section.setTitle(null);

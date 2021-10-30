@@ -128,7 +128,6 @@ public class Paragraph extends Phrase {
      * Constructs a <CODE>Paragraph</CODE>.
      */
     public Paragraph() {
-        super();
     }
 
     /**
