@@ -48,8 +48,6 @@
  */
 package com.lowagie.text;
 
-import com.lowagie.text.html.Markup;
-
 import java.awt.*;
 
 /**
@@ -487,22 +485,22 @@ public class Font implements Comparable<Font> {
      */
     public static int getStyleValue(String style) {
         int s = 0;
-        if (style.contains(Markup.CSS_VALUE_NORMAL)) {
+        if (style.contains("normal")) {
             s |= NORMAL;
         }
-        if (style.contains(Markup.CSS_VALUE_BOLD)) {
+        if (style.contains("bold")) {
             s |= BOLD;
         }
-        if (style.contains(Markup.CSS_VALUE_ITALIC)) {
+        if (style.contains("italic")) {
             s |= ITALIC;
         }
-        if (style.contains(Markup.CSS_VALUE_OBLIQUE)) {
+        if (style.contains("oblique")) {
             s |= ITALIC;
         }
-        if (style.contains(Markup.CSS_VALUE_UNDERLINE)) {
+        if (style.contains("underline")) {
             s |= UNDERLINE;
         }
-        if (style.contains(Markup.CSS_VALUE_LINETHROUGH)) {
+        if (style.contains("line-through")) {
             s |= STRIKETHRU;
         }
         return s;
