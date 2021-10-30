@@ -181,11 +181,7 @@ public class SimpleCell extends Rectangle implements TextElementArray {
             || element.type() == Element.CHUNK
             || element.type() == Element.LIST
             || element.type() == Element.MARKED
-            || element.type() == Element.JPEG
-            || element.type() == Element.JPEG2000
-            || element.type() == Element.JBIG2
-            || element.type() == Element.IMGRAW
-            || element.type() == Element.IMGTEMPLATE) {
+            || element.type() == Element.IMAGE) {
             content.add(element);
         } else {
             throw new BadElementException("You can't add an element of type " + element.getClass().getName() + " to a SimpleCell.");

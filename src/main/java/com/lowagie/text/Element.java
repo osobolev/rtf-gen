@@ -198,29 +198,7 @@ public interface Element {
     /**
      * This is a possible type of <CODE>Element</CODE>.
      */
-    int JPEG = 32;
-
-    /**
-     * This is a possible type of <CODE>Element</CODE>.
-     */
-    int JPEG2000 = 33;
-
-    /**
-     * This is a possible type of <CODE>Element</CODE>.
-     */
-    int IMGRAW = 34;
-
-    /**
-     * This is a possible type of <CODE>Element</CODE>.
-     */
-    int IMGTEMPLATE = 35;
-
-    /**
-     * This is a possible type of <CODE>Element</CODE>.
-     *
-     * @since 2.1.5
-     */
-    int JBIG2 = 36;
+    int IMAGE = 34;
 
     /**
      * This is a possible type of <CODE>Element</CODE>.
@@ -301,48 +279,6 @@ public interface Element {
      * Does the same as ALIGN_JUSTIFIED but the last line is also spread out.
      */
     int ALIGN_JUSTIFIED_ALL = 8;
-
-    // static member variables for CCITT compression
-
-    /**
-     * Pure two-dimensional encoding (Group 4)
-     */
-    int CCITTG4 = 0x100;
-
-    /**
-     * Pure one-dimensional encoding (Group 3, 1-D)
-     */
-    int CCITTG3_1D = 0x101;
-
-    /**
-     * Mixed one- and two-dimensional encoding (Group 3, 2-D)
-     */
-    int CCITTG3_2D = 0x102;
-
-    /**
-     * A flag indicating whether 1-bits are to be interpreted as black pixels
-     * and 0-bits as white pixels,
-     */
-    int CCITT_BLACKIS1 = 1;
-
-    /**
-     * A flag indicating whether the filter expects extra 0-bits before each
-     * encoded line so that the line begins on a byte boundary.
-     */
-    int CCITT_ENCODEDBYTEALIGN = 2;
-
-    /**
-     * A flag indicating whether end-of-line bit patterns are required to be
-     * present in the encoding.
-     */
-    int CCITT_ENDOFLINE = 4;
-
-    /**
-     * A flag indicating whether the filter expects the encoded data to be
-     * terminated by an end-of-block pattern, overriding the Rows parameter. The
-     * use of this flag will set the key /EndOfBlock to false.
-     */
-    int CCITT_ENDOFBLOCK = 8;
 
     // methods
 

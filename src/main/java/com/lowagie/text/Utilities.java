@@ -48,10 +48,6 @@
  */
 package com.lowagie.text;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 /**
  * A collection of convenience methods that were present in many different iText
  * classes.
@@ -75,24 +71,6 @@ public final class Utilities {
             System.arraycopy(original, 0, original2, 0, original.length);
             original2[original.length] = item;
             return original2;
-        }
-    }
-
-    /**
-     * This method makes a valid URL from a given filename.
-     * <p>
-     * This method makes the conversion of this library from the JAVA 2 platform
-     * to a JDK1.1.x-version easier.
-     *
-     * @param filename a given filename
-     * @return a valid URL
-     * @throws MalformedURLException
-     */
-    public static URL toURL(String filename) throws MalformedURLException {
-        try {
-            return new URL(filename);
-        } catch (Exception e) {
-            return new File(filename).toURI().toURL();
         }
     }
 

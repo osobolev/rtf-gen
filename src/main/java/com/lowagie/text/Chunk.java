@@ -197,7 +197,6 @@ public class Chunk implements Element {
     public Chunk(Image image, float offsetX, float offsetY) {
         this(OBJECT_REPLACEMENT_CHARACTER, new Font());
         Image copyImage = Image.getInstance(image);
-        copyImage.setAbsolutePosition(Float.NaN, Float.NaN);
         setAttribute(IMAGE, new Object[] {copyImage, offsetX, offsetY, Boolean.FALSE});
     }
 
