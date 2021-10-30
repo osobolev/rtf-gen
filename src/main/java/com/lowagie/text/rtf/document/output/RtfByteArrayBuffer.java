@@ -185,7 +185,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
     private void writeLoop(byte[] src, int off, int len) {
         while (len > 0) {
             int room = buffer.length - pos;
-            int n = len > room ? room : len;
+            int n = Math.min(len, room);
             System.arraycopy(src, off, buffer, pos, n);
             len -= n;
             off += n;

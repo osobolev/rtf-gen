@@ -260,7 +260,7 @@ public class CCITTG4Encoder {
          */
         if (bits > 0) {
             n = oneruns[bp[pos] & 0xff];
-            span += n > bits ? bits : n;
+            span += Math.min(n, bits);
         }
         return span;
     }
@@ -301,7 +301,7 @@ public class CCITTG4Encoder {
          */
         if (bits > 0) {
             n = zeroruns[bp[pos] & 0xff];
-            span += n > bits ? bits : n;
+            span += Math.min(n, bits);
         }
         return span;
     }

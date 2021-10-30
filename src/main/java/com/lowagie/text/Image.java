@@ -979,7 +979,7 @@ public abstract class Image extends Rectangle {
         scalePercent(100);
         float percentX = (fitWidth * 100) / getScaledWidth();
         float percentY = (fitHeight * 100) / getScaledHeight();
-        scalePercent(percentX < percentY ? percentX : percentY);
+        scalePercent(Math.min(percentX, percentY));
         setWidthPercentage(0);
     }
 

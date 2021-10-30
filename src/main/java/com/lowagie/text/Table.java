@@ -1229,8 +1229,8 @@ public class Table extends Rectangle implements LargeElement {
                 return false;
             }
 
-            int difx = ((rows.size() - aLocation.x) > aCell.getRowspan()) ? aCell.getRowspan() : rows.size() - aLocation.x;
-            int dify = ((columns - aLocation.y) > aCell.getColspan()) ? aCell.getColspan() : columns - aLocation.y;
+            int difx = Math.min(rows.size() - aLocation.x, aCell.getRowspan());
+            int dify = Math.min(columns - aLocation.y, aCell.getColspan());
             // no other content at cells targeted by rowspan/colspan
             for (int i = aLocation.x; i < (aLocation.x + difx); i++) {
                 for (int j = aLocation.y; j < (aLocation.y + dify); j++) {
