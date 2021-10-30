@@ -93,7 +93,7 @@ public class Cell extends Rectangle implements TextElementArray {
      * The <CODE>ArrayList</CODE> of <CODE>Element</CODE>s
      * that are part of the content of the Cell.
      */
-    protected java.util.List<Element> arrayList;
+    protected final java.util.List<Element> arrayList = new ArrayList<>();
 
     /**
      * The horizontal alignment of the cell content.
@@ -183,8 +183,6 @@ public class Cell extends Rectangle implements TextElementArray {
         super(0, 0, 0, 0);
         setBorder(UNDEFINED);
         setBorderWidth(0.5f);
-        // initializes the arraylist
-        arrayList = new ArrayList<>();
     }
 
     /**

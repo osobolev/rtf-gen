@@ -81,7 +81,7 @@ public abstract class ExtendedColor extends Color {
      */
     public static final int TYPE_SHADING = 5;
 
-    protected int type;
+    protected final int type;
 
     /**
      * Constructs an extended color of a certain type.

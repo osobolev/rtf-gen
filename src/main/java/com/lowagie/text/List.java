@@ -130,7 +130,7 @@ public class List implements TextElementArray {
     /**
      * This is the <CODE>ArrayList</CODE> containing the different <CODE>ListItem</CODE>s.
      */
-    protected java.util.List<Element> list = new ArrayList<>();
+    protected final java.util.List<Element> list = new ArrayList<>();
 
     /**
      * Indicates if the list has to be numbered.

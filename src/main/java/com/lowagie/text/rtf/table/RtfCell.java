@@ -138,23 +138,23 @@ public class RtfCell extends Cell implements RtfExtendedElement {
      * Whether to use generic padding or individual
      * padding values (cellPaddingLeft, cellPaddingTop, cellPaddingBottom, cellPaddingRight)
      */
-    private boolean usePadding = false;
+    private final boolean usePadding = false;
     /*
      * Cell padding left
      */
-    private float cellPaddingLeft = 0;
+    private final float cellPaddingLeft = 0;
     /*
      * Cell padding top
      */
-    private float cellPaddingTop = 0;
+    private final float cellPaddingTop = 0;
     /*
      * Cell padding bottom
      */
-    private float cellPaddingBottom = 0;
+    private final float cellPaddingBottom = 0;
     /*
      * Cell padding right
      */
-    private float cellPaddingRight = 0;
+    private final float cellPaddingRight = 0;
 
     /**
      * Constructs an empty RtfCell

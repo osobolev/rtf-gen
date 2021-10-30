@@ -67,12 +67,12 @@ public class HeaderFooter extends Rectangle {
     /**
      * Does the page contain a pagenumber?
      */
-    private boolean numbered;
+    private final boolean numbered;
 
     /**
      * This is the <CODE>Phrase</CODE> that comes before the pagenumber.
      */
-    private Phrase before;
+    private final Phrase before;
 
     /**
      * This is number of the page.

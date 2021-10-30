@@ -358,11 +358,11 @@ public class RtfBorder extends RtfElement {
     /**
      * The type of this RtfBorder
      */
-    private int borderType;
+    private final int borderType;
     /**
      * The position of this RtfBorder
      */
-    private int borderPosition;
+    private final int borderPosition;
     /**
      * The style of this RtfBorder
      */
@@ -370,11 +370,11 @@ public class RtfBorder extends RtfElement {
     /**
      * The width of this RtfBorder
      */
-    private int borderWidth;
+    private final int borderWidth;
     /**
      * The color of this RtfBorder
      */
-    private RtfColor borderColor;
+    private final RtfColor borderColor;
 
     /**
      * Makes a copy of the given RtfBorder

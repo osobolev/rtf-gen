@@ -70,7 +70,7 @@ public class SimpleCell extends Rectangle implements TextElementArray {
     /**
      * the content of the Cell.
      */
-    private java.util.List<Element> content = new ArrayList<>();
+    private final java.util.List<Element> content = new ArrayList<>();
     /**
      * the width of the Cell.
      */

@@ -123,15 +123,15 @@ public class RtfShapeProperty extends RtfAddableElement {
     /**
      * The value type.
      */
-    private int type = 0;
+    private final int type;
     /**
      * The RtfShapeProperty name.
      */
-    private String name;
+    private final String name;
     /**
      * The RtfShapeProperty value.
      */
-    private Object value;
+    private final Object value;
 
     /**
      * Internally used to create the RtfShape.
@@ -139,7 +139,8 @@ public class RtfShapeProperty extends RtfAddableElement {
      * @param name  The property name to use.
      * @param value The property value to use.
      */
-    private RtfShapeProperty(String name, Object value) {
+    private RtfShapeProperty(int type, String name, Object value) {
+        this.type = type;
         this.name = name;
         this.value = value;
     }
@@ -151,8 +152,7 @@ public class RtfShapeProperty extends RtfAddableElement {
      * @param value The long value to use.
      */
     public RtfShapeProperty(String name, long value) {
-        this(name, Long.valueOf(value));
-        this.type = PROPERTY_TYPE_LONG;
+        this(PROPERTY_TYPE_LONG, name, value);
     }
 
     /**
@@ -162,8 +162,7 @@ public class RtfShapeProperty extends RtfAddableElement {
      * @param value The double value to use.
      */
     public RtfShapeProperty(String name, double value) {
-        this(name, Double.valueOf(value));
-        this.type = PROPERTY_TYPE_DOUBLE;
+        this(PROPERTY_TYPE_DOUBLE, name, value);
     }
 
     /**
@@ -173,8 +172,7 @@ public class RtfShapeProperty extends RtfAddableElement {
      * @param value The boolean value to use.
      */
     public RtfShapeProperty(String name, boolean value) {
-        this(name, Boolean.valueOf(value));
-        this.type = PROPERTY_TYPE_BOOLEAN;
+        this(PROPERTY_TYPE_BOOLEAN, name, value);
     }
 
     /**
@@ -184,8 +182,7 @@ public class RtfShapeProperty extends RtfAddableElement {
      * @param value The Color value to use.
      */
     public RtfShapeProperty(String name, Color value) {
-        this(name, (Object) value);
-        this.type = PROPERTY_TYPE_COLOR;
+        this(PROPERTY_TYPE_COLOR, name, value);
     }
 
     /**
@@ -195,8 +192,7 @@ public class RtfShapeProperty extends RtfAddableElement {
      * @param value The int array to use.
      */
     public RtfShapeProperty(String name, int[] value) {
-        this(name, (Object) value);
-        this.type = PROPERTY_TYPE_ARRAY;
+        this(PROPERTY_TYPE_ARRAY, name, value);
     }
 
     /**
@@ -206,8 +202,7 @@ public class RtfShapeProperty extends RtfAddableElement {
      * @param value The Point array to use.
      */
     public RtfShapeProperty(String name, Point[] value) {
-        this(name, (Object) value);
-        this.type = PROPERTY_TYPE_ARRAY;
+        this(PROPERTY_TYPE_ARRAY, name, value);
     }
 
     /**
@@ -217,9 +212,7 @@ public class RtfShapeProperty extends RtfAddableElement {
      * @param value The Image to use.
      */
     public RtfShapeProperty(String name, Image value) {
-        this.name = name;
-        this.value = value;
-        this.type = PROPERTY_TYPE_IMAGE;
+        this(PROPERTY_TYPE_IMAGE, name, value);
     }
 
     /**

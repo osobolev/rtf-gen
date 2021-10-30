@@ -69,12 +69,12 @@ public class Meta implements Element {
     /**
      * This is the type of Meta-information this object contains.
      */
-    private int type;
+    private final int type;
 
     /**
      * This is the content of the Meta-information.
      */
-    private StringBuilder content;
+    private final StringBuilder content;
 
     // constructors
 

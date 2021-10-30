@@ -76,14 +76,13 @@ public class RtfBorderGroup extends RtfElement {
     /**
      * The borders in this RtfBorderGroup
      */
-    private Map<Integer, RtfBorder> borders;
+    private final Map<Integer, RtfBorder> borders = new HashMap<>();
 
     /**
      * Constructs an empty RtfBorderGroup.
      */
     public RtfBorderGroup() {
         super(null);
-        this.borders = new HashMap<>();
     }
 
     /**
@@ -96,7 +95,6 @@ public class RtfBorderGroup extends RtfElement {
      */
     public RtfBorderGroup(int bordersToAdd, int borderStyle, float borderWidth, Color borderColor) {
         super(null);
-        this.borders = new HashMap<>();
         addBorder(bordersToAdd, borderStyle, borderWidth, borderColor);
     }
 
@@ -109,7 +107,6 @@ public class RtfBorderGroup extends RtfElement {
      */
     protected RtfBorderGroup(RtfDocument doc, int borderType, RtfBorderGroup borderGroup) {
         super(doc);
-        this.borders = new HashMap<>();
         this.borderType = borderType;
         if (borderGroup != null) {
             for (Map.Entry<Integer, RtfBorder> entry : borderGroup.getBorders().entrySet()) {
@@ -130,7 +127,6 @@ public class RtfBorderGroup extends RtfElement {
     protected RtfBorderGroup(RtfDocument doc, int borderType, int bordersToUse, float borderWidth, Color borderColor) {
         super(doc);
         this.borderType = borderType;
-        this.borders = new HashMap<>();
         addBorder(bordersToUse, RtfBorder.BORDER_SINGLE, borderWidth, borderColor);
     }
 

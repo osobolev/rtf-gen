@@ -82,7 +82,7 @@ public class RtfInfoGroup extends RtfElement {
     /**
      * The RtfInfoElements that belong to this RtfInfoGroup
      */
-    private List<RtfInfoElement> infoElements;
+    private final List<RtfInfoElement> infoElements = new ArrayList<>();
 
     /**
      * Constructs a RtfInfoGroup belonging to a RtfDocument
@@ -91,7 +91,6 @@ public class RtfInfoGroup extends RtfElement {
      */
     public RtfInfoGroup(RtfDocument doc) {
         super(doc);
-        infoElements = new ArrayList<>();
     }
 
     /**

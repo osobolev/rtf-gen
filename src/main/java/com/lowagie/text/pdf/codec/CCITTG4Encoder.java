@@ -55,12 +55,12 @@ import java.io.ByteArrayOutputStream;
  */
 public class CCITTG4Encoder {
 
-    private int rowbytes;
-    private int rowpixels;
+    private final int rowbytes;
+    private final int rowpixels;
     private int bit = 8;
     private int data;
-    private byte[] refline;
-    private ByteArrayOutputStream outBuf = new ByteArrayOutputStream(1024);
+    private final byte[] refline;
+    private final ByteArrayOutputStream outBuf = new ByteArrayOutputStream(1024);
     private byte[] dataBp;
     private int offsetData;
     private int sizeData;

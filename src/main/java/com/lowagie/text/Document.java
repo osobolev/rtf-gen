@@ -133,7 +133,7 @@ public class Document implements DocListener {
     /**
      * The DocListener.
      */
-    private java.util.List<DocListener> listeners = new ArrayList<>();
+    private final java.util.List<DocListener> listeners = new ArrayList<>();
 
     /**
      * Is the document open or not?

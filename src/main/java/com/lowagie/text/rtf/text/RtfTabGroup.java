@@ -79,13 +79,12 @@ public class RtfTabGroup extends RtfAddableElement {
     /**
      * The tabs to add.
      */
-    private List<RtfTab> tabs;
+    private final List<RtfTab> tabs = new ArrayList<>();
 
     /**
      * Constructs an empty RtfTabGroup.
      */
     public RtfTabGroup() {
-        this.tabs = new ArrayList<>();
     }
 
     /**
@@ -94,7 +93,6 @@ public class RtfTabGroup extends RtfAddableElement {
      * @param tabs An ArrayList with the RtfTabs to group in this RtfTabGroup.
      */
     public RtfTabGroup(List<RtfTab> tabs) {
-        this.tabs = new ArrayList<>();
         this.tabs.addAll(tabs);
     }
 

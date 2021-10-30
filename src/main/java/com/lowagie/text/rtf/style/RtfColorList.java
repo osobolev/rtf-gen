@@ -76,7 +76,7 @@ public class RtfColorList extends RtfElement implements RtfExtendedElement {
     /**
      * ArrayList containing all colors of this RtfColorList
      */
-    private List<RtfColor> colorList = new ArrayList<>();
+    private final List<RtfColor> colorList = new ArrayList<>();
 
     /**
      * Constructs a new RtfColorList for the RtfDocument. Will add the default

@@ -155,7 +155,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * The subitems of this RtfList
      */
-    private java.util.List<RtfBasicElement> items;
+    private final java.util.List<RtfBasicElement> items;
 
     /**
      * The parent list if there is one.
@@ -206,7 +206,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * The RtfList lists managed by this RtfListTable
      */
-    private java.util.List<RtfListLevel> listLevels = null;
+    private final java.util.List<RtfListLevel> listLevels = new ArrayList<>();
 
     /**
      * Constructs an empty RtfList object.
@@ -216,6 +216,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     public RtfList() {
         super(null);
         createDefaultLevels();
+        this.items = null;
     }
 
     /**
@@ -239,6 +240,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     public RtfList(RtfDocument doc) {
         super(doc);
         createDefaultLevels();
+        this.items = null;
         // get the list number or create a new one adding it to the table
         this.listNumber = document.getDocumentHeader().getListNumber(this);
     }
@@ -531,7 +533,6 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
      * @since 2.1.3
      */
     protected void createDefaultLevels() {
-        this.listLevels = new ArrayList<>();    // listlevels
         for (int i = 0; i <= 8; i++) {
             // create a list level
             RtfListLevel ll = new RtfListLevel(this.document);

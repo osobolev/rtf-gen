@@ -302,7 +302,7 @@ public class RtfListLevel extends RtfElement implements RtfExtendedElement {
     /**
      * Which picture bullet from the \listpicture destination should be applied
      */
-    private int levelPicture = -1;
+    private final int levelPicture = -1;
 
     private int levelTextNumber = 0;
     /**
@@ -314,7 +314,7 @@ public class RtfListLevel extends RtfElement implements RtfExtendedElement {
      */
     private RtfFont fontBullet;
 
-    private int templateID;
+    private final int templateID;
 
     private RtfListLevel listLevelParent = null;
 

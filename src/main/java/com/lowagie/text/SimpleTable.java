@@ -59,7 +59,7 @@ public class SimpleTable extends Rectangle implements TextElementArray {
     /**
      * the content of a Table.
      */
-    private java.util.List<SimpleCell> content = new ArrayList<>();
+    private final java.util.List<SimpleCell> content = new ArrayList<>();
     /**
      * the width of the Table.
      */

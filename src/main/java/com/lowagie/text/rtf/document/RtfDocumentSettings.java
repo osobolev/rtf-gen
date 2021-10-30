@@ -67,7 +67,7 @@ public class RtfDocumentSettings {
     /**
      * The RtfDocument this RtfDocumentSettings belongs to.
      */
-    private RtfDocument document;
+    private final RtfDocument document;
     /**
      * Whether to also output the table row definition after the cell content.
      */
@@ -116,7 +116,7 @@ public class RtfDocumentSettings {
      *
      * @since 2.1.1
      */
-    private String writereservhash = null; //\*\writereservhash - not implemented
+    private final String writereservhash = null; //\*\writereservhash - not implemented
     /**
      * Document recommended to be opened in read only mode.
      * Author: Howard Shank (hgshank@yahoo.com)

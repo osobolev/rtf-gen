@@ -61,17 +61,17 @@ public class RomanNumberFactory {
         /**
          * part of a roman number
          */
-        public char digit;
+        public final char digit;
 
         /**
          * value of the roman digit
          */
-        public int value;
+        public final int value;
 
         /**
          * can the digit be used as a prefix
          */
-        public boolean pre;
+        public final boolean pre;
 
         /**
          * Constructs a roman digit
