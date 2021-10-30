@@ -171,29 +171,7 @@ public abstract class Image extends Rectangle {
     /**
      * type of image
      */
-    public static final int ORIGINAL_TIFF = 5;
-
-    /**
-     * type of image
-     */
     public static final int ORIGINAL_WMF = 6;
-
-    /**
-     * type of image
-     */
-    public static final int ORIGINAL_PS = 7;
-
-    /**
-     * type of image
-     */
-    public static final int ORIGINAL_JPEG2000 = 8;
-
-    /**
-     * type of image
-     *
-     * @since 2.1.5
-     */
-    public static final int ORIGINAL_JBIG2 = 9;
 
     // member variables
 
@@ -285,8 +263,7 @@ public abstract class Image extends Rectangle {
      * @throws MalformedURLException
      * @throws IOException
      */
-    public static Image getInstance(URL url) throws BadElementException,
-        MalformedURLException, IOException {
+    public static Image getInstance(URL url) throws BadElementException, MalformedURLException, IOException {
         BufferedImage bi = ImageIO.read(url);
         return getInstance(bi, null);
     }
@@ -301,8 +278,7 @@ public abstract class Image extends Rectangle {
      * @throws MalformedURLException
      * @throws IOException
      */
-    public static Image getInstance(String filename)
-        throws BadElementException, MalformedURLException, IOException {
+    public static Image getInstance(String filename) throws BadElementException, MalformedURLException, IOException {
         return getInstance(Utilities.toURL(filename));
     }
 
@@ -315,8 +291,7 @@ public abstract class Image extends Rectangle {
      * @throws MalformedURLException
      * @throws IOException
      */
-    public static Image getInstance(byte[] imgb) throws BadElementException,
-        MalformedURLException, IOException {
+    public static Image getInstance(byte[] imgb) throws BadElementException, MalformedURLException, IOException {
         BufferedImage bi = ImageIO.read(new ByteArrayInputStream(imgb));
         return getInstance(bi, null);
     }
@@ -338,19 +313,6 @@ public abstract class Image extends Rectangle {
     }
 
     /**
-     * Creates a JBIG2 Image.
-     *
-     * @param    width    the width of the image
-     * @param    height    the height of the image
-     * @param    data    the raw image data
-     * @param    globals    JBIG2 globals
-     * @since 2.1.5
-     */
-    public static Image getInstance(int width, int height, byte[] data, byte[] globals) {
-        return new ImgJBIG2(width, height, data, globals);
-    }
-
-    /**
      * Creates an Image with CCITT G3 or G4 compression. It assumes that the
      * data bytes are already compressed.
      *
@@ -368,10 +330,8 @@ public abstract class Image extends Rectangle {
      * @throws BadElementException on error
      */
     public static Image getInstance(int width, int height, boolean reverseBits,
-                                    int typeCCITT, int parameters, byte[] data)
-        throws BadElementException {
-        return getInstance(width, height, reverseBits, typeCCITT,
-            parameters, data, null);
+                                    int typeCCITT, int parameters, byte[] data) throws BadElementException {
+        return getInstance(width, height, reverseBits, typeCCITT, parameters, data, null);
     }
 
     /**
@@ -394,13 +354,10 @@ public abstract class Image extends Rectangle {
      * @throws BadElementException on error
      */
     public static Image getInstance(int width, int height, boolean reverseBits,
-                                    int typeCCITT, int parameters, byte[] data, int[] transparency)
-        throws BadElementException {
+                                    int typeCCITT, int parameters, byte[] data, int[] transparency) throws BadElementException {
         if (transparency != null && transparency.length != 2)
-            throw new BadElementException(
-                "Transparency length must be equal to 2 with CCITT images");
-        Image img = new ImgCCITT(width, height, reverseBits, typeCCITT,
-            parameters, data);
+            throw new BadElementException("Transparency length must be equal to 2 with CCITT images");
+        Image img = new ImgCCITT(width, height, reverseBits, typeCCITT, parameters, data);
         img.transparency = transparency;
         return img;
     }
@@ -419,11 +376,9 @@ public abstract class Image extends Rectangle {
      * @throws BadElementException on error
      */
     public static Image getInstance(int width, int height, int components,
-                                    int bpc, byte[] data, int[] transparency)
-        throws BadElementException {
+                                    int bpc, byte[] data, int[] transparency) throws BadElementException {
         if (transparency != null && transparency.length != components * 2)
-            throw new BadElementException(
-                "Transparency length must be equal to (componentes * 2)");
+            throw new BadElementException("Transparency length must be equal to (componentes * 2)");
         if (components == 1 && bpc == 1) {
             byte[] g4 = CCITTG4Encoder.compress(data, width, height);
             return getInstance(width, height, false, Image.CCITTG4,
@@ -457,13 +412,11 @@ public abstract class Image extends Rectangle {
             }
         }
 
-        PixelGrabber pg = new PixelGrabber(image,
-            0, 0, -1, -1, true);
+        PixelGrabber pg = new PixelGrabber(image, 0, 0, -1, -1, true);
         try {
             pg.grabPixels();
         } catch (InterruptedException e) {
-            throw new IOException(
-                "java.awt.Image Interrupted waiting for pixels!");
+            throw new IOException("java.awt.Image Interrupted waiting for pixels!");
         }
         if ((pg.getStatus() & ImageObserver.ABORT) != 0) {
             throw new IOException("java.awt.Image fetch aborted or errored");
@@ -474,8 +427,7 @@ public abstract class Image extends Rectangle {
         if (forceBW) {
             int transColor = 1;
             if (color != null) {
-                transColor = (color.getRed() + color.getGreen()
-                              + color.getBlue() < 384) ? 0 : 1;
+                transColor = (color.getRed() + color.getGreen() + color.getBlue() < 384) ? 0 : 1;
             }
             int[] transparency = null;
             int cbyte = 0x80;
@@ -613,8 +565,7 @@ public abstract class Image extends Rectangle {
      * @throws BadElementException on error
      * @throws IOException         on error
      */
-    public static Image getInstance(java.awt.Image image, Color color)
-        throws BadElementException, IOException {
+    public static Image getInstance(java.awt.Image image, Color color) throws BadElementException, IOException {
         return getInstance(image, color, false);
     }
 
