@@ -59,6 +59,7 @@ import com.lowagie.text.rtf.style.RtfParagraphStyle;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Arrays;
 
 /**
  * The RtfParagraph is an extension of the RtfPhrase that adds alignment and
@@ -115,9 +116,7 @@ public class RtfParagraph extends RtfPhrase {
             }
             try {
                 RtfBasicElement[] rtfElements = doc.getMapper().mapElement(chunk);
-                for (int j = 0; j < rtfElements.length; j++) {
-                    chunks.add(rtfElements[j]);
-                }
+                chunks.addAll(Arrays.asList(rtfElements));
             } catch (DocumentException de) {
             }
         }

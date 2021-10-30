@@ -58,6 +58,7 @@ import com.lowagie.text.rtf.style.RtfFont;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The RtfPhrase contains multiple RtfChunks
@@ -130,9 +131,7 @@ public class RtfPhrase extends RtfElement {
             }
             try {
                 RtfBasicElement[] rtfElements = doc.getMapper().mapElement(chunk);
-                for (int j = 0; j < rtfElements.length; j++) {
-                    chunks.add(rtfElements[j]);
-                }
+                chunks.addAll(Arrays.asList(rtfElements));
             } catch (DocumentException de) {
             }
         }

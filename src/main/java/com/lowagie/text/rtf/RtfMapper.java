@@ -168,6 +168,6 @@ public class RtfMapper {
             break;
         }
 
-        return (RtfBasicElement[]) rtfElements.toArray(new RtfBasicElement[rtfElements.size()]);
+        return (RtfBasicElement[]) rtfElements.toArray(new RtfBasicElement[0]);
     }
 }
