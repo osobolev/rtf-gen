@@ -53,8 +53,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.lowagie.text.pdf.HyphenationEvent;
-
 /**
  * A <CODE>Phrase</CODE> is a series of <CODE>Chunk</CODE>s.
  * <P>
@@ -94,11 +92,6 @@ public class Phrase extends ArrayList implements TextElementArray {
     /** This is the font of this phrase. */
     protected Font font;
     
-    /** Null, unless the Phrase has to be hyphenated.
-     * @since	2.1.2
-     */
-    protected HyphenationEvent hyphenation = null;
-    
     // constructors
     
     /**
@@ -116,7 +109,6 @@ public class Phrase extends ArrayList implements TextElementArray {
         this.addAll(phrase);
         leading = phrase.getLeading();
         font = phrase.getFont();
-        setHyphenation(phrase.getHyphenation());
     }
 
 	/**
@@ -137,7 +129,6 @@ public class Phrase extends ArrayList implements TextElementArray {
     public Phrase(Chunk chunk) {
         super.add(chunk);
         font = chunk.getFont();
-        setHyphenation(chunk.getHyphenation());
     }
 
 	/**
@@ -151,7 +142,6 @@ public class Phrase extends ArrayList implements TextElementArray {
         this.leading = leading;
         super.add(chunk);
         font = chunk.getFont();
-        setHyphenation(chunk.getHyphenation());
     }
     
     /**
@@ -278,9 +268,6 @@ public class Phrase extends ArrayList implements TextElementArray {
                 if (!font.isStandardFont()) {
                     chunk.setFont(font.difference(chunk.getFont()));
                 }
-                if (hyphenation != null && chunk.getHyphenation() == null && !chunk.isEmpty()) {
-                	chunk.setHyphenation(hyphenation);
-                }
                 super.add(index, chunk);
             }
             else if (element.type() == Element.PHRASE ||
@@ -400,9 +387,6 @@ public class Phrase extends ArrayList implements TextElementArray {
         }
         Chunk newChunk = new Chunk(c, f);
         newChunk.setAttributes(chunk.getAttributes());
-        if (hyphenation != null && newChunk.getHyphenation() == null && !newChunk.isEmpty()) {
-        	newChunk.setHyphenation(hyphenation);
-        }
         return super.add(newChunk);
     }
     
@@ -503,24 +487,6 @@ public class Phrase extends ArrayList implements TextElementArray {
         }
     }
     
-    /**
-     * Getter for the hyphenation settings.
-     * @return	a HyphenationEvent
-     * @since	2.1.2
-     */
-    public HyphenationEvent getHyphenation() {
-		return hyphenation;
-	}
-
-    /**
-     * Setter for the hyphenation.
-     * @param	hyphenation	a HyphenationEvent instance
-     * @since	2.1.2
-     */
-	public void setHyphenation(HyphenationEvent hyphenation) {
-		this.hyphenation = hyphenation;
-	}
-	
     // kept for historical reasons; people should use FontSelector
     // eligible for deprecation, but the methods are mentioned in the book p277.
     

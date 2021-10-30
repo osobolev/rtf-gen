@@ -54,7 +54,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.lowagie.text.pdf.HyphenationEvent;
 import com.lowagie.text.pdf.PdfAction;
 import com.lowagie.text.pdf.PdfAnnotation;
 import com.lowagie.text.pdf.PdfContentByte;
@@ -210,60 +209,11 @@ public class Chunk implements Element {
 	public static final String SEPARATOR = "SEPARATOR";
 	
 	/**
-	 * Creates a separator Chunk.
-     * Note that separator chunks can't be used in combination with tab chunks!
-	 * @param	separator	the drawInterface to use to draw the separator.
-	 * @since	2.1.2
-	 */
-	public Chunk(DrawInterface separator) {
-		this(separator, false);
-	}	
-	
-	/**
-	 * Creates a separator Chunk.
-     * Note that separator chunks can't be used in combination with tab chunks!
-	 * @param	separator	the drawInterface to use to draw the separator.
-	 * @param	vertical	true if this is a vertical separator
-	 * @since	2.1.2
-	 */
-	public Chunk(DrawInterface separator, boolean vertical) {
-		this(OBJECT_REPLACEMENT_CHARACTER, new Font());
-		setAttribute(SEPARATOR, new Object[] {separator, Boolean.valueOf(vertical)});
-	}
-
-	/**
 	 * Key for drawInterface of the tab.
 	 * @since	2.1.2
 	 */
 	public static final String TAB = "TAB";
 	
-	/**
-	 * Creates a tab Chunk.
-     * Note that separator chunks can't be used in combination with tab chunks!
-	 * @param	separator	the drawInterface to use to draw the tab.
-	 * @param	tabPosition	an X coordinate that will be used as start position for the next Chunk.
-	 * @since	2.1.2
-	 */
-	public Chunk(DrawInterface separator, float tabPosition) {
-		this(separator, tabPosition, false);
-	}
-	
-	/**
-	 * Creates a tab Chunk.
-     * Note that separator chunks can't be used in combination with tab chunks!
-	 * @param	separator	the drawInterface to use to draw the tab.
-	 * @param	tabPosition	an X coordinate that will be used as start position for the next Chunk.
-	 * @param	newline		if true, a newline will be added if the tabPosition has already been reached.
-	 * @since	2.1.2
-	 */
-	public Chunk(DrawInterface separator, float tabPosition, boolean newline) {
-		this(OBJECT_REPLACEMENT_CHARACTER, new Font());
-		if (tabPosition < 0) {
-			throw new IllegalArgumentException("A tab position may not be lower than 0; yours is " + tabPosition);
-		}
-		setAttribute(TAB, new Object[] {separator, new Float(tabPosition), Boolean.valueOf(newline), new Float(0)});
-	}
-
 	/**
 	 * Constructs a chunk containing an <CODE>Image</CODE>.
 	 * 
@@ -662,20 +612,6 @@ public class Chunk implements Element {
 		return setAttribute(SPLITCHARACTER, splitCharacter);
 	}
 
-	/** Key for hyphenation. */
-	public static final String HYPHENATION = "HYPHENATION";
-	
-	/**
-	 * sets the hyphenation engine to this <CODE>Chunk</CODE>.
-	 * 
-	 * @param hyphenation
-	 *            the hyphenation engine
-	 * @return this <CODE>Chunk</CODE>
-	 */
-	public Chunk setHyphenation(HyphenationEvent hyphenation) {
-		return setAttribute(HYPHENATION, hyphenation);
-	}
-
 	/** Key for remote goto. */
 	public static final String REMOTEGOTO = "REMOTEGOTO";
 
@@ -858,15 +794,6 @@ public class Chunk implements Element {
 		return true;
 	}
 
-	/**
-     * Returns the hyphenation (if present).
-     * @since	2.1.2
-	 */
-    public HyphenationEvent getHyphenation() {
-        if (attributes == null) return null;
-        return (HyphenationEvent) attributes.get(Chunk.HYPHENATION);
-	}
-	
 	// keys used in PdfChunk
 	
 	/** Key for color. */
