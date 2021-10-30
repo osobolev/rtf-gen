@@ -445,7 +445,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * This method differs from toString because toString will return an ArrayList with the toString value of the Chunks in this Phrase.
      */
     public String getContent() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (Element element : getChunks()) {
             buf.append(element.toString());
         }
@@ -526,7 +526,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
                     string = string.substring(index);
                 }
                 Font symbol = new Font(Font.SYMBOL, font.getSize(), font.getStyle(), font.getColor());
-                StringBuffer buf = new StringBuffer();
+                StringBuilder buf = new StringBuilder();
                 buf.append(SpecialSymbol.getCorrespondingSymbol(string.charAt(0)));
                 string = string.substring(1);
                 while (SpecialSymbol.index(string) == 0) {

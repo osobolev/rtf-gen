@@ -492,7 +492,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
         if (depth < 1) {
             return title;
         }
-        StringBuffer buf = new StringBuffer(" ");
+        StringBuilder buf = new StringBuilder(" ");
         for (int i = 0; i < depth; i++) {
             buf.insert(0, ".");
             buf.insert(0, numbers.get(i).intValue());
