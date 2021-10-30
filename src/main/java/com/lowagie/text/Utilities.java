@@ -134,9 +134,8 @@ public class Utilities {
      * @throws IOException
      */
     public static void skip(InputStream is, int size) throws IOException {
-        long n;
         while (size > 0) {
-            n = is.skip(size);
+            long n = is.skip(size);
             if (n <= 0)
                 break;
             size -= n;

@@ -107,9 +107,8 @@ public class ImgJBIG2 extends Image {
         plainHeight = getHeight();
         if (globals != null) {
             this.global = globals;
-            MessageDigest md;
             try {
-                md = MessageDigest.getInstance("MD5");
+                MessageDigest md = MessageDigest.getInstance("MD5");
                 md.update(this.global);
                 this.globalHash = md.digest();
             } catch (Exception e) {

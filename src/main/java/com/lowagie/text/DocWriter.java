@@ -472,9 +472,8 @@ public abstract class DocWriter implements DocListener {
         throws IOException {
         if (markup == null) return false;
         Iterator attributeIterator = markup.keySet().iterator();
-        String name;
         while (attributeIterator.hasNext()) {
-            name = String.valueOf(attributeIterator.next());
+            String name = String.valueOf(attributeIterator.next());
             write(name, markup.getProperty(name));
         }
         markup.clear();

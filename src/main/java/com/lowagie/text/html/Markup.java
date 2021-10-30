@@ -548,15 +548,14 @@ public class Markup {
         if (string == null)
             return result;
         StringTokenizer keyValuePairs = new StringTokenizer(string, ";");
-        StringTokenizer keyValuePair;
-        String key;
-        String value;
         while (keyValuePairs.hasMoreTokens()) {
-            keyValuePair = new StringTokenizer(keyValuePairs.nextToken(), ":");
+            StringTokenizer keyValuePair = new StringTokenizer(keyValuePairs.nextToken(), ":");
+            String key;
             if (keyValuePair.hasMoreTokens())
                 key = keyValuePair.nextToken().trim();
             else
                 continue;
+            String value;
             if (keyValuePair.hasMoreTokens())
                 value = keyValuePair.nextToken().trim();
             else

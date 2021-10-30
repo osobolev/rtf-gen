@@ -89,8 +89,7 @@ public class RomanList extends List {
     public boolean add(Object o) {
         if (o instanceof ListItem) {
             ListItem item = (ListItem) o;
-            Chunk chunk;
-            chunk = new Chunk(preSymbol, symbol.getFont());
+            Chunk chunk = new Chunk(preSymbol, symbol.getFont());
             chunk.append(RomanNumberFactory.getString(first + list.size(), lowercase));
             chunk.append(postSymbol);
             item.setListSymbol(chunk);

@@ -349,8 +349,7 @@ public abstract class Image extends Rectangle {
      * @since 2.1.5
      */
     public static Image getInstance(int width, int height, byte[] data, byte[] globals) {
-        Image img = new ImgJBIG2(width, height, data, globals);
-        return img;
+        return new ImgJBIG2(width, height, data, globals);
     }
 
     /**

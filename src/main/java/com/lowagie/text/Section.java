@@ -211,9 +211,8 @@ public class Section extends ArrayList implements TextElementArray, LargeElement
      */
     public boolean process(ElementListener listener) {
         try {
-            Element element;
             for (Iterator i = iterator(); i.hasNext(); ) {
-                element = (Element) i.next();
+                Element element = (Element) i.next();
                 listener.add(element);
             }
             return true;
@@ -672,9 +671,8 @@ public class Section extends ArrayList implements TextElementArray, LargeElement
      */
     public void setChapterNumber(int number) {
         numbers.set(numbers.size() - 1, new Integer(number));
-        Object s;
         for (Iterator i = iterator(); i.hasNext(); ) {
-            s = i.next();
+            Object s = i.next();
             if (s instanceof Section) {
                 ((Section) s).setChapterNumber(number);
             }
@@ -746,9 +744,8 @@ public class Section extends ArrayList implements TextElementArray, LargeElement
     public void flushContent() {
         setNotAddedYet(false);
         title = null;
-        Element element;
         for (Iterator i = iterator(); i.hasNext(); ) {
-            element = (Element) i.next();
+            Element element = (Element) i.next();
             if (element instanceof Section) {
                 Section s = (Section) element;
                 if (!s.isComplete() && size() == 1) {

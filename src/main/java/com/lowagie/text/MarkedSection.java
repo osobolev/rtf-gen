@@ -113,9 +113,8 @@ public class MarkedSection extends MarkedObject {
      */
     public boolean process(ElementListener listener) {
         try {
-            Element element;
             for (Iterator i = ((Section) this.element).iterator(); i.hasNext(); ) {
-                element = (Element) i.next();
+                Element element = (Element) i.next();
                 listener.add(element);
             }
             return true;

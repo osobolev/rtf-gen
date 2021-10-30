@@ -311,9 +311,8 @@ public class Phrase extends ArrayList implements TextElementArray {
             case Element.PARAGRAPH:
                 Phrase phrase = (Phrase) o;
                 boolean success = true;
-                Element e;
                 for (Iterator i = phrase.iterator(); i.hasNext(); ) {
-                    e = (Element) i.next();
+                    Element e = (Element) i.next();
                     if (e instanceof Chunk) {
                         success &= addChunk((Chunk) e);
                     } else {

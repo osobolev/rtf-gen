@@ -426,8 +426,8 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
             result.write(OPEN_GROUP);
         }
 
-        int itemNr = 0;
         if (items != null) {
+            int itemNr = 0;
             for (int i = 0; i < items.size(); i++) {
 
                 RtfElement thisRtfElement = (RtfElement) items.get(i);

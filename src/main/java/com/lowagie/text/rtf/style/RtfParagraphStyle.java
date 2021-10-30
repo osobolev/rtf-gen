@@ -697,8 +697,7 @@ public class RtfParagraphStyle extends RtfFont {
             return false;
         }
         RtfParagraphStyle paragraphStyle = (RtfParagraphStyle) o;
-        boolean result = this.getStyleName().equals(paragraphStyle.getStyleName());
-        return result;
+        return this.getStyleName().equals(paragraphStyle.getStyleName());
     }
 
     /**

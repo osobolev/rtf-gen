@@ -195,12 +195,11 @@ public class Anchor extends Phrase {
      */
     public boolean process(ElementListener listener) {
         try {
-            Chunk chunk;
             Iterator i = getChunks().iterator();
             boolean localDestination = reference != null && reference.startsWith("#");
             boolean notGotoOK = true;
             while (i.hasNext()) {
-                chunk = (Chunk) i.next();
+                Chunk chunk = (Chunk) i.next();
                 if (name != null && notGotoOK && !chunk.isEmpty()) {
                     chunk.setLocalDestination(name);
                     notGotoOK = false;
@@ -223,12 +222,11 @@ public class Anchor extends Phrase {
      */
     public ArrayList getChunks() {
         ArrayList tmp = new ArrayList();
-        Chunk chunk;
         Iterator i = iterator();
         boolean localDestination = reference != null && reference.startsWith("#");
         boolean notGotoOK = true;
         while (i.hasNext()) {
-            chunk = (Chunk) i.next();
+            Chunk chunk = (Chunk) i.next();
             if (name != null && notGotoOK && !chunk.isEmpty()) {
                 chunk.setLocalDestination(name);
                 notGotoOK = false;

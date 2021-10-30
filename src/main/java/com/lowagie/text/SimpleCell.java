@@ -210,9 +210,8 @@ public class SimpleCell extends Rectangle implements TextElementArray {
         cell.setUseAscender(useAscender);
         cell.setUseBorderPadding(useBorderPadding);
         cell.setUseDescender(useDescender);
-        Element element;
         for (Iterator i = content.iterator(); i.hasNext(); ) {
-            element = (Element) i.next();
+            Element element = (Element) i.next();
             cell.addElement(element);
         }
         return cell;

@@ -127,10 +127,9 @@ public class SimpleTable extends Rectangle implements TextElementArray {
         table.setSpacing(cellspacing);
         table.setPadding(cellpadding);
         table.cloneNonPositionParameters(this);
-        int pos;
         for (Iterator rows = content.iterator(); rows.hasNext(); ) {
             row = (SimpleCell) rows.next();
-            pos = 0;
+            int pos = 0;
             for (Iterator cells = row.getContent().iterator(); cells.hasNext(); ) {
                 cell = (SimpleCell) cells.next();
                 table.addCell(cell.createCell(row));

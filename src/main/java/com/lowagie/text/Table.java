@@ -596,10 +596,9 @@ public class Table extends Rectangle implements LargeElement {
         }
 
         // The different percentages are calculated
-        float width;
         this.widths[columns - 1] = 100;
         for (int i = 0; i < columns - 1; i++) {
-            width = (100.0f * widths[i]) / hundredPercent;
+            float width = (100.0f * widths[i]) / hundredPercent;
             this.widths[i] = width;
             this.widths[columns - 1] -= width;
         }
@@ -863,9 +862,8 @@ public class Table extends Rectangle implements LargeElement {
         }
 
         int rowCount = aLocation.x + 1 - rows.size();
-        int i = 0;
         if (rowCount > 0) {   //create new rows ?
-            for (; i < rowCount; i++) {
+            for (int i = 0; i < rowCount; i++) {
                 rows.add(new Row(columns));
             }
         }
@@ -884,9 +882,8 @@ public class Table extends Rectangle implements LargeElement {
         ArrayList newRows = new ArrayList(rows.size());
 
         int newColumns = columns + aColumns;
-        Row row;
         for (int i = 0; i < rows.size(); i++) {
-            row = new Row(newColumns);
+            Row row = new Row(newColumns);
             for (int j = 0; j < columns; j++) {
                 row.setElement(((Row) rows.get(i)).getCell(j), j);
             }
@@ -919,10 +916,9 @@ public class Table extends Rectangle implements LargeElement {
         setWidths(newWidths);
         System.arraycopy(widths, 0, newWidths, 0, columns);
         widths = newWidths;
-        Row row;
         int size = rows.size();
         for (int i = 0; i < size; i++) {
-            row = (Row) rows.get(i);
+            Row row = (Row) rows.get(i);
             row.deleteColumn(column);
             rows.set(i, row);
         }
@@ -1296,10 +1292,10 @@ public class Table extends Rectangle implements LargeElement {
      * @param aPosition the position where the cell has to be placed
      */
     private void placeCell(ArrayList someRows, Cell aCell, Point aPosition) {
-        int i;
-        Row row = null;
         int rowCount = aPosition.x + aCell.getRowspan() - someRows.size();
         assumeTableDefaults(aCell);
+        int i;
+        Row row = null;
         if ((aPosition.x + aCell.getRowspan()) > someRows.size()) {
             for (i = 0; i < rowCount; i++) {
                 row = new Row(columns);
@@ -1326,10 +1322,8 @@ public class Table extends Rectangle implements LargeElement {
      */
     private void setCurrentLocationToNextValidPosition(Point aLocation) {
         // set latest location to next valid position
-        int i;
-        int j;
-        i = aLocation.x;
-        j = aLocation.y;
+        int i = aLocation.x;
+        int j = aLocation.y;
         do {
             if ((j + 1) == columns) {    // goto next row
                 i++;

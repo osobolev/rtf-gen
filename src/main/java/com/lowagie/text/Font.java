@@ -246,9 +246,8 @@ public class Font implements Comparable {
         if (object == null) {
             return -1;
         }
-        Font font;
         try {
-            font = (Font) object;
+            Font font = (Font) object;
             if (this.family != font.getFamily()) {
                 return 1;
             }
@@ -293,7 +292,6 @@ public class Font implements Comparable {
      * @return the familyname
      */
     public String getFamilyname() {
-        String tmp = "unknown";
         switch (getFamily()) {
         case COURIER:
             return FontFactory.COURIER;
@@ -306,7 +304,7 @@ public class Font implements Comparable {
         case ZAPFDINGBATS:
             return FontFactory.ZAPFDINGBATS;
         }
-        return tmp;
+        return "unknown";
     }
 
     /**

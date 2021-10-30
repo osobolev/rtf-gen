@@ -94,13 +94,12 @@ public class RtfMapper {
      * @throws DocumentException
      */
     public RtfBasicElement[] mapElement(Element element) throws DocumentException {
-        ArrayList rtfElements = new ArrayList();
-
         if (element instanceof RtfBasicElement) {
             RtfBasicElement rtfElement = (RtfBasicElement) element;
             rtfElement.setRtfDocument(this.rtfDoc);
             return new RtfBasicElement[] {rtfElement};
         }
+        ArrayList rtfElements = new ArrayList();
         switch (element.type()) {
         case Element.CHUNK:
             Chunk chunk = (Chunk) element;
