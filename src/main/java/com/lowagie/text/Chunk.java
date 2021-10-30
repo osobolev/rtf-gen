@@ -326,7 +326,7 @@ public class Chunk implements Element {
      */
     public boolean isEmpty() {
         return (content.toString().trim().length() == 0)
-               && (content.toString().indexOf("\n") == -1)
+               && (content.toString().indexOf('\n') == -1)
                && (attributes == null);
     }
 
