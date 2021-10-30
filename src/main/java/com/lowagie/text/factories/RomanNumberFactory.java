@@ -121,7 +121,7 @@ public class RomanNumberFactory {
             buf.append(getString(index / 1000));
             buf.append('|');
             // remainder
-            index = index - (index / 1000) * 1000;
+            index -= (index / 1000) * 1000;
         }
 
         // number between 1 and 3000
