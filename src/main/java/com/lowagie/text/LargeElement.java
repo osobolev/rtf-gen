@@ -71,7 +71,7 @@ public interface LargeElement extends Element {
      * @param    complete    false if you'll be adding more data after
      * adding the object to the document.
      */
-    public void setComplete(boolean complete);
+    void setComplete(boolean complete);
 
     /**
      * Indicates if the element is complete or not.
@@ -79,10 +79,10 @@ public interface LargeElement extends Element {
      * @since iText 2.0.8
      * @return indicates if the element is complete according to the user.
      */
-    public boolean isComplete();
+    boolean isComplete();
 
     /**
      * Flushes the content that has been added.
      */
-    public void flushContent();
+    void flushContent();
 }

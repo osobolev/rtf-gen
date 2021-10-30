@@ -70,5 +70,5 @@ public interface ElementListener extends EventListener {
      * @throws DocumentException    when a document isn't open yet, or has been closed
      */
 
-    public boolean add(Element element) throws DocumentException; // [L0]
+    boolean add(Element element) throws DocumentException; // [L0]
 }

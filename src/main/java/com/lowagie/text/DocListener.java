@@ -67,7 +67,7 @@ public interface DocListener extends ElementListener {
      * <CODE>Elements</CODE> can be added.
      */
 
-    public void open(); // [L1]
+    void open(); // [L1]
 
     /**
      * Signals that the <CODE>Document</CODE> was closed and that no other
@@ -76,7 +76,7 @@ public interface DocListener extends ElementListener {
      * The outputstream of every writer implementing <CODE>DocListener</CODE> will be closed.
      */
 
-    public void close(); // [L2] 
+    void close(); // [L2]
 
     /**
      * Signals that an new page has to be started.
@@ -84,7 +84,7 @@ public interface DocListener extends ElementListener {
      * @return    <CODE>true</CODE> if the page was added, <CODE>false</CODE> if not.
      */
 
-    public boolean newPage(); // [L3]
+    boolean newPage(); // [L3]
 
     /**
      * Sets the pagesize.
@@ -93,7 +93,7 @@ public interface DocListener extends ElementListener {
      * @return a <CODE>boolean</CODE>
      */
 
-    public boolean setPageSize(Rectangle pageSize); // [L4]
+    boolean setPageSize(Rectangle pageSize); // [L4]
 
     /**
      * Sets the margins.
@@ -105,7 +105,7 @@ public interface DocListener extends ElementListener {
      * @return a <CODE>boolean</CODE>
      */
 
-    public boolean setMargins(float marginLeft, float marginRight, float marginTop, float marginBottom);  // [L5]
+    boolean setMargins(float marginLeft, float marginRight, float marginTop, float marginBottom);  // [L5]
 
     /**
      * Parameter that allows you to do left/right  margin mirroring (odd/even pages)
@@ -113,7 +113,7 @@ public interface DocListener extends ElementListener {
      * @param marginMirroring
      * @return true if successful
      */
-    public boolean setMarginMirroring(boolean marginMirroring); // [L6]
+    boolean setMarginMirroring(boolean marginMirroring); // [L6]
 
     /**
      * Parameter that allows you to do top/bottom margin mirroring (odd/even pages)
@@ -122,7 +122,7 @@ public interface DocListener extends ElementListener {
      * @return true if successful
      * @since 2.1.6
      */
-    public boolean setMarginMirroringTopBottom(boolean marginMirroringTopBottom); // [L6]
+    boolean setMarginMirroringTopBottom(boolean marginMirroringTopBottom); // [L6]
 
     /**
      * Sets the page number.
@@ -130,13 +130,13 @@ public interface DocListener extends ElementListener {
      * @param    pageN        the new page number
      */
 
-    public void setPageCount(int pageN); // [L7]
+    void setPageCount(int pageN); // [L7]
 
     /**
      * Sets the page number to 0.
      */
 
-    public void resetPageCount(); // [L8]
+    void resetPageCount(); // [L8]
 
     /**
      * Changes the header of this document.
@@ -144,13 +144,13 @@ public interface DocListener extends ElementListener {
      * @param    header        the new header
      */
 
-    public void setHeader(HeaderFooter header); // [L9]
+    void setHeader(HeaderFooter header); // [L9]
 
     /**
      * Resets the header of this document.
      */
 
-    public void resetHeader(); // [L10]
+    void resetHeader(); // [L10]
 
     /**
      * Changes the footer of this document.
@@ -158,11 +158,11 @@ public interface DocListener extends ElementListener {
      * @param    footer        the new footer
      */
 
-    public void setFooter(HeaderFooter footer); // [L11]
+    void setFooter(HeaderFooter footer); // [L11]
 
     /**
      * Resets the footer of this document.
      */
 
-    public void resetFooter(); // [L12]
+    void resetFooter(); // [L12]
 }
