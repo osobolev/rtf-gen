@@ -63,7 +63,6 @@ public class CCITTG4Encoder {
     private final ByteArrayOutputStream outBuf = new ByteArrayOutputStream(1024);
     private byte[] dataBp;
     private int offsetData;
-    private int sizeData;
 
     /**
      * Creates a new encoder.
@@ -86,7 +85,7 @@ public class CCITTG4Encoder {
     public void fax4Encode(byte[] data, int offset, int size) {
         dataBp = data;
         offsetData = offset;
-        sizeData = size;
+        int sizeData = size;
         while (sizeData > 0) {
             Fax3Encode2DRow();
             System.arraycopy(dataBp, offsetData, refline, 0, rowbytes);
