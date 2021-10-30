@@ -136,11 +136,7 @@ public class RtfStylesheetList extends RtfElement implements RtfExtendedElement 
         if (!defaultsLoaded) {
             registerDefaultStyles();
         }
-        if (this.styleMap.containsKey(styleName)) {
-            return this.styleMap.get(styleName);
-        } else {
-            return null;
-        }
+        return this.styleMap.get(styleName);
     }
 
     /**
