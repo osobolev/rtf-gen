@@ -208,7 +208,6 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
      * The RtfList lists managed by this RtfListTable
      */
     private ArrayList listLevels = null;
-    ;
 
     /**
      * Constructs an empty RtfList object.
