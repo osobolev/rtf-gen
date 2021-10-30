@@ -114,23 +114,6 @@ public class Document implements DocListener {
     private static final String ITEXT_VERSION = ITEXT + " " + RELEASE + " by 1T3XT";
 
     /**
-     * Allows the pdf documents to be produced without compression for debugging
-     * purposes.
-     */
-    public static boolean compress = true;
-
-    /**
-     * When true the file access is not done through a memory mapped file. Use it if the file
-     * is too big to be mapped in your address space.
-     */
-    public static boolean plainRandomAccess = false;
-
-    /**
-     * Scales the WMF font size. The default value is 0.86.
-     */
-    public static float wmfFontCorrection = 0.86f;
-
-    /**
      * The DocListener.
      */
     private final java.util.List<DocListener> listeners = new ArrayList<>();
