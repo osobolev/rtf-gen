@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.awt.*;
@@ -77,7 +76,6 @@ import java.util.Map;
  *
  * </BLOCKQUOTE>
  */
-
 public class Chunk implements Element {
 
     // public static membervariables
@@ -339,7 +337,6 @@ public class Chunk implements Element {
      *
      * @return false if there aren't any.
      */
-
     public boolean hasAttributes() {
         return attributes != null;
     }
@@ -351,7 +348,6 @@ public class Chunk implements Element {
      *
      * @return the attributes for this <CODE>Chunk</CODE>
      */
-
     public Map<String, Object> getAttributes() {
         return attributes;
     }
@@ -372,7 +368,6 @@ public class Chunk implements Element {
      * @param obj  the value of the attribute
      * @return this <CODE>Chunk</CODE>
      */
-
     private Chunk setAttribute(String name, Object obj) {
         if (attributes == null)
             attributes = new HashMap<>();
@@ -475,7 +470,6 @@ public class Chunk implements Element {
      * @param rise the displacement in points
      * @return this <CODE>Chunk</CODE>
      */
-
     public Chunk setTextRise(float rise) {
         return setAttribute(SUBSUPSCRIPT, new Float(rise));
     }
@@ -582,7 +576,6 @@ public class Chunk implements Element {
      * @param name     the name of the destination to go to
      * @return this <CODE>Chunk</CODE>
      */
-
     public Chunk setRemoteGoto(String filename, String name) {
         return setAttribute(REMOTEGOTO, new Object[] {filename, name});
     }
@@ -594,7 +587,6 @@ public class Chunk implements Element {
      * @param page     the page of the destination to go to. First page is 1
      * @return this <CODE>Chunk</CODE>
      */
-
     public Chunk setRemoteGoto(String filename, int page) {
         return setAttribute(REMOTEGOTO, new Object[] {filename,
             new Integer(page)});
@@ -613,7 +605,6 @@ public class Chunk implements Element {
      * @param name the name of the destination to go to
      * @return this <CODE>Chunk</CODE>
      */
-
     public Chunk setLocalGoto(String name) {
         return setAttribute(LOCALGOTO, name);
     }
@@ -646,7 +637,6 @@ public class Chunk implements Element {
      * @param text the text for the tag
      * @return this <CODE>Chunk</CODE>
      */
-
     public Chunk setGenericTag(String text) {
         return setAttribute(GENERICTAG, text);
     }
@@ -661,7 +651,6 @@ public class Chunk implements Element {
      *
      * @return the image
      */
-
     public Image getImage() {
         if (attributes == null)
             return null;
@@ -684,7 +673,6 @@ public class Chunk implements Element {
      * @param url the <CODE>URL</CODE> to link to
      * @return this <CODE>Chunk</CODE>
      */
-
     public Chunk setAnchor(URL url) {
         return setAttribute(ACTION, url.toExternalForm());
     }
@@ -695,7 +683,6 @@ public class Chunk implements Element {
      * @param url the url to link to
      * @return this <CODE>Chunk</CODE>
      */
-
     public Chunk setAnchor(String url) {
         return setAttribute(ACTION, url);
     }
@@ -710,7 +697,6 @@ public class Chunk implements Element {
      *
      * @return this <CODE>Chunk</CODE>
      */
-
     public Chunk setNewPage() {
         return setAttribute(NEWPAGE, null);
     }

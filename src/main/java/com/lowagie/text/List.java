@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import com.lowagie.text.factories.RomanAlphabetFactory;
@@ -98,7 +97,6 @@ import java.util.Iterator;
  * @see        Element
  * @see        ListItem
  */
-
 public class List implements TextElementArray {
 
     // constants
@@ -460,7 +458,6 @@ public class List implements TextElementArray {
      *
      * @return    <CODE>true</CODE> if the list is numbered, <CODE>false</CODE> otherwise.
      */
-
     public boolean isNumbered() {
         return numbered;
     }

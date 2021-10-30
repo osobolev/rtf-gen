@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text.pdf;
 
 /**
@@ -54,7 +53,6 @@ package com.lowagie.text.pdf;
  *
  * @author Paulo Soares (psoares@consiste.pt)
  */
-
 public abstract class BaseFont {
 
     /**

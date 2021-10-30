@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.lang.reflect.Field;
@@ -56,7 +55,6 @@ import java.lang.reflect.Field;
  *
  * @see        Rectangle
  */
-
 public class PageSize {
 
     // membervariables

@@ -47,7 +47,6 @@
  * http://www.lowagie.com/iText/
  *
  */
-
 package com.lowagie.text;
 
 import java.util.ArrayList;
@@ -73,7 +72,6 @@ import java.util.ArrayList;
  * section1.add(someSectionText);
  * </PRE></BLOCKQUOTE>
  */
-
 public class Chapter extends Section {
 
     // constant
@@ -97,7 +95,6 @@ public class Chapter extends Section {
      * @param    title        the Chapter title (as a <CODE>Paragraph</CODE>)
      * @param    number        the Chapter number
      */
-
     public Chapter(Paragraph title, int number) {
         super(title, 1);
         numbers = new ArrayList<>();

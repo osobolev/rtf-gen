@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 /**
@@ -61,7 +60,6 @@ package com.lowagie.text;
  * document.setFooter(footer);
  * </PRE></BLOCKQUOTE>
  */
-
 public class HeaderFooter extends Rectangle {
 
     // membervariables
@@ -99,7 +97,6 @@ public class HeaderFooter extends Rectangle {
      * @param    before        the <CODE>Phrase</CODE> before the pagenumber
      * @param    after        the <CODE>Phrase</CODE> before the pagenumber
      */
-
     public HeaderFooter(Phrase before, Phrase after) {
         super(0, 0, 0, 0);
         setBorder(TOP + BOTTOM);
@@ -116,7 +113,6 @@ public class HeaderFooter extends Rectangle {
      * @param    before        the <CODE>Phrase</CODE> before the pagenumber
      * @param    numbered    <CODE>true</CODE> if the page has to be numbered
      */
-
     public HeaderFooter(Phrase before, boolean numbered) {
         super(0, 0, 0, 0);
         setBorder(TOP + BOTTOM);
@@ -133,7 +129,6 @@ public class HeaderFooter extends Rectangle {
      *
      * @return true if the page has to be numbered
      */
-
     public boolean isNumbered() {
         return numbered;
     }
@@ -143,7 +138,6 @@ public class HeaderFooter extends Rectangle {
      *
      * @return a Phrase
      */
-
     public Phrase getBefore() {
         return before;
     }
@@ -153,7 +147,6 @@ public class HeaderFooter extends Rectangle {
      *
      * @return a Phrase
      */
-
     public Phrase getAfter() {
         return after;
     }
@@ -163,7 +156,6 @@ public class HeaderFooter extends Rectangle {
      *
      * @param        pageN        the new page number
      */
-
     public void setPageNumber(int pageN) {
         this.pageN = pageN;
     }
@@ -173,7 +165,6 @@ public class HeaderFooter extends Rectangle {
      *
      * @param        alignment    the new alignment
      */
-
     public void setAlignment(int alignment) {
         this.alignment = alignment;
     }
@@ -185,7 +176,6 @@ public class HeaderFooter extends Rectangle {
      *
      * @return a <CODE>Paragraph</CODE>
      */
-
     public Paragraph paragraph() {
         Paragraph paragraph = new Paragraph(before.getLeading());
         paragraph.add(before);
@@ -204,7 +194,6 @@ public class HeaderFooter extends Rectangle {
      *
      * @return alignment
      */
-
     public int alignment() {
         return alignment;
     }

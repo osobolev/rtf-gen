@@ -53,7 +53,6 @@ import com.lowagie.text.factories.RomanNumberFactory;
  *
  * @see com.lowagie.text.List
  */
-
 public class RomanList extends List {
 
 // constructors

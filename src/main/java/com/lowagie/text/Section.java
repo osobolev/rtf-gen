@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.util.ArrayList;
@@ -78,7 +77,6 @@ import java.util.Iterator;
  * <STRONG>section11.add(someSectionText);</STRONG>
  * </PRE></BLOCKQUOTE>
  */
-
 public class Section extends ArrayList<Element> implements TextElementArray, LargeElement {
     // constant
     /**

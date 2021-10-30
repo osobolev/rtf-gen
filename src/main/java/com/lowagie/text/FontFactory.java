@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import com.lowagie.text.pdf.BaseFont;
@@ -58,7 +57,6 @@ import com.lowagie.text.pdf.BaseFont;
  *
  * @author Bruno Lowagie
  */
-
 public final class FontFactory {
 
     /**

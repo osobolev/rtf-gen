@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 /**
@@ -79,7 +78,6 @@ package com.lowagie.text;
  * @see Section
  * @see Table
  */
-
 public interface Element {
 
     // static membervariables (meta information)
@@ -282,19 +280,16 @@ public interface Element {
     /**
      * A possible value for vertical alignment.
      */
-
     int ALIGN_TOP = 4;
 
     /**
      * A possible value for vertical alignment.
      */
-
     int ALIGN_MIDDLE = 5;
 
     /**
      * A possible value for vertical alignment.
      */
-
     int ALIGN_BOTTOM = 6;
 
     /**
@@ -358,7 +353,6 @@ public interface Element {
      * @param listener an <CODE>ElementListener</CODE>
      * @return <CODE>true</CODE> if the element was processed successfully
      */
-
     boolean process(ElementListener listener);
 
     /**
@@ -366,7 +360,6 @@ public interface Element {
      *
      * @return a type
      */
-
     int type();
 
     /**
@@ -376,7 +369,6 @@ public interface Element {
      * @since iText 2.0.8
      * @return true if this is a 'content' element; false if this is a 'metadata' element
      */
-
     boolean isContent();
 
     /**
@@ -385,7 +377,6 @@ public interface Element {
      * @since iText 2.0.8
      * @return true if this element can be nested inside other elements.
      */
-
     boolean isNestable();
 
     /**
@@ -393,7 +384,6 @@ public interface Element {
      *
      * @return an <CODE>ArrayList</CODE>
      */
-
     java.util.List<Element> getChunks();
 
     /**
@@ -401,6 +391,5 @@ public interface Element {
      *
      * @return a type
      */
-
     String toString();
 }

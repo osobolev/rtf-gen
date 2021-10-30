@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 /**
@@ -57,7 +56,6 @@ package com.lowagie.text;
  * @see        Document
  * @see        DocWriter
  */
-
 public interface DocListener extends ElementListener {
 
     // methods
@@ -66,7 +64,6 @@ public interface DocListener extends ElementListener {
      * Signals that the <CODE>Document</CODE> has been opened and that
      * <CODE>Elements</CODE> can be added.
      */
-
     void open(); // [L1]
 
     /**
@@ -75,7 +72,6 @@ public interface DocListener extends ElementListener {
      * <p>
      * The outputstream of every writer implementing <CODE>DocListener</CODE> will be closed.
      */
-
     void close(); // [L2]
 
     /**
@@ -83,7 +79,6 @@ public interface DocListener extends ElementListener {
      *
      * @return    <CODE>true</CODE> if the page was added, <CODE>false</CODE> if not.
      */
-
     boolean newPage(); // [L3]
 
     /**
@@ -92,7 +87,6 @@ public interface DocListener extends ElementListener {
      * @param    pageSize    the new pagesize
      * @return a <CODE>boolean</CODE>
      */
-
     boolean setPageSize(Rectangle pageSize); // [L4]
 
     /**
@@ -104,7 +98,6 @@ public interface DocListener extends ElementListener {
      * @param    marginBottom    the margin on the bottom
      * @return a <CODE>boolean</CODE>
      */
-
     boolean setMargins(float marginLeft, float marginRight, float marginTop, float marginBottom);  // [L5]
 
     /**
@@ -129,13 +122,11 @@ public interface DocListener extends ElementListener {
      *
      * @param    pageN        the new page number
      */
-
     void setPageCount(int pageN); // [L7]
 
     /**
      * Sets the page number to 0.
      */
-
     void resetPageCount(); // [L8]
 
     /**
@@ -143,13 +134,11 @@ public interface DocListener extends ElementListener {
      *
      * @param    header        the new header
      */
-
     void setHeader(HeaderFooter header); // [L9]
 
     /**
      * Resets the header of this document.
      */
-
     void resetHeader(); // [L10]
 
     /**
@@ -157,12 +146,10 @@ public interface DocListener extends ElementListener {
      *
      * @param    footer        the new footer
      */
-
     void setFooter(HeaderFooter footer); // [L11]
 
     /**
      * Resets the footer of this document.
      */
-
     void resetFooter(); // [L12]
 }

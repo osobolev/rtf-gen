@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 /**
@@ -58,7 +57,6 @@ package com.lowagie.text;
  *
  * @since iText 2.0.8
  */
-
 public interface LargeElement extends Element {
 
     /**

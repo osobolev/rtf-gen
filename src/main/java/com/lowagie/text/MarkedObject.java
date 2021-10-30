@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.util.Properties;
@@ -58,7 +57,6 @@ import java.util.Properties;
  * This functionality was hardly used by anyone, so it was removed, and replaced by
  * the MarkedObject functionality.
  */
-
 public class MarkedObject implements Element {
 
     /**

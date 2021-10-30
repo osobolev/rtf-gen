@@ -49,7 +49,6 @@
  * Some methods in this class were contributed by Geert Poels, Kris Jespers and
  * Steve Ogryzek. Check the CVS repository.
  */
-
 package com.lowagie.text;
 
 import java.awt.*;
@@ -146,7 +145,6 @@ import java.util.List;
  * @see Row
  * @see Cell
  */
-
 public class Table extends Rectangle implements LargeElement {
 
     // membervariables
@@ -800,7 +798,6 @@ public class Table extends Rectangle implements LargeElement {
      * @param content a <CODE>String</CODE>
      * @throws BadElementException this should never happen
      */
-
     public void addCell(String content) throws BadElementException {
         addCell(new Phrase(content), curPosition);
     }

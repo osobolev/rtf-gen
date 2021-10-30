@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 /**
@@ -61,7 +60,6 @@ package com.lowagie.text;
  * @see        Element
  * @see        Meta
  */
-
 public class Header extends Meta {
 
     // membervariables
@@ -79,7 +77,6 @@ public class Header extends Meta {
      * @param    name        the name of the meta-information
      * @param    content        the content
      */
-
     public Header(String name, String content) {
         super(Element.HEADER, content);
         this.name = new StringBuffer(name);

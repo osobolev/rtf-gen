@@ -44,7 +44,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text.rtf.document.output;
 
 import java.io.ByteArrayOutputStream;

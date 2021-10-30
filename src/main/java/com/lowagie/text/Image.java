@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import com.lowagie.text.pdf.codec.CCITTG4Encoder;
@@ -70,7 +69,6 @@ import java.net.URL;
  * @see Element
  * @see Rectangle
  */
-
 public abstract class Image extends Rectangle {
 
     // static final membervariables
@@ -694,7 +692,6 @@ public abstract class Image extends Rectangle {
      *
      * @return a type
      */
-
     public int type() {
         return type;
     }
@@ -715,7 +712,6 @@ public abstract class Image extends Rectangle {
      *
      * @return a <CODE>boolean</CODE>
      */
-
     public boolean isJpeg() {
         return type == JPEG;
     }
@@ -726,7 +722,6 @@ public abstract class Image extends Rectangle {
      *
      * @return a <CODE>boolean</CODE>
      */
-
     public boolean isImgRaw() {
         return type == IMGRAW;
     }
@@ -737,7 +732,6 @@ public abstract class Image extends Rectangle {
      *
      * @return a <CODE>boolean</CODE>
      */
-
     public boolean isImgTemplate() {
         return type == IMGTEMPLATE;
     }
@@ -750,7 +744,6 @@ public abstract class Image extends Rectangle {
      *
      * @return a <CODE>String</CODE>
      */
-
     public URL getUrl() {
         return url;
     }
@@ -802,7 +795,6 @@ public abstract class Image extends Rectangle {
      *
      * @param alignment the alignment
      */
-
     public void setAlignment(int alignment) {
         this.alignment = alignment;
     }
@@ -812,7 +804,6 @@ public abstract class Image extends Rectangle {
      *
      * @return a <CODE>String</CODE>
      */
-
     public String getAlt() {
         return alt;
     }
@@ -822,7 +813,6 @@ public abstract class Image extends Rectangle {
      *
      * @param alt the alternative information
      */
-
     public void setAlt(String alt) {
         this.alt = alt;
     }
@@ -833,7 +823,6 @@ public abstract class Image extends Rectangle {
      * @param absoluteX
      * @param absoluteY
      */
-
     public void setAbsolutePosition(float absoluteX, float absoluteY) {
         this.absoluteX = absoluteX;
         this.absoluteY = absoluteY;
@@ -1200,7 +1189,6 @@ public abstract class Image extends Rectangle {
      *
      * @param spacing the new spacing
      */
-
     public void setSpacingBefore(float spacing) {
         this.spacingBefore = spacing;
     }
@@ -1219,7 +1207,6 @@ public abstract class Image extends Rectangle {
      *
      * @param spacing the new spacing
      */
-
     public void setSpacingAfter(float spacing) {
         this.spacingAfter = spacing;
     }
@@ -1617,7 +1604,6 @@ public abstract class Image extends Rectangle {
      *
      * @return the transparency values
      */
-
     public int[] getTransparency() {
         return transparency;
     }

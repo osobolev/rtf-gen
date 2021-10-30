@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import com.lowagie.text.pdf.GrayColor;
@@ -478,7 +477,6 @@ public class Rectangle implements Element {
      *
      * @param backgroundColor a <CODE>Color</CODE>
      */
-
     public void setBackgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
     }

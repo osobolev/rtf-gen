@@ -59,7 +59,6 @@ import java.util.*;
  * A collection of convenience methods that were present in many different iText
  * classes.
  */
-
 public class Utilities {
 
     /**

@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.util.EventListener;
@@ -57,7 +56,6 @@ import java.util.EventListener;
  *
  * @see        DocListener
  */
-
 public interface ElementListener extends EventListener {
 
     // methods
@@ -69,6 +67,5 @@ public interface ElementListener extends EventListener {
      * @return    <CODE>true</CODE> if the element was added, <CODE>false</CODE> if not.
      * @throws DocumentException    when a document isn't open yet, or has been closed
      */
-
     boolean add(Element element) throws DocumentException; // [L0]
 }

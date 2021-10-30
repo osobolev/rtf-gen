@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.net.URL;
@@ -58,7 +57,6 @@ import java.net.URL;
  * @see        Element
  * @see        Image
  */
-
 public class ImgCCITT extends Image {
 
     ImgCCITT(Image image) {
@@ -80,7 +78,6 @@ public class ImgCCITT extends Image {
      * @param data        the image data
      * @throws BadElementException on error
      */
-
     public ImgCCITT(int width, int height, boolean reverseBits, int typeCCITT, int parameters, byte[] data) throws BadElementException {
         super((URL) null);
         if (typeCCITT != CCITTG4 && typeCCITT != CCITTG3_1D && typeCCITT != CCITTG3_2D)

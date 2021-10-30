@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.net.URL;
@@ -58,7 +57,6 @@ import java.net.URL;
  * @see        Element
  * @see        Image
  */
-
 public class ImgRaw extends Image {
 
     ImgRaw(Image image) {
@@ -75,7 +73,6 @@ public class ImgRaw extends Image {
      * @param data       the image data
      * @throws BadElementException on error
      */
-
     public ImgRaw(int width, int height, int components, int bpc, byte[] data) throws BadElementException {
         super((URL) null);
         type = IMGRAW;

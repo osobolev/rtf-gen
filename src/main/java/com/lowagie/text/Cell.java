@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.util.ArrayList;
@@ -86,7 +85,6 @@ import java.util.Iterator;
  * @see        Table
  * @see        Row
  */
-
 public class Cell extends Rectangle implements TextElementArray {
 
     // membervariables

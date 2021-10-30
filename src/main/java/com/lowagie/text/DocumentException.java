@@ -47,7 +47,6 @@
  * http://www.lowagie.com/iText/
  *
  */
-
 package com.lowagie.text;
 
 /**
@@ -58,7 +57,6 @@ package com.lowagie.text;
  * @see        DocWriter
  * @see        DocListener
  */
-
 public class DocumentException extends Exception {
 
     /**

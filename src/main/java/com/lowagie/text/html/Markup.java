@@ -49,7 +49,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text.html;
 
 import java.util.Properties;
@@ -58,7 +57,6 @@ import java.util.StringTokenizer;
 /**
  * A class that contains all the possible tagnames and their attributes.
  */
-
 public class Markup {
 
     // iText specific
@@ -413,7 +411,6 @@ public class Markup {
      *               number and a unit.
      * @return a float
      */
-
     public static float parseLength(String string) {
         // TODO: Evaluate the effect of this.
         // It may change the default behavour of the methd if this is changed.

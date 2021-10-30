@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.util.ArrayList;
@@ -79,7 +78,6 @@ import java.util.Iterator;
  * @see        Paragraph
  * @see        Anchor
  */
-
 public class Phrase extends ArrayList<Element> implements TextElementArray {
 
     // constants
@@ -396,7 +394,6 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      *
      * @param    leading        the new leading
      */
-
     public void setLeading(float leading) {
         this.leading = leading;
     }

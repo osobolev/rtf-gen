@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import com.lowagie.text.html.Markup;
@@ -67,7 +66,6 @@ import java.awt.*;
  *
  * </BLOCKQUOTE>
  */
-
 public class Font implements Comparable<Font> {
 
     // static membervariables for the different families
@@ -185,7 +183,6 @@ public class Font implements Comparable<Font> {
      * @param style  the style of this font
      * @param color  the <CODE>Color</CODE> of this font.
      */
-
     public Font(int family, float size, int style, Color color) {
         this.family = family;
         this.size = size;
@@ -200,7 +197,6 @@ public class Font implements Comparable<Font> {
      * @param size   the size of this font
      * @param style  the style of this font
      */
-
     public Font(int family, float size, int style) {
         this(family, size, style, null);
     }
@@ -211,7 +207,6 @@ public class Font implements Comparable<Font> {
      * @param family the family to which this font belongs
      * @param size   the size of this font
      */
-
     public Font(int family, float size) {
         this(family, size, UNDEFINED, null);
     }
@@ -221,7 +216,6 @@ public class Font implements Comparable<Font> {
      *
      * @param family the family to which this font belongs
      */
-
     public Font(int family) {
         this(family, UNDEFINED, UNDEFINED, null);
     }
@@ -229,7 +223,6 @@ public class Font implements Comparable<Font> {
     /**
      * Constructs a Font.
      */
-
     public Font() {
         this(UNDEFINED, UNDEFINED, UNDEFINED, null);
     }
@@ -531,7 +524,6 @@ public class Font implements Comparable<Font> {
      *
      * @param color the new color of the font
      */
-
     public void setColor(Color color) {
         this.color = color;
     }

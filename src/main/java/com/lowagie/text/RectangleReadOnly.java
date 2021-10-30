@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.awt.*;
@@ -66,7 +65,6 @@ import java.awt.*;
  * @see HeaderFooter
  * @since 2.1.2
  */
-
 public class RectangleReadOnly extends Rectangle {
 
     // CONSTRUCTORS
@@ -127,7 +125,6 @@ public class RectangleReadOnly extends Rectangle {
      *
      * @param urx the new value
      */
-
     public void setRight(float urx) {
         throwReadOnlyError();
     }
@@ -229,7 +226,6 @@ public class RectangleReadOnly extends Rectangle {
      *
      * @param borderWidth the new value
      */
-
     public void setBorderWidth(float borderWidth) {
         throwReadOnlyError();
     }
@@ -277,7 +273,6 @@ public class RectangleReadOnly extends Rectangle {
      *
      * @param borderColor a <CODE>Color</CODE>
      */
-
     public void setBorderColor(Color borderColor) {
         throwReadOnlyError();
     }

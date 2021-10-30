@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 /**
@@ -95,7 +94,6 @@ package com.lowagie.text;
  * @see    Paragraph
  * @see List
  */
-
 public class ListItem extends Paragraph {
 
     // constants

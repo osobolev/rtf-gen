@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.util.ArrayList;
@@ -63,7 +62,6 @@ import java.util.ArrayList;
  * @see        Element
  * @see        Header
  */
-
 public class Meta implements Element {
 
     // membervariables
@@ -181,7 +179,6 @@ public class Meta implements Element {
      *
      * @return a <CODE>String</CODE>
      */
-
     public String getName() {
         switch (type) {
         case Element.SUBJECT:

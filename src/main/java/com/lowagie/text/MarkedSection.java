@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.util.Collection;
@@ -59,7 +58,6 @@ import java.util.Iterator;
  * This functionality was hardly used by anyone, so it was removed, and replaced by
  * the MarkedObject functionality.
  */
-
 public class MarkedSection extends MarkedObject {
 
     /**

@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.io.BufferedOutputStream;
@@ -70,7 +69,6 @@ import java.util.Properties;
  * @see Document
  * @see DocListener
  */
-
 public abstract class DocWriter implements DocListener {
 
     /**
@@ -156,7 +154,6 @@ public abstract class DocWriter implements DocListener {
      * @param document The <CODE>Document</CODE> that has to be written
      * @param os       The <CODE>OutputStream</CODE> the writer has to write to.
      */
-
     protected DocWriter(Document document, OutputStream os) {
         this.document = document;
         this.os = new BufferedOutputStream(os);
@@ -174,7 +171,6 @@ public abstract class DocWriter implements DocListener {
      * @return <CODE>false</CODE>
      * @throws DocumentException when a document isn't open yet, or has been closed
      */
-
     public boolean add(Element element) throws DocumentException {
         return false;
     }
@@ -182,7 +178,6 @@ public abstract class DocWriter implements DocListener {
     /**
      * Signals that the <CODE>Document</CODE> was opened.
      */
-
     public void open() {
         open = true;
     }
@@ -193,7 +188,6 @@ public abstract class DocWriter implements DocListener {
      * @param pageSize the new pagesize
      * @return a <CODE>boolean</CODE>
      */
-
     public boolean setPageSize(Rectangle pageSize) {
         this.pageSize = pageSize;
         return true;
@@ -210,7 +204,6 @@ public abstract class DocWriter implements DocListener {
      * @param marginBottom the margin on the bottom
      * @return <CODE>false</CODE>
      */
-
     public boolean setMargins(float marginLeft, float marginRight, float marginTop, float marginBottom) {
         return false;
     }
@@ -222,7 +215,6 @@ public abstract class DocWriter implements DocListener {
      *
      * @return <CODE>true</CODE> if the page was added, <CODE>false</CODE> if not.
      */
-
     public boolean newPage() {
         if (!open) {
             return false;
@@ -239,7 +231,6 @@ public abstract class DocWriter implements DocListener {
      *
      * @param header the new header
      */
-
     public void setHeader(HeaderFooter header) {
     }
 
@@ -250,7 +241,6 @@ public abstract class DocWriter implements DocListener {
      * derived from this abstract class if they actually support the use of
      * headers.
      */
-
     public void resetHeader() {
     }
 
@@ -263,7 +253,6 @@ public abstract class DocWriter implements DocListener {
      *
      * @param footer the new footer
      */
-
     public void setFooter(HeaderFooter footer) {
     }
 
@@ -274,7 +263,6 @@ public abstract class DocWriter implements DocListener {
      * derived from this abstract class if they actually support the use of
      * footers.
      */
-
     public void resetFooter() {
     }
 
@@ -285,7 +273,6 @@ public abstract class DocWriter implements DocListener {
      * derived from this abstract class if they actually support the use of
      * pagenumbers.
      */
-
     public void resetPageCount() {
     }
 
@@ -298,7 +285,6 @@ public abstract class DocWriter implements DocListener {
      *
      * @param pageN the new page number
      */
-
     public void setPageCount(int pageN) {
     }
 
@@ -306,7 +292,6 @@ public abstract class DocWriter implements DocListener {
      * Signals that the <CODE>Document</CODE> was closed and that no other
      * <CODE>Elements</CODE> will be added.
      */
-
     public void close() {
         open = false;
         try {
@@ -327,7 +312,6 @@ public abstract class DocWriter implements DocListener {
      * @param text the text to be converted
      * @return the conversion result
      */
-
     public static byte[] getISOBytes(String text) {
         if (text == null)
             return null;
@@ -341,7 +325,6 @@ public abstract class DocWriter implements DocListener {
     /**
      * Let the writer know that all writing has to be paused.
      */
-
     public void pause() {
         pause = true;
     }
@@ -351,7 +334,6 @@ public abstract class DocWriter implements DocListener {
      *
      * @return        <CODE>true</CODE> if writing temporarily has to be paused, <CODE>false</CODE> otherwise.
      */
-
     public boolean isPaused() {
         return pause;
     }
@@ -359,7 +341,6 @@ public abstract class DocWriter implements DocListener {
     /**
      * Let the writer know that writing may be resumed.
      */
-
     public void resume() {
         pause = false;
     }
@@ -367,7 +348,6 @@ public abstract class DocWriter implements DocListener {
     /**
      * Flushes the <CODE>BufferedOutputStream</CODE>.
      */
-
     public void flush() {
         try {
             os.flush();
@@ -382,7 +362,6 @@ public abstract class DocWriter implements DocListener {
      * @param string the <CODE>String</CODE> to write
      * @throws IOException
      */
-
     protected void write(String string) throws IOException {
         os.write(getISOBytes(string));
     }
@@ -393,7 +372,6 @@ public abstract class DocWriter implements DocListener {
      * @param indent the number of tabs to add
      * @throws IOException
      */
-
     protected void addTabs(int indent) throws IOException {
         os.write(NEWLINE);
         for (int i = 0; i < indent; i++) {
@@ -408,7 +386,6 @@ public abstract class DocWriter implements DocListener {
      * @param value the value of an attribute
      * @throws IOException
      */
-
     protected void write(String key, String value)
         throws IOException {
         os.write(SPACE);
@@ -425,7 +402,6 @@ public abstract class DocWriter implements DocListener {
      * @param tag the name of the tag
      * @throws IOException
      */
-
     protected void writeStart(String tag)
         throws IOException {
         os.write(LT);
@@ -438,7 +414,6 @@ public abstract class DocWriter implements DocListener {
      * @param tag the name of the tag
      * @throws IOException
      */
-
     protected void writeEnd(String tag)
         throws IOException {
         os.write(LT);
@@ -452,7 +427,6 @@ public abstract class DocWriter implements DocListener {
      *
      * @throws IOException
      */
-
     protected void writeEnd()
         throws IOException {
         os.write(SPACE);

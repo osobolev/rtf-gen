@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 /**
@@ -60,7 +59,6 @@ package com.lowagie.text;
  * @see        Anchor
  * @see        Cell
  */
-
 public interface TextElementArray extends Element {
 
     /**

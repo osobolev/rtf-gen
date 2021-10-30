@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 /**
@@ -56,7 +55,6 @@ package com.lowagie.text;
  * @see        Cell
  * @see        Table
  */
-
 public class BadElementException extends DocumentException {
 
     private static final long serialVersionUID = -799006030723822254L;

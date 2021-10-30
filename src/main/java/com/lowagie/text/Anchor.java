@@ -46,7 +46,6 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-
 package com.lowagie.text;
 
 import java.net.MalformedURLException;
@@ -70,7 +69,6 @@ import java.util.Iterator;
  * @see        Element
  * @see        Phrase
  */
-
 public class Anchor extends Phrase {
 
     // constant
@@ -102,7 +100,6 @@ public class Anchor extends Phrase {
      *
      * @param    leading        the leading
      */
-
     public Anchor(float leading) {
         super(leading);
     }
