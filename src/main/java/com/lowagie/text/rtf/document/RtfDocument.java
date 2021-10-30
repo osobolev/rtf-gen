@@ -60,8 +60,8 @@ import com.lowagie.text.rtf.graphic.RtfImage;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The RtfDocument stores all document related data and also the main data stream.
@@ -90,7 +90,7 @@ public class RtfDocument extends RtfElement {
     /**
      * Stores integers that have been generated as unique random numbers
      */
-    private List<Integer> previousRandomInts;
+    private Set<Integer> previousRandomInts;
     /**
      * Whether to automatically generate TOC entries for Chapters and Sections. Defaults to false
      */
@@ -127,7 +127,7 @@ public class RtfDocument extends RtfElement {
         this.mapper = new RtfMapper(this);
         this.documentHeader = new RtfDocumentHeader(this);
         this.documentHeader.init();
-        this.previousRandomInts = new ArrayList<>();
+        this.previousRandomInts = new HashSet<>();
         this.documentSettings = new RtfDocumentSettings(this);
     }
 
@@ -218,14 +218,11 @@ public class RtfDocument extends RtfElement {
      * @return A random int
      */
     public int getRandomInt() {
-        Integer newInt;
-        do {
-//        	do {
-            newInt = new Integer((int) (Math.random() * Integer.MAX_VALUE));
-//        	} while(newInt.intValue() <= -1 && newInt.intValue() >= -5);
-        } while (this.previousRandomInts.contains(newInt));
-        this.previousRandomInts.add(newInt);
-        return newInt.intValue();
+        while (true){
+            int newInt = (int) (Math.random() * Integer.MAX_VALUE);
+            if (this.previousRandomInts.add(newInt))
+                return newInt;
+        }
     }
 
     /**
