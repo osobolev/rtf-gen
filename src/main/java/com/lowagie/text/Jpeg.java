@@ -117,7 +117,7 @@ public class Jpeg extends Image {
     /**
      * sequence that is used in all Jpeg files
      */
-    public static final byte JFIF_ID[] = {0x4A, 0x46, 0x49, 0x46, 0x00};
+    public static final byte[] JFIF_ID = {0x4A, 0x46, 0x49, 0x46, 0x00};
 
     private byte[][] icc;
     // Constructors
@@ -246,7 +246,7 @@ public class Jpeg extends Image {
                             Utilities.skip(is, len - 2);
                             continue;
                         }
-                        byte bcomp[] = new byte[JFIF_ID.length];
+                        byte[] bcomp = new byte[JFIF_ID.length];
                         int r = is.read(bcomp);
                         if (r != bcomp.length)
                             throw new BadElementException(errorID + " corrupted JFIF marker.");

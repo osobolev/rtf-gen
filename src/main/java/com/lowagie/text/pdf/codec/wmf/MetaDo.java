@@ -131,7 +131,7 @@ public class MetaDo {
         if (image.getOriginalType() != Image.ORIGINAL_BMP)
             throw new IOException("Only BMP can be wrapped in WMF.");
         InputStream imgIn;
-        byte data[] = null;
+        byte[] data = null;
         if (image.getOriginalData() == null) {
             imgIn = image.getUrl().openStream();
             ByteArrayOutputStream out = new ByteArrayOutputStream();

@@ -190,8 +190,8 @@ public class Row implements Element {
             throw new IndexOutOfBoundsException("getCell at illegal index : " + column);
         }
         columns--;
-        boolean newReserved[] = new boolean[columns];
-        Object newCells[] = new Cell[columns];
+        boolean[] newReserved = new boolean[columns];
+        Object[] newCells = new Cell[columns];
 
         for (int i = 0; i < column; i++) {
             newReserved[i] = reserved[i];

@@ -616,7 +616,7 @@ public class Table extends Rectangle implements LargeElement {
      * @throws DocumentException
      */
     public void setWidths(int[] widths) throws DocumentException {
-        float tb[] = new float[widths.length];
+        float[] tb = new float[widths.length];
         for (int k = 0; k < widths.length; ++k)
             tb[k] = widths[k];
         setWidths(tb);
@@ -913,7 +913,7 @@ public class Table extends Rectangle implements LargeElement {
      * @throws BadElementException
      */
     public void deleteColumn(int column) throws BadElementException {
-        float newWidths[] = new float[--columns];
+        float[] newWidths = new float[--columns];
         System.arraycopy(widths, 0, newWidths, 0, column);
         System.arraycopy(widths, column + 1, newWidths, column, columns - column);
         setWidths(newWidths);
@@ -1135,7 +1135,7 @@ public class Table extends Rectangle implements LargeElement {
                         lDummyTable = (Table) ((Row) rows.get(i)).getCell(j);
 
                         // Work out where columns in table table correspond to columns in current table
-                        int colMap[] = new int[lDummyTable.widths.length + 1];
+                        int[] colMap = new int[lDummyTable.widths.length + 1];
                         int cb = 0, ct = 0;
 
                         for (; cb < lDummyTable.widths.length; cb++) {
