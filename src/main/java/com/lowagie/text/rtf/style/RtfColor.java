@@ -179,13 +179,13 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * unused
      */
-    public void writeContent(final OutputStream out) throws IOException {
+    public void writeContent(OutputStream out) throws IOException {
     }
 
     /**
      * Write the definition part of this RtfColor.
      */
-    public void writeDefinition(final OutputStream result) throws IOException {
+    public void writeDefinition(OutputStream result) throws IOException {
         result.write(COLOR_RED);
         result.write(intToByteArray(red));
         result.write(COLOR_GREEN);
@@ -198,7 +198,7 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the beginning of this RtfColor
      */
-    public void writeBegin(final OutputStream result) {
+    public void writeBegin(OutputStream result) {
         try {
             result.write(COLOR_NUMBER);
             result.write(intToByteArray(colorNumber));
@@ -212,7 +212,7 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
      *
      * @param result The <code>OutputStream</code> to which nothing will be written
      */
-    public void writeEnd(final OutputStream result) {
+    public void writeEnd(OutputStream result) {
     }
 
     /**

@@ -168,7 +168,7 @@ public class RtfTable extends RtfElement {
     /**
      * Writes the content of this RtfTable
      */
-    public void writeContent(final OutputStream result) throws IOException {
+    public void writeContent(OutputStream result) throws IOException {
         if (!inHeader) {
             if (this.offset != -1) {
                 result.write(RtfFont.FONT_SIZE);

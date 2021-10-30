@@ -162,13 +162,13 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     /**
      * unused
      */
-    public void writeContent(final OutputStream out) throws IOException {
+    public void writeContent(OutputStream out) throws IOException {
     }
 
     /**
      * Writes the page size / page margin definition
      */
-    public void writeDefinition(final OutputStream result) throws IOException {
+    public void writeDefinition(OutputStream result) throws IOException {
         result.write(PAGE_WIDTH);
         result.write(intToByteArray(pageWidth));
         result.write(PAGE_HEIGHT);
@@ -187,7 +187,7 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the definition part for a new section
      */
-    public void writeSectionDefinition(final OutputStream result) throws IOException {
+    public void writeSectionDefinition(OutputStream result) throws IOException {
         if (landscape) {
             result.write(LANDSCAPE);
             result.write(SECTION_PAGE_WIDTH);

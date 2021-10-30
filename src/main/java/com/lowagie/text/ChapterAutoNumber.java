@@ -69,7 +69,7 @@ public class ChapterAutoNumber extends Chapter {
      *
      * @param para the Chapter title (as a <CODE>Paragraph</CODE>)
      */
-    public ChapterAutoNumber(final Paragraph para) {
+    public ChapterAutoNumber(Paragraph para) {
         super(para, 0);
     }
 
@@ -78,7 +78,7 @@ public class ChapterAutoNumber extends Chapter {
      *
      * @param title the Chapter title (as a <CODE>String</CODE>)
      */
-    public ChapterAutoNumber(final String title) {
+    public ChapterAutoNumber(String title) {
         super(title, 0);
     }
 
@@ -88,7 +88,7 @@ public class ChapterAutoNumber extends Chapter {
      * @param title the Section title (as a <CODE>String</CODE>)
      * @return Returns the new section.
      */
-    public Section addSection(final String title) {
+    public Section addSection(String title) {
         if (isAddedCompletely()) {
             throw new IllegalStateException("This LargeElement has already been added to the Document.");
         }
@@ -101,7 +101,7 @@ public class ChapterAutoNumber extends Chapter {
      * @param title the Section title (as a <CODE>Paragraph</CODE>)
      * @return Returns the new section.
      */
-    public Section addSection(final Paragraph title) {
+    public Section addSection(Paragraph title) {
         if (isAddedCompletely()) {
             throw new IllegalStateException("This LargeElement has already been added to the Document.");
         }

@@ -634,7 +634,7 @@ public class Document implements DocListener {
     public boolean addCreationDate() {
         try {
             /* bugfix by 'taqua' (Thomas) */
-            final SimpleDateFormat sdf = new SimpleDateFormat(
+            SimpleDateFormat sdf = new SimpleDateFormat(
                 "EEE MMM dd HH:mm:ss zzz yyyy");
             return add(new Meta(Element.CREATIONDATE, sdf.format(new Date())));
         } catch (DocumentException de) {

@@ -601,7 +601,7 @@ public class RtfParagraphStyle extends RtfFont {
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException On i/o errors.
      */
-    private void writeParagraphSettings(final OutputStream result) throws IOException {
+    private void writeParagraphSettings(OutputStream result) throws IOException {
         if (this.keepTogether) {
             result.write(RtfParagraphStyle.KEEP_TOGETHER);
         }
@@ -646,7 +646,7 @@ public class RtfParagraphStyle extends RtfFont {
     /**
      * Writes the definition of this RtfParagraphStyle for the stylesheet list.
      */
-    public void writeDefinition(final OutputStream result) throws IOException {
+    public void writeDefinition(OutputStream result) throws IOException {
         result.write(DocWriter.getISOBytes("{"));
         result.write(DocWriter.getISOBytes("\\style"));
         result.write(DocWriter.getISOBytes("\\s"));
@@ -667,7 +667,7 @@ public class RtfParagraphStyle extends RtfFont {
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException On i/o errors.
      */
-    public void writeBegin(final OutputStream result) throws IOException {
+    public void writeBegin(OutputStream result) throws IOException {
         result.write(DocWriter.getISOBytes("\\s"));
         result.write(intToByteArray(this.styleNumber));
         writeParagraphSettings(result);
@@ -679,13 +679,13 @@ public class RtfParagraphStyle extends RtfFont {
      * @param result The <code>OutputStream</code> that nothing is written to
      * @throws IOException On i/o errors.
      */
-    public void writeEnd(final OutputStream result) throws IOException {
+    public void writeEnd(OutputStream result) throws IOException {
     }
 
     /**
      * unused
      */
-    public void writeContent(final OutputStream out) throws IOException {
+    public void writeContent(OutputStream out) throws IOException {
     }
 
     /**

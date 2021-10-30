@@ -238,7 +238,7 @@ public class RtfShape extends RtfAddableElement {
      * Writes the RtfShape. Some settings are automatically translated into
      * or require other properties and these are set first.
      */
-    public void writeContent(final OutputStream result) throws IOException {
+    public void writeContent(OutputStream result) throws IOException {
         this.shapeNr = this.doc.getRandomInt();
 
         this.properties.put("ShapeType", new RtfShapeProperty("ShapeType", this.type));

@@ -114,7 +114,7 @@ public class RtfTabGroup extends RtfAddableElement {
     /**
      * Combines the tab output form all grouped tabs.
      */
-    public void writeContent(final OutputStream result) throws IOException {
+    public void writeContent(OutputStream result) throws IOException {
         for (int i = 0; i < this.tabs.size(); i++) {
             RtfTab rt = (RtfTab) this.tabs.get(i);
             rt.writeContent(result);

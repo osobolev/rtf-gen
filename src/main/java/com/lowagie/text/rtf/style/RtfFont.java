@@ -322,7 +322,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Writes the font definition
      */
-    public void writeDefinition(final OutputStream result) throws IOException {
+    public void writeDefinition(OutputStream result) throws IOException {
         result.write(FONT_FAMILY);
         result.write(FONT_CHARSET);
         result.write(intToByteArray(charset));
@@ -336,7 +336,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException On i/o errors.
      */
-    public void writeBegin(final OutputStream result) throws IOException {
+    public void writeBegin(OutputStream result) throws IOException {
         if (this.fontNumber != Font.UNDEFINED) {
             result.write(RtfFontList.FONT_NUMBER);
             result.write(intToByteArray(fontNumber));
@@ -389,7 +389,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException On i/o errors.
      */
-    public void writeEnd(final OutputStream result) throws IOException {
+    public void writeEnd(OutputStream result) throws IOException {
         if (this.fontStyle != UNDEFINED) {
             if ((fontStyle & STYLE_BOLD) == STYLE_BOLD) {
                 result.write(FONT_BOLD);

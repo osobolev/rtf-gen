@@ -279,7 +279,7 @@ public class RtfRow extends RtfElement {
      *
      * @param result The <code>OutputStream</code> to write the definitions to.
      */
-    private void writeRowDefinition(final OutputStream result) throws IOException {
+    private void writeRowDefinition(OutputStream result) throws IOException {
         result.write(ROW_BEGIN);
         this.document.outputDebugLinebreak(result);
         result.write(ROW_WIDTH_STYLE);
@@ -345,7 +345,7 @@ public class RtfRow extends RtfElement {
     /**
      * Writes the content of this RtfRow
      */
-    public void writeContent(final OutputStream result) throws IOException {
+    public void writeContent(OutputStream result) throws IOException {
         writeRowDefinition(result);
 
         for (int i = 0; i < this.cells.size(); i++) {
