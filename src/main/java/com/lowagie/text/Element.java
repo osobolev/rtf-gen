@@ -71,7 +71,6 @@ import java.util.ArrayList;
  * @see Chunk
  * @see Header
  * @see Image
- * @see Jpeg
  * @see List
  * @see ListItem
  * @see Meta
