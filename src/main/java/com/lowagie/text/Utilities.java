@@ -49,27 +49,14 @@
 package com.lowagie.text;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
 
 /**
  * A collection of convenience methods that were present in many different iText
  * classes.
  */
-public class Utilities {
-
-    /**
-     * Gets the keys of a Map
-     *
-     * @param table a Map
-     * @return the keyset of a Map (or an empty set if table is null)
-     */
-    public static <K> Set<K> getKeySet(Map<K, ?> table) {
-        return table == null ? Collections.emptySet() : table.keySet();
-    }
+public final class Utilities {
 
     /**
      * Utility method to extend an array.
@@ -92,17 +79,6 @@ public class Utilities {
     }
 
     /**
-     * Checks for a true/false value of a key in a Properties object.
-     *
-     * @param attributes
-     * @param key
-     * @return a true/false value of a key in a Properties object
-     */
-    public static boolean checkTrueOrFalse(Properties attributes, String key) {
-        return "true".equalsIgnoreCase(attributes.getProperty(key));
-    }
-
-    /**
      * This method makes a valid URL from a given filename.
      * <p>
      * This method makes the conversion of this library from the JAVA 2 platform
@@ -117,24 +93,6 @@ public class Utilities {
             return new URL(filename);
         } catch (Exception e) {
             return new File(filename).toURI().toURL();
-        }
-    }
-
-    /**
-     * This method is an alternative for the <CODE>InputStream.skip()</CODE>
-     * -method that doesn't seem to work properly for big values of <CODE>size
-     * </CODE>.
-     *
-     * @param is   the <CODE>InputStream</CODE>
-     * @param size the number of bytes to skip
-     * @throws IOException
-     */
-    public static void skip(InputStream is, int size) throws IOException {
-        while (size > 0) {
-            long n = is.skip(size);
-            if (n <= 0)
-                break;
-            size -= n;
         }
     }
 
@@ -202,112 +160,5 @@ public class Utilities {
      */
     public static float inchesToPoints(float value) {
         return value * 72f;
-    }
-
-    /**
-     * Check if the value of a character belongs to a certain interval
-     * that indicates it's the higher part of a surrogate pair.
-     *
-     * @param c the character
-     * @return true if the character belongs to the interval
-     * @since 2.1.2
-     */
-    public static boolean isSurrogateHigh(char c) {
-        return c >= '\ud800' && c <= '\udbff';
-    }
-
-    /**
-     * Check if the value of a character belongs to a certain interval
-     * that indicates it's the lower part of a surrogate pair.
-     *
-     * @param c the character
-     * @return true if the character belongs to the interval
-     * @since 2.1.2
-     */
-    public static boolean isSurrogateLow(char c) {
-        return c >= '\udc00' && c <= '\udfff';
-    }
-
-    /**
-     * Checks if two subsequent characters in a String are
-     * are the higher and the lower character in a surrogate
-     * pair (and therefore eligible for conversion to a UTF 32 character).
-     *
-     * @param text the String with the high and low surrogate characters
-     * @param idx  the index of the 'high' character in the pair
-     * @return true if the characters are surrogate pairs
-     * @since 2.1.2
-     */
-    public static boolean isSurrogatePair(String text, int idx) {
-        if (idx < 0 || idx > text.length() - 2)
-            return false;
-        return isSurrogateHigh(text.charAt(idx)) && isSurrogateLow(text.charAt(idx + 1));
-    }
-
-    /**
-     * Checks if two subsequent characters in a character array are
-     * are the higher and the lower character in a surrogate
-     * pair (and therefore eligible for conversion to a UTF 32 character).
-     *
-     * @param text the character array with the high and low surrogate characters
-     * @param idx  the index of the 'high' character in the pair
-     * @return true if the characters are surrogate pairs
-     * @since 2.1.2
-     */
-    public static boolean isSurrogatePair(char[] text, int idx) {
-        if (idx < 0 || idx > text.length - 2)
-            return false;
-        return isSurrogateHigh(text[idx]) && isSurrogateLow(text[idx + 1]);
-    }
-
-    /**
-     * Returns the code point of a UTF32 character corresponding with
-     * a high and a low surrogate value.
-     *
-     * @param highSurrogate the high surrogate value
-     * @param lowSurrogate  the low surrogate value
-     * @return a code point value
-     * @since 2.1.2
-     */
-    public static int convertToUtf32(char highSurrogate, char lowSurrogate) {
-        return ((highSurrogate - 0xd800) * 0x400) + (lowSurrogate - 0xdc00) + 0x10000;
-    }
-
-    /**
-     * Converts a unicode character in a character array to a UTF 32 code point value.
-     *
-     * @param text a character array that has the unicode character(s)
-     * @param idx  the index of the 'high' character
-     * @return the code point value
-     * @since 2.1.2
-     */
-    public static int convertToUtf32(char[] text, int idx) {
-        return ((text[idx] - 0xd800) * 0x400) + (text[idx + 1] - 0xdc00) + 0x10000;
-    }
-
-    /**
-     * Converts a unicode character in a String to a UTF32 code point value
-     *
-     * @param text a String that has the unicode character(s)
-     * @param idx  the index of the 'high' character
-     * @return the codepoint value
-     * @since 2.1.2
-     */
-    public static int convertToUtf32(String text, int idx) {
-        return ((text.charAt(idx) - 0xd800) * 0x400) + (text.charAt(idx + 1) - 0xdc00) + 0x10000;
-    }
-
-    /**
-     * Converts a UTF32 code point value to a String with the corresponding character(s).
-     *
-     * @param codePoint a Unicode value
-     * @return the corresponding characters in a String
-     * @since 2.1.2
-     */
-    public static String convertFromUtf32(int codePoint) {
-        if (codePoint < 0x10000)
-            return Character.toString((char) codePoint);
-        codePoint -= 0x10000;
-        return new String(new char[] {(char) ((codePoint / 0x400) + 0xd800), (char) ((codePoint % 0x400) + 0xdc00)});
     }
 }
