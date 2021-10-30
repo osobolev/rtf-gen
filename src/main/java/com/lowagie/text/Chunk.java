@@ -427,7 +427,7 @@ public class Chunk implements Element {
 	 */
 	public Chunk setUnderline(float thickness, float yPosition) {
 		return setUnderline(null, thickness, 0f, yPosition, 0f,
-				PdfContentByte.LINE_CAP_BUTT);
+				0);
 	}
 
 	/**
