@@ -49,11 +49,6 @@
 
 package com.lowagie.text.rtf.table;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import com.lowagie.text.Element;
 import com.lowagie.text.Row;
 import com.lowagie.text.Table;
@@ -62,16 +57,20 @@ import com.lowagie.text.rtf.document.RtfDocument;
 import com.lowagie.text.rtf.style.RtfFont;
 import com.lowagie.text.rtf.text.RtfParagraph;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * The RtfTable wraps a Table.
  * INTERNAL USE ONLY
- * 
- * @version $Id: RtfTable.java 3533 2008-07-07 21:27:13Z Howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Steffen Stundzig
  * @author Benoit Wiart
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfTable.java 3533 2008-07-07 21:27:13Z Howard_s $
  */
 public class RtfTable extends RtfElement {
 
@@ -95,9 +94,9 @@ public class RtfTable extends RtfElement {
      * The cell spacing
      */
     private float cellSpacing = 0;
-    
+
     /**
-     * The border style of this RtfTable 
+     * The border style of this RtfTable
      */
     private RtfBorderGroup borders = null;
     /**
@@ -120,11 +119,11 @@ public class RtfTable extends RtfElement {
      * The offset from the previous text
      */
     private int offset = -1;
-    
+
     /**
      * Constructs a RtfTable based on a Table for a RtfDocument.
-     * 
-     * @param doc The RtfDocument this RtfTable belongs to
+     *
+     * @param doc   The RtfDocument this RtfTable belongs to
      * @param table The Table that this RtfTable wraps
      */
     public RtfTable(RtfDocument doc, Table table) {
@@ -136,7 +135,7 @@ public class RtfTable extends RtfElement {
     /**
      * Imports the rows and settings from the Table into this
      * RtfTable.
-     * 
+     *
      * @param table The source Table
      */
     private void importTable(Table table) {
@@ -147,131 +146,130 @@ public class RtfTable extends RtfElement {
         this.cellSpacing = (float) (table.getSpacing() * TWIPS_FACTOR);
         this.borders = new RtfBorderGroup(this.document, RtfBorder.ROW_BORDER, table.getBorder(), table.getBorderWidth(), table.getBorderColor());
         this.alignment = table.getAlignment();
-        
+
         int i = 0;
         Iterator rowIterator = table.iterator();
-        while(rowIterator.hasNext()) {
+        while (rowIterator.hasNext()) {
             this.rows.add(new RtfRow(this.document, this, (Row) rowIterator.next(), i));
             i++;
         }
-        for(i = 0; i < this.rows.size(); i++) {
+        for (i = 0; i < this.rows.size(); i++) {
             ((RtfRow) this.rows.get(i)).handleCellSpanning();
             ((RtfRow) this.rows.get(i)).cleanRow();
         }
         this.headerRows = table.getLastHeaderRow();
         this.cellsFitToPage = table.isCellsFitPage();
         this.tableFitToPage = table.isTableFitsPage();
-        if(!Float.isNaN(table.getOffset())) {
+        if (!Float.isNaN(table.getOffset())) {
             this.offset = (int) (table.getOffset() * 2);
         }
     }
 
     /**
      * Writes the content of this RtfTable
-     */    
-    public void writeContent(final OutputStream result) throws IOException
-    {
-        if(!inHeader) {
-            if(this.offset != -1) {
+     */
+    public void writeContent(final OutputStream result) throws IOException {
+        if (!inHeader) {
+            if (this.offset != -1) {
                 result.write(RtfFont.FONT_SIZE);
                 result.write(intToByteArray(this.offset));
             }
             result.write(RtfParagraph.PARAGRAPH);
         }
-        
-        for(int i = 0; i < this.rows.size(); i++) {
-        	RtfElement re = (RtfElement)this.rows.get(i);
+
+        for (int i = 0; i < this.rows.size(); i++) {
+            RtfElement re = (RtfElement) this.rows.get(i);
             //.result.write(re.write());
-        	re.writeContent(result);
+            re.writeContent(result);
         }
-        
+
         result.write(RtfParagraph.PARAGRAPH_DEFAULTS);
-    }        
-    
+    }
+
     /**
      * Gets the alignment of this RtfTable
-     * 
+     *
      * @return The alignment of this RtfTable.
      */
     protected int getAlignment() {
         return alignment;
     }
-    
+
     /**
      * Gets the borders of this RtfTable
-     * 
+     *
      * @return The borders of this RtfTable.
      */
     protected RtfBorderGroup getBorders() {
         return this.borders;
     }
-    
+
     /**
      * Gets the cell padding of this RtfTable
-     * 
+     *
      * @return The cell padding of this RtfTable.
      */
     protected float getCellPadding() {
         return cellPadding;
     }
-    
+
     /**
      * Gets the cell spacing of this RtfTable
-     * 
+     *
      * @return The cell spacing of this RtfTable.
      */
     protected float getCellSpacing() {
         return cellSpacing;
     }
-    
+
     /**
      * Gets the proportional cell widths of this RtfTable
-     * 
+     *
      * @return The proportional widths of this RtfTable.
      */
     protected float[] getProportionalWidths() {
         return (float[]) proportionalWidths.clone();
     }
-    
+
     /**
-     * Gets the percentage of the page width this RtfTable covers 
-     * 
+     * Gets the percentage of the page width this RtfTable covers
+     *
      * @return The percentage of the page width.
      */
     protected float getTableWidthPercent() {
         return tableWidthPercent;
     }
-    
+
     /**
      * Gets the rows of this RtfTable
-     * 
+     *
      * @return The rows of this RtfTable
      */
     protected ArrayList getRows() {
         return this.rows;
     }
-    
+
     /**
      * Gets the cellsFitToPage setting of this RtfTable.
-     * 
+     *
      * @return The cellsFitToPage setting of this RtfTable.
      */
     protected boolean getCellsFitToPage() {
         return this.cellsFitToPage;
     }
-    
+
     /**
      * Gets the tableFitToPage setting of this RtfTable.
-     * 
+     *
      * @return The tableFitToPage setting of this RtfTable.
      */
     protected boolean getTableFitToPage() {
         return this.tableFitToPage;
     }
-    
+
     /**
      * Gets the number of header rows of this RtfTable
-     * 
+     *
      * @return The number of header rows
      */
     protected int getHeaderRows() {

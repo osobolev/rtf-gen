@@ -55,16 +55,16 @@ import java.io.OutputStream;
 /**
  * The RtfExtendedElement interface is to be used for elements that also
  * write data into the definition part of the rtf document
- * 
- * @version $Id: RtfExtendedElement.java 3373 2008-05-12 16:21:24Z xlv $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfExtendedElement.java 3373 2008-05-12 16:21:24Z xlv $
  */
-public interface RtfExtendedElement extends RtfBasicElement
-{
+public interface RtfExtendedElement extends RtfBasicElement {
+
     /**
      * Write the definition part of the element
-     * 
+     *
      * @param out The <code>OutputStream</code> to write the element definition to
      */
     public void writeDefinition(OutputStream out) throws IOException;

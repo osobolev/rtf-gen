@@ -49,23 +49,22 @@
 
 package com.lowagie.text.rtf.style;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfElement;
 import com.lowagie.text.rtf.RtfExtendedElement;
 import com.lowagie.text.rtf.document.RtfDocument;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
 
 /**
  * The RtfColorList stores all colors that appear in the document. Black
  * and White are always added
- * 
- * @version $Id: RtfColorList.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfColorList.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfColorList extends RtfElement implements RtfExtendedElement {
 
@@ -73,16 +72,16 @@ public class RtfColorList extends RtfElement implements RtfExtendedElement {
      * Constant for the beginning of the color table
      */
     private static final byte[] COLOR_TABLE = DocWriter.getISOBytes("\\colortbl");
-    
+
     /**
      * ArrayList containing all colors of this RtfColorList
      */
     ArrayList colorList = new ArrayList();
-    
+
     /**
      * Constructs a new RtfColorList for the RtfDocument. Will add the default
      * black and white colors.
-     * 
+     *
      * @param doc The RtfDocument this RtfColorList belongs to
      */
     public RtfColorList(RtfDocument doc) {
@@ -90,50 +89,46 @@ public class RtfColorList extends RtfElement implements RtfExtendedElement {
         colorList.add(new RtfColor(doc, 0, 0, 0, 0));
         colorList.add(new RtfColor(doc, 255, 255, 255, 1));
     }
-    
+
     /**
      * Returns the index of the given RtfColor in the color list. If the RtfColor
      * is not in the list of colors, then it is added.
-     * 
+     *
      * @param color The RtfColor for which to get the index
      * @return The index of the RtfColor
      */
     public int getColorNumber(RtfColor color) {
         int colorIndex = -1;
-        for(int i = 0; i < colorList.size(); i++) {
-            if(colorList.get(i).equals(color)) {
+        for (int i = 0; i < colorList.size(); i++) {
+            if (colorList.get(i).equals(color)) {
                 colorIndex = i;
             }
         }
-        if(colorIndex == -1) {
+        if (colorIndex == -1) {
             colorIndex = colorList.size();
             colorList.add(color);
         }
         return colorIndex;
     }
-    
+
     /**
      * unused
      */
-    public void writeContent(final OutputStream out) throws IOException
-    {    	
+    public void writeContent(final OutputStream out) throws IOException {
     }
-    
+
     /**
      * Write the definition part of the color list. Calls the writeDefinition
-     * methods of the RtfColors in the color list. 
+     * methods of the RtfColors in the color list.
      */
-    public void writeDefinition(final OutputStream result) throws IOException
-    {
+    public void writeDefinition(final OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         result.write(COLOR_TABLE);
-        for(int i = 0; i < colorList.size(); i++) {
+        for (int i = 0; i < colorList.size(); i++) {
             RtfColor color = (RtfColor) colorList.get(i);
             color.writeDefinition(result);
         }
         result.write(CLOSE_GROUP);
-        this.document.outputDebugLinebreak(result);    	
+        this.document.outputDebugLinebreak(result);
     }
-    
-
 }

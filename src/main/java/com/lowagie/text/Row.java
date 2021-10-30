@@ -54,54 +54,70 @@ import java.util.ArrayList;
 /**
  * A <CODE>Row</CODE> is part of a <CODE>Table</CODE>
  * and contains some <CODE>Cells</CODE>.
- * <P>
+ * <p>
  * All <CODE>Row</CODE>s are constructed by a <CODE>Table</CODE>-object.
  * You don't have to construct any <CODE>Row</CODE> yourself.
  * In fact you can't construct a <CODE>Row</CODE> outside the package.
- * <P>
+ * <p>
  * Since a <CODE>Cell</CODE> can span several rows and/or columns
  * a row can contain reserved space without any content.
  *
- * @see   Element
- * @see   Cell
- * @see   Table
+ * @see Element
+ * @see Cell
+ * @see Table
  */
 public class Row implements Element {
-    
+
     // constants
-    
-	/** id of a null element in a Row*/
+
+    /**
+     * id of a null element in a Row
+     */
     public static final int NULL = 0;
-    
-    /** id of the Cell element in a Row*/
+
+    /**
+     * id of the Cell element in a Row
+     */
     public static final int CELL = 1;
-    
-    /** id of the Table element in a Row*/
+
+    /**
+     * id of the Table element in a Row
+     */
     public static final int TABLE = 2;
-    
+
     // member variables
-    
-    /** This is the number of columns in the <CODE>Row</CODE>. */
+
+    /**
+     * This is the number of columns in the <CODE>Row</CODE>.
+     */
     protected int columns;
-    
-    /** This is a valid position the <CODE>Row</CODE>. */
+
+    /**
+     * This is a valid position the <CODE>Row</CODE>.
+     */
     protected int currentColumn;
-    
-    /** This is the array that keeps track of reserved cells. */
+
+    /**
+     * This is the array that keeps track of reserved cells.
+     */
     protected boolean[] reserved;
-    
-    /** This is the array of Objects (<CODE>Cell</CODE> or <CODE>Table</CODE>). */
+
+    /**
+     * This is the array of Objects (<CODE>Cell</CODE> or <CODE>Table</CODE>).
+     */
     protected Object[] cells;
-    
-    /** This is the vertical alignment. */
+
+    /**
+     * This is the vertical alignment.
+     */
     protected int horizontalAlignment;
-    
+
     // constructors
-    
+
     /**
      * Constructs a <CODE>Row</CODE> with a certain number of <VAR>columns</VAR>.
      *
-     * @param columns   a number of columns
+     * @param columns a number of columns
      */
     protected Row(int columns) {
         this.columns = columns;
@@ -109,67 +125,66 @@ public class Row implements Element {
         cells = new Object[columns];
         currentColumn = 0;
     }
-    
+
     // implementation of the Element-methods
-    
+
     /**
      * Processes the element by adding it (or the different parts) to a
      * <CODE>ElementListener</CODE>.
      *
-     * @param listener  an <CODE>ElementListener</CODE>
-     * @return  <CODE>true</CODE> if the element was processed successfully
+     * @param listener an <CODE>ElementListener</CODE>
+     * @return <CODE>true</CODE> if the element was processed successfully
      */
     public boolean process(ElementListener listener) {
         try {
             return listener.add(this);
-        }
-        catch(DocumentException de) {
+        } catch (DocumentException de) {
             return false;
         }
     }
-    
+
     /**
      * Gets the type of the text element.
      *
-     * @return  a type
+     * @return a type
      */
     public int type() {
         return Element.ROW;
     }
-    
+
     /**
      * Gets all the chunks in this element.
      *
-     * @return  an <CODE>ArrayList</CODE>
+     * @return an <CODE>ArrayList</CODE>
      */
     public ArrayList getChunks() {
         return new ArrayList();
     }
-    
-	/**
-	 * @see com.lowagie.text.Element#isContent()
-	 * @since	iText 2.0.8
-	 */
-	public boolean isContent() {
-		return true;
-	}
 
-	/**
-	 * @see com.lowagie.text.Element#isNestable()
-	 * @since	iText 2.0.8
-	 */
-	public boolean isNestable() {
-		return false;
-	}
-    
+    /**
+     * @since iText 2.0.8
+     * @see com.lowagie.text.Element#isContent()
+     */
+    public boolean isContent() {
+        return true;
+    }
+
+    /**
+     * @since iText 2.0.8
+     * @see com.lowagie.text.Element#isNestable()
+     */
+    public boolean isNestable() {
+        return false;
+    }
+
     // method to delete a column
-    
+
     /**
      * Returns a <CODE>Row</CODE> that is a copy of this <CODE>Row</CODE>
      * in which a certain column has been deleted.
      *
-     * @param column  the number of the column to delete
-     */    
+     * @param column the number of the column to delete
+     */
     void deleteColumn(int column) {
         if ((column >= columns) || (column < 0)) {
             throw new IndexOutOfBoundsException("getCell at illegal index : " + column);
@@ -177,7 +192,7 @@ public class Row implements Element {
         columns--;
         boolean newReserved[] = new boolean[columns];
         Object newCells[] = new Cell[columns];
-        
+
         for (int i = 0; i < column; i++) {
             newReserved[i] = reserved[i];
             newCells[i] = cells[i];
@@ -196,86 +211,84 @@ public class Row implements Element {
         reserved = newReserved;
         cells = newCells;
     }
-    
+
     // methods
-    
+
     /**
      * Adds a <CODE>Cell</CODE> to the <CODE>Row</CODE>.
      *
-     * @param       element the element to add (currently only Cells and Tables supported)
-     * @return      the column position the <CODE>Cell</CODE> was added,
-     *                      or <CODE>-1</CODE> if the <CODE>element</CODE> couldn't be added.
+     * @param element the element to add (currently only Cells and Tables supported)
+     * @return the column position the <CODE>Cell</CODE> was added,
+     * or <CODE>-1</CODE> if the <CODE>element</CODE> couldn't be added.
      */
     int addElement(Object element) {
         return addElement(element, currentColumn);
     }
-    
+
     /**
      * Adds an element to the <CODE>Row</CODE> at the position given.
      *
-     * @param       element the element to add. (currently only Cells and Tables supported
-     * @param       column  the position where to add the cell.
-     * @return      the column position the <CODE>Cell</CODE> was added,
-     *                      or <CODE>-1</CODE> if the <CODE>Cell</CODE> couldn't be added.
+     * @param element the element to add. (currently only Cells and Tables supported
+     * @param column  the position where to add the cell.
+     * @return the column position the <CODE>Cell</CODE> was added,
+     * or <CODE>-1</CODE> if the <CODE>Cell</CODE> couldn't be added.
      */
     int addElement(Object element, int column) {
         if (element == null) throw new NullPointerException("addCell - null argument");
         if ((column < 0) || (column > columns)) throw new IndexOutOfBoundsException("addCell - illegal column argument");
-        if ( !((getObjectID(element) == CELL) || (getObjectID(element) == TABLE)) ) throw new IllegalArgumentException("addCell - only Cells or Tables allowed");
-        
-        int lColspan = ( (Cell.class.isInstance(element)) ? ((Cell) element).getColspan() : 1);
-        
+        if (!((getObjectID(element) == CELL) || (getObjectID(element) == TABLE))) throw new IllegalArgumentException("addCell - only Cells or Tables allowed");
+
+        int lColspan = ((Cell.class.isInstance(element)) ? ((Cell) element).getColspan() : 1);
+
         if (!reserve(column, lColspan)) {
             return -1;
         }
-        
+
         cells[column] = element;
         currentColumn += lColspan - 1;
-        
+
         return column;
     }
-    
+
     /**
      * Puts <CODE>Cell</CODE> to the <CODE>Row</CODE> at the position given, doesn't reserve colspan.
      *
-     * @param   aElement    the cell to add.
-     * @param   column  the position where to add the cell.
+     * @param aElement the cell to add.
+     * @param column   the position where to add the cell.
      */
     void setElement(Object aElement, int column) {
         if (reserved[column]) throw new IllegalArgumentException("setElement - position already taken");
-        
+
         cells[column] = aElement;
         if (aElement != null) {
             reserved[column] = true;
         }
     }
-    
+
     /**
      * Reserves a <CODE>Cell</CODE> in the <CODE>Row</CODE>.
      *
-     * @param   column  the column that has to be reserved.
-     * @return  <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not.
+     * @param column the column that has to be reserved.
+     * @return <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not.
      */
     boolean reserve(int column) {
         return reserve(column, 1);
     }
-    
-    
+
     /**
      * Reserves a <CODE>Cell</CODE> in the <CODE>Row</CODE>.
      *
-     * @param   column  the column that has to be reserved.
-     * @param   size    the number of columns
-     * @return  <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not.
+     * @param column the column that has to be reserved.
+     * @param size   the number of columns
+     * @return <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not.
      */
     boolean reserve(int column, int size) {
         if ((column < 0) || ((column + size) > columns)) throw new IndexOutOfBoundsException("reserve - incorrect column/size");
-        
-        for(int i=column; i < column + size; i++)
-        {
+
+        for (int i = column; i < column + size; i++) {
             if (reserved[i]) {
                 // undo reserve
-                for(int j=i; j >= column; j--) {
+                for (int j = i; j >= column; j--) {
                     reserved[j] = false;
                 }
                 return false;
@@ -284,52 +297,52 @@ public class Row implements Element {
         }
         return true;
     }
-    
+
     // methods to retrieve information
-    
+
     /**
      * Returns true/false when this position in the <CODE>Row</CODE> has been reserved, either filled or through a colspan of an Element.
      *
-     * @param       column  the column.
-     * @return      <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not.
+     * @param column the column.
+     * @return <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not.
      */
     boolean isReserved(int column) {
         return reserved[column];
     }
-    
+
     /**
      * Returns the type-id of the element in a Row.
      *
-     * @param       column  the column of which you'd like to know the type
+     * @param column the column of which you'd like to know the type
      * @return the type-id of the element in the row
      */
     int getElementID(int column) {
         if (cells[column] == null) return NULL;
         else if (Cell.class.isInstance(cells[column])) return CELL;
         else if (Table.class.isInstance(cells[column])) return TABLE;
-        
+
         return -1;
     }
-    
+
     /**
      * Returns the type-id of an Object.
      *
-     * @param       element the object of which you'd like to know the type-id, -1 if invalid
+     * @param element the object of which you'd like to know the type-id, -1 if invalid
      * @return the type-id of an object
      */
     int getObjectID(Object element) {
         if (element == null) return NULL;
         else if (Cell.class.isInstance(element)) return CELL;
-        else if (Table.class.isInstance(element)) return TABLE; 
+        else if (Table.class.isInstance(element)) return TABLE;
         return -1;
     }
-    
+
     /**
      * Gets a <CODE>Cell</CODE> or <CODE>Table</CODE> from a certain column.
      *
-     * @param   column  the column the <CODE>Cell/Table</CODE> is in.
-     * @return  the <CODE>Cell</CODE>,<CODE>Table</CODE> or <VAR>Object</VAR> if the column was
-     *                  reserved or null if empty.
+     * @param column the column the <CODE>Cell/Table</CODE> is in.
+     * @return the <CODE>Cell</CODE>,<CODE>Table</CODE> or <VAR>Object</VAR> if the column was
+     * reserved or null if empty.
      */
     public Object getCell(int column) {
         if ((column < 0) || (column > columns)) {
@@ -337,11 +350,11 @@ public class Row implements Element {
         }
         return cells[column];
     }
-    
+
     /**
      * Checks if the row is empty.
      *
-     * @return  <CODE>true</CODE> if none of the columns is reserved.
+     * @return <CODE>true</CODE> if none of the columns is reserved.
      */
     public boolean isEmpty() {
         for (int i = 0; i < columns; i++) {
@@ -351,16 +364,16 @@ public class Row implements Element {
         }
         return true;
     }
-    
+
     /**
      * Gets the number of columns.
      *
-     * @return  a value
+     * @return a value
      */
     public int getColumns() {
         return columns;
     }
-    
+
     /**
      * Sets the horizontal alignment.
      *
@@ -369,11 +382,11 @@ public class Row implements Element {
     public void setHorizontalAlignment(int value) {
         horizontalAlignment = value;
     }
-    
+
     /**
      * Gets the horizontal alignment.
      *
-     * @return  a value
+     * @return a value
      */
     public int getHorizontalAlignment() {
         return horizontalAlignment;

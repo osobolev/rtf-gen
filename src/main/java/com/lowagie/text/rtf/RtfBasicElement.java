@@ -49,22 +49,23 @@
 
 package com.lowagie.text.rtf;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.RtfElementInterface;
 import com.lowagie.text.rtf.document.RtfDocument;
+
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfBasicElement interface defines the interface for elements that can
  * be added to the RtfWriter.
  *
- * @version $Id: RtfBasicElement.java 3580 2008-08-06 15:52:00Z howard_s $
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfBasicElement.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public interface RtfBasicElement extends RtfElementInterface {
+
     /**
      * Constant for the beginning of a rtf group
      */
@@ -88,28 +89,28 @@ public interface RtfBasicElement extends RtfElementInterface {
 
     /**
      * Writes the element content to the given output stream.
-     * 
+     *
      * @param out The <code>OutputStream</code> to write the content to
      */
     public void writeContent(OutputStream out) throws IOException;
-    
+
     /**
      * Sets the RtfDocument this RtfElement belongs to
-     * 
+     *
      * @param doc The @link{com.lowagie.text.rtf.document.RtfDocument} this <code>RtfElement</code> belongs to
      */
     public void setRtfDocument(RtfDocument doc);
-    
+
     /**
      * Sets whether this RtfBasicElement is in a table
-     * 
+     *
      * @param inTable Whether this RtfBasicElement is in a table
      */
     public void setInTable(boolean inTable);
-    
+
     /**
      * Sets whether this RtfBasicElement is in a header
-     * 
+     *
      * @param inHeader Whether this RtfBasicElement is in a header
      */
     public void setInHeader(boolean inHeader);

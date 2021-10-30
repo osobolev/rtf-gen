@@ -49,24 +49,24 @@
 
 package com.lowagie.text.rtf.list;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfElement;
 import com.lowagie.text.rtf.RtfExtendedElement;
 import com.lowagie.text.rtf.document.RtfDocument;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
 
 /**
  * The RtfListTable manages all RtfList objects and list override table in one RtfDocument.
- * 
- * @version $Id: RtfListTable.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Howard Shank (hgshank@yahoo.com)
+ * @version $Id: RtfListTable.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfListTable extends RtfElement implements RtfExtendedElement {
+
     /**
      * Constant for the list table
      */
@@ -84,7 +84,6 @@ public class RtfListTable extends RtfElement implements RtfExtendedElement {
      * Constant for the list override count
      */
     private static final byte[] LIST_OVERRIDE_COUNT = DocWriter.getISOBytes("\\listoverridecount");
-    
 
     /**
      * The RtfList lists managed by this RtfListTable
@@ -94,15 +93,15 @@ public class RtfListTable extends RtfElement implements RtfExtendedElement {
      * The RtfPictureList lists managed by this RtfListTable
      */
     private ArrayList picturelists;
-    
+
     /**
      * Constructs a RtfListTable for a RtfDocument
-     * 
+     *
      * @param doc The RtfDocument this RtfListTable belongs to
      */
     public RtfListTable(RtfDocument doc) {
         super(doc);
-        
+
         this.lists = new ArrayList();
         this.picturelists = new ArrayList();
     }
@@ -110,51 +109,49 @@ public class RtfListTable extends RtfElement implements RtfExtendedElement {
     /**
      * unused
      */
-    public void writeContent(final OutputStream out) throws IOException
-    {    	
+    public void writeContent(final OutputStream out) throws IOException {
     }
-    
+
     /**
      * Writes the list and list override tables.
      */
-    public void writeDefinition(final OutputStream result) throws IOException
-    {
+    public void writeDefinition(final OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         result.write(LIST_TABLE);
         this.document.outputDebugLinebreak(result);
-        
-        for(int i = 0; i < picturelists.size(); i++) {
-        	RtfPictureList l = (RtfPictureList)picturelists.get(i);
+
+        for (int i = 0; i < picturelists.size(); i++) {
+            RtfPictureList l = (RtfPictureList) picturelists.get(i);
 //        	l.setID(document.getRandomInt());
-        	l.writeDefinition(result);
-        	this.document.outputDebugLinebreak(result);
+            l.writeDefinition(result);
+            this.document.outputDebugLinebreak(result);
         }
 
-        for(int i = 0; i < lists.size(); i++) {
-        	RtfList l = (RtfList)lists.get(i);
-        	l.setID(document.getRandomInt());
-        	l.writeDefinition(result);
-        	this.document.outputDebugLinebreak(result);
+        for (int i = 0; i < lists.size(); i++) {
+            RtfList l = (RtfList) lists.get(i);
+            l.setID(document.getRandomInt());
+            l.writeDefinition(result);
+            this.document.outputDebugLinebreak(result);
         }
         result.write(CLOSE_GROUP);
         this.document.outputDebugLinebreak(result);
-        
+
         result.write(OPEN_GROUP);
         result.write(LIST_OVERRIDE_TABLE);
         this.document.outputDebugLinebreak(result);
-        
+
         // list override index values are 1-based, not 0.
         // valid list override index values \ls are 1 to 2000.
         // if there are more then 2000 lists, the result is undefined.
-        for(int i = 0; i < lists.size(); i++) {
+        for (int i = 0; i < lists.size(); i++) {
             result.write(OPEN_GROUP);
             result.write(LIST_OVERRIDE);
             result.write(RtfList.LIST_ID);
-            result.write(intToByteArray( ((RtfList) lists.get(i)).getID() ));
+            result.write(intToByteArray(((RtfList) lists.get(i)).getID()));
             result.write(LIST_OVERRIDE_COUNT);
-            result.write(intToByteArray(0));	// is this correct? Spec says valid values are 1 or 9.
+            result.write(intToByteArray(0));    // is this correct? Spec says valid values are 1 or 9.
             result.write(RtfList.LIST_NUMBER);
-            result.write(intToByteArray( ((RtfList) lists.get(i)).getListNumber()) );
+            result.write(intToByteArray(((RtfList) lists.get(i)).getListNumber()));
             result.write(CLOSE_GROUP);
             this.document.outputDebugLinebreak(result);
         }
@@ -165,27 +162,27 @@ public class RtfListTable extends RtfElement implements RtfExtendedElement {
     /**
      * Gets the id of the specified RtfList. If the RtfList is not yet in the
      * list of RtfList, then it is added.
-     * 
+     *
      * @param list The RtfList for which to get the id.
      * @return The id of the RtfList.
      */
     public int getListNumber(RtfList list) {
-        if(lists.contains(list)) {
+        if (lists.contains(list)) {
             return lists.indexOf(list);
         } else {
             lists.add(list);
             return lists.size();
         }
     }
-    
+
     /**
      * Remove a RtfList from the list of RtfList
-     * 
+     *
      * @param list The RtfList to remove.
      */
     public void freeListNumber(RtfList list) {
         int i = lists.indexOf(list);
-        if(i >= 0) {
+        if (i >= 0) {
             lists.remove(i);
         }
     }

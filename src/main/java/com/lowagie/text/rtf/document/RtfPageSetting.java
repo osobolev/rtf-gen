@@ -49,23 +49,22 @@
 
 package com.lowagie.text.rtf.document;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.rtf.RtfElement;
 import com.lowagie.text.rtf.RtfExtendedElement;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfPageSetting stores the page size / page margins for a RtfDocument.
  * INTERNAL CLASS - NOT TO BE USED DIRECTLY
- *  
- * @version $Id:RtfPageSetting.java 3126 2008-02-07 20:30:46Z hallm $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id:RtfPageSetting.java 3126 2008-02-07 20:30:46Z hallm $
  */
 public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
 
@@ -121,7 +120,7 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
      * Constant for the section bottom margin
      */
     private static final byte[] SECTION_MARGIN_BOTTOM = DocWriter.getISOBytes("\\margbsxn");
-    
+
     /**
      * The page width to use
      */
@@ -153,25 +152,23 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
 
     /**
      * Constructs a new RtfPageSetting object belonging to a RtfDocument.
-     * 
-     * @param doc The RtfDocument this RtfPageSetting belongs to 
+     *
+     * @param doc The RtfDocument this RtfPageSetting belongs to
      */
     public RtfPageSetting(RtfDocument doc) {
         super(doc);
     }
-    
+
     /**
      * unused
      */
-    public void writeContent(final OutputStream out) throws IOException
-    {    	
+    public void writeContent(final OutputStream out) throws IOException {
     }
-    
+
     /**
      * Writes the page size / page margin definition
      */
-    public void writeDefinition(final OutputStream result) throws IOException
-    {
+    public void writeDefinition(final OutputStream result) throws IOException {
         result.write(PAGE_WIDTH);
         result.write(intToByteArray(pageWidth));
         result.write(PAGE_HEIGHT);
@@ -184,15 +181,14 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
         result.write(intToByteArray(marginTop));
         result.write(MARGIN_BOTTOM);
         result.write(intToByteArray(marginBottom));
-        this.document.outputDebugLinebreak(result);    	
+        this.document.outputDebugLinebreak(result);
     }
-    
+
     /**
      * Writes the definition part for a new section
      */
-    public void writeSectionDefinition(final OutputStream result) throws IOException
-    {
-        if(landscape) {
+    public void writeSectionDefinition(final OutputStream result) throws IOException {
+        if (landscape) {
             result.write(LANDSCAPE);
             result.write(SECTION_PAGE_WIDTH);
             result.write(intToByteArray(pageWidth));
@@ -213,140 +209,140 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
         result.write(SECTION_MARGIN_TOP);
         result.write(intToByteArray(marginTop));
         result.write(SECTION_MARGIN_BOTTOM);
-        result.write(intToByteArray(marginBottom));    	
+        result.write(intToByteArray(marginBottom));
     }
 
     /**
      * Gets the bottom margin
-     *  
+     *
      * @return Returns the bottom margin
      */
     public int getMarginBottom() {
         return marginBottom;
     }
-    
+
     /**
      * Sets the bottom margin
-     * 
+     *
      * @param marginBottom The bottom margin to use
      */
     public void setMarginBottom(int marginBottom) {
         this.marginBottom = marginBottom;
     }
-    
+
     /**
      * Gets the left margin
-     * 
+     *
      * @return Returns the left margin
      */
     public int getMarginLeft() {
         return marginLeft;
     }
-    
+
     /**
      * Sets the left margin to use
-     * 
+     *
      * @param marginLeft The left margin to use
      */
     public void setMarginLeft(int marginLeft) {
         this.marginLeft = marginLeft;
     }
-    
+
     /**
      * Gets the right margin
-     * 
+     *
      * @return Returns the right margin
      */
     public int getMarginRight() {
         return marginRight;
     }
-    
+
     /**
      * Sets the right margin to use
-     * 
+     *
      * @param marginRight The right margin to use
      */
     public void setMarginRight(int marginRight) {
         this.marginRight = marginRight;
     }
-    
+
     /**
      * Gets the top margin
-     * 
+     *
      * @return Returns the top margin
      */
     public int getMarginTop() {
         return marginTop;
     }
-    
+
     /**
      * Sets the top margin to use
-     * 
+     *
      * @param marginTop The top margin to use
      */
     public void setMarginTop(int marginTop) {
         this.marginTop = marginTop;
     }
-    
+
     /**
      * Gets the page height
-     * 
+     *
      * @return Returns the page height
      */
     public int getPageHeight() {
         return pageHeight;
     }
-    
+
     /**
      * Sets the page height to use
-     * 
+     *
      * @param pageHeight The page height to use
      */
     public void setPageHeight(int pageHeight) {
         this.pageHeight = pageHeight;
     }
-    
+
     /**
      * Gets the page width
-     * 
+     *
      * @return Returns the page width
      */
     public int getPageWidth() {
         return pageWidth;
     }
-    
+
     /**
      * Sets the page width to use
-     * 
+     *
      * @param pageWidth The page width to use
      */
     public void setPageWidth(int pageWidth) {
         this.pageWidth = pageWidth;
     }
-    
+
     /**
      * Set the page size to use. This method will use guessFormat to try to guess the correct
      * page format. If no format could be guessed, the sizes from the pageSize are used and
      * the landscape setting is determined by comparing width and height;
-     * 
+     *
      * @param pageSize The pageSize to use
      */
     public void setPageSize(Rectangle pageSize) {
-        if(!guessFormat(pageSize, false)) {
+        if (!guessFormat(pageSize, false)) {
             this.pageWidth = (int) (pageSize.getWidth() * RtfElement.TWIPS_FACTOR);
             this.pageHeight = (int) (pageSize.getHeight() * RtfElement.TWIPS_FACTOR);
             this.landscape = pageWidth > pageHeight;
         }
     }
-    
+
     /**
      * This method tries to fit the <code>Rectangle pageSize</code> to one of the predefined PageSize rectangles.
      * If a match is found the pageWidth and pageHeight will be set according to values determined from files
      * generated by MS Word2000 and OpenOffice 641. If no match is found the method will try to match the rotated
      * Rectangle by calling itself with the parameter rotate set to true.
-     * 
+     *
      * @param pageSize the page size for which to guess the correct format
-     * @param rotate Whether we should try to rotate the size befor guessing the format
+     * @param rotate   Whether we should try to rotate the size befor guessing the format
      * @return <code>True</code> if the format was guessed, <code>false/<code> otherwise
      */
     private boolean guessFormat(Rectangle pageSize, boolean rotate) {
@@ -418,7 +414,7 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
 
     /**
      * This method compares to Rectangles. They are considered equal if width and height are the same
-     * 
+     *
      * @param rect1 The first Rectangle to compare
      * @param rect2 The second Rectangle to compare
      * @return <code>True</code> if the Rectangles equal, <code>false</code> otherwise

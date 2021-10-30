@@ -56,57 +56,89 @@ import com.lowagie.text.pdf.BaseFont;
  * to this static class first and then create fonts in your code using one of the static getFont-method
  * without having to enter a path as parameter.
  *
- * @author  Bruno Lowagie
+ * @author Bruno Lowagie
  */
 
 public final class FontFactory {
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String COURIER = BaseFont.COURIER;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String COURIER_BOLD = BaseFont.COURIER_BOLD;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String COURIER_OBLIQUE = BaseFont.COURIER_OBLIQUE;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String COURIER_BOLDOBLIQUE = BaseFont.COURIER_BOLDOBLIQUE;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String HELVETICA = BaseFont.HELVETICA;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String HELVETICA_BOLD = BaseFont.HELVETICA_BOLD;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String HELVETICA_OBLIQUE = BaseFont.HELVETICA_OBLIQUE;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String HELVETICA_BOLDOBLIQUE = BaseFont.HELVETICA_BOLDOBLIQUE;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String SYMBOL = BaseFont.SYMBOL;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String TIMES = "Times";
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String TIMES_ROMAN = BaseFont.TIMES_ROMAN;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String TIMES_BOLD = BaseFont.TIMES_BOLD;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String TIMES_ITALIC = BaseFont.TIMES_ITALIC;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String TIMES_BOLDITALIC = BaseFont.TIMES_BOLDITALIC;
-    
-/** This is a possible value of a base 14 type 1 font */
+
+    /**
+     * This is a possible value of a base 14 type 1 font
+     */
     public static final String ZAPFDINGBATS = BaseFont.ZAPFDINGBATS;
-    
-/** Creates new FontFactory */
+
+    /**
+     * Creates new FontFactory
+     */
     private FontFactory() {
     }
 }

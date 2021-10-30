@@ -49,23 +49,23 @@
 
 package com.lowagie.text.rtf.style;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Iterator;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfBasicElement;
 import com.lowagie.text.rtf.RtfElement;
 import com.lowagie.text.rtf.RtfExtendedElement;
 import com.lowagie.text.rtf.document.RtfDocument;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Iterator;
+
 /**
  * The RtfStylesheetList stores the RtfParagraphStyles that are used in the document.
- * 
- * @version $Id: RtfStylesheetList.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfStylesheetList.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfStylesheetList extends RtfElement implements RtfExtendedElement {
 
@@ -77,10 +77,10 @@ public class RtfStylesheetList extends RtfElement implements RtfExtendedElement 
      * Whether the default settings have been loaded.
      */
     private boolean defaultsLoaded = false;
-    
+
     /**
      * Constructs a new RtfStylesheetList for the RtfDocument.
-     * 
+     *
      * @param doc The RtfDocument this RtfStylesheetList belongs to.
      */
     public RtfStylesheetList(RtfDocument doc) {
@@ -91,13 +91,12 @@ public class RtfStylesheetList extends RtfElement implements RtfExtendedElement 
     /**
      * unused
      */
-    public void writeContent(OutputStream out) throws IOException
-    {	
+    public void writeContent(OutputStream out) throws IOException {
     }
-    
+
     /**
      * Register a RtfParagraphStyle with this RtfStylesheetList.
-     * 
+     *
      * @param rtfParagraphStyle The RtfParagraphStyle to add.
      */
     public void registerParagraphStyle(RtfParagraphStyle rtfParagraphStyle) {
@@ -113,16 +112,16 @@ public class RtfStylesheetList extends RtfElement implements RtfExtendedElement 
      */
     private void registerDefaultStyles() {
         defaultsLoaded = true;
-        if(!this.styleMap.containsKey(RtfParagraphStyle.STYLE_NORMAL.getStyleName())) {
+        if (!this.styleMap.containsKey(RtfParagraphStyle.STYLE_NORMAL.getStyleName())) {
             registerParagraphStyle(RtfParagraphStyle.STYLE_NORMAL);
         }
-        if(!this.styleMap.containsKey(RtfParagraphStyle.STYLE_HEADING_1.getStyleName())) {
+        if (!this.styleMap.containsKey(RtfParagraphStyle.STYLE_HEADING_1.getStyleName())) {
             registerParagraphStyle(RtfParagraphStyle.STYLE_HEADING_1);
         }
-        if(!this.styleMap.containsKey(RtfParagraphStyle.STYLE_HEADING_2.getStyleName())) {
+        if (!this.styleMap.containsKey(RtfParagraphStyle.STYLE_HEADING_2.getStyleName())) {
             registerParagraphStyle(RtfParagraphStyle.STYLE_HEADING_2);
         }
-        if(!this.styleMap.containsKey(RtfParagraphStyle.STYLE_HEADING_3.getStyleName())) {
+        if (!this.styleMap.containsKey(RtfParagraphStyle.STYLE_HEADING_3.getStyleName())) {
             registerParagraphStyle(RtfParagraphStyle.STYLE_HEADING_3);
         }
     }
@@ -130,36 +129,35 @@ public class RtfStylesheetList extends RtfElement implements RtfExtendedElement 
     /**
      * Gets the RtfParagraphStyle with the given name. Makes sure that the defaults
      * have been loaded.
-     * 
+     *
      * @param styleName The name of the RtfParagraphStyle to get.
      * @return The RtfParagraphStyle with the given name or null.
      */
     public RtfParagraphStyle getRtfParagraphStyle(String styleName) {
-        if(!defaultsLoaded) {
+        if (!defaultsLoaded) {
             registerDefaultStyles();
         }
-        if(this.styleMap.containsKey(styleName)) {
+        if (this.styleMap.containsKey(styleName)) {
             return (RtfParagraphStyle) this.styleMap.get(styleName);
         } else {
             return null;
         }
     }
-    
+
     /**
      * Writes the definition of the stylesheet list.
      */
-    public void writeDefinition(final OutputStream result) throws IOException
-    {
+    public void writeDefinition(final OutputStream result) throws IOException {
         result.write(DocWriter.getISOBytes("{"));
         result.write(DocWriter.getISOBytes("\\stylesheet"));
         result.write(RtfBasicElement.DELIMITER);
         this.document.outputDebugLinebreak(result);
         Iterator it = this.styleMap.values().iterator();
-        while(it.hasNext()) {
-        	RtfParagraphStyle rps = (RtfParagraphStyle)it.next();
-        	rps.writeDefinition(result);
+        while (it.hasNext()) {
+            RtfParagraphStyle rps = (RtfParagraphStyle) it.next();
+            rps.writeDefinition(result);
         }
         result.write(DocWriter.getISOBytes("}"));
-        this.document.outputDebugLinebreak(result);  	
+        this.document.outputDebugLinebreak(result);
     }
 }

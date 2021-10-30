@@ -49,21 +49,20 @@
 
 package com.lowagie.text.rtf.field;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.Font;
 import com.lowagie.text.rtf.document.RtfDocument;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfPageNumber provides the page number field in rtf documents.
- * 
- * @version $Id: RtfPageNumber.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Steffen.Stundzig (Steffen.Stundzig@smb-tec.com)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfPageNumber.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfPageNumber extends RtfField {
 
@@ -71,59 +70,59 @@ public class RtfPageNumber extends RtfField {
      * Constant for the page number
      */
     private static final byte[] PAGE_NUMBER = DocWriter.getISOBytes("PAGE");
-    
+
     /**
      * Constructs a RtfPageNumber. This can be added anywhere to add a page number field.
      */
     public RtfPageNumber() {
         super(null);
     }
-    
+
     /**
      * Constructs a RtfPageNumber with a specified Font. This can be added anywhere to
      * add a page number field.
+     *
      * @param font
      */
     public RtfPageNumber(Font font) {
         super(null, font);
     }
-    
+
     /**
      * Constructs a RtfPageNumber object.
-     * 
+     *
      * @param doc The RtfDocument this RtfPageNumber belongs to
      */
     public RtfPageNumber(RtfDocument doc) {
         super(doc);
     }
-    
+
     /**
      * Constructs a RtfPageNumber object with a specific font.
-     * 
-     * @param doc The RtfDocument this RtfPageNumber belongs to
+     *
+     * @param doc  The RtfDocument this RtfPageNumber belongs to
      * @param font The Font to use
      */
     public RtfPageNumber(RtfDocument doc, Font font) {
         super(doc, font);
     }
-    
+
     /**
      * Writes the field instruction content
      *
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
-    protected void writeFieldInstContent(final OutputStream result) throws IOException 
-    {
-    	result.write(PAGE_NUMBER);
+    protected void writeFieldInstContent(final OutputStream result) throws IOException {
+        result.write(PAGE_NUMBER);
     }
-    
+
     /**
      * Writes the field result content
-     * 
+     *
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
-    protected void writeFieldResultContent(final OutputStream result) throws IOException {        
+    protected void writeFieldResultContent(final OutputStream result) throws IOException {
     }
 }

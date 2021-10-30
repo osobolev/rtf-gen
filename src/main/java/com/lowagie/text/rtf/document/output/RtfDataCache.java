@@ -52,17 +52,16 @@ package com.lowagie.text.rtf.document.output;
 import java.io.IOException;
 import java.io.OutputStream;
 
-
 /**
  * The RtfDataCache interface must be implemented by classes wishing to
  * act as caches for the rtf document data.
- * 
- * @version $Id: RtfDataCache.java 3373 2008-05-12 16:21:24Z xlv $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfDataCache.java 3373 2008-05-12 16:21:24Z xlv $
  */
-public interface RtfDataCache 
-{
+public interface RtfDataCache {
+
     /**
      * Constant for caching efficiently into memory.
      */
@@ -75,17 +74,17 @@ public interface RtfDataCache
      * Constant for caching to the disk.
      */
     public static final int CACHE_DISK = 1;
-    
+
     /**
      * Get the OutputStream that the RtfDocument can write to.
-     * 
+     *
      * @return The OutputStream the RtfDocument can use.
      */
     public OutputStream getOutputStream();
-    
+
     /**
      * Write the content of the cache into the OutputStream.
-     * 
+     *
      * @param target The OutputStream to write the content into.
      * @throws IOException If an error occurs reading/writing.
      */

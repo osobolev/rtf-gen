@@ -3,7 +3,7 @@
  *
  * Copyright 2004 by Mark Hall
  * Uses code Copyright 2002
- *   Steffen.Stundzig (Steffen.Stundzig@smb-tec.com) 
+ *   Steffen.Stundzig (Steffen.Stundzig@smb-tec.com)
  *
  * The contents of this file are subject to the Mozilla Public License Version 1.1
  * (the "License"); you may not use this file except in compliance with the License.
@@ -51,22 +51,21 @@
 
 package com.lowagie.text.rtf.field;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.Font;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfTOCEntry is used together with the RtfTableOfContents to generate a table of
  * contents. Add the RtfTOCEntry in those locations in the document where table of
- * contents entries should link to 
- * 
- * @version $Id: RtfTOCEntry.java 3580 2008-08-06 15:52:00Z howard_s $
+ * contents entries should link to
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
- * @author Steffen.Stundzig (Steffen.Stundzig@smb-tec.com) 
+ * @author Steffen.Stundzig (Steffen.Stundzig@smb-tec.com)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfTOCEntry.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfTOCEntry extends RtfField {
 
@@ -86,7 +85,7 @@ public class RtfTOCEntry extends RtfField {
      * Constant for a TOC entry without page numbers
      */
     private static final byte[] TOC_ENTRY_NO_PAGE_NUMBER = DocWriter.getISOBytes("\\tcn");
-    
+
     /**
      * The entry text of this RtfTOCEntry
      */
@@ -95,30 +94,29 @@ public class RtfTOCEntry extends RtfField {
      * Whether to show page numbers in the table of contents
      */
     private boolean showPageNumber = true;
-    
+
     /**
      * Constructs a RtfTOCEntry with a certain entry text.
-     * 
+     *
      * @param entry The entry text to display
      */
     public RtfTOCEntry(String entry) {
         super(null, new Font());
-        if(entry != null) {
+        if (entry != null) {
             this.entry = entry;
         }
     }
-    
+
     /**
      * Writes the content of the <code>RtfTOCEntry</code>.
-     * 
+     *
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
-     */ 
-    public void writeContent(final OutputStream result) throws IOException
-    {    	
+     */
+    public void writeContent(final OutputStream result) throws IOException {
         result.write(TEXT_HIDDEN_ON);
         result.write(OPEN_GROUP);
-        if(this.showPageNumber) {
+        if (this.showPageNumber) {
             result.write(TOC_ENTRY_PAGE_NUMBER);
         } else {
             result.write(TOC_ENTRY_NO_PAGE_NUMBER);
@@ -128,28 +126,25 @@ public class RtfTOCEntry extends RtfField {
         result.write(CLOSE_GROUP);
         result.write(TEXT_HIDDEN_OFF);
     }
-    
+
     /**
      * Sets whether to display a page number in the table of contents, or not
-     * 
+     *
      * @param showPageNumber Whether to display a page number or not
      */
     public void setShowPageNumber(boolean showPageNumber) {
         this.showPageNumber = showPageNumber;
     }
-    
+
     /**
      * unused
      */
-    protected void writeFieldInstContent(OutputStream out) throws IOException 
-    {
+    protected void writeFieldInstContent(OutputStream out) throws IOException {
     }
 
     /**
      * unused
      */
-    protected void writeFieldResultContent(OutputStream out) throws IOException
-    {
+    protected void writeFieldResultContent(OutputStream out) throws IOException {
     }
-
 }

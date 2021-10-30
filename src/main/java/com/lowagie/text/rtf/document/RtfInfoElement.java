@@ -49,24 +49,23 @@
 
 package com.lowagie.text.rtf.document;
 
+import com.lowagie.text.DocWriter;
+import com.lowagie.text.Meta;
+import com.lowagie.text.rtf.RtfElement;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.lowagie.text.DocWriter;
-import com.lowagie.text.Meta;
-import com.lowagie.text.rtf.RtfElement;
-
-
 /**
  * Stores one information group element. Valid elements are
  * author, title, subject, keywords, producer and creationdate.
- * 
- * @version $Id: RtfInfoElement.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfInfoElement.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfInfoElement extends RtfElement {
 
@@ -93,7 +92,7 @@ public class RtfInfoElement extends RtfElement {
     /**
      * Constant for the creationdate element
      */
-    private static final byte[] INFO_CREATION_DATE =DocWriter.getISOBytes( "\\creationdate");
+    private static final byte[] INFO_CREATION_DATE = DocWriter.getISOBytes("\\creationdate");
 
     /**
      * The type of this RtfInfoElement. The values from Element.INFO_ELEMENT_NAME are used.
@@ -103,11 +102,11 @@ public class RtfInfoElement extends RtfElement {
      * The content of this RtfInfoElement
      */
     private String content = "";
-    
+
     /**
      * Constructs a RtfInfoElement based on the given Meta object
-     * 
-     * @param doc The RtfDocument this RtfInfoElement belongs to
+     *
+     * @param doc  The RtfDocument this RtfInfoElement belongs to
      * @param meta The Meta object this RtfInfoElement is based on
      */
     public RtfInfoElement(RtfDocument doc, Meta meta) {
@@ -115,49 +114,48 @@ public class RtfInfoElement extends RtfElement {
         infoType = meta.type();
         content = meta.getContent();
     }
-    
+
     /**
      * Writes the content of one RTF information element.
-     */    
-    public void writeContent(final OutputStream result) throws IOException
-    {
+     */
+    public void writeContent(final OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
-        switch(infoType) {
-            case Meta.AUTHOR:
-                result.write(INFO_AUTHOR);
-            	break;
-            case Meta.SUBJECT:
-                result.write(INFO_SUBJECT);
-        		break;
-            case Meta.KEYWORDS:
-                result.write(INFO_KEYWORDS);
-        		break;
-            case Meta.TITLE:
-                result.write(INFO_TITLE);
-        		break;
-            case Meta.PRODUCER:
-                result.write(INFO_PRODUCER);
-        		break;
-            case Meta.CREATIONDATE:
-                result.write(INFO_CREATION_DATE);
-            	break;
-            default:
-                result.write(INFO_AUTHOR);
-            	break;
+        switch (infoType) {
+        case Meta.AUTHOR:
+            result.write(INFO_AUTHOR);
+            break;
+        case Meta.SUBJECT:
+            result.write(INFO_SUBJECT);
+            break;
+        case Meta.KEYWORDS:
+            result.write(INFO_KEYWORDS);
+            break;
+        case Meta.TITLE:
+            result.write(INFO_TITLE);
+            break;
+        case Meta.PRODUCER:
+            result.write(INFO_PRODUCER);
+            break;
+        case Meta.CREATIONDATE:
+            result.write(INFO_CREATION_DATE);
+            break;
+        default:
+            result.write(INFO_AUTHOR);
+            break;
         }
         result.write(DELIMITER);
-        if(infoType == Meta.CREATIONDATE) {
+        if (infoType == Meta.CREATIONDATE) {
             result.write(DocWriter.getISOBytes(convertDate(content)));
         } else {
             document.filterSpecialChar(result, content, false, false);
         }
         result.write(CLOSE_GROUP);
-    }        
-    
+    }
+
     /**
      * Converts a date from the format used by iText to the format required by
      * rtf.<br>iText: EEE MMM dd HH:mm:ss zzz yyyy - rtf: \\'yr'yyyy\\'mo'MM\\'dy'dd\\'hr'HH\\'min'mm\\'sec'ss
-     * 
+     *
      * @param date The date formated by iText
      * @return The date formated for rtf
      */
@@ -167,7 +165,7 @@ public class RtfInfoElement extends RtfElement {
             Date creationDate = sdf.parse(date);
             sdf = new SimpleDateFormat("\\'yr'yyyy\\'mo'MM\\'dy'dd\\'hr'HH\\'min'mm\\'sec'ss");
             return sdf.format(creationDate);
-        } catch(ParseException pe) {
+        } catch (ParseException pe) {
             pe.printStackTrace();
             return "";
         }

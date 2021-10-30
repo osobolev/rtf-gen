@@ -49,20 +49,19 @@
 
 package com.lowagie.text.rtf.text;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfElement;
 import com.lowagie.text.rtf.document.RtfDocument;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfNewPage creates a new page. INTERNAL CLASS
- * 
- * @version $Id: RtfNewPage.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfNewPage.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfNewPage extends RtfElement {
 
@@ -70,23 +69,21 @@ public class RtfNewPage extends RtfElement {
      * Constant for a new page
      */
     public static final byte[] NEW_PAGE = DocWriter.getISOBytes("\\page");
-    
+
     /**
      * Constructs a RtfNewPage
-     * 
+     *
      * @param doc The RtfDocument this RtfNewPage belongs to
      */
     public RtfNewPage(RtfDocument doc) {
         super(doc);
     }
-    
+
     /**
      * Writes a new page
-     */ 
-    public void writeContent(final OutputStream result) throws IOException
-    {
+     */
+    public void writeContent(final OutputStream result) throws IOException {
         result.write(NEW_PAGE);
-        result.write(RtfParagraph.PARAGRAPH_DEFAULTS);    	
+        result.write(RtfParagraph.PARAGRAPH_DEFAULTS);
     }
-    
 }

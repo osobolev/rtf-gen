@@ -50,20 +50,20 @@
 
 package com.lowagie.text.rtf.field;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.Font;
 import com.lowagie.text.rtf.document.RtfDocument;
 
+import java.io.IOException;
+import java.io.OutputStream;
+
 /**
  * The RtfTotalPageNumber provides the total number of pages field in rtf documents.
- * 
- * @version $Id: RtfTotalPageNumber.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Jose Hurtado (jose.hurtado@gft.com)
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfTotalPageNumber.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfTotalPageNumber extends RtfField {
 
@@ -71,61 +71,60 @@ public class RtfTotalPageNumber extends RtfField {
      * Constant for arabic total page numbers.
      */
     private static final byte[] ARABIC_TOTAL_PAGES = DocWriter.getISOBytes("NUMPAGES \\\\* Arabic");
-    
+
     /**
      * Constructs a RtfTotalPageNumber. This can be added anywhere to add a total number of pages field.
      */
     public RtfTotalPageNumber() {
         super(null);
     }
-    
+
     /**
      * Constructs a RtfTotalPageNumber with a specified Font. This can be added anywhere
      * to add a total number of pages field.
+     *
      * @param font
      */
     public RtfTotalPageNumber(Font font) {
         super(null, font);
     }
-    
+
     /**
      * Constructs a RtfTotalPageNumber object.
-     * 
+     *
      * @param doc The RtfDocument this RtfTotalPageNumber belongs to
      */
     public RtfTotalPageNumber(RtfDocument doc) {
         super(doc);
     }
-    
+
     /**
      * Constructs a RtfTotalPageNumber object with a specific font.
-     * 
-     * @param doc The RtfDocument this RtfTotalPageNumber belongs to
+     *
+     * @param doc  The RtfDocument this RtfTotalPageNumber belongs to
      * @param font The Font to use
      */
     public RtfTotalPageNumber(RtfDocument doc, Font font) {
         super(doc, font);
     }
-    
+
     /**
      * Writes the field NUMPAGES instruction with Arabic format: "NUMPAGES \\\\* Arabic".
-     * 
+     *
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
-     */ 
-    protected void writeFieldInstContent(OutputStream result) throws IOException 
-    {
-    	result.write(ARABIC_TOTAL_PAGES);
+     */
+    protected void writeFieldInstContent(OutputStream result) throws IOException {
+        result.write(ARABIC_TOTAL_PAGES);
     }
 
     /**
      * Writes the field result content "1".
-     * 
+     *
      * @param out The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
-    protected void writeFieldResultContent(final OutputStream out) throws IOException 
-    {
-    	out.write(DocWriter.getISOBytes("1"));
+    protected void writeFieldResultContent(final OutputStream out) throws IOException {
+        out.write(DocWriter.getISOBytes("1"));
     }
 }

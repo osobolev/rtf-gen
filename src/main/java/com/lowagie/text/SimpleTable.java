@@ -57,200 +57,219 @@ import java.util.Iterator;
  */
 public class SimpleTable extends Rectangle implements TextElementArray {
 
-	/** the content of a Table. */
-	private ArrayList content = new ArrayList();
-	/** the width of the Table. */
-	private float width = 0f;
-	/** the widthpercentage of the Table. */
-	private float widthpercentage = 0f;
-	/** the spacing of the Cells. */
-	private float cellspacing;
-	/** the padding of the Cells. */
-	private float cellpadding;
-	/** the alignment of the table. */
-	private int alignment;
-	
-	/**
-	 * A RectangleCell is always constructed without any dimensions.
-	 * Dimensions are defined after creation.
-	 */
-	public SimpleTable() {
-		super(0f, 0f, 0f, 0f);
-		setBorder(BOX);
-		setBorderWidth(2f);
-	}
-	
-	/**
-	 * Adds content to this object.
-	 * @param element
-	 * @throws BadElementException
-	 */
-	public void addElement(SimpleCell element) throws BadElementException {
-		if(!element.isCellgroup()) {
-			throw new BadElementException("You can't add cells to a table directly, add them to a row first.");
-		}
-		content.add(element);
-	}
-	
-	/**
-	 * Creates a Table object based on this TableAttributes object.
-	 * @return a com.lowagie.text.Table object
-	 * @throws BadElementException
-	 */
-	public Table createTable() throws BadElementException {
-		if (content.isEmpty()) throw new BadElementException("Trying to create a table without rows.");
-		SimpleCell row = (SimpleCell)content.get(0);
-		SimpleCell cell;
-		int columns = 0;
-		for (Iterator i = row.getContent().iterator(); i.hasNext(); ) {
-			cell = (SimpleCell)i.next();
-			columns += cell.getColspan();
-		}
-		float[] widths = new float[columns];
-		float[] widthpercentages = new float[columns];
-		Table table = new Table(columns);
-		table.setAlignment(alignment);
-		table.setSpacing(cellspacing);
-		table.setPadding(cellpadding);
-		table.cloneNonPositionParameters(this);
-		int pos;
-		for (Iterator rows = content.iterator(); rows.hasNext(); ) {
-			row = (SimpleCell)rows.next();
-			pos = 0;
-			for (Iterator cells = row.getContent().iterator(); cells.hasNext(); ) {
-				cell = (SimpleCell)cells.next();
-				table.addCell(cell.createCell(row));
-				if (cell.getColspan() == 1) {
-					if (cell.getWidth() > 0) widths[pos] = cell.getWidth();
-					if (cell.getWidthpercentage() > 0) widthpercentages[pos] = cell.getWidthpercentage();
-				}
-				pos += cell.getColspan();
-			}
-		}
-		float sumWidths = 0f;
-		for(int i = 0; i < columns; i++) {
-			if (widths[i] == 0) {
-				sumWidths = 0;
-				break;
-			}
-			sumWidths += widths[i];
-		}
-		if (sumWidths > 0) {
-			table.setWidth(sumWidths);
-			table.setLocked(true);
-			table.setWidths(widths);
-		}
-		else {
-			for(int i = 0; i < columns; i++) {
-				if (widthpercentages[i] == 0) {
-					sumWidths = 0;
-					break;
-				}
-				sumWidths += widthpercentages[i];
-			}
-			if (sumWidths > 0) {
-				table.setWidths(widthpercentages);
-			}
-		}
-		if (width > 0) {
-			table.setWidth(width);
-			table.setLocked(true);
-		}
-		else if (widthpercentage > 0) {
-			table.setWidth(widthpercentage);
-		}
-		return table;
-	}
+    /**
+     * the content of a Table.
+     */
+    private ArrayList content = new ArrayList();
+    /**
+     * the width of the Table.
+     */
+    private float width = 0f;
+    /**
+     * the widthpercentage of the Table.
+     */
+    private float widthpercentage = 0f;
+    /**
+     * the spacing of the Cells.
+     */
+    private float cellspacing;
+    /**
+     * the padding of the Cells.
+     */
+    private float cellpadding;
+    /**
+     * the alignment of the table.
+     */
+    private int alignment;
 
-	/**
-	 * @return Returns the cellpadding.
-	 */
-	public float getCellpadding() {
-		return cellpadding;
-	}
-	/**
-	 * @param cellpadding The cellpadding to set.
-	 */
-	public void setCellpadding(float cellpadding) {
-		this.cellpadding = cellpadding;
-	}
-	/**
-	 * @return Returns the cellspacing.
-	 */
-	public float getCellspacing() {
-		return cellspacing;
-	}
-	/**
-	 * @param cellspacing The cellspacing to set.
-	 */
-	public void setCellspacing(float cellspacing) {
-		this.cellspacing = cellspacing;
-	}
-	
-	/**
-	 * @return Returns the alignment.
-	 */
-	public int getAlignment() {
-		return alignment;
-	}
-	/**
-	 * @param alignment The alignment to set.
-	 */
-	public void setAlignment(int alignment) {
-		this.alignment = alignment;
-	}
-	/**
-	 * @return Returns the width.
-	 */
-	public float getWidth() {
-		return width;
-	}
-	/**
-	 * @param width The width to set.
-	 */
-	public void setWidth(float width) {
-		this.width = width;
-	}
-	/**
-	 * @return Returns the widthpercentage.
-	 */
-	public float getWidthpercentage() {
-		return widthpercentage;
-	}
-	/**
-	 * @param widthpercentage The widthpercentage to set.
-	 */
-	public void setWidthpercentage(float widthpercentage) {
-		this.widthpercentage = widthpercentage;
-	}
-	/**
-	 * @see com.lowagie.text.Element#type()
-	 */
-	public int type() {
-		return Element.TABLE;
-	}
+    /**
+     * A RectangleCell is always constructed without any dimensions.
+     * Dimensions are defined after creation.
+     */
+    public SimpleTable() {
+        super(0f, 0f, 0f, 0f);
+        setBorder(BOX);
+        setBorderWidth(2f);
+    }
 
-	/**
-	 * @see com.lowagie.text.Element#isNestable()
-	 * @since	iText 2.0.8
-	 */
-	public boolean isNestable() {
-		return true;
-	}
+    /**
+     * Adds content to this object.
+     *
+     * @param element
+     * @throws BadElementException
+     */
+    public void addElement(SimpleCell element) throws BadElementException {
+        if (!element.isCellgroup()) {
+            throw new BadElementException("You can't add cells to a table directly, add them to a row first.");
+        }
+        content.add(element);
+    }
 
-	/**
-	 * @see com.lowagie.text.TextElementArray#add(java.lang.Object)
-	 */
-	public boolean add(Object o) {
-		try {
-			addElement((SimpleCell)o);
-			return true;
-		}
-		catch(ClassCastException e) {
-			return false;
-		}
-		catch(BadElementException e) {
-			throw new ExceptionConverter(e);
-		}
-	}
+    /**
+     * Creates a Table object based on this TableAttributes object.
+     *
+     * @return a com.lowagie.text.Table object
+     * @throws BadElementException
+     */
+    public Table createTable() throws BadElementException {
+        if (content.isEmpty()) throw new BadElementException("Trying to create a table without rows.");
+        SimpleCell row = (SimpleCell) content.get(0);
+        SimpleCell cell;
+        int columns = 0;
+        for (Iterator i = row.getContent().iterator(); i.hasNext(); ) {
+            cell = (SimpleCell) i.next();
+            columns += cell.getColspan();
+        }
+        float[] widths = new float[columns];
+        float[] widthpercentages = new float[columns];
+        Table table = new Table(columns);
+        table.setAlignment(alignment);
+        table.setSpacing(cellspacing);
+        table.setPadding(cellpadding);
+        table.cloneNonPositionParameters(this);
+        int pos;
+        for (Iterator rows = content.iterator(); rows.hasNext(); ) {
+            row = (SimpleCell) rows.next();
+            pos = 0;
+            for (Iterator cells = row.getContent().iterator(); cells.hasNext(); ) {
+                cell = (SimpleCell) cells.next();
+                table.addCell(cell.createCell(row));
+                if (cell.getColspan() == 1) {
+                    if (cell.getWidth() > 0) widths[pos] = cell.getWidth();
+                    if (cell.getWidthpercentage() > 0) widthpercentages[pos] = cell.getWidthpercentage();
+                }
+                pos += cell.getColspan();
+            }
+        }
+        float sumWidths = 0f;
+        for (int i = 0; i < columns; i++) {
+            if (widths[i] == 0) {
+                sumWidths = 0;
+                break;
+            }
+            sumWidths += widths[i];
+        }
+        if (sumWidths > 0) {
+            table.setWidth(sumWidths);
+            table.setLocked(true);
+            table.setWidths(widths);
+        } else {
+            for (int i = 0; i < columns; i++) {
+                if (widthpercentages[i] == 0) {
+                    sumWidths = 0;
+                    break;
+                }
+                sumWidths += widthpercentages[i];
+            }
+            if (sumWidths > 0) {
+                table.setWidths(widthpercentages);
+            }
+        }
+        if (width > 0) {
+            table.setWidth(width);
+            table.setLocked(true);
+        } else if (widthpercentage > 0) {
+            table.setWidth(widthpercentage);
+        }
+        return table;
+    }
+
+    /**
+     * @return Returns the cellpadding.
+     */
+    public float getCellpadding() {
+        return cellpadding;
+    }
+
+    /**
+     * @param cellpadding The cellpadding to set.
+     */
+    public void setCellpadding(float cellpadding) {
+        this.cellpadding = cellpadding;
+    }
+
+    /**
+     * @return Returns the cellspacing.
+     */
+    public float getCellspacing() {
+        return cellspacing;
+    }
+
+    /**
+     * @param cellspacing The cellspacing to set.
+     */
+    public void setCellspacing(float cellspacing) {
+        this.cellspacing = cellspacing;
+    }
+
+    /**
+     * @return Returns the alignment.
+     */
+    public int getAlignment() {
+        return alignment;
+    }
+
+    /**
+     * @param alignment The alignment to set.
+     */
+    public void setAlignment(int alignment) {
+        this.alignment = alignment;
+    }
+
+    /**
+     * @return Returns the width.
+     */
+    public float getWidth() {
+        return width;
+    }
+
+    /**
+     * @param width The width to set.
+     */
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    /**
+     * @return Returns the widthpercentage.
+     */
+    public float getWidthpercentage() {
+        return widthpercentage;
+    }
+
+    /**
+     * @param widthpercentage The widthpercentage to set.
+     */
+    public void setWidthpercentage(float widthpercentage) {
+        this.widthpercentage = widthpercentage;
+    }
+
+    /**
+     * @see com.lowagie.text.Element#type()
+     */
+    public int type() {
+        return Element.TABLE;
+    }
+
+    /**
+     * @since iText 2.0.8
+     * @see com.lowagie.text.Element#isNestable()
+     */
+    public boolean isNestable() {
+        return true;
+    }
+
+    /**
+     * @see com.lowagie.text.TextElementArray#add(java.lang.Object)
+     */
+    public boolean add(Object o) {
+        try {
+            addElement((SimpleCell) o);
+            return true;
+        } catch (ClassCastException e) {
+            return false;
+        } catch (BadElementException e) {
+            throw new ExceptionConverter(e);
+        }
+    }
 }

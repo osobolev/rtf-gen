@@ -3,7 +3,7 @@
  *
  * Copyright 2004 by Mark Hall
  * Uses code Copyright 2002
- *   Steffen.Stundzig (Steffen.Stundzig@smb-tec.com) 
+ *   Steffen.Stundzig (Steffen.Stundzig@smb-tec.com)
  *
  * The contents of this file are subject to the Mozilla Public License Version 1.1
  * (the "License"); you may not use this file except in compliance with the License.
@@ -51,66 +51,62 @@
 
 package com.lowagie.text.rtf.field;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.Font;
 
-
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
- * The RtfTableOfContents together with multiple RtfTOCEntry objects generates a table 
+ * The RtfTableOfContents together with multiple RtfTOCEntry objects generates a table
  * of contents. The table of contents will display no entries in the viewing program
  * and the user will have to update it first. A text to inform the user of this is
  * displayed instead.
- * 
- * @version $Id: RtfTableOfContents.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
- * @author Steffen.Stundzig (Steffen.Stundzig@smb-tec.com) 
+ * @author Steffen.Stundzig (Steffen.Stundzig@smb-tec.com)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfTableOfContents.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfTableOfContents extends RtfField {
 
-	/**
-	 * field inst content
-	 */
-	private final static String FIELD_INST = "TOC \\\\f \\\\h \\\\u \\\\o \"1-5\" ";
+    /**
+     * field inst content
+     */
+    private final static String FIELD_INST = "TOC \\\\f \\\\h \\\\u \\\\o \"1-5\" ";
     /**
      * The default text to display
      */
     private String defaultText = "Table of Contents - Click to update";
-    
+
     /**
      * Constructs a RtfTableOfContents. The default text is the text that is displayed
      * before the user updates the table of contents
-     * 
+     *
      * @param defaultText The default text to display
      */
     public RtfTableOfContents(String defaultText) {
         super(null, new Font());
         this.defaultText = defaultText;
     }
-    
+
     /**
      * Writes the field instruction content
-     * 
+     *
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
-     */ 
-    protected void writeFieldInstContent(final OutputStream result) throws IOException 
-    {
-    	result.write(DocWriter.getISOBytes(FIELD_INST));
+     */
+    protected void writeFieldInstContent(final OutputStream result) throws IOException {
+        result.write(DocWriter.getISOBytes(FIELD_INST));
     }
 
     /**
      * Writes the field result content
-     * 
+     *
      * @param out The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
-    protected void writeFieldResultContent(final OutputStream out) throws IOException 
-    {
-    	document.filterSpecialChar(out, defaultText, true, true);
-    }    
+    protected void writeFieldResultContent(final OutputStream out) throws IOException {
+        document.filterSpecialChar(out, defaultText, true, true);
+    }
 }

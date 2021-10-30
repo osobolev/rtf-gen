@@ -49,29 +49,21 @@
 
 package com.lowagie.text.rtf.headerfooter;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
-import com.lowagie.text.DocWriter;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Element;
-import com.lowagie.text.HeaderFooter;
-import com.lowagie.text.Image;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Phrase;
-import com.lowagie.text.Table;
+import com.lowagie.text.*;
 import com.lowagie.text.rtf.RtfBasicElement;
 import com.lowagie.text.rtf.document.RtfDocument;
 import com.lowagie.text.rtf.field.RtfPageNumber;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfHeaderFooter represents one header or footer. This class can be used
  * directly.
- * 
- * @version $Id: RtfHeaderFooter.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfHeaderFooter.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
 
@@ -132,7 +124,7 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
      * Constant for a footer on the right hand pages
      */
     private static final byte[] FOOTER_RIGHT = DocWriter.getISOBytes("\\footerr");
-    
+
     /**
      * The RtfDocument this RtfHeaderFooter belongs to
      */
@@ -150,15 +142,15 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
      * DISPLAY_LEFT_PAGES, DISPLAY_RIGHT_PAGES or DISPLAY_ALL_PAGES
      */
     private int displayAt = DISPLAY_ALL_PAGES;
-   
+
     /**
      * Constructs a RtfHeaderFooter based on a HeaderFooter with a certain type and displayAt
      * location. For internal use only.
-     * 
-     * @param doc The RtfDocument this RtfHeaderFooter belongs to
+     *
+     * @param doc          The RtfDocument this RtfHeaderFooter belongs to
      * @param headerFooter The HeaderFooter to base this RtfHeaderFooter on
-     * @param type The type of RtfHeaderFooter
-     * @param displayAt The display location of this RtfHeaderFooter
+     * @param type         The type of RtfHeaderFooter
+     * @param displayAt    The display location of this RtfHeaderFooter
      */
     protected RtfHeaderFooter(RtfDocument doc, HeaderFooter headerFooter, int type, int displayAt) {
         super(new Phrase(""), false);
@@ -178,48 +170,48 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
         }
         try {
             this.content = new Object[1];
-            if(this.document != null) {
+            if (this.document != null) {
                 this.content[0] = this.document.getMapper().mapElement(par)[0];
                 ((RtfBasicElement) this.content[0]).setInHeader(true);
             } else {
                 this.content[0] = par;
             }
-        } catch(DocumentException de) {
+        } catch (DocumentException de) {
             de.printStackTrace();
         }
     }
-    
+
     /**
      * Constructs a RtfHeaderFooter as a copy of an existing RtfHeaderFooter.
      * For internal use only.
-     * 
-     * @param doc The RtfDocument this RtfHeaderFooter belongs to
+     *
+     * @param doc          The RtfDocument this RtfHeaderFooter belongs to
      * @param headerFooter The RtfHeaderFooter to copy
-     * @param displayAt The display location of this RtfHeaderFooter
+     * @param displayAt    The display location of this RtfHeaderFooter
      */
     protected RtfHeaderFooter(RtfDocument doc, RtfHeaderFooter headerFooter, int displayAt) {
         super(new Phrase(""), false);
         this.document = doc;
         this.content = headerFooter.getContent();
         this.displayAt = displayAt;
-        for(int i = 0; i < this.content.length; i++) {
-            if(this.content[i] instanceof Element) {
+        for (int i = 0; i < this.content.length; i++) {
+            if (this.content[i] instanceof Element) {
                 try {
                     this.content[i] = this.document.getMapper().mapElement((Element) this.content[i])[0];
-                } catch(DocumentException de) {
+                } catch (DocumentException de) {
                     de.printStackTrace();
                 }
             }
-            if(this.content[i] instanceof RtfBasicElement) {
+            if (this.content[i] instanceof RtfBasicElement) {
                 ((RtfBasicElement) this.content[i]).setInHeader(true);
             }
         }
     }
-    
+
     /**
      * Constructs a RtfHeaderFooter for a HeaderFooter.
-     *  
-     * @param doc The RtfDocument this RtfHeaderFooter belongs to
+     *
+     * @param doc          The RtfDocument this RtfHeaderFooter belongs to
      * @param headerFooter The HeaderFooter to base this RtfHeaderFooter on
      */
     protected RtfHeaderFooter(RtfDocument doc, HeaderFooter headerFooter) {
@@ -240,116 +232,114 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
             this.content = new Object[1];
             this.content[0] = doc.getMapper().mapElement(par)[0];
             ((RtfBasicElement) this.content[0]).setInHeader(true);
-        } catch(DocumentException de) {
+        } catch (DocumentException de) {
             de.printStackTrace();
         }
     }
-    
+
     /**
      * Constructs a RtfHeaderFooter for any Element.
      *
      * @param element The Element to display as content of this RtfHeaderFooter
      */
     public RtfHeaderFooter(Element element) {
-        this(new Element[]{element});
+        this(new Element[] {element});
     }
 
     /**
      * Constructs a RtfHeaderFooter for an array of Elements.
-     * 
+     *
      * @param elements The Elements to display as the content of this RtfHeaderFooter.
      */
     public RtfHeaderFooter(Element[] elements) {
         super(new Phrase(""), false);
         this.content = new Object[elements.length];
-        for(int i = 0; i < elements.length; i++) {
+        for (int i = 0; i < elements.length; i++) {
             this.content[i] = elements[i];
         }
     }
-    
+
     /**
      * Sets the RtfDocument this RtfElement belongs to
-     * 
+     *
      * @param doc The RtfDocument to use
      */
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
-        if(this.document != null) {
-            for(int i = 0; i < this.content.length; i++) {
+        if (this.document != null) {
+            for (int i = 0; i < this.content.length; i++) {
                 try {
-                    if(this.content[i] instanceof Element) {
+                    if (this.content[i] instanceof Element) {
                         this.content[i] = this.document.getMapper().mapElement((Element) this.content[i])[0];
                         ((RtfBasicElement) this.content[i]).setInHeader(true);
-                    } else if(this.content[i] instanceof RtfBasicElement){
+                    } else if (this.content[i] instanceof RtfBasicElement) {
                         ((RtfBasicElement) this.content[i]).setRtfDocument(this.document);
                         ((RtfBasicElement) this.content[i]).setInHeader(true);
                     }
-                } catch(DocumentException de) {
+                } catch (DocumentException de) {
                     de.printStackTrace();
                 }
             }
         }
     }
-    
+
     /**
      * Writes the content of this RtfHeaderFooter
-     */    
-    public void writeContent(final OutputStream result) throws IOException
-    {
+     */
+    public void writeContent(final OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
-        if(this.type == TYPE_HEADER) {
-            if(this.displayAt == DISPLAY_ALL_PAGES) {
+        if (this.type == TYPE_HEADER) {
+            if (this.displayAt == DISPLAY_ALL_PAGES) {
                 result.write(HEADER_ALL);
-            } else if(this.displayAt == DISPLAY_FIRST_PAGE) {
+            } else if (this.displayAt == DISPLAY_FIRST_PAGE) {
                 result.write(HEADER_FIRST);
-            } else if(this.displayAt == DISPLAY_LEFT_PAGES) {
+            } else if (this.displayAt == DISPLAY_LEFT_PAGES) {
                 result.write(HEADER_LEFT);
-            } else if(this.displayAt == DISPLAY_RIGHT_PAGES) {
+            } else if (this.displayAt == DISPLAY_RIGHT_PAGES) {
                 result.write(HEADER_RIGHT);
             }
         } else {
-            if(this.displayAt == DISPLAY_ALL_PAGES) {
+            if (this.displayAt == DISPLAY_ALL_PAGES) {
                 result.write(FOOTER_ALL);
-            } else if(this.displayAt == DISPLAY_FIRST_PAGE) {
+            } else if (this.displayAt == DISPLAY_FIRST_PAGE) {
                 result.write(FOOTER_FIRST);
-            } else if(this.displayAt == DISPLAY_LEFT_PAGES) {
+            } else if (this.displayAt == DISPLAY_LEFT_PAGES) {
                 result.write(FOOTER_LEFT);
-            } else if(this.displayAt == DISPLAY_RIGHT_PAGES) {
+            } else if (this.displayAt == DISPLAY_RIGHT_PAGES) {
                 result.write(FOOTER_RIGHT);
             }
         }
         result.write(DELIMITER);
-        for(int i = 0; i < this.content.length; i++) {
-            if(this.content[i] instanceof RtfBasicElement) {
-            	RtfBasicElement rbe = (RtfBasicElement)this.content[i];
-            	rbe.writeContent(result);
+        for (int i = 0; i < this.content.length; i++) {
+            if (this.content[i] instanceof RtfBasicElement) {
+                RtfBasicElement rbe = (RtfBasicElement) this.content[i];
+                rbe.writeContent(result);
             }
         }
         result.write(CLOSE_GROUP);
-    }        
-    
-    
+    }
+
     /**
      * Sets the display location of this RtfHeaderFooter
-     * 
+     *
      * @param displayAt The display location to use.
      */
     public void setDisplayAt(int displayAt) {
         this.displayAt = displayAt;
     }
-    
+
     /**
      * Sets the type of this RtfHeaderFooter
-     * 
+     *
      * @param type The type to use.
      */
     public void setType(int type) {
         this.type = type;
     }
-    
+
     /**
      * Gets the content of this RtfHeaderFooter
-     * 
+     *
      * @return The content of this RtfHeaderFooter
      */
     private Object[] getContent() {
@@ -358,32 +348,34 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
 
     /**
      * Unused
+     *
      * @param inTable
      */
     public void setInTable(boolean inTable) {
     }
-    
+
     /**
      * Unused
+     *
      * @param inHeader
      */
     public void setInHeader(boolean inHeader) {
     }
-    
+
     /**
      * Set the alignment of this RtfHeaderFooter. Passes the setting
      * on to the contained element.
      */
     public void setAlignment(int alignment) {
         super.setAlignment(alignment);
-        for(int i = 0; i < this.content.length; i++) {
-            if(this.content[i] instanceof Paragraph) {
+        for (int i = 0; i < this.content.length; i++) {
+            if (this.content[i] instanceof Paragraph) {
                 ((Paragraph) this.content[i]).setAlignment(alignment);
-            } else if(this.content[i] instanceof Table) {
+            } else if (this.content[i] instanceof Table) {
                 ((Table) this.content[i]).setAlignment(alignment);
-            } else if(this.content[i] instanceof Image) {
+            } else if (this.content[i] instanceof Image) {
                 ((Image) this.content[i]).setAlignment(alignment);
-            }     
+            }
         }
     }
 }

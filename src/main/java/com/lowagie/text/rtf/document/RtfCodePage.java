@@ -49,21 +49,23 @@
 
 package com.lowagie.text.rtf.document;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfElement;
 import com.lowagie.text.rtf.RtfExtendedElement;
+
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfCodePage class allows different code pages to be used in the rtf document.
  * Currently always ansi / ansicpg1252
  *
- * @version $Id:RtfCodePage.java 3126 2008-02-07 20:30:46Z hallm $
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id:RtfCodePage.java 3126 2008-02-07 20:30:46Z hallm $
  */
 public class RtfCodePage extends RtfElement implements RtfExtendedElement {
+
     /**
      * Constant for ansi encoded rtf documents
      */
@@ -75,7 +77,7 @@ public class RtfCodePage extends RtfElement implements RtfExtendedElement {
 
     /**
      * Construct an RtfCodePage
-     * 
+     *
      * @param doc The RtfDocument this RtfCodePage belongs to
      */
     public RtfCodePage(RtfDocument doc) {
@@ -85,19 +87,16 @@ public class RtfCodePage extends RtfElement implements RtfExtendedElement {
     /**
      * unused
      */
-    public void writeContent(final OutputStream out) throws IOException
-    {    	
+    public void writeContent(final OutputStream out) throws IOException {
     }
-    
+
     /**
      * Writes the selected codepage
      */
-    public void writeDefinition(final OutputStream result) throws IOException
-    {
+    public void writeDefinition(final OutputStream result) throws IOException {
         result.write(ANSI);
         result.write(ANSI_CODEPAGE);
         result.write(intToByteArray(1252));
-        this.document.outputDebugLinebreak(result);    	
+        this.document.outputDebugLinebreak(result);
     }
-
 }

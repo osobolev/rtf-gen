@@ -49,20 +49,21 @@
 
 package com.lowagie.text.rtf;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.document.RtfDocument;
+
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * RtfElement is the base class for all RTF Element classes
  *
- * @version $Id:RtfElement.java 3126 2008-02-07 20:30:46Z hallm $
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id:RtfElement.java 3126 2008-02-07 20:30:46Z hallm $
  */
 public abstract class RtfElement implements RtfBasicElement {
+
     /**
      * The RtfDocument this RtfElement belongs to
      */
@@ -75,10 +76,10 @@ public abstract class RtfElement implements RtfBasicElement {
      * Whether this RtfElement is in a header
      */
     protected boolean inHeader = false;
-    
+
     /**
      * Constructs a RtfElement belonging to the specified RtfDocument.
-     * 
+     *
      * @param doc The RtfDocument this RtfElement belongs to
      */
     public RtfElement(RtfDocument doc) {
@@ -93,51 +94,48 @@ public abstract class RtfElement implements RtfBasicElement {
      * @param i The integer to convert
      * @return A byte array representing the integer
      */
-    public byte[] intToByteArray(int i)
-    {
+    public byte[] intToByteArray(int i) {
         return DocWriter.getISOBytes(Integer.toString(i));
     }
 
     /**
      * Writes the element content to the given output stream.
-     */    
+     */
     public abstract void writeContent(final OutputStream out) throws IOException;
-    
+
     /**
      * Sets the RtfDocument this RtfElement belongs to
-     * 
+     *
      * @param doc The RtfDocument to use
      */
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
     }
-    
+
     /**
      * Gets whether this RtfElement is in a table
-     * 
+     *
      * @return Whether this RtfElement is in a table
      */
     public boolean isInTable() {
         return inTable;
     }
-    
+
     /**
      * Sets whether this RtfElement is in a table
-     * 
+     *
      * @param inTable <code>True</code> if this RtfElement is in a table, <code>false</code> otherwise
      */
     public void setInTable(boolean inTable) {
         this.inTable = inTable;
     }
-    
+
     /**
      * Sets whether this RtfElement is in a header
-     * 
+     *
      * @param inHeader <code>True</code> if this RtfElement is in a header, <code>false</code> otherwise
      */
     public void setInHeader(boolean inHeader) {
         this.inHeader = inHeader;
     }
-    
-    
 }

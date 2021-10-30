@@ -49,40 +49,33 @@
 
 package com.lowagie.text.rtf;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.EventListener;
-
-import com.lowagie.text.DocWriter;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Element;
-import com.lowagie.text.HeaderFooter;
-import com.lowagie.text.Rectangle;
+import com.lowagie.text.*;
 import com.lowagie.text.rtf.document.RtfDocument;
 import com.lowagie.text.rtf.document.RtfDocumentSettings;
 import com.lowagie.text.rtf.text.RtfNewPage;
 
+import java.io.OutputStream;
+
 /**
  * The RtfWriter allows the creation of rtf documents via the iText system
- *
+ * <p>
  * Version: $Id: RtfWriter2.java 3583 2008-08-12 00:00:09Z xlv $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  */
 public class RtfWriter2 extends DocWriter {
+
     /**
      * The RtfDocument this RtfWriter is creating
      */
     private RtfDocument rtfDoc = null;
-    
+
     /**
      * Constructs a new RtfWriter that listens to the specified Document and
      * writes its output to the OutputStream.
-     * 
+     *
      * @param doc The Document that this RtfWriter listens to
-     * @param os The OutputStream to write to
+     * @param os  The OutputStream to write to
      */
     protected RtfWriter2(Document doc, OutputStream os) {
         super(doc, os);
@@ -92,9 +85,9 @@ public class RtfWriter2 extends DocWriter {
 
     /**
      * Static method to generate RtfWriters
-     * 
+     *
      * @param doc The Document that this RtfWriter listens to
-     * @param os The OutputStream to write to
+     * @param os  The OutputStream to write to
      * @return The new RtfWriter
      */
     public static RtfWriter2 getInstance(Document doc, OutputStream os) {
@@ -103,29 +96,29 @@ public class RtfWriter2 extends DocWriter {
 
     /**
      * Sets the header to use
-     * 
+     *
      * @param hf The HeaderFooter to use
      */
     public void setHeader(HeaderFooter hf) {
         this.rtfDoc.getDocumentHeader().setHeader(hf);
     }
-    
+
     /**
      * Resets the header
      */
     public void resetHeader() {
         this.rtfDoc.getDocumentHeader().setHeader(null);
     }
-    
+
     /**
      * Sets the footer to use
-     * 
+     *
      * @param hf The HeaderFooter to use
      */
     public void setFooter(HeaderFooter hf) {
         this.rtfDoc.getDocumentHeader().setFooter(hf);
     }
-    
+
     /**
      * Resets the footer
      */
@@ -135,28 +128,32 @@ public class RtfWriter2 extends DocWriter {
 
     /**
      * This method is not supported in the RtfWriter
+     *
      * @param i Unused
      */
-    public void setPageCount(int i) {}
-    
-    /**
-     * This method is not supported in the RtfWriter
-     */
-    public void resetPageCount() {}
+    public void setPageCount(int i) {
+    }
 
     /**
      * This method is not supported in the RtfWriter
      */
-    public void clearTextWrap() {}
+    public void resetPageCount() {
+    }
+
+    /**
+     * This method is not supported in the RtfWriter
+     */
+    public void clearTextWrap() {
+    }
 
     /**
      * Opens the RtfDocument
      */
     public void open() {
-    	super.open();
+        super.open();
         this.rtfDoc.open();
     }
-    
+
     /**
      * Closes the RtfDocument. This causes the document to be written
      * to the specified OutputStream
@@ -181,9 +178,9 @@ public class RtfWriter2 extends DocWriter {
             return false;
         }
         RtfBasicElement[] rtfElements = rtfDoc.getMapper().mapElement(element);
-        if(rtfElements.length != 0) {
-            for(int i = 0; i < rtfElements.length; i++) {
-                if(rtfElements[i] != null) {
+        if (rtfElements.length != 0) {
+            for (int i = 0; i < rtfElements.length; i++) {
+                if (rtfElements[i] != null) {
                     rtfDoc.add(rtfElements[i]);
                 }
             }
@@ -192,7 +189,7 @@ public class RtfWriter2 extends DocWriter {
             return false;
         }
     }
-    
+
     /**
      * Adds a page break
      *
@@ -206,9 +203,9 @@ public class RtfWriter2 extends DocWriter {
     /**
      * Sets the page margins
      *
-     * @param left The left margin
-     * @param right The right margin
-     * @param top The top margin
+     * @param left   The left margin
+     * @param right  The right margin
+     * @param top    The top margin
      * @param bottom The bottom margin
      * @return <code>false</code>
      */
@@ -219,7 +216,7 @@ public class RtfWriter2 extends DocWriter {
         rtfDoc.getDocumentHeader().getPageSetting().setMarginBottom((int) (bottom * RtfElement.TWIPS_FACTOR));
         return true;
     }
-    
+
     /**
      * Sets the size of the page
      *
@@ -230,20 +227,20 @@ public class RtfWriter2 extends DocWriter {
         rtfDoc.getDocumentHeader().getPageSetting().setPageSize(rect);
         return true;
     }
-    
+
     /**
      * Whether to automagically generate table of contents entries when
      * adding Chapters or Sections.
-     * 
+     *
      * @param autogenerate Whether to automatically generate TOC entries
      */
     public void setAutogenerateTOCEntries(boolean autogenerate) {
         this.rtfDoc.setAutogenerateTOCEntries(autogenerate);
     }
-    
+
     /**
      * Gets the RtfDocumentSettings that specify how the rtf document is generated.
-     * 
+     *
      * @return The current RtfDocumentSettings.
      */
     public RtfDocumentSettings getDocumentSettings() {

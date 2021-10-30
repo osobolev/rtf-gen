@@ -49,29 +49,28 @@
 
 package com.lowagie.text.rtf.text;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.Chapter;
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfBasicElement;
 import com.lowagie.text.rtf.document.RtfDocument;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfChapter wraps a Chapter element.
  * INTERNAL CLASS
- * 
- * @version $Id: RtfChapter.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfChapter.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfChapter extends RtfSection {
 
     /**
      * Constructs a RtfChapter for a given Chapter
-     * 
-     * @param doc The RtfDocument this RtfChapter belongs to
+     *
+     * @param doc     The RtfDocument this RtfChapter belongs to
      * @param chapter The Chapter this RtfChapter is based on
      */
     public RtfChapter(RtfDocument doc, Chapter chapter) {
@@ -80,22 +79,20 @@ public class RtfChapter extends RtfSection {
 
     /**
      * Writes the RtfChapter and its contents
-     */    
-    public void writeContent(final OutputStream result) throws IOException
-    {
-        if(this.document.getLastElementWritten() != null && !(this.document.getLastElementWritten() instanceof RtfChapter)) {
+     */
+    public void writeContent(final OutputStream result) throws IOException {
+        if (this.document.getLastElementWritten() != null && !(this.document.getLastElementWritten() instanceof RtfChapter)) {
             result.write(DocWriter.getISOBytes("\\page"));
         }
         result.write(DocWriter.getISOBytes("\\sectd"));
         document.getDocumentHeader().writeSectionDefinition(result);
-        if(this.title != null) {
+        if (this.title != null) {
             this.title.writeContent(result);
         }
-        for(int i = 0; i < items.size(); i++) {
-        	RtfBasicElement rbe = (RtfBasicElement)items.get(i);
-        	rbe.writeContent(result);
+        for (int i = 0; i < items.size(); i++) {
+            RtfBasicElement rbe = (RtfBasicElement) items.get(i);
+            rbe.writeContent(result);
         }
         result.write(DocWriter.getISOBytes("\\sect"));
-    }        
-    
+    }
 }

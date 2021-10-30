@@ -49,22 +49,23 @@
 
 package com.lowagie.text.rtf.style;
 
-import java.awt.Color;
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.Font;
 import com.lowagie.text.rtf.RtfExtendedElement;
 import com.lowagie.text.rtf.document.RtfDocument;
+
+import java.awt.*;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfFont class stores one font for an rtf document. It extends Font,
  * so can be set as a font, to allow adding of fonts with arbitrary names.
  * BaseFont fontname handling contributed by Craig Fleming. Various fixes
  * Renaud Michel, Werner Daehn.
- *
+ * <p>
  * Version: $Id: RtfFont.java 4008 2009-07-07 09:56:52Z blowagie $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Craig Fleming (rythos@rhana.dhs.org)
  * @author Renaud Michel (r.michel@immedia.be)
@@ -73,6 +74,7 @@ import com.lowagie.text.rtf.document.RtfDocument;
  * @author Thomas Bickel (tmb99@inode.at)
  */
 public class RtfFont extends Font implements RtfExtendedElement {
+
     /**
      * Constant for the font family to use ("froman")
      */
@@ -125,7 +127,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * Constant for hidden text flag
      */
     private static final byte[] FONT_HIDDEN = DocWriter.getISOBytes("\\v");
-    
+
     /**
      * Constant for a plain font
      */
@@ -170,9 +172,10 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * Constant for a font that hides the actual text.
      */
     public static final int STYLE_HIDDEN = 512;
-    
+
     /**
      * Default font
+     *
      * @since 2.1.7
      */
     public static final String DEFAULT_FONT = "Times New Roman";
@@ -205,66 +208,66 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * The RtfDocument this RtfFont belongs to.
      */
     protected RtfDocument document = null;
-    
+
     /**
      * Constructs a RtfFont with the given font name and all other properties
      * at their default values.
-     * 
+     *
      * @param fontName The font name to use
      */
     public RtfFont(String fontName) {
         super(Font.UNDEFINED, Font.UNDEFINED, Font.UNDEFINED, null);
         this.fontName = fontName;
     }
-    
+
     /**
      * Constructs a RtfFont with the given font name and font size and all other
      * properties at their default values.
-     * 
+     *
      * @param fontName The font name to use
-     * @param size The font size to use
+     * @param size     The font size to use
      */
     public RtfFont(String fontName, float size) {
         super(Font.UNDEFINED, size, Font.UNDEFINED, null);
         this.fontName = fontName;
     }
-    
+
     /**
      * Constructs a RtfFont with the given font name, font size and font style and the
      * default color.
-     * 
+     *
      * @param fontName The font name to use
-     * @param size The font size to use
-     * @param style The font style to use
+     * @param size     The font size to use
+     * @param style    The font style to use
      */
     public RtfFont(String fontName, float size, int style) {
         super(Font.UNDEFINED, size, style, null);
         this.fontName = fontName;
     }
-    
+
     /**
      * Constructs a RtfFont with the given font name, font size, font style and
      * color.
-     * 
+     *
      * @param fontName The font name to use
-     * @param size the font size to use
-     * @param style The font style to use
-     * @param color The font color to use
+     * @param size     the font size to use
+     * @param style    The font style to use
+     * @param color    The font color to use
      */
     public RtfFont(String fontName, float size, int style, Color color) {
         super(Font.UNDEFINED, size, style, color);
         this.fontName = fontName;
     }
-    
+
     /**
      * Constructs a RtfFont with the given font name, font size, font style, color
      * and charset. This can be used when generating non latin-1 text.
-     * 
+     *
      * @param fontName The font name to use
-     * @param size the font size to use
-     * @param style The font style to use
-     * @param color The font color to use
-     * @param charset The charset of the font content
+     * @param size     the font size to use
+     * @param style    The font style to use
+     * @param color    The font color to use
+     * @param charset  The charset of the font content
      */
     public RtfFont(String fontName, float size, int style, Color color, int charset) {
         this(fontName, size, style, color);
@@ -274,7 +277,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Special constructor for the default font
      *
-     * @param doc The RtfDocument this font appears in
+     * @param doc        The RtfDocument this font appears in
      * @param fontNumber The id of this font
      */
     protected RtfFont(RtfDocument doc, int fontNumber) {
@@ -285,32 +288,33 @@ public class RtfFont extends Font implements RtfExtendedElement {
 
     /**
      * Constructs a RtfFont from a com.lowagie.text.Font
-     * @param doc The RtfDocument this font appears in
+     *
+     * @param doc  The RtfDocument this font appears in
      * @param font The Font to use as a base
      */
     public RtfFont(RtfDocument doc, Font font) {
         this.document = doc;
-        if(font != null) {
-            if(font instanceof RtfFont) {
+        if (font != null) {
+            if (font instanceof RtfFont) {
                 this.fontName = ((RtfFont) font).getFontName();
                 this.charset = ((RtfFont) font).getCharset();
             } else {
                 setToDefaultFamily(font.getFamilyname());
             }
 
-            if(this.fontName.equalsIgnoreCase("unknown")) {
+            if (this.fontName.equalsIgnoreCase("unknown")) {
                 this.fontName = DEFAULT_FONT;
             }
-            
+
             setSize(font.getSize());
             setStyle(font.getStyle());
             setColor(font.getColor());
-            if(document != null) {
-            	this.fontNumber = document.getDocumentHeader().getFontNumber(this);
+            if (document != null) {
+                this.fontNumber = document.getDocumentHeader().getFontNumber(this);
             }
         }
 
-        if(document != null) {
+        if (document != null) {
             setRtfDocument(document);
         }
     }
@@ -318,15 +322,14 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Writes the font definition
      */
-    public void writeDefinition(final OutputStream result) throws IOException
-    {
+    public void writeDefinition(final OutputStream result) throws IOException {
         result.write(FONT_FAMILY);
         result.write(FONT_CHARSET);
         result.write(intToByteArray(charset));
         result.write(DELIMITER);
         document.filterSpecialChar(result, fontName, true, false);
     }
-    
+
     /**
      * Writes the font beginning
      *
@@ -334,48 +337,48 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * @throws IOException On i/o errors.
      */
     public void writeBegin(final OutputStream result) throws IOException {
-        if(this.fontNumber != Font.UNDEFINED) {
+        if (this.fontNumber != Font.UNDEFINED) {
             result.write(RtfFontList.FONT_NUMBER);
             result.write(intToByteArray(fontNumber));
         }
-        if(this.fontSize != Font.UNDEFINED) {
+        if (this.fontSize != Font.UNDEFINED) {
             result.write(FONT_SIZE);
             result.write(intToByteArray(fontSize * 2));
         }
-        if(this.fontStyle != UNDEFINED) {
-            if((fontStyle & STYLE_BOLD) == STYLE_BOLD) {
+        if (this.fontStyle != UNDEFINED) {
+            if ((fontStyle & STYLE_BOLD) == STYLE_BOLD) {
                 result.write(FONT_BOLD);
             }
-            if((fontStyle & STYLE_ITALIC) == STYLE_ITALIC) {
+            if ((fontStyle & STYLE_ITALIC) == STYLE_ITALIC) {
                 result.write(FONT_ITALIC);
             }
-            if((fontStyle & STYLE_UNDERLINE) == STYLE_UNDERLINE) {
+            if ((fontStyle & STYLE_UNDERLINE) == STYLE_UNDERLINE) {
                 result.write(FONT_UNDERLINE);
             }
-            if((fontStyle & STYLE_STRIKETHROUGH) == STYLE_STRIKETHROUGH) {
+            if ((fontStyle & STYLE_STRIKETHROUGH) == STYLE_STRIKETHROUGH) {
                 result.write(FONT_STRIKETHROUGH);
             }
-            if((fontStyle & STYLE_HIDDEN) == STYLE_HIDDEN) {
+            if ((fontStyle & STYLE_HIDDEN) == STYLE_HIDDEN) {
                 result.write(FONT_HIDDEN);
             }
-            if((fontStyle & STYLE_DOUBLE_STRIKETHROUGH) == STYLE_DOUBLE_STRIKETHROUGH) {
+            if ((fontStyle & STYLE_DOUBLE_STRIKETHROUGH) == STYLE_DOUBLE_STRIKETHROUGH) {
                 result.write(FONT_DOUBLE_STRIKETHROUGH);
                 result.write(intToByteArray(1));
             }
-            if((fontStyle & STYLE_SHADOW) == STYLE_SHADOW) {
+            if ((fontStyle & STYLE_SHADOW) == STYLE_SHADOW) {
                 result.write(FONT_SHADOW);
             }
-            if((fontStyle & STYLE_OUTLINE) == STYLE_OUTLINE) {
+            if ((fontStyle & STYLE_OUTLINE) == STYLE_OUTLINE) {
                 result.write(FONT_OUTLINE);
             }
-            if((fontStyle & STYLE_EMBOSSED) == STYLE_EMBOSSED) {
+            if ((fontStyle & STYLE_EMBOSSED) == STYLE_EMBOSSED) {
                 result.write(FONT_EMBOSSED);
             }
-            if((fontStyle & STYLE_ENGRAVED) == STYLE_ENGRAVED) {
+            if ((fontStyle & STYLE_ENGRAVED) == STYLE_ENGRAVED) {
                 result.write(FONT_ENGRAVED);
             }
         }
-        if(color != null) {
+        if (color != null) {
             color.writeBegin(result);
         }
     }
@@ -386,45 +389,45 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException On i/o errors.
      */
-    public void writeEnd(final OutputStream result) throws IOException{
-        if(this.fontStyle != UNDEFINED) {
-            if((fontStyle & STYLE_BOLD) == STYLE_BOLD) {
+    public void writeEnd(final OutputStream result) throws IOException {
+        if (this.fontStyle != UNDEFINED) {
+            if ((fontStyle & STYLE_BOLD) == STYLE_BOLD) {
                 result.write(FONT_BOLD);
                 result.write(intToByteArray(0));
             }
-            if((fontStyle & STYLE_ITALIC) == STYLE_ITALIC) {
+            if ((fontStyle & STYLE_ITALIC) == STYLE_ITALIC) {
                 result.write(FONT_ITALIC);
                 result.write(intToByteArray(0));
             }
-            if((fontStyle & STYLE_UNDERLINE) == STYLE_UNDERLINE) {
+            if ((fontStyle & STYLE_UNDERLINE) == STYLE_UNDERLINE) {
                 result.write(FONT_UNDERLINE);
                 result.write(intToByteArray(0));
             }
-            if((fontStyle & STYLE_STRIKETHROUGH) == STYLE_STRIKETHROUGH) {
+            if ((fontStyle & STYLE_STRIKETHROUGH) == STYLE_STRIKETHROUGH) {
                 result.write(FONT_STRIKETHROUGH);
                 result.write(intToByteArray(0));
             }
-            if((fontStyle & STYLE_HIDDEN) == STYLE_HIDDEN) {
+            if ((fontStyle & STYLE_HIDDEN) == STYLE_HIDDEN) {
                 result.write(FONT_HIDDEN);
                 result.write(intToByteArray(0));
             }
-            if((fontStyle & STYLE_DOUBLE_STRIKETHROUGH) == STYLE_DOUBLE_STRIKETHROUGH) {
+            if ((fontStyle & STYLE_DOUBLE_STRIKETHROUGH) == STYLE_DOUBLE_STRIKETHROUGH) {
                 result.write(FONT_DOUBLE_STRIKETHROUGH);
                 result.write(intToByteArray(0));
             }
-            if((fontStyle & STYLE_SHADOW) == STYLE_SHADOW) {
+            if ((fontStyle & STYLE_SHADOW) == STYLE_SHADOW) {
                 result.write(FONT_SHADOW);
                 result.write(intToByteArray(0));
             }
-            if((fontStyle & STYLE_OUTLINE) == STYLE_OUTLINE) {
+            if ((fontStyle & STYLE_OUTLINE) == STYLE_OUTLINE) {
                 result.write(FONT_OUTLINE);
                 result.write(intToByteArray(0));
             }
-            if((fontStyle & STYLE_EMBOSSED) == STYLE_EMBOSSED) {
+            if ((fontStyle & STYLE_EMBOSSED) == STYLE_EMBOSSED) {
                 result.write(FONT_EMBOSSED);
                 result.write(intToByteArray(0));
             }
-            if((fontStyle & STYLE_ENGRAVED) == STYLE_ENGRAVED) {
+            if ((fontStyle & STYLE_ENGRAVED) == STYLE_ENGRAVED) {
                 result.write(FONT_ENGRAVED);
                 result.write(intToByteArray(0));
             }
@@ -434,19 +437,18 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * unused
      */
-    public void writeContent(OutputStream out) throws IOException
-    {    	
+    public void writeContent(OutputStream out) throws IOException {
     }
-    
+
     /**
      * Tests for equality of RtfFonts. RtfFonts are equal if their fontName,
      * fontSize, fontStyle and fontSuperSubscript are equal
-     * 
+     *
      * @param obj The RtfFont to compare with this RtfFont
      * @return <code>True</code> if the RtfFonts are equal, <code>false</code> otherwise
      */
     public boolean equals(Object obj) {
-        if(!(obj instanceof RtfFont)) {
+        if (!(obj instanceof RtfFont)) {
             return false;
         }
         RtfFont font = (RtfFont) obj;
@@ -460,16 +462,16 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * Returns the hash code of this RtfFont. The hash code is the hash code of the
      * string containing the font name + font size + "-" + the font style + "-" + the
      * font super/supscript value.
-     * 
+     *
      * @return The hash code of this RtfFont
      */
     public int hashCode() {
         return (this.fontName + this.fontSize + "-" + this.fontStyle).hashCode();
     }
-    
+
     /**
      * Gets the font name of this RtfFont
-     * 
+     *
      * @return The font name
      */
     public String getFontName() {
@@ -478,93 +480,93 @@ public class RtfFont extends Font implements RtfExtendedElement {
 
     /**
      * Sets the font name of this RtfFont.
-     * 
-     * @param fontName The font name to use 
+     *
+     * @param fontName The font name to use
      */
     protected void setFontName(String fontName) {
         this.fontName = fontName;
-        if(document != null) {
+        if (document != null) {
             this.fontNumber = document.getDocumentHeader().getFontNumber(this);
         }
     }
-    
+
     /**
      * @see com.lowagie.text.Font#getFamilyname()
      */
     public String getFamilyname() {
         return this.fontName;
     }
-    
+
     /**
      * @see com.lowagie.text.Font#setFamily(String)
      */
-    public void setFamily(String family){
+    public void setFamily(String family) {
         super.setFamily(family);
         setToDefaultFamily(family);
     }
-    
+
     /**
      * Sets the correct font name from the family name.
-     * 
+     *
      * @param familyname The family name to set the name to.
      */
-    private void setToDefaultFamily(String familyname){
+    private void setToDefaultFamily(String familyname) {
         switch (Font.getFamilyIndex(familyname)) {
-            case Font.COURIER:
-                this.fontName = "Courier";
-                break;
-            case Font.HELVETICA:
-                this.fontName = "Arial";
-                break;
-            case Font.SYMBOL:
-                this.fontName = "Symbol";
-                this.charset = 2;
-                break;
-            case Font.TIMES_ROMAN:
-                this.fontName = "Times New Roman";
-                break;
-            case Font.ZAPFDINGBATS:
-                this.fontName = "Windings";
-                break;
-            default:
-                this.fontName = familyname;
+        case Font.COURIER:
+            this.fontName = "Courier";
+            break;
+        case Font.HELVETICA:
+            this.fontName = "Arial";
+            break;
+        case Font.SYMBOL:
+            this.fontName = "Symbol";
+            this.charset = 2;
+            break;
+        case Font.TIMES_ROMAN:
+            this.fontName = "Times New Roman";
+            break;
+        case Font.ZAPFDINGBATS:
+            this.fontName = "Windings";
+            break;
+        default:
+            this.fontName = familyname;
         }
     }
-    
+
     /**
      * Gets the font size of this RtfFont
-     * 
+     *
      * @return The font size
      */
     public int getFontSize() {
         return this.fontSize;
     }
-    
+
     /**
      * @see com.lowagie.text.Font#setSize(float)
      */
-    public void setSize(float size){
+    public void setSize(float size) {
         super.setSize(size);
         this.fontSize = (int) getSize();
     }
 
     /**
      * Gets the font style of this RtfFont
-     * 
+     *
      * @return The font style
      */
     public int getFontStyle() {
         return this.fontStyle;
     }
-    
+
     /**
      * @see com.lowagie.text.Font#setStyle(int)
      */
-    public void setStyle(int style){
+    public void setStyle(int style) {
         super.setStyle(style);
         this.fontStyle = getStyle();
     }
-    
+
     /**
      * @see com.lowagie.text.Font#setStyle(String)
      */
@@ -575,7 +577,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
 
     /**
      * Gets the charset used for constructing this RtfFont.
-     * 
+     *
      * @return The charset of this RtfFont.
      */
     public int getCharset() {
@@ -584,7 +586,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
 
     /**
      * Sets the charset used for constructing this RtfFont.
-     * 
+     *
      * @param charset The charset to use.
      */
     public void setCharset(int charset) {
@@ -593,7 +595,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
 
     /**
      * Gets the font number of this RtfFont
-     * 
+     *
      * @return The font number
      */
     public int getFontNumber() {
@@ -602,50 +604,52 @@ public class RtfFont extends Font implements RtfExtendedElement {
 
     /**
      * Sets the RtfDocument this RtfFont belongs to
-     * 
+     *
      * @param doc The RtfDocument to use
      */
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
-        if(document != null) {
+        if (document != null) {
             this.fontNumber = document.getDocumentHeader().getFontNumber(this);
         }
-        if(this.color != null) {
+        if (this.color != null) {
             this.color.setRtfDocument(this.document);
         }
     }
 
     /**
      * Unused
+     *
      * @param inTable
      */
     public void setInTable(boolean inTable) {
     }
-    
+
     /**
      * Unused
+     *
      * @param inHeader
      */
     public void setInHeader(boolean inHeader) {
     }
-    
+
     /**
      * @see com.lowagie.text.Font#setColor(Color)
      */
     public void setColor(Color color) {
         super.setColor(color);
-        if(color != null) {
+        if (color != null) {
             this.color = new RtfColor(document, color);
         } else {
             this.color = null;
         }
     }
-    
+
     /**
      * @see com.lowagie.text.Font#setColor(int, int, int)
      */
     public void setColor(int red, int green, int blue) {
-        super.setColor(red,green,blue);
+        super.setColor(red, green, blue);
         this.color = new RtfColor(document, red, green, blue);
     }
 
@@ -669,63 +673,63 @@ public class RtfFont extends Font implements RtfExtendedElement {
      */
     public Font difference(Font font) {
         String dFamilyname = font.getFamilyname();
-        if(dFamilyname == null || dFamilyname.trim().equals("") || dFamilyname.trim().equalsIgnoreCase("unknown")) {
+        if (dFamilyname == null || dFamilyname.trim().equals("") || dFamilyname.trim().equalsIgnoreCase("unknown")) {
             dFamilyname = this.fontName;
         }
 
         float dSize = font.getSize();
-        if(dSize == Font.UNDEFINED) {
+        if (dSize == Font.UNDEFINED) {
             dSize = this.getSize();
         }
 
         int dStyle = Font.UNDEFINED;
-        if(this.getStyle() != Font.UNDEFINED && font.getStyle() != Font.UNDEFINED) {
+        if (this.getStyle() != Font.UNDEFINED && font.getStyle() != Font.UNDEFINED) {
             dStyle = this.getStyle() | font.getStyle();
-        } else if(this.getStyle() != Font.UNDEFINED) {
+        } else if (this.getStyle() != Font.UNDEFINED) {
             dStyle = this.getStyle();
-        } else if(font.getStyle() != Font.UNDEFINED) {
+        } else if (font.getStyle() != Font.UNDEFINED) {
             dStyle = font.getStyle();
         }
 
         Color dColor = font.getColor();
-        if(dColor == null) {
+        if (dColor == null) {
             dColor = this.getColor();
         }
-        
+
         int dCharset = this.charset;
-        if(font instanceof RtfFont) {
+        if (font instanceof RtfFont) {
             dCharset = ((RtfFont) font).getCharset();
         }
-        
+
         return new RtfFont(dFamilyname, dSize, dStyle, dColor, dCharset);
     }
-    
+
     /**
      * The <code>RtfFont</code> is never a standard font.
-     * 
+     *
      * @since 2.1.0
      */
     public boolean isStandardFont() {
         return false;
     }
-    
+
     /**
      * Compares this <code>RtfFont</code> to either a {@link com.lowagie.text.Font} or
      * an <code>RtfFont</code>.
-     * 
+     *
      * @since 2.1.0
      */
     public int compareTo(Object object) {
         if (object == null) {
             return -1;
         }
-        if(object instanceof RtfFont) {
-            if(this.getFontName().compareTo(((RtfFont) object).getFontName()) != 0) {
+        if (object instanceof RtfFont) {
+            if (this.getFontName().compareTo(((RtfFont) object).getFontName()) != 0) {
                 return 1;
             } else {
                 return super.compareTo(object);
             }
-        } else if(object instanceof Font) {
+        } else if (object instanceof Font) {
             return super.compareTo(object);
         } else {
             return -3;

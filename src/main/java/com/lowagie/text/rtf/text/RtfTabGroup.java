@@ -51,16 +51,16 @@
 
 package com.lowagie.text.rtf.text;
 
+import com.lowagie.text.rtf.RtfAddableElement;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import com.lowagie.text.rtf.RtfAddableElement;
-
 /**
  * The RtfTabGroup is a convenience class if the same tabs are to be added
  * to multiple paragraphs.<br /><br />
- * 
+ *
  * <code>RtfTabGroup tabs = new RtfTabGroup();<br />
  * tabs.add(new RtfTab(70, RtfTab.TAB_LEFT_ALIGN));<br />
  * tabs.add(new RtfTab(160, RtfTab.TAB_CENTER_ALIGN));<br />
@@ -69,56 +69,55 @@ import com.lowagie.text.rtf.RtfAddableElement;
  * Paragraph para = new Paragraph();<br />
  * para.add(tabs);<br />
  * para.add("\tLeft aligned\tCentre aligned\t12,45\tRight aligned");</code>
- * 
- * @version $Id: RtfTabGroup.java 3373 2008-05-12 16:21:24Z xlv $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfTabGroup.java 3373 2008-05-12 16:21:24Z xlv $
  */
 public class RtfTabGroup extends RtfAddableElement {
-	/**
-	 * The tabs to add.
-	 */
-	private ArrayList tabs = null;
 
-	/**
-	 * Constructs an empty RtfTabGroup.
-	 */
-	public RtfTabGroup() {
-		this.tabs = new ArrayList();
-	}
-	
-	/**
-	 * Constructs a RtfTabGroup with a set of tabs.
-	 * 
-	 * @param tabs An ArrayList with the RtfTabs to group in this RtfTabGroup.
-	 */
-	public RtfTabGroup(ArrayList tabs) {
-		this.tabs = new ArrayList();
-		for(int i = 0; i < tabs.size(); i++) {
-			if(tabs.get(i) instanceof RtfTab) {
-				this.tabs.add(tabs.get(i));
-			}
-		}
-	}
-	
-	/**
-	 * Adds a RtfTab to the list of grouped tabs.
-	 * 
-	 * @param tab The RtfTab to add.
-	 */
-	public void add(RtfTab tab) {
-		this.tabs.add(tab);
-	}
-	
+    /**
+     * The tabs to add.
+     */
+    private ArrayList tabs = null;
+
+    /**
+     * Constructs an empty RtfTabGroup.
+     */
+    public RtfTabGroup() {
+        this.tabs = new ArrayList();
+    }
+
+    /**
+     * Constructs a RtfTabGroup with a set of tabs.
+     *
+     * @param tabs An ArrayList with the RtfTabs to group in this RtfTabGroup.
+     */
+    public RtfTabGroup(ArrayList tabs) {
+        this.tabs = new ArrayList();
+        for (int i = 0; i < tabs.size(); i++) {
+            if (tabs.get(i) instanceof RtfTab) {
+                this.tabs.add(tabs.get(i));
+            }
+        }
+    }
+
+    /**
+     * Adds a RtfTab to the list of grouped tabs.
+     *
+     * @param tab The RtfTab to add.
+     */
+    public void add(RtfTab tab) {
+        this.tabs.add(tab);
+    }
+
     /**
      * Combines the tab output form all grouped tabs.
-     */    
-    public void writeContent(final OutputStream result) throws IOException
-    {
-    	for(int i = 0; i < this.tabs.size(); i++) {
-    		RtfTab rt = (RtfTab) this.tabs.get(i);
-    		rt.writeContent(result);
-    	}
-    }        
-	
+     */
+    public void writeContent(final OutputStream result) throws IOException {
+        for (int i = 0; i < this.tabs.size(); i++) {
+            RtfTab rt = (RtfTab) this.tabs.get(i);
+            rt.writeContent(result);
+        }
+    }
 }

@@ -49,9 +49,6 @@
 
 package com.lowagie.text.rtf.document;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.HeaderFooter;
 import com.lowagie.text.rtf.RtfElement;
@@ -60,24 +57,22 @@ import com.lowagie.text.rtf.headerfooter.RtfHeaderFooter;
 import com.lowagie.text.rtf.headerfooter.RtfHeaderFooterGroup;
 import com.lowagie.text.rtf.list.RtfList;
 import com.lowagie.text.rtf.list.RtfListTable;
-import com.lowagie.text.rtf.style.RtfColor;
-import com.lowagie.text.rtf.style.RtfColorList;
-import com.lowagie.text.rtf.style.RtfFont;
-import com.lowagie.text.rtf.style.RtfFontList;
-import com.lowagie.text.rtf.style.RtfParagraphStyle;
-import com.lowagie.text.rtf.style.RtfStylesheetList;
+import com.lowagie.text.rtf.style.*;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfDocumentHeader contains all classes required for the generation of
  * the document header area.
- * 
- * @version $Id: RtfDocumentHeader.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
  * @author Howard Shank (hgshank@yahoo.com)
+ * @version $Id: RtfDocumentHeader.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfDocumentHeader extends RtfElement {
+
     /**
      * Constant for the title page
      */
@@ -86,7 +81,7 @@ public class RtfDocumentHeader extends RtfElement {
      * Constant for facing pages
      */
     private static final byte[] FACING_PAGES = DocWriter.getISOBytes("\\facingp");
-    
+
     /**
      * The code page to use
      */
@@ -118,6 +113,7 @@ public class RtfDocumentHeader extends RtfElement {
     /**
      * The protection settings
      * Author: Howard Shank (hgshank@yahoo.com)
+     *
      * @since 2.1.1
      */
     private RtfProtectionSetting protectionSetting = null;
@@ -136,7 +132,7 @@ public class RtfDocumentHeader extends RtfElement {
 
     /**
      * Constructs a RtfDocumentHeader for a RtfDocument
-     * 
+     *
      * @param doc The RtfDocument this RtfDocumentHeader belongs to
      */
     protected RtfDocumentHeader(RtfDocument doc) {
@@ -159,17 +155,16 @@ public class RtfDocumentHeader extends RtfElement {
         this.footer = new RtfHeaderFooterGroup(this.document, RtfHeaderFooter.TYPE_FOOTER);
         this.generator = new RtfGenerator(this.document);
     }
-    
+
     /**
      * Writes the contents of the document header area.
-     */    
-    public void writeContent(final OutputStream result) throws IOException
-    {
+     */
+    public void writeContent(final OutputStream result) throws IOException {
         try {
             // This is so that all color, font and similar information is processed once, before
             // the header section is written.
             writeSectionDefinition(new RtfNilOutputStream());
-            
+
             this.codePage.writeDefinition(result);
             this.fontList.writeDefinition(result);
             this.colorList.writeDefinition(result);
@@ -179,28 +174,28 @@ public class RtfDocumentHeader extends RtfElement {
             this.infoGroup.writeContent(result);
             this.protectionSetting.writeDefinition(result);
             this.pageSetting.writeDefinition(result);
-            
+
             writeSectionDefinition(result);
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-    }        
+    }
 
     /**
      * Writes the section definition data
+     *
      * @param result
      */
-    public void writeSectionDefinition(final OutputStream result) 
-    {
+    public void writeSectionDefinition(final OutputStream result) {
         try {
             RtfHeaderFooterGroup header = convertHeaderFooter(this.header, RtfHeaderFooter.TYPE_HEADER);
             RtfHeaderFooterGroup footer = convertHeaderFooter(this.footer, RtfHeaderFooter.TYPE_FOOTER);
-            if(header.hasTitlePage() || footer.hasTitlePage()) {
+            if (header.hasTitlePage() || footer.hasTitlePage()) {
                 result.write(TITLE_PAGE);
                 header.setHasTitlePage();
                 footer.setHasTitlePage();
             }
-            if(header.hasFacingPages() || footer.hasFacingPages()) {
+            if (header.hasFacingPages() || footer.hasFacingPages()) {
                 result.write(FACING_PAGES);
                 header.setHasFacingPages();
                 footer.setHasFacingPages();
@@ -208,11 +203,11 @@ public class RtfDocumentHeader extends RtfElement {
             footer.writeContent(result);
             header.writeContent(result);
             pageSetting.writeSectionDefinition(result);
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
-        }    	
+        }
     }
-    
+
     /**
      * Gets the number of the specified RtfFont
      *
@@ -225,102 +220,103 @@ public class RtfDocumentHeader extends RtfElement {
 
     /**
      * Gets the number of the specified RtfColor
-     * 
+     *
      * @param color The RtfColor for which to get the number
      * @return The number of the color
      */
     public int getColorNumber(RtfColor color) {
         return this.colorList.getColorNumber(color);
     }
-    
+
     /**
      * Gets the number of the specified RtfList
-     * 
+     *
      * @param list The RtfList for which to get the number
      * @return The number of the list
      */
     public int getListNumber(RtfList list) {
         return this.listTable.getListNumber(list);
     }
+
     /**
      * Gets the RtfParagraphStyle with the given style name.
-     * 
-     * @param styleName The style name of the RtfParagraphStyle to get. 
+     *
+     * @param styleName The style name of the RtfParagraphStyle to get.
      * @return The RtfParagraphStyle with the given style name or null.
      */
     public RtfParagraphStyle getRtfParagraphStyle(String styleName) {
         return this.stylesheetList.getRtfParagraphStyle(styleName);
     }
-    
+
     /**
      * Removes a RtfList from the list table
-     * 
+     *
      * @param list The RtfList to remove
      */
     public void freeListNumber(RtfList list) {
         this.listTable.freeListNumber(list);
     }
-    
+
     /**
      * Gets the RtfPageSetting object of this RtfDocument
-     * 
+     *
      * @return The RtfPageSetting object
      */
     public RtfPageSetting getPageSetting() {
         return this.pageSetting;
     }
-    
+
     /**
      * Adds an RtfInfoElement to the list of RtfInfoElements
-     * 
+     *
      * @param rtfInfoElement The RtfInfoElement to add
      */
     public void addInfoElement(RtfInfoElement rtfInfoElement) {
         this.infoGroup.add(rtfInfoElement);
     }
-    
+
     /**
      * Sets the current header to use
-     * 
+     *
      * @param header The HeaderFooter to use as header
      */
     public void setHeader(HeaderFooter header) {
         this.header = header;
     }
-    
+
     /**
      * Sets the current footer to use
-     * 
+     *
      * @param footer The HeaderFooter to use as footer
      */
     public void setFooter(HeaderFooter footer) {
         this.footer = footer;
     }
-    
+
     /**
      * Registers the RtfParagraphStyle for further use in the document.
-     * 
+     *
      * @param rtfParagraphStyle The RtfParagraphStyle to register.
      */
     public void registerParagraphStyle(RtfParagraphStyle rtfParagraphStyle) {
         this.stylesheetList.registerParagraphStyle(rtfParagraphStyle);
     }
-    
+
     /**
      * Converts a HeaderFooter into a RtfHeaderFooterGroup. Depending on which class
      * the HeaderFooter is, the correct RtfHeaderFooterGroup is created.
-     * 
-     * @param hf The HeaderFooter to convert.
+     *
+     * @param hf   The HeaderFooter to convert.
      * @param type Whether the conversion is being done on a footer or header
      * @return The converted RtfHeaderFooterGroup.
      * @see com.lowagie.text.rtf.headerfooter.RtfHeaderFooter
      * @see com.lowagie.text.rtf.headerfooter.RtfHeaderFooterGroup
      */
     private RtfHeaderFooterGroup convertHeaderFooter(HeaderFooter hf, int type) {
-        if(hf != null) {
-            if(hf instanceof RtfHeaderFooterGroup) {
+        if (hf != null) {
+            if (hf instanceof RtfHeaderFooterGroup) {
                 return new RtfHeaderFooterGroup(this.document, (RtfHeaderFooterGroup) hf, type);
-            } else if(hf instanceof RtfHeaderFooter) {
+            } else if (hf instanceof RtfHeaderFooter) {
                 return new RtfHeaderFooterGroup(this.document, (RtfHeaderFooter) hf, type);
             } else {
                 return new RtfHeaderFooterGroup(this.document, hf, type);
@@ -329,13 +325,14 @@ public class RtfDocumentHeader extends RtfElement {
             return new RtfHeaderFooterGroup(this.document, type);
         }
     }
+
     /**
      * Get the <code>RtfListTable</code> object.
-     * 
+     *
      * @return the ListTable object.
      * @since 2.1.3
      */
     public RtfListTable getListTable() {
-    	return this.listTable;
+        return this.listTable;
     }
 }

@@ -49,23 +49,22 @@
 
 package com.lowagie.text.rtf.table;
 
-import java.awt.Color;
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfElement;
 import com.lowagie.text.rtf.document.RtfDocument;
 import com.lowagie.text.rtf.style.RtfColor;
 
+import java.awt.*;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfBorder handle one row or cell border.
  * INTERNAL USE ONLY
- * 
- * @version $Id: RtfBorder.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfBorder.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfBorder extends RtfElement {
 
@@ -124,7 +123,7 @@ public class RtfBorder extends RtfElement {
     /**
      * Constant for the double thick border style
      */
-    protected static final byte[] BORDER_STYLE_DOUBLE_THICK	= DocWriter.getISOBytes("\\brdrth");
+    protected static final byte[] BORDER_STYLE_DOUBLE_THICK = DocWriter.getISOBytes("\\brdrth");
     /**
      * Constant for the shadowed border style
      */
@@ -152,7 +151,7 @@ public class RtfBorder extends RtfElement {
     /**
      * Constant for the dot dot dash border style
      */
-    protected static final byte[] BORDER_STYLE_DOT_DOT_DASH	= DocWriter.getISOBytes("\\brdrdashdd");
+    protected static final byte[] BORDER_STYLE_DOT_DOT_DASH = DocWriter.getISOBytes("\\brdrdashdd");
     /**
      * Constant for the triple border style
      */
@@ -188,7 +187,7 @@ public class RtfBorder extends RtfElement {
     /**
      * Constant for the thin thick large border style
      */
-    protected static final byte[] BORDER_STYLE_THIN_THICK_LARGE	= DocWriter.getISOBytes("\\brdrthtnlg");
+    protected static final byte[] BORDER_STYLE_THIN_THICK_LARGE = DocWriter.getISOBytes("\\brdrthtnlg");
     /**
      * Constant for the thin thick thin large border style
      */
@@ -222,7 +221,7 @@ public class RtfBorder extends RtfElement {
      * Constant for a cell border
      */
     protected static final int CELL_BORDER = 2;
-    
+
     /**
      * This border is no border :-)
      */
@@ -244,7 +243,7 @@ public class RtfBorder extends RtfElement {
      */
     protected static final int BOTTOM_BORDER = 8;
     /**
-     * Constant for a box (left, top, right, bottom) border 
+     * Constant for a box (left, top, right, bottom) border
      */
     protected static final int BOX_BORDER = 15;
     /**
@@ -255,7 +254,7 @@ public class RtfBorder extends RtfElement {
      * Constant for a horizontal line
      */
     protected static final int HORIZONTAL_BORDER = 32;
-    
+
     /**
      * Constant for a border with no border
      */
@@ -356,7 +355,7 @@ public class RtfBorder extends RtfElement {
      * Constant for an engraved border
      */
     public static final int BORDER_ENGRAVE = 24;
-    
+
     /**
      * The type of this RtfBorder
      */
@@ -377,13 +376,13 @@ public class RtfBorder extends RtfElement {
      * The color of this RtfBorder
      */
     private RtfColor borderColor = null;
-    
+
     /**
      * Makes a copy of the given RtfBorder
-     * 
-     * @param doc The RtfDocument this RtfBorder belongs to
+     *
+     * @param doc        The RtfDocument this RtfBorder belongs to
      * @param borderType The border type of this RtfBorder
-     * @param border The RtfBorder to copy
+     * @param border     The RtfBorder to copy
      */
     protected RtfBorder(RtfDocument doc, int borderType, RtfBorder border) {
         super(doc);
@@ -393,16 +392,16 @@ public class RtfBorder extends RtfElement {
         this.borderWidth = border.getBorderWidth();
         this.borderColor = new RtfColor(this.document, border.getBorderColor());
     }
-    
+
     /**
      * Constructs a RtfBorder
-     * 
-     * @param doc The RtfDocument this RtfBorder belongs to
-     * @param borderType The type of border this RtfBorder is
+     *
+     * @param doc            The RtfDocument this RtfBorder belongs to
+     * @param borderType     The type of border this RtfBorder is
      * @param borderPosition The position of this RtfBorder
-     * @param borderStyle The style of this RtfBorder
-     * @param borderWidth The width of this RtfBorder
-     * @param borderColor The color of this RtfBorder
+     * @param borderStyle    The style of this RtfBorder
+     * @param borderWidth    The width of this RtfBorder
+     * @param borderColor    The color of this RtfBorder
      */
     protected RtfBorder(RtfDocument doc, int borderType, int borderPosition, int borderStyle, float borderWidth, Color borderColor) {
         super(doc);
@@ -410,47 +409,46 @@ public class RtfBorder extends RtfElement {
         this.borderPosition = borderPosition;
         this.borderStyle = borderStyle;
         this.borderWidth = (int) Math.min((borderWidth * TWIPS_FACTOR), 75);
-        if(this.borderWidth == 0) {
+        if (this.borderWidth == 0) {
             this.borderStyle = BORDER_NONE;
         }
-        if(borderColor == null) {
+        if (borderColor == null) {
             this.borderColor = new RtfColor(this.document, new Color(0, 0, 0));
         } else {
             this.borderColor = new RtfColor(this.document, borderColor);
         }
     }
-    
+
     /**
      * Writes the RtfBorder settings
      */
-    public void writeContent(final OutputStream result) throws IOException
-    {
-        if(this.borderStyle == BORDER_NONE || this.borderPosition == NO_BORDER || this.borderWidth == 0) {
+    public void writeContent(final OutputStream result) throws IOException {
+        if (this.borderStyle == BORDER_NONE || this.borderPosition == NO_BORDER || this.borderWidth == 0) {
             return;
         }
 
-    	if(this.borderType == ROW_BORDER) {
-            switch(this.borderPosition) {
-                case LEFT_BORDER:
-                    result.write(ROW_BORDER_LEFT);
-                	break;
-                case TOP_BORDER:
-                    result.write(ROW_BORDER_TOP);
-                    break;
-                case RIGHT_BORDER:
-                    result.write(ROW_BORDER_RIGHT);
-                    break;
-                case BOTTOM_BORDER:
-                    result.write(ROW_BORDER_BOTTOM);
-                    break;
-                case HORIZONTAL_BORDER:
-                    result.write(ROW_BORDER_HORIZONTAL);
-                    break;
-                case VERTICAL_BORDER:
-                    result.write(ROW_BORDER_VERTICAL);
-                    break;
-                default:
-                    return;
+        if (this.borderType == ROW_BORDER) {
+            switch (this.borderPosition) {
+            case LEFT_BORDER:
+                result.write(ROW_BORDER_LEFT);
+                break;
+            case TOP_BORDER:
+                result.write(ROW_BORDER_TOP);
+                break;
+            case RIGHT_BORDER:
+                result.write(ROW_BORDER_RIGHT);
+                break;
+            case BOTTOM_BORDER:
+                result.write(ROW_BORDER_BOTTOM);
+                break;
+            case HORIZONTAL_BORDER:
+                result.write(ROW_BORDER_HORIZONTAL);
+                break;
+            case VERTICAL_BORDER:
+                result.write(ROW_BORDER_VERTICAL);
+                break;
+            default:
+                return;
             }
             result.write(writeBorderStyle());
             result.write(BORDER_WIDTH);
@@ -458,22 +456,22 @@ public class RtfBorder extends RtfElement {
             result.write(BORDER_COLOR_NUMBER);
             result.write(intToByteArray(this.borderColor.getColorNumber()));
             this.document.outputDebugLinebreak(result);
-        } else if(this.borderType == CELL_BORDER) {
-            switch(this.borderPosition) {
-                case LEFT_BORDER:
-                    result.write(CELL_BORDER_LEFT);
-                	break;
-                case TOP_BORDER:
-                    result.write(CELL_BORDER_TOP);
-                    break;
-                case RIGHT_BORDER:
-                    result.write(CELL_BORDER_RIGHT);
-                    break;
-                case BOTTOM_BORDER:
-                    result.write(CELL_BORDER_BOTTOM);
-                    break;
-                default:
-                    return;
+        } else if (this.borderType == CELL_BORDER) {
+            switch (this.borderPosition) {
+            case LEFT_BORDER:
+                result.write(CELL_BORDER_LEFT);
+                break;
+            case TOP_BORDER:
+                result.write(CELL_BORDER_TOP);
+                break;
+            case RIGHT_BORDER:
+                result.write(CELL_BORDER_RIGHT);
+                break;
+            case BOTTOM_BORDER:
+                result.write(CELL_BORDER_BOTTOM);
+                break;
+            default:
+                return;
             }
             result.write(writeBorderStyle());
             result.write(BORDER_WIDTH);
@@ -481,48 +479,74 @@ public class RtfBorder extends RtfElement {
             result.write(BORDER_COLOR_NUMBER);
             result.write(intToByteArray(this.borderColor.getColorNumber()));
             this.document.outputDebugLinebreak(result);
-        }    	
+        }
     }
-     
+
     /**
      * Writes the style of this RtfBorder
-     * 
+     *
      * @return A byte array containing the style of this RtfBorder
      */
     private byte[] writeBorderStyle() {
-        switch(this.borderStyle) {
-            case BORDER_NONE                    : return new byte[0];
-            case BORDER_SINGLE 					: return BORDER_STYLE_SINGLE;
-            case BORDER_DOUBLE_THICK	 		: return BORDER_STYLE_DOUBLE_THICK;
-            case BORDER_SHADOWED 				: return BORDER_STYLE_SHADOWED;
-            case BORDER_DOTTED   				: return BORDER_STYLE_DOTTED;
-            case BORDER_DASHED   				: return BORDER_STYLE_DASHED;
-            case BORDER_HAIRLINE   				: return BORDER_STYLE_HAIRLINE;
-            case BORDER_DOUBLE 		  			: return BORDER_STYLE_DOUBLE;
-            case BORDER_DOT_DASH   				: return BORDER_STYLE_DOT_DASH;
-            case BORDER_DOT_DOT_DASH			: return BORDER_STYLE_DOT_DOT_DASH;
-            case BORDER_TRIPLE					: return BORDER_STYLE_TRIPLE;
-            case BORDER_THICK_THIN				: return BORDER_STYLE_THICK_THIN;
-            case BORDER_THIN_THICK				: return BORDER_STYLE_THIN_THICK;
-            case BORDER_THIN_THICK_THIN			: return BORDER_STYLE_THIN_THICK_THIN;
-            case BORDER_THICK_THIN_MED			: return BORDER_STYLE_THICK_THIN_MED;
-            case BORDER_THIN_THICK_MED			: return BORDER_STYLE_THIN_THICK_MED;
-            case BORDER_THIN_THICK_THIN_MED		: return BORDER_STYLE_THIN_THICK_THIN_MED;
-            case BORDER_THICK_THIN_LARGE		: return BORDER_STYLE_THICK_THIN_LARGE;
-            case BORDER_THIN_THICK_LARGE		: return BORDER_STYLE_THIN_THICK_LARGE;
-            case BORDER_THIN_THICK_THIN_LARGE	: return BORDER_STYLE_THIN_THICK_THIN_LARGE;
-            case BORDER_WAVY					: return BORDER_STYLE_WAVY;
-            case BORDER_DOUBLE_WAVY				: return BORDER_STYLE_DOUBLE_WAVY;
-            case BORDER_STRIPED					: return BORDER_STYLE_STRIPED;
-            case BORDER_EMBOSS					: return BORDER_STYLE_EMBOSS;
-            case BORDER_ENGRAVE					: return BORDER_STYLE_ENGRAVE;
-            default                             : return BORDER_STYLE_SINGLE;
+        switch (this.borderStyle) {
+        case BORDER_NONE:
+            return new byte[0];
+        case BORDER_SINGLE:
+            return BORDER_STYLE_SINGLE;
+        case BORDER_DOUBLE_THICK:
+            return BORDER_STYLE_DOUBLE_THICK;
+        case BORDER_SHADOWED:
+            return BORDER_STYLE_SHADOWED;
+        case BORDER_DOTTED:
+            return BORDER_STYLE_DOTTED;
+        case BORDER_DASHED:
+            return BORDER_STYLE_DASHED;
+        case BORDER_HAIRLINE:
+            return BORDER_STYLE_HAIRLINE;
+        case BORDER_DOUBLE:
+            return BORDER_STYLE_DOUBLE;
+        case BORDER_DOT_DASH:
+            return BORDER_STYLE_DOT_DASH;
+        case BORDER_DOT_DOT_DASH:
+            return BORDER_STYLE_DOT_DOT_DASH;
+        case BORDER_TRIPLE:
+            return BORDER_STYLE_TRIPLE;
+        case BORDER_THICK_THIN:
+            return BORDER_STYLE_THICK_THIN;
+        case BORDER_THIN_THICK:
+            return BORDER_STYLE_THIN_THICK;
+        case BORDER_THIN_THICK_THIN:
+            return BORDER_STYLE_THIN_THICK_THIN;
+        case BORDER_THICK_THIN_MED:
+            return BORDER_STYLE_THICK_THIN_MED;
+        case BORDER_THIN_THICK_MED:
+            return BORDER_STYLE_THIN_THICK_MED;
+        case BORDER_THIN_THICK_THIN_MED:
+            return BORDER_STYLE_THIN_THICK_THIN_MED;
+        case BORDER_THICK_THIN_LARGE:
+            return BORDER_STYLE_THICK_THIN_LARGE;
+        case BORDER_THIN_THICK_LARGE:
+            return BORDER_STYLE_THIN_THICK_LARGE;
+        case BORDER_THIN_THICK_THIN_LARGE:
+            return BORDER_STYLE_THIN_THICK_THIN_LARGE;
+        case BORDER_WAVY:
+            return BORDER_STYLE_WAVY;
+        case BORDER_DOUBLE_WAVY:
+            return BORDER_STYLE_DOUBLE_WAVY;
+        case BORDER_STRIPED:
+            return BORDER_STYLE_STRIPED;
+        case BORDER_EMBOSS:
+            return BORDER_STYLE_EMBOSS;
+        case BORDER_ENGRAVE:
+            return BORDER_STYLE_ENGRAVE;
+        default:
+            return BORDER_STYLE_SINGLE;
         }
     }
-    
+
     /**
      * Gets the color of this RtfBorder
-     * 
+     *
      * @return Returns RtfColor of this RtfBorder
      */
     protected RtfColor getBorderColor() {
@@ -531,6 +555,7 @@ public class RtfBorder extends RtfElement {
 
     /**
      * Gets the position of this RtfBorder
+     *
      * @return Returns the position of this RtfBorder
      */
     protected int getBorderPosition() {
@@ -539,7 +564,7 @@ public class RtfBorder extends RtfElement {
 
     /**
      * Gets the style of this RtfBorder
-     * 
+     *
      * @return Returns the style of this RtfBorder
      */
     protected int getBorderStyle() {
@@ -548,7 +573,7 @@ public class RtfBorder extends RtfElement {
 
     /**
      * Gets the type of this RtfBorder
-     * 
+     *
      * @return Returns the type of this RtfBorder
      */
     protected int getBorderType() {
@@ -557,7 +582,7 @@ public class RtfBorder extends RtfElement {
 
     /**
      * Gets the width of this RtfBorder
-     * 
+     *
      * @return Returns the width of this RtfBorder
      */
     protected int getBorderWidth() {

@@ -49,48 +49,45 @@
 
 package com.lowagie.text.rtf.document;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.Document;
 import com.lowagie.text.rtf.RtfElement;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
- * The RtfGenerator creates the (\*\generator ...} element. 
- * 
- * @version $Id: RtfGenerator.java 3580 2008-08-06 15:52:00Z howard_s $
+ * The RtfGenerator creates the (\*\generator ...} element.
+ *
  * @author Howard Shank (hgshank@yahoo.com)
- * @since 2.0.8 
+ * @version $Id: RtfGenerator.java 3580 2008-08-06 15:52:00Z howard_s $
+ * @since 2.0.8
  */
 public class RtfGenerator extends RtfElement {
+
     /**
      * Generator group starting tag
      */
     private static final byte[] GENERATOR = DocWriter.getISOBytes("\\*\\generator");
-    
+
     /**
      * Constructs a <code>RtfGenerator</code> belonging to a RtfDocument
-     * 
+     *
      * @param doc The <code>RtfDocument</code> this <code>RtfGenerator</code> belongs to
      */
     public RtfGenerator(RtfDocument doc) {
         super(doc);
     }
-    
-    
+
     /**
      * Writes the RTF generator group.
-     */    
-    public void writeContent(final OutputStream result) throws IOException
-    {
-    	result.write(OPEN_GROUP);
-		result.write(GENERATOR);
-		result.write(DELIMITER);
-		result.write(DocWriter.getISOBytes(Document.getVersion()));
-		result.write(CLOSE_GROUP);
-		this.document.outputDebugLinebreak(result);
-    }        
-    
+     */
+    public void writeContent(final OutputStream result) throws IOException {
+        result.write(OPEN_GROUP);
+        result.write(GENERATOR);
+        result.write(DELIMITER);
+        result.write(DocWriter.getISOBytes(Document.getVersion()));
+        result.write(CLOSE_GROUP);
+        this.document.outputDebugLinebreak(result);
+    }
 }

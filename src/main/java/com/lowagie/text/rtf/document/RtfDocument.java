@@ -49,10 +49,6 @@
 
 package com.lowagie.text.rtf.document;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfBasicElement;
 import com.lowagie.text.rtf.RtfElement;
@@ -63,17 +59,22 @@ import com.lowagie.text.rtf.document.output.RtfEfficientMemoryCache;
 import com.lowagie.text.rtf.document.output.RtfMemoryCache;
 import com.lowagie.text.rtf.graphic.RtfImage;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+
 /**
  * The RtfDocument stores all document related data and also the main data stream.
  * INTERNAL CLASS - NOT TO BE USED DIRECTLY
  *
- * @version $Id: RtfDocument.java 3580 2008-08-06 15:52:00Z howard_s $
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Todd Bush [Tab support]
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfDocument.java 3580 2008-08-06 15:52:00Z howard_s $
  * @since 1.x
  */
 public class RtfDocument extends RtfElement {
+
     /**
      * Stores the actual document data
      */
@@ -102,7 +103,7 @@ public class RtfDocument extends RtfElement {
      * The last RtfBasicElement that was added directly to the RtfDocument.
      */
     private RtfBasicElement lastElementWritten = null;
-    
+
     /**
      * Constant for the Rtf document start
      */
@@ -116,7 +117,7 @@ public class RtfDocument extends RtfElement {
     private final static byte[] FSC_BACKSLASH = DocWriter.getISOBytes("\\");
     private final static byte[] FSC_HEX_PREFIX = DocWriter.getISOBytes("\\\'");
     private final static byte[] FSC_UNI_PREFIX = DocWriter.getISOBytes("\\u");
-    
+
     /**
      * The default constructor for a RtfDocument
      */
@@ -133,10 +134,9 @@ public class RtfDocument extends RtfElement {
     /**
      * unused
      */
-    public void writeContent(final OutputStream out) throws IOException
-    {    	
+    public void writeContent(final OutputStream out) throws IOException {
     }
-    
+
     /**
      * Writes the document
      *
@@ -149,11 +149,11 @@ public class RtfDocument extends RtfElement {
             this.documentHeader.writeContent(out);
             this.data.writeTo(out);
             out.write(CLOSE_GROUP);
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
-    
+
     /**
      * Opens the RtfDocument and initializes the data cache. If the data cache is
      * set to CACHE_DISK, but the cache cannot be initialized then the memory cache
@@ -161,136 +161,134 @@ public class RtfDocument extends RtfElement {
      */
     public void open() {
         try {
-            switch(this.documentSettings.getDataCacheStyle()) {
-            	case RtfDataCache.CACHE_MEMORY_EFFICIENT:  
-            		this.data = new RtfEfficientMemoryCache(); 
-            		break;
-                case RtfDataCache.CACHE_MEMORY:
-                	this.data = new RtfMemoryCache();
-                	break;
-                case RtfDataCache.CACHE_DISK:
-                	this.data = new RtfDiskCache();
-                	break;
-                default:
-                	throw new RuntimeException("unknown");
+            switch (this.documentSettings.getDataCacheStyle()) {
+            case RtfDataCache.CACHE_MEMORY_EFFICIENT:
+                this.data = new RtfEfficientMemoryCache();
+                break;
+            case RtfDataCache.CACHE_MEMORY:
+                this.data = new RtfMemoryCache();
+                break;
+            case RtfDataCache.CACHE_DISK:
+                this.data = new RtfDiskCache();
+                break;
+            default:
+                throw new RuntimeException("unknown");
             }
-    		
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             System.err.println("Could not initialize disk cache. Using memory cache.");
             ioe.printStackTrace();
             this.data = new RtfMemoryCache();
         }
     }
-    
+
     /**
      * Adds an element to the rtf document
-     * 
+     *
      * @param element The element to add
      */
     public void add(RtfBasicElement element) {
         try {
-            if(element instanceof RtfInfoElement) {
+            if (element instanceof RtfInfoElement) {
                 this.documentHeader.addInfoElement((RtfInfoElement) element);
             } else {
-                if(element instanceof RtfImage) {
+                if (element instanceof RtfImage) {
                     ((RtfImage) element).setTopLevelElement(true);
                 }
-                element.writeContent( this.data.getOutputStream() );
+                element.writeContent(this.data.getOutputStream());
                 this.lastElementWritten = element;
             }
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
-    
+
     /**
      * Gets the RtfMapper object of this RtfDocument
-     * 
+     *
      * @return The RtfMapper
      */
     public RtfMapper getMapper() {
         return this.mapper;
     }
-    
+
     /**
      * Generates a random integer that is unique with respect to the document.
      * Will not return a number between -1 and -5 because some values in that range are invalid.
+     *
      * @return A random int
      */
     public int getRandomInt() {
         Integer newInt = null;
         do {
 //        	do {
-        		newInt = new Integer((int) (Math.random() * Integer.MAX_VALUE));
+            newInt = new Integer((int) (Math.random() * Integer.MAX_VALUE));
 //        	} while(newInt.intValue() <= -1 && newInt.intValue() >= -5);
-        } while(this.previousRandomInts.contains(newInt));
+        } while (this.previousRandomInts.contains(newInt));
         this.previousRandomInts.add(newInt);
         return newInt.intValue();
     }
-    
+
     /**
      * Gets the RtfDocumentHeader of this RtfDocument
-     * 
+     *
      * @return The RtfDocumentHeader of this RtfDocument
      */
     public RtfDocumentHeader getDocumentHeader() {
         return this.documentHeader;
     }
-    
+
     /**
      * Writes the given string to the given {@link OutputStream} encoding the string characters.
-     * 
-     * @param out destination OutputStream
-     * @param str string to write
-     * @param useHex if <code>true</code> hex encoding characters is preferred to unicode encoding if possible
+     *
+     * @param out            destination OutputStream
+     * @param str            string to write
+     * @param useHex         if <code>true</code> hex encoding characters is preferred to unicode encoding if possible
      * @param softLineBreaks if <code>true</code> return characters are written as soft line breaks
-     * 
      * @throws IOException
      */
-    public void filterSpecialChar(final OutputStream out, final String str, final boolean useHex, final boolean softLineBreaks) throws IOException
-    {
-        if(out == null) {
+    public void filterSpecialChar(final OutputStream out, final String str, final boolean useHex, final boolean softLineBreaks) throws IOException {
+        if (out == null) {
             throw new NullPointerException("null OutpuStream");
         }
 
         final boolean alwaysUseUniCode = this.documentSettings.isAlwaysUseUnicode();
-        if(str == null) {
+        if (str == null) {
             return;
         }
         final int len = str.length();
-        if(len == 0) {
+        if (len == 0) {
             return;
         }
 
-        for(int k = 0; k < len; k++) {
+        for (int k = 0; k < len; k++) {
             final char c = str.charAt(k);
-            if(c < 0x20) {
+            if (c < 0x20) {
                 //allow return and tab only
-                if(c == '\n') {
+                if (c == '\n') {
                     out.write(softLineBreaks ? FSC_LINE : FSC_PAR);
-                } else if(c == '\t') {
-                    out.write(FSC_TAB);                 
+                } else if (c == '\t') {
+                    out.write(FSC_TAB);
                 } else {
                     out.write('?');
                 }
-            } else if((c == '\\') || (c == '{') || (c == '}')) {
+            } else if ((c == '\\') || (c == '{') || (c == '}')) {
                 //escape
                 out.write(FSC_BACKSLASH);
                 out.write(c);
-            } else if((c == '$') && (len-k >= FSC_NEWPAGE.length) && subMatch(str, k, FSC_NEWPAGE)) {
+            } else if ((c == '$') && (len - k >= FSC_NEWPAGE.length) && subMatch(str, k, FSC_NEWPAGE)) {
                 out.write(FSC_PAGE_PAR);
-                k += FSC_NEWPAGE.length-1;
+                k += FSC_NEWPAGE.length - 1;
             } else {
-                if((c > 0xff) || ((c > 'z') && alwaysUseUniCode)) {
-                    if(useHex && (c <= 0xff)) {
+                if ((c > 0xff) || ((c > 'z') && alwaysUseUniCode)) {
+                    if (useHex && (c <= 0xff)) {
                         //encode as 2 char hex string 
                         out.write(FSC_HEX_PREFIX);
-                        out.write(RtfImage.byte2charLUT, c*2, 2);
+                        out.write(RtfImage.byte2charLUT, c * 2, 2);
                     } else {
                         //encode as decimal, signed short value
                         out.write(FSC_UNI_PREFIX);
-                        String s = Short.toString((short)c);
-                        for(int x = 0; x < s.length(); x++) {
+                        String s = Short.toString((short) c);
+                        for (int x = 0; x < s.length(); x++) {
                             out.write(s.charAt(x));
                         }
                         out.write('?');
@@ -299,74 +297,74 @@ public class RtfDocument extends RtfElement {
                     out.write(c);
                 }
             }
-        }       
+        }
     }
+
     /**
      * Returns <code>true</code> if <tt>m.length</tt> characters in <tt>str</tt>, starting at offset <tt>soff</tt>
      * match the bytes in the given array <tt>m</tt>.
-     * 
-     * @param str the string to search for a match
+     *
+     * @param str  the string to search for a match
      * @param soff the starting offset in str
-     * @param m the array to match
+     * @param m    the array to match
      * @return <code>true</code> if there is match
      */
-    private static boolean subMatch(final String str, int soff, final byte[] m)
-    {
-        for(int k = 0; k < m.length; k++) {
-            if(str.charAt(soff++) != m[k]) {
+    private static boolean subMatch(final String str, int soff, final byte[] m) {
+        for (int k = 0; k < m.length; k++) {
+            if (str.charAt(soff++) != m[k]) {
                 return false;
             }
         }
         return true;
     }
-    
+
     /**
      * Whether to automagically generate table of contents entries when
      * adding Chapters or Sections.
-     * 
+     *
      * @param autogenerate Whether to automatically generate TOC entries
      */
     public void setAutogenerateTOCEntries(boolean autogenerate) {
         this.autogenerateTOCEntries = autogenerate;
     }
-    
+
     /**
      * Get whether to automatically generate table of contents entries
-     * 
+     *
      * @return Whether to automatically generate TOC entries
      */
     public boolean getAutogenerateTOCEntries() {
         return this.autogenerateTOCEntries;
     }
-    
+
     /**
      * Gets the RtfDocumentSettings that specify how the rtf document is generated.
-     * 
+     *
      * @return The current RtfDocumentSettings.
      */
     public RtfDocumentSettings getDocumentSettings() {
         return this.documentSettings;
     }
-    
+
     /**
      * Gets the last RtfBasicElement that was directly added to the RtfDocument.
-     *  
+     *
      * @return The last RtfBasicElement that was directly added to the RtfDocument.
      */
     public RtfBasicElement getLastElementWritten() {
         return this.lastElementWritten;
     }
-    
+
     /**
      * Helper method outputs linebreak in document if debugging is turned on.
+     *
      * @param result the OutputStream to write the linebreak to.
      * @throws IOException
      * @since 2.1.3
      */
     final public void outputDebugLinebreak(final OutputStream result) throws IOException {
-    	if(this.getDocumentSettings().isOutputDebugLineBreaks())
-        {
-        	result.write('\n');
+        if (this.getDocumentSettings().isOutputDebugLineBreaks()) {
+            result.write('\n');
         }
     }
 }

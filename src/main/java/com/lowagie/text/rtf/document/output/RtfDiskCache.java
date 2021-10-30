@@ -49,22 +49,15 @@
 
 package com.lowagie.text.rtf.document.output;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-
+import java.io.*;
 
 /**
  * The RtfFileCache is a RtfDataCache that uses a temporary file
  * to store the rtf document data. Not so fast, but doesn't use any
  * memory (just disk space).
- * 
- * @version $Revision: 3373 $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
+ * @version $Revision: 3373 $
  */
 public class RtfDiskCache implements RtfDataCache {
 
@@ -76,10 +69,10 @@ public class RtfDiskCache implements RtfDataCache {
      * The temporary file to store the data in.
      */
     private File tempFile = null;
-    
+
     /**
      * Constructs a RtfFileCache. Creates the temp file.
-     * 
+     *
      * @throws IOException If the temporary file could not be created.
      */
     public RtfDiskCache() throws IOException {
@@ -102,11 +95,10 @@ public class RtfDiskCache implements RtfDataCache {
         BufferedInputStream tempIn = new BufferedInputStream(new FileInputStream(this.tempFile));
         byte[] buffer = new byte[8192];
         int bytesRead = -1;
-        while((bytesRead = tempIn.read(buffer)) >= 0) {
+        while ((bytesRead = tempIn.read(buffer)) >= 0) {
             target.write(buffer, 0, bytesRead);
         }
         tempIn.close();
         this.tempFile.delete();
     }
-
 }

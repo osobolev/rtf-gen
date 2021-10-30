@@ -49,30 +49,29 @@
 
 package com.lowagie.text.rtf.field;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.Anchor;
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.document.RtfDocument;
 import com.lowagie.text.rtf.text.RtfPhrase;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfAnchor is the RTF representation of an Anchor object.
- * 
- * @version $Id: RtfAnchor.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Werner Daehn (Werner.Daehn@BusinessObjects.com)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfAnchor.java 3580 2008-08-06 15:52:00Z howard_s $
  */
-public class RtfAnchor extends RtfField 
-{
+public class RtfAnchor extends RtfField {
+
     /**
      * Constant for a hyperlink
      */
     private static final byte[] HYPERLINK = DocWriter.getISOBytes("HYPERLINK");
-    
+
     /**
      * The url of this RtfAnchor
      */
@@ -84,8 +83,8 @@ public class RtfAnchor extends RtfField
 
     /**
      * Constructs a RtfAnchor based on a RtfField
-     * 
-     * @param doc The RtfDocument this RtfAnchor belongs to
+     *
+     * @param doc    The RtfDocument this RtfAnchor belongs to
      * @param anchor The Anchor this RtfAnchor is based on
      */
     public RtfAnchor(RtfDocument doc, Anchor anchor) {
@@ -93,7 +92,7 @@ public class RtfAnchor extends RtfField
         this.url = anchor.getReference();
         this.content = new RtfPhrase(doc, anchor);
     }
-    
+
     /**
      * Write the field instructions for this RtfAnchor. Sets the field
      * type to HYPERLINK and then writes the url.
@@ -101,23 +100,20 @@ public class RtfAnchor extends RtfField
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
-    protected void writeFieldInstContent(OutputStream result) throws IOException 
-    {
+    protected void writeFieldInstContent(OutputStream result) throws IOException {
         result.write(HYPERLINK);
         result.write(DELIMITER);
         this.document.filterSpecialChar(result, url, true, true);
     }
-    
+
     /**
      * Write the field result for this RtfAnchor. Writes the content
      * of the RtfPhrase.
-     * 
+     *
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
-    protected void writeFieldResultContent(OutputStream result) throws IOException 
-    {
+    protected void writeFieldResultContent(OutputStream result) throws IOException {
         content.writeContent(result);
     }
-    
 }

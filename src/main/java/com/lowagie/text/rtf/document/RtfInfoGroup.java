@@ -49,31 +49,32 @@
 
 package com.lowagie.text.rtf.document;
 
+import com.lowagie.text.DocWriter;
+import com.lowagie.text.rtf.RtfElement;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import com.lowagie.text.DocWriter;
-import com.lowagie.text.rtf.RtfElement;
-
-
 /**
- * The RtfInfoGroup stores information group elements. 
- * 
- * @version $Id: RtfInfoGroup.java 3580 2008-08-06 15:52:00Z howard_s $
+ * The RtfInfoGroup stores information group elements.
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
  * @author Howard Shank (hgshank@yahoo.com)
+ * @version $Id: RtfInfoGroup.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfInfoGroup extends RtfElement {
+
     /**
      * Information group starting tag
      */
     private static final byte[] INFO_GROUP = DocWriter.getISOBytes("\\info");
-    
+
     /**
      * Constant for the password element.
      * Author: Howard Shank (hgshank@yahoo.com)
+     *
      * @since 2.1.1
      */
     private static final byte[] INFO_PASSWORD = DocWriter.getISOBytes("\\*\\password");
@@ -82,49 +83,47 @@ public class RtfInfoGroup extends RtfElement {
      * The RtfInfoElements that belong to this RtfInfoGroup
      */
     ArrayList infoElements = null;
-    
+
     /**
      * Constructs a RtfInfoGroup belonging to a RtfDocument
-     * 
+     *
      * @param doc The RtfDocument this RtfInfoGroup belongs to
      */
     public RtfInfoGroup(RtfDocument doc) {
         super(doc);
         infoElements = new ArrayList();
     }
-    
+
     /**
      * Adds an RtfInfoElement to the RtfInfoGroup
-     * 
+     *
      * @param infoElement The RtfInfoElement to add
      */
     public void add(RtfInfoElement infoElement) {
         this.infoElements.add(infoElement);
     }
-    
+
     /**
      * Writes the RTF information group and its elements.
-     */    
-    public void writeContent(final OutputStream result) throws IOException
-    {
-    	result.write(OPEN_GROUP);
-		result.write(INFO_GROUP);
-		for(int i = 0; i < infoElements.size(); i++) {
-			RtfInfoElement infoElement = (RtfInfoElement) infoElements.get(i);
-			infoElement.writeContent(result);
-		}
-		
-		// handle document protection
-    	if(document.getDocumentSettings().isDocumentProtected()) {
-	    	result.write(OPEN_GROUP);
-			result.write(INFO_PASSWORD);
-			result.write(DELIMITER);
-			result.write(document.getDocumentSettings().getProtectionHashBytes());
-			result.write(CLOSE_GROUP);
-    	}
+     */
+    public void writeContent(final OutputStream result) throws IOException {
+        result.write(OPEN_GROUP);
+        result.write(INFO_GROUP);
+        for (int i = 0; i < infoElements.size(); i++) {
+            RtfInfoElement infoElement = (RtfInfoElement) infoElements.get(i);
+            infoElement.writeContent(result);
+        }
 
-		result.write(CLOSE_GROUP);
-		this.document.outputDebugLinebreak(result);
-    }        
-    
+        // handle document protection
+        if (document.getDocumentSettings().isDocumentProtected()) {
+            result.write(OPEN_GROUP);
+            result.write(INFO_PASSWORD);
+            result.write(DELIMITER);
+            result.write(document.getDocumentSettings().getProtectionHashBytes());
+            result.write(CLOSE_GROUP);
+        }
+
+        result.write(CLOSE_GROUP);
+        this.document.outputDebugLinebreak(result);
+    }
 }

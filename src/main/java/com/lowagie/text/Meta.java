@@ -54,155 +54,158 @@ import java.util.ArrayList;
 /**
  * This is an <CODE>Element</CODE> that contains
  * some meta information about the document.
- * <P>
+ * <p>
  * An object of type <CODE>Meta</CODE> can not be constructed by the user.
  * User defined meta information should be placed in a <CODE>Header</CODE>-object.
  * <CODE>Meta</CODE> is reserved for: Subject, Keywords, Author, Title, Producer
  * and Creationdate information.
  *
- * @see		Element
- * @see		Header
+ * @see        Element
+ * @see        Header
  */
 
 public class Meta implements Element {
-    
+
     // membervariables
-    
-	/** This is the type of Meta-information this object contains. */
+
+    /**
+     * This is the type of Meta-information this object contains.
+     */
     private int type;
-    
-    /** This is the content of the Meta-information. */
+
+    /**
+     * This is the content of the Meta-information.
+     */
     private StringBuffer content;
-    
+
     // constructors
-    
+
     /**
      * Constructs a <CODE>Meta</CODE>.
      *
-     * @param	type		the type of meta-information
-     * @param	content		the content
+     * @param    type        the type of meta-information
+     * @param    content        the content
      */
     Meta(int type, String content) {
         this.type = type;
         this.content = new StringBuffer(content);
     }
-    
+
     /**
      * Constructs a <CODE>Meta</CODE>.
      *
-     * @param	tag		    the tagname of the meta-information
-     * @param	content		the content
+     * @param    tag         the tagname of the meta-information
+     * @param    content        the content
      */
     public Meta(String tag, String content) {
         this.type = Meta.getType(tag);
         this.content = new StringBuffer(content);
     }
-    
+
     // implementation of the Element-methods
-    
+
     /**
      * Processes the element by adding it (or the different parts) to a
      * <CODE>ElementListener</CODE>.
      *
-     * @param	listener		the <CODE>ElementListener</CODE>
-     * @return	<CODE>true</CODE> if the element was processed successfully
+     * @param    listener        the <CODE>ElementListener</CODE>
+     * @return    <CODE>true</CODE> if the element was processed successfully
      */
     public boolean process(ElementListener listener) {
         try {
             return listener.add(this);
-        }
-        catch(DocumentException de) {
+        } catch (DocumentException de) {
             return false;
         }
     }
-    
+
     /**
      * Gets the type of the text element.
      *
-     * @return	a type
+     * @return a type
      */
     public int type() {
         return type;
     }
-    
+
     /**
      * Gets all the chunks in this element.
      *
-     * @return	an <CODE>ArrayList</CODE>
+     * @return an <CODE>ArrayList</CODE>
      */
     public ArrayList getChunks() {
         return new ArrayList();
     }
-    
-	/**
-	 * @see com.lowagie.text.Element#isContent()
-	 * @since	iText 2.0.8
-	 */
-	public boolean isContent() {
-		return false;
-	}
 
-	/**
-	 * @see com.lowagie.text.Element#isNestable()
-	 * @since	iText 2.0.8
-	 */
-	public boolean isNestable() {
-		return false;
-	}
-    
+    /**
+     * @since iText 2.0.8
+     * @see com.lowagie.text.Element#isContent()
+     */
+    public boolean isContent() {
+        return false;
+    }
+
+    /**
+     * @since iText 2.0.8
+     * @see com.lowagie.text.Element#isNestable()
+     */
+    public boolean isNestable() {
+        return false;
+    }
+
     // methods
-    
+
     /**
      * appends some text to this <CODE>Meta</CODE>.
      *
-     * @param	string      a <CODE>String</CODE>
-     * @return	a <CODE>StringBuffer</CODE>
+     * @param    string a <CODE>String</CODE>
+     * @return a <CODE>StringBuffer</CODE>
      */
     public StringBuffer append(String string) {
         return content.append(string);
     }
-    
+
     // methods to retrieve information
 
-	/**
+    /**
      * Returns the content of the meta information.
      *
-     * @return	a <CODE>String</CODE>
+     * @return a <CODE>String</CODE>
      */
     public String getContent() {
         return content.toString();
     }
 
-	/**
-     * Returns the name of the meta information.
-     *
-     * @return	a <CODE>String</CODE>
-     */
-    
-    public String getName() {
-        switch (type) {
-            case Element.SUBJECT:
-                return ElementTags.SUBJECT;
-            case Element.KEYWORDS:
-                return ElementTags.KEYWORDS;
-            case Element.AUTHOR:
-                return ElementTags.AUTHOR;
-            case Element.TITLE:
-                return ElementTags.TITLE;
-            case Element.PRODUCER:
-                return ElementTags.PRODUCER;
-            case Element.CREATIONDATE:
-                return ElementTags.CREATIONDATE;
-                default:
-                    return ElementTags.UNKNOWN;
-        }
-    }
-    
     /**
      * Returns the name of the meta information.
-     * 
+     *
+     * @return a <CODE>String</CODE>
+     */
+
+    public String getName() {
+        switch (type) {
+        case Element.SUBJECT:
+            return ElementTags.SUBJECT;
+        case Element.KEYWORDS:
+            return ElementTags.KEYWORDS;
+        case Element.AUTHOR:
+            return ElementTags.AUTHOR;
+        case Element.TITLE:
+            return ElementTags.TITLE;
+        case Element.PRODUCER:
+            return ElementTags.PRODUCER;
+        case Element.CREATIONDATE:
+            return ElementTags.CREATIONDATE;
+        default:
+            return ElementTags.UNKNOWN;
+        }
+    }
+
+    /**
+     * Returns the name of the meta information.
+     *
      * @param tag iText tag for meta information
-     * @return	the Element value corresponding with the given tag
+     * @return the Element value corresponding with the given tag
      */
     public static int getType(String tag) {
         if (ElementTags.SUBJECT.equals(tag)) {
@@ -225,5 +228,4 @@ public class Meta implements Element {
         }
         return Element.HEADER;
     }
-
 }

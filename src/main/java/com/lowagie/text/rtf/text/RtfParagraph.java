@@ -49,14 +49,7 @@
 
 package com.lowagie.text.rtf.text;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
-import com.lowagie.text.Chunk;
-import com.lowagie.text.DocWriter;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Element;
-import com.lowagie.text.Paragraph;
+import com.lowagie.text.*;
 import com.lowagie.text.rtf.RtfBasicElement;
 import com.lowagie.text.rtf.RtfElement;
 import com.lowagie.text.rtf.document.RtfDocument;
@@ -64,14 +57,16 @@ import com.lowagie.text.rtf.graphic.RtfImage;
 import com.lowagie.text.rtf.style.RtfFont;
 import com.lowagie.text.rtf.style.RtfParagraphStyle;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfParagraph is an extension of the RtfPhrase that adds alignment and
  * indentation properties. It wraps a Paragraph.
- * 
- * @version $Id: RtfParagraph.java 3670 2009-02-01 09:13:48Z blowagie $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfParagraph.java 3670 2009-02-01 09:13:48Z blowagie $
  */
 public class RtfParagraph extends RtfPhrase {
 
@@ -79,22 +74,22 @@ public class RtfParagraph extends RtfPhrase {
      * Constant for the end of a paragraph
      */
     public static final byte[] PARAGRAPH = DocWriter.getISOBytes("\\par");
-    
+
     /**
      * An optional RtfParagraphStyle to use for styling.
      */
     protected RtfParagraphStyle paragraphStyle = null;
-    
+
     /**
      * Constructs a RtfParagraph belonging to a RtfDocument based on a Paragraph.
-     * 
-     * @param doc The RtfDocument this RtfParagraph belongs to
+     *
+     * @param doc       The RtfDocument this RtfParagraph belongs to
      * @param paragraph The Paragraph that this RtfParagraph is based on
      */
     public RtfParagraph(RtfDocument doc, Paragraph paragraph) {
         super(doc);
         RtfFont baseFont = null;
-        if(paragraph.getFont() instanceof RtfParagraphStyle) {
+        if (paragraph.getFont() instanceof RtfParagraphStyle) {
             this.paragraphStyle = this.document.getDocumentHeader().getRtfParagraphStyle(((RtfParagraphStyle) paragraph.getFont()).getStyleName());
             baseFont = this.paragraphStyle;
         } else {
@@ -106,100 +101,99 @@ public class RtfParagraph extends RtfPhrase {
             this.paragraphStyle.setIndentRight((int) (paragraph.getIndentationRight() * RtfElement.TWIPS_FACTOR));
             this.paragraphStyle.setSpacingBefore((int) (paragraph.getSpacingBefore() * RtfElement.TWIPS_FACTOR));
             this.paragraphStyle.setSpacingAfter((int) (paragraph.getSpacingAfter() * RtfElement.TWIPS_FACTOR));
-            if(paragraph.hasLeading()) {
+            if (paragraph.hasLeading()) {
                 this.paragraphStyle.setLineLeading((int) (paragraph.getLeading() * RtfElement.TWIPS_FACTOR));
             }
             this.paragraphStyle.setKeepTogether(paragraph.getKeepTogether());
-        }        
-        for(int i = 0; i < paragraph.size(); i++) {
+        }
+        for (int i = 0; i < paragraph.size(); i++) {
             Element chunk = (Element) paragraph.get(i);
-            if(chunk instanceof Chunk) {
+            if (chunk instanceof Chunk) {
                 ((Chunk) chunk).setFont(baseFont.difference(((Chunk) chunk).getFont()));
-            } else if(chunk instanceof RtfImage) {
+            } else if (chunk instanceof RtfImage) {
                 ((RtfImage) chunks.get(i)).setAlignment(this.paragraphStyle.getAlignment());
             }
             try {
                 RtfBasicElement[] rtfElements = doc.getMapper().mapElement(chunk);
-                for(int j = 0; j < rtfElements.length; j++) {
+                for (int j = 0; j < rtfElements.length; j++) {
                     chunks.add(rtfElements[j]);
                 }
-            } catch(DocumentException de) {
+            } catch (DocumentException de) {
             }
         }
     }
-    
+
     /**
      * Set whether this RtfParagraph must stay on the same page as the next one.
-     *  
+     *
      * @param keepTogetherWithNext Whether this RtfParagraph must keep together with the next.
      */
     public void setKeepTogetherWithNext(boolean keepTogetherWithNext) {
         this.paragraphStyle.setKeepTogetherWithNext(keepTogetherWithNext);
     }
-    
+
     /**
      * Writes the content of this RtfParagraph. First paragraph specific data is written
      * and then the RtfChunks of this RtfParagraph are added.
-     */    
-    public void writeContent(final OutputStream result) throws IOException
-    {
+     */
+    public void writeContent(final OutputStream result) throws IOException {
         result.write(PARAGRAPH_DEFAULTS);
         result.write(PLAIN);
 
-        if(inTable) {
+        if (inTable) {
             result.write(IN_TABLE);
         }
-        
-        if(this.paragraphStyle != null) {
+
+        if (this.paragraphStyle != null) {
             this.paragraphStyle.writeBegin(result);
         }
         result.write(DocWriter.getISOBytes("\\plain"));
-        
-        for(int i = 0; i < chunks.size(); i++) {
-        	RtfBasicElement rbe = (RtfBasicElement)chunks.get(i);
-        	rbe.writeContent(result);
+
+        for (int i = 0; i < chunks.size(); i++) {
+            RtfBasicElement rbe = (RtfBasicElement) chunks.get(i);
+            rbe.writeContent(result);
         }
-        
-        if(this.paragraphStyle != null) {
+
+        if (this.paragraphStyle != null) {
             this.paragraphStyle.writeEnd(result);
         }
-        
-        if(!inTable) {
+
+        if (!inTable) {
             result.write(PARAGRAPH);
         }
         this.document.outputDebugLinebreak(result);
-    }        
-    
+    }
+
     /**
      * Gets the left indentation of this RtfParagraph.
-     * 
+     *
      * @return The left indentation.
      */
     public int getIndentLeft() {
         return this.paragraphStyle.getIndentLeft();
     }
-    
+
     /**
      * Sets the left indentation of this RtfParagraph.
-     * 
+     *
      * @param indentLeft The left indentation to use.
      */
     public void setIndentLeft(int indentLeft) {
         this.paragraphStyle.setIndentLeft(indentLeft);
     }
-    
+
     /**
      * Gets the right indentation of this RtfParagraph.
-     * 
+     *
      * @return The right indentation.
      */
-    public int getIndentRight()  {
+    public int getIndentRight() {
         return this.paragraphStyle.getIndentRight();
     }
-    
+
     /**
      * Sets the right indentation of this RtfParagraph.
-     * 
+     *
      * @param indentRight The right indentation to use.
      */
     public void setIndentRight(int indentRight) {

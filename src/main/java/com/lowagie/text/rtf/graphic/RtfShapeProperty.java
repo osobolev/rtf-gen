@@ -1,25 +1,24 @@
 package com.lowagie.text.rtf.graphic;
 
-import java.awt.Color;
-import java.awt.Point;
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.ExceptionConverter;
 import com.lowagie.text.Image;
 import com.lowagie.text.rtf.RtfAddableElement;
 
+import java.awt.*;
+import java.io.IOException;
+import java.io.OutputStream;
+
 /**
  * The RtfShapeProperty stores all shape properties that are
  * not handled by the RtfShape and RtfShapePosition.<br /><br />
- * 
+ * <p>
  * There is a huge selection of properties that can be set. For
  * the most important properites there are constants for the
  * property name, for all others you must find the correct
  * property name in the RTF specification (version 1.6).<br /><br />
- * 
+ * <p>
  * The following types of property values are supported:
  * <ul>
  *   <li>long</li>
@@ -29,15 +28,16 @@ import com.lowagie.text.rtf.RtfAddableElement;
  *   <li>int[]</li>
  *   <li>Point[]</li>
  * </ul>
- * 
- * @version $Id: RtfShapeProperty.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfShapeProperty.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfShapeProperty extends RtfAddableElement {
+
     /**
-    * Property for defining an image.
-    */
+     * Property for defining an image.
+     */
     public static final String PROPERTY_IMAGE = "pib";
     /**
      * Property for defining vertices in freeform shapes. Requires a
@@ -102,120 +102,120 @@ public class RtfShapeProperty extends RtfAddableElement {
     /**
      * The stored value is boolean.
      */
-	private static final int PROPERTY_TYPE_BOOLEAN = 2;
+    private static final int PROPERTY_TYPE_BOOLEAN = 2;
     /**
      * The stored value is a double.
      */
-	private static final int PROPERTY_TYPE_DOUBLE = 3;
+    private static final int PROPERTY_TYPE_DOUBLE = 3;
     /**
      * The stored value is a Color.
      */
-	private static final int PROPERTY_TYPE_COLOR = 4;
+    private static final int PROPERTY_TYPE_COLOR = 4;
     /**
      * The stored value is either an int or a Point array.
      */
-	private static final int PROPERTY_TYPE_ARRAY = 5;
+    private static final int PROPERTY_TYPE_ARRAY = 5;
     /**
-    * The stored value is an Image.
-    */
+     * The stored value is an Image.
+     */
     private static final int PROPERTY_TYPE_IMAGE = 6;
-	
+
     /**
      * The value type.
      */
-	private int type = 0;
+    private int type = 0;
     /**
      * The RtfShapeProperty name.
      */
-	private String name = "";
+    private String name = "";
     /**
      * The RtfShapeProperty value.
      */
-	private Object value = null;
-	
+    private Object value = null;
+
     /**
      * Internally used to create the RtfShape.
-     * 
-     * @param name The property name to use.
+     *
+     * @param name  The property name to use.
      * @param value The property value to use.
      */
-	private RtfShapeProperty(String name, Object value) {
-		this.name = name;
-		this.value = value;
-	}
-	
+    private RtfShapeProperty(String name, Object value) {
+        this.name = name;
+        this.value = value;
+    }
+
     /**
      * Constructs a RtfShapeProperty with a long value.
-     * 
-     * @param name The property name to use.
+     *
+     * @param name  The property name to use.
      * @param value The long value to use.
      */
-	public RtfShapeProperty(String name, long value) {
-		this(name, new Long(value));
-		this.type = PROPERTY_TYPE_LONG;
-	}
-	
+    public RtfShapeProperty(String name, long value) {
+        this(name, new Long(value));
+        this.type = PROPERTY_TYPE_LONG;
+    }
+
     /**
      * Constructs a RtfShapeProperty with a double value.
-     * 
-     * @param name The property name to use.
+     *
+     * @param name  The property name to use.
      * @param value The double value to use.
      */
-	public RtfShapeProperty(String name, double value) {
-		this(name, new Double(value));
-		this.type = PROPERTY_TYPE_DOUBLE;
-	}
-	
+    public RtfShapeProperty(String name, double value) {
+        this(name, new Double(value));
+        this.type = PROPERTY_TYPE_DOUBLE;
+    }
+
     /**
      * Constructs a RtfShapeProperty with a boolean value.
-     * 
-     * @param name The property name to use.
+     *
+     * @param name  The property name to use.
      * @param value The boolean value to use.
      */
-	public RtfShapeProperty(String name, boolean value) {
-		this(name, Boolean.valueOf(value));
-		this.type = PROPERTY_TYPE_BOOLEAN;
-	}
-	
+    public RtfShapeProperty(String name, boolean value) {
+        this(name, Boolean.valueOf(value));
+        this.type = PROPERTY_TYPE_BOOLEAN;
+    }
+
     /**
      * Constructs a RtfShapeProperty with a Color value.
-     * 
-     * @param name The property name to use.
+     *
+     * @param name  The property name to use.
      * @param value The Color value to use.
      */
-	public RtfShapeProperty(String name, Color value) {
-		this(name, (Object) value);
-		this.type = PROPERTY_TYPE_COLOR;
-	}
-	
+    public RtfShapeProperty(String name, Color value) {
+        this(name, (Object) value);
+        this.type = PROPERTY_TYPE_COLOR;
+    }
+
     /**
      * Constructs a RtfShapeProperty with an int array value.
-     * 
-     * @param name The property name to use.
+     *
+     * @param name  The property name to use.
      * @param value The int array to use.
      */
-	public RtfShapeProperty(String name, int[] value) {
-		this(name, (Object) value);
-		this.type = PROPERTY_TYPE_ARRAY;
-	}
-    
+    public RtfShapeProperty(String name, int[] value) {
+        this(name, (Object) value);
+        this.type = PROPERTY_TYPE_ARRAY;
+    }
+
     /**
      * Constructs a RtfShapeProperty with a Point array value.
-     * 
-     * @param name The property name to use.
+     *
+     * @param name  The property name to use.
      * @param value The Point array to use.
      */
     public RtfShapeProperty(String name, Point[] value) {
         this(name, (Object) value);
         this.type = PROPERTY_TYPE_ARRAY;
     }
-	
+
     /**
-    * Constructs a RtfShapeProperty with an Image value.
-    * 
-    * @param name The property name to use.
-    * @param value The Image to use.
-    */
+     * Constructs a RtfShapeProperty with an Image value.
+     *
+     * @param name  The property name to use.
+     * @param value The Image to use.
+     */
     public RtfShapeProperty(String name, Image value) {
         this.name = name;
         this.value = value;
@@ -224,81 +224,79 @@ public class RtfShapeProperty extends RtfAddableElement {
 
     /**
      * Gets the name of this RtfShapeProperty.
-     * 
+     *
      * @return The name of this RtfShapeProperty.
      */
     public String getName() {
         return this.name;
     }
-    
+
     /**
      * Writes the property definition. How the property
      * is written depends on the property type.
      */
-    public void writeContent(final OutputStream result) throws IOException
-    {    	
-    	result.write(OPEN_GROUP);
-    	result.write(DocWriter.getISOBytes("\\sp"));
-    	result.write(OPEN_GROUP);
-    	result.write(DocWriter.getISOBytes("\\sn"));
-    	result.write(DELIMITER);
-    	result.write(DocWriter.getISOBytes(this.name));
-    	result.write(CLOSE_GROUP);
-    	result.write(OPEN_GROUP);
-    	result.write(DocWriter.getISOBytes("\\sv"));
-    	result.write(DELIMITER);
-    	switch(this.type) {
-    	case PROPERTY_TYPE_LONG: 
-    	case PROPERTY_TYPE_DOUBLE:
-    		result.write(DocWriter.getISOBytes(this.value.toString()));
-    		break;
-    	case PROPERTY_TYPE_BOOLEAN:
-    		if(((Boolean) this.value).booleanValue()) {
-    			result.write(DocWriter.getISOBytes("1"));
-    		} else {
-    			result.write(DocWriter.getISOBytes("0"));
-    		}
-    		break;
-    	case PROPERTY_TYPE_COLOR:
+    public void writeContent(final OutputStream result) throws IOException {
+        result.write(OPEN_GROUP);
+        result.write(DocWriter.getISOBytes("\\sp"));
+        result.write(OPEN_GROUP);
+        result.write(DocWriter.getISOBytes("\\sn"));
+        result.write(DELIMITER);
+        result.write(DocWriter.getISOBytes(this.name));
+        result.write(CLOSE_GROUP);
+        result.write(OPEN_GROUP);
+        result.write(DocWriter.getISOBytes("\\sv"));
+        result.write(DELIMITER);
+        switch (this.type) {
+        case PROPERTY_TYPE_LONG:
+        case PROPERTY_TYPE_DOUBLE:
+            result.write(DocWriter.getISOBytes(this.value.toString()));
+            break;
+        case PROPERTY_TYPE_BOOLEAN:
+            if (((Boolean) this.value).booleanValue()) {
+                result.write(DocWriter.getISOBytes("1"));
+            } else {
+                result.write(DocWriter.getISOBytes("0"));
+            }
+            break;
+        case PROPERTY_TYPE_COLOR:
             Color color = (Color) this.value;
             result.write(intToByteArray(color.getRed() | (color.getGreen() << 8) | (color.getBlue() << 16)));
-    		break;
-    	case PROPERTY_TYPE_ARRAY:
-    	    if(this.value instanceof int[]) {
-    	        int[] values = (int[]) this.value;
-    	        result.write(DocWriter.getISOBytes("4;"));
-    	        result.write(intToByteArray(values.length));
-    	        result.write(COMMA_DELIMITER);
-    	        for(int i = 0; i < values.length; i++) {
-    	            result.write(intToByteArray(values[i]));
-    	            if(i < values.length - 1) {
-    	                result.write(COMMA_DELIMITER);
-    	            }
-    	        }
-    	    } else if(this.value instanceof Point[]) {
-    	        Point[] values = (Point[]) this.value;
+            break;
+        case PROPERTY_TYPE_ARRAY:
+            if (this.value instanceof int[]) {
+                int[] values = (int[]) this.value;
+                result.write(DocWriter.getISOBytes("4;"));
+                result.write(intToByteArray(values.length));
+                result.write(COMMA_DELIMITER);
+                for (int i = 0; i < values.length; i++) {
+                    result.write(intToByteArray(values[i]));
+                    if (i < values.length - 1) {
+                        result.write(COMMA_DELIMITER);
+                    }
+                }
+            } else if (this.value instanceof Point[]) {
+                Point[] values = (Point[]) this.value;
                 result.write(DocWriter.getISOBytes("8;"));
                 result.write(intToByteArray(values.length));
                 result.write(COMMA_DELIMITER);
-                for(int i = 0; i < values.length; i++) {
+                for (int i = 0; i < values.length; i++) {
                     result.write(DocWriter.getISOBytes("("));
                     result.write(intToByteArray(values[i].x));
                     result.write(DocWriter.getISOBytes(","));
                     result.write(intToByteArray(values[i].y));
                     result.write(DocWriter.getISOBytes(")"));
-                    if(i < values.length - 1) {
+                    if (i < values.length - 1) {
                         result.write(COMMA_DELIMITER);
                     }
                 }
             }
-    		break;
+            break;
         case PROPERTY_TYPE_IMAGE:
-            Image image = (Image)this.value;
+            Image image = (Image) this.value;
             RtfImage img = null;
             try {
                 img = new RtfImage(this.doc, image);
-            }
-            catch (DocumentException de) {
+            } catch (DocumentException de) {
                 throw new ExceptionConverter(de);
             }
             img.setTopLevelElement(true);
@@ -306,9 +304,8 @@ public class RtfShapeProperty extends RtfAddableElement {
             img.writeContent(result);
             result.write(CLOSE_GROUP);
             break;
-    	}
-    	result.write(CLOSE_GROUP);
-    	result.write(CLOSE_GROUP);
+        }
+        result.write(CLOSE_GROUP);
+        result.write(CLOSE_GROUP);
     }
-	
 }

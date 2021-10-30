@@ -49,22 +49,21 @@
 
 package com.lowagie.text.rtf.text;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.Annotation;
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfElement;
 import com.lowagie.text.rtf.document.RtfDocument;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfAnnotation provides support for adding Annotations to the rtf document.
  * Only simple Annotations with Title / Content are supported.
- * 
- * @version $Id: RtfAnnotation.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfAnnotation.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public class RtfAnnotation extends RtfElement {
 
@@ -80,7 +79,7 @@ public class RtfAnnotation extends RtfElement {
      * Constant for the actual annotation
      */
     private static final byte[] ANNOTATION = DocWriter.getISOBytes("\\*\\annotation");
-    
+
     /**
      * The title of this RtfAnnotation
      */
@@ -89,11 +88,11 @@ public class RtfAnnotation extends RtfElement {
      * The content of this RtfAnnotation
      */
     private String content = "";
-    
+
     /**
      * Constructs a RtfAnnotation based on an Annotation.
-     * 
-     * @param doc The RtfDocument this RtfAnnotation belongs to
+     *
+     * @param doc        The RtfDocument this RtfAnnotation belongs to
      * @param annotation The Annotation this RtfAnnotation is based off
      */
     public RtfAnnotation(RtfDocument doc, Annotation annotation) {
@@ -101,12 +100,11 @@ public class RtfAnnotation extends RtfElement {
         title = annotation.title();
         content = annotation.content();
     }
-    
+
     /**
      * Writes the content of the RtfAnnotation
      */
-    public void writeContent(final OutputStream result) throws IOException
-    {
+    public void writeContent(final OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         result.write(ANNOTATION_ID);
         result.write(DELIMITER);
@@ -122,6 +120,6 @@ public class RtfAnnotation extends RtfElement {
         result.write(RtfParagraph.PARAGRAPH_DEFAULTS);
         result.write(DELIMITER);
         result.write(DocWriter.getISOBytes(content));
-        result.write(CLOSE_GROUP);    	
+        result.write(CLOSE_GROUP);
     }
 }

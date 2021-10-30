@@ -49,83 +49,89 @@
 
 package com.lowagie.text.rtf.document;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfElement;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
- * The RtfProtectionSetting handles document protection elements 
- * 
- * @version $Id: RtfProtectionSetting.java 3580 2008-08-06 15:52:00Z howard_s $
+ * The RtfProtectionSetting handles document protection elements
+ *
  * @author Howard Shank (hgshank@yahoo.com)
- * @since 2.1.1 
+ * @version $Id: RtfProtectionSetting.java 3580 2008-08-06 15:52:00Z howard_s $
+ * @since 2.1.1
  */
 public class RtfProtectionSetting extends RtfElement {
-	/**
-	 * Constant for Form protection controlword
-	 * Mutually exclusive
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#REVPROT
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#ANNOTPROT
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#READPROT
-	 * @since 2.1.1 
-	 */
-    private static final byte[] FORMPROT = DocWriter.getISOBytes("\\formprot");
-	/**
-	 * Constant for Revision protection controlword
-	 * Mutually exclusive
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#FORMPROT
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#ANNOTPROT
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#READPROT
-	 * @since 2.1.1
-	 */
-    private static final byte[] REVPROT = DocWriter.getISOBytes("\\revprot");
-	/**
-	 * Constant for Annotation/Comment protection controlword
-	 * Mutually exclusive
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#FORMPROT
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#REVPROT
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#READPROT
-	 * @since 2.1.1
-	 */
-    private static final byte[] ANNOTPROT = DocWriter.getISOBytes("\\annotprot");
-	/**
-	 * Constant for read only rotection controlword
-	 * Mutually exclusive - exception, can be combined with ANNOTPROT
-	 * for backwards compatibility
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#FORMPROT
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#REVPROT
-	 * @see com.lowagie.text.rtf.document.RtfProtectionSetting#ANNOTPROT
-	 * @since 2.1.1
-	 */
-    private static final byte[] READPROT = DocWriter.getISOBytes("\\readprot");
-    
-	/**
-	 * Constant for protlevel controlword
-	 * @since 2.1.1
-	 */
-    private static final byte[] PROTLEVEL = DocWriter.getISOBytes("\\protlevel");
-	/**
-	 * Constant for enforceprot controlword
-	 * @since 2.1.1 
-	 */
-    private static final byte[] ENFORCEPROT = DocWriter.getISOBytes("\\enforceprot");
-    
-	/**
-	 * Constant for enforceprot controlword.
-	 * Implemented in Microsoft Word 2007.
-	 * 
+
+    /**
+     * Constant for Form protection controlword
+     * Mutually exclusive
+     *
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#REVPROT
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#ANNOTPROT
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#READPROT
      * @since 2.1.1
-	 */
+     */
+    private static final byte[] FORMPROT = DocWriter.getISOBytes("\\formprot");
+    /**
+     * Constant for Revision protection controlword
+     * Mutually exclusive
+     *
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#FORMPROT
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#ANNOTPROT
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#READPROT
+     * @since 2.1.1
+     */
+    private static final byte[] REVPROT = DocWriter.getISOBytes("\\revprot");
+    /**
+     * Constant for Annotation/Comment protection controlword
+     * Mutually exclusive
+     *
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#FORMPROT
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#REVPROT
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#READPROT
+     * @since 2.1.1
+     */
+    private static final byte[] ANNOTPROT = DocWriter.getISOBytes("\\annotprot");
+    /**
+     * Constant for read only rotection controlword
+     * Mutually exclusive - exception, can be combined with ANNOTPROT
+     * for backwards compatibility
+     *
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#FORMPROT
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#REVPROT
+     * @see com.lowagie.text.rtf.document.RtfProtectionSetting#ANNOTPROT
+     * @since 2.1.1
+     */
+    private static final byte[] READPROT = DocWriter.getISOBytes("\\readprot");
+
+    /**
+     * Constant for protlevel controlword
+     *
+     * @since 2.1.1
+     */
+    private static final byte[] PROTLEVEL = DocWriter.getISOBytes("\\protlevel");
+    /**
+     * Constant for enforceprot controlword
+     *
+     * @since 2.1.1
+     */
+    private static final byte[] ENFORCEPROT = DocWriter.getISOBytes("\\enforceprot");
+
+    /**
+     * Constant for enforceprot controlword.
+     * Implemented in Microsoft Word 2007.
+     *
+     * @since 2.1.1
+     */
     private static final byte[] READONLYRECOMMENDED = DocWriter.getISOBytes("\\readonlyrecommended");
 
     /**
      * Constructs a <code>RtfProtectionSetting</code> belonging to a RtfDocument
-     * 
+     *
      * @param doc The <code>RtfDocument</code> this <code>RtfProtectionSetting</code> belongs to
-	 * @since 2.1.1
+     * @since 2.1.1
      */
     public RtfProtectionSetting(RtfDocument doc) {
         super(doc);
@@ -133,43 +139,43 @@ public class RtfProtectionSetting extends RtfElement {
 
     /**
      * Writes the RTF protection control words
-	 * @since 2.1.1
-     */    
-    public void writeContent(final OutputStream result) throws IOException
-    {
+     *
+     * @since 2.1.1
+     */
+    public void writeContent(final OutputStream result) throws IOException {
     }
-    
+
     /**
      * Writes the RTF protection control words
-	 * @since 2.1.1
-    */    
-    public void writeDefinition(final OutputStream result) throws IOException
-    {
-    	if(document.getDocumentSettings().isDocumentProtected()) {
-	    	switch(document.getDocumentSettings().getProtectionLevelRaw()) {
-	    	case RtfProtection.LEVEL_FORMPROT:
-	    		result.write(FORMPROT);
-	    		break;
-	    	case RtfProtection.LEVEL_ANNOTPROT:
-	    		result.write(ANNOTPROT);
-	    		break;
-	    	case RtfProtection.LEVEL_REVPROT:
-	    		result.write(REVPROT);
-	    		break;
-	    	case RtfProtection.LEVEL_READPROT:
-	    		result.write(ANNOTPROT);
-	    		result.write(READPROT);
-	    		break;
-	    	}
-	    	result.write(ENFORCEPROT);	// assumes one of the above protection keywords was output.
-	    	result.write((byte)'1');
-	    	result.write(PROTLEVEL);
-	    	result.write(document.getDocumentSettings().getProtectionLevelBytes());
-    	}
-    	
-    	if(document.getDocumentSettings().getReadOnlyRecommended()) {
-	    	result.write(READONLYRECOMMENDED);
-	    	result.write(DELIMITER);
-    	}
+     *
+     * @since 2.1.1
+     */
+    public void writeDefinition(final OutputStream result) throws IOException {
+        if (document.getDocumentSettings().isDocumentProtected()) {
+            switch (document.getDocumentSettings().getProtectionLevelRaw()) {
+            case RtfProtection.LEVEL_FORMPROT:
+                result.write(FORMPROT);
+                break;
+            case RtfProtection.LEVEL_ANNOTPROT:
+                result.write(ANNOTPROT);
+                break;
+            case RtfProtection.LEVEL_REVPROT:
+                result.write(REVPROT);
+                break;
+            case RtfProtection.LEVEL_READPROT:
+                result.write(ANNOTPROT);
+                result.write(READPROT);
+                break;
+            }
+            result.write(ENFORCEPROT);    // assumes one of the above protection keywords was output.
+            result.write((byte) '1');
+            result.write(PROTLEVEL);
+            result.write(document.getDocumentSettings().getProtectionLevelBytes());
+        }
+
+        if (document.getDocumentSettings().getReadOnlyRecommended()) {
+            result.write(READONLYRECOMMENDED);
+            result.write(DELIMITER);
+        }
     }
 }

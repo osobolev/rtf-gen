@@ -54,10 +54,9 @@ import java.net.URL;
 /**
  * Raw Image data that has to be inserted into the document
  *
- * @see		Element
- * @see		Image
- *
- * @author  Paulo Soares
+ * @author Paulo Soares
+ * @see        Element
+ * @see        Image
  */
 
 public class ImgRaw extends Image {
@@ -66,18 +65,19 @@ public class ImgRaw extends Image {
         super(image);
     }
 
-/** Creates an Image in raw mode.
- *
- * @param width the exact width of the image
- * @param height the exact height of the image
- * @param components 1,3 or 4 for GrayScale, RGB and CMYK
- * @param bpc bits per component. Must be 1,2,4 or 8
- * @param data the image data
- * @throws BadElementException on error
- */
-    
-    public ImgRaw(int width, int height, int components, int bpc, byte[] data) throws BadElementException{
-        super((URL)null);
+    /**
+     * Creates an Image in raw mode.
+     *
+     * @param width      the exact width of the image
+     * @param height     the exact height of the image
+     * @param components 1,3 or 4 for GrayScale, RGB and CMYK
+     * @param bpc        bits per component. Must be 1,2,4 or 8
+     * @param data       the image data
+     * @throws BadElementException on error
+     */
+
+    public ImgRaw(int width, int height, int components, int bpc, byte[] data) throws BadElementException {
+        super((URL) null);
         type = IMGRAW;
         scaledHeight = height;
         setTop(scaledHeight);

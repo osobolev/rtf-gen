@@ -3,7 +3,7 @@
  *
  * Copyright 2004 by Mark Hall
  * Uses code Copyright 2002
- *   <a href="http://www.smb-tec.com">SMB</a> 
+ *   <a href="http://www.smb-tec.com">SMB</a>
  *   Dirk Weigenand (Dirk.Weigenand@smb-tec.com)
  *
  * The contents of this file are subject to the Mozilla Public License Version 1.1
@@ -52,9 +52,6 @@
 
 package com.lowagie.text.rtf.field;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 import com.lowagie.text.Chunk;
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.Font;
@@ -62,17 +59,19 @@ import com.lowagie.text.rtf.RtfBasicElement;
 import com.lowagie.text.rtf.document.RtfDocument;
 import com.lowagie.text.rtf.style.RtfFont;
 
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The RtfField class is an abstract base class for all rtf field functionality.
  * Subclasses only need to implement the two abstract methods writeFieldInstContent
  * and writeFieldResultContent. All other field functionality is handled by the
  * RtfField class.
- * 
- * @version $Id: RtfField.java 3580 2008-08-06 15:52:00Z howard_s $
+ *
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @author Dirk Weigenand (Dirk.Weigenand@smb-tec.com)
  * @author Thomas Bickel (tmb99@inode.at)
+ * @version $Id: RtfField.java 3580 2008-08-06 15:52:00Z howard_s $
  */
 public abstract class RtfField extends Chunk implements RtfBasicElement {
 
@@ -138,7 +137,7 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
      */
     private boolean inHeader = false;
     /**
-     * The RtfDocument this RtfField belongs to 
+     * The RtfDocument this RtfField belongs to
      */
     protected RtfDocument document = null;
     /**
@@ -150,19 +149,19 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
      * Constructs a RtfField for a RtfDocument. This is not very useful,
      * since the RtfField by itself does not do anything. Use one of the
      * subclasses instead.
-     * 
+     *
      * @param doc The RtfDocument this RtfField belongs to.
      */
     protected RtfField(RtfDocument doc) {
         this(doc, new Font());
     }
-    
+
     /**
      * Constructs a RtfField for a RtfDocument. This is not very useful,
      * since the RtfField by itself does not do anything. Use one of the
      * subclasses instead.
-     * 
-     * @param doc The RtfDocument this RtfField belongs to.
+     *
+     * @param doc  The RtfDocument this RtfField belongs to.
      * @param font The Font this RtfField should use
      */
     protected RtfField(RtfDocument doc, Font font) {
@@ -170,120 +169,113 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
         this.document = doc;
         this.font = new RtfFont(this.document, font);
     }
-    
+
     /**
      * Sets the RtfDocument this RtfElement belongs to
-     * 
+     *
      * @param doc The RtfDocument to use
      */
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
         this.font.setRtfDocument(this.document);
     }
-    
+
     /**
      * Writes the field beginning. Also writes field properties.
-     * 
+     *
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException
      */
-    private void writeFieldBegin(OutputStream result) throws IOException 
-    {
+    private void writeFieldBegin(OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         result.write(FIELD);
-        if(fieldDirty) result.write(FIELD_DIRTY);
-        if(fieldEdit) result.write(FIELD_EDIT);
-        if(fieldLocked) result.write(FIELD_LOCKED);
-        if(fieldPrivate) result.write(FIELD_PRIVATE);
+        if (fieldDirty) result.write(FIELD_DIRTY);
+        if (fieldEdit) result.write(FIELD_EDIT);
+        if (fieldLocked) result.write(FIELD_LOCKED);
+        if (fieldPrivate) result.write(FIELD_PRIVATE);
     }
-    
+
     /**
      * Writes the beginning of the field instruction area.
-     * 
+     *
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException
      */
-    private void writeFieldInstBegin(OutputStream result) throws IOException 
-    {
-        result.write(OPEN_GROUP);        
+    private void writeFieldInstBegin(OutputStream result) throws IOException {
+        result.write(OPEN_GROUP);
         result.write(FIELD_INSTRUCTIONS);
         result.write(DELIMITER);
     }
-    
+
     /**
      * Writes the content of the field instruction area. Override this
      * method in your subclasses.
-     * 
+     *
      * @param result The <code>OutputStream</code> to write to.
      */
     protected abstract void writeFieldInstContent(OutputStream result) throws IOException;
-    
+
     /**
      * Writes the end of the field instruction area.
-     * 
+     *
      * @param result The <code>OutputStream</code> to write to.
      */
-    private void writeFieldInstEnd(OutputStream result) throws IOException 
-    {
-        if(fieldAlt) {
+    private void writeFieldInstEnd(OutputStream result) throws IOException {
+        if (fieldAlt) {
             result.write(DELIMITER);
             result.write(FIELD_ALT);
         }
         result.write(CLOSE_GROUP);
     }
-    
+
     /**
      * Writes the beginning of the field result area
-     * 
+     *
      * @param result The <code>OutputStream</code> to write to.
      */
-    private void writeFieldResultBegin(final OutputStream result) throws IOException 
-    {
+    private void writeFieldResultBegin(final OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         result.write(FIELD_RESULT);
         result.write(DELIMITER);
     }
-    
+
     /**
      * Writes the content of the pre-calculated field result. Override this
      * method in your subclasses.
-     * 
-     * @param result The <code>OutputStream</code> to write to.
-     * @throws IOException on i/o errors.
-     */ 
-    protected abstract void writeFieldResultContent(OutputStream result) throws IOException;
-    
-    /**
-     * Writes the end of the field result area
-     * 
-     * @param result The <code>OutputStream</code> to write to.
-     * @throws IOException on i/o errors.
-     */ 
-    private void writeFieldResultEnd(final OutputStream result) throws IOException 
-    {
-        result.write(DELIMITER);
-        result.write(CLOSE_GROUP);
-    }
-    
-    /**
-     * Writes the end of the field
-     * 
+     *
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
-    private void writeFieldEnd(OutputStream result) throws IOException
-    {
-        result.write(CLOSE_GROUP);
-    }
-    
+    protected abstract void writeFieldResultContent(OutputStream result) throws IOException;
+
     /**
-     * Writes the field to the <code>OutputStream</code>.
-     * 
+     * Writes the end of the field result area
+     *
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
-     */    
-    public void writeContent(final OutputStream result) throws IOException
-    {
+     */
+    private void writeFieldResultEnd(final OutputStream result) throws IOException {
+        result.write(DELIMITER);
+        result.write(CLOSE_GROUP);
+    }
+
+    /**
+     * Writes the end of the field
+     *
+     * @param result The <code>OutputStream</code> to write to.
+     * @throws IOException on i/o errors.
+     */
+    private void writeFieldEnd(OutputStream result) throws IOException {
+        result.write(CLOSE_GROUP);
+    }
+
+    /**
+     * Writes the field to the <code>OutputStream</code>.
+     *
+     * @param result The <code>OutputStream</code> to write to.
+     * @throws IOException on i/o errors.
+     */
+    public void writeContent(final OutputStream result) throws IOException {
         this.font.writeBegin(result);
         writeFieldBegin(result);
         writeFieldInstBegin(result);
@@ -294,91 +286,92 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
         writeFieldResultEnd(result);
         writeFieldEnd(result);
         this.font.writeEnd(result);
-    }        
-        
+    }
+
     /**
      * Get whether this field is an alt field
-     * 
+     *
      * @return Returns whether this field is an alt field
      */
     public boolean isFieldAlt() {
         return fieldAlt;
     }
-    
+
     /**
      * Set whether this field is an alt field
-     * 
+     *
      * @param fieldAlt The value to use
      */
     public void setFieldAlt(boolean fieldAlt) {
         this.fieldAlt = fieldAlt;
     }
-    
+
     /**
      * Get whether this field is dirty
-     * 
+     *
      * @return Returns whether this field is dirty
      */
     public boolean isFieldDirty() {
         return fieldDirty;
     }
-    
+
     /**
      * Set whether this field is dirty
-     * 
+     *
      * @param fieldDirty The value to use
      */
     public void setFieldDirty(boolean fieldDirty) {
         this.fieldDirty = fieldDirty;
     }
-    
+
     /**
      * Get whether this field is edited
-     * 
+     *
      * @return Returns whether this field is edited
      */
     public boolean isFieldEdit() {
         return fieldEdit;
     }
-    
+
     /**
      * Set whether this field is edited.
-     * 
+     *
      * @param fieldEdit The value to use
      */
     public void setFieldEdit(boolean fieldEdit) {
         this.fieldEdit = fieldEdit;
     }
-    
+
     /**
      * Get whether this field is locked
-     * 
+     *
      * @return Returns the fieldLocked.
      */
     public boolean isFieldLocked() {
         return fieldLocked;
     }
-    
+
     /**
      * Set whether this field is locked
+     *
      * @param fieldLocked The value to use
      */
     public void setFieldLocked(boolean fieldLocked) {
         this.fieldLocked = fieldLocked;
     }
-    
+
     /**
      * Get whether this field is private
-     * 
+     *
      * @return Returns the fieldPrivate.
      */
     public boolean isFieldPrivate() {
         return fieldPrivate;
     }
-    
+
     /**
      * Set whether this field is private
-     * 
+     *
      * @param fieldPrivate The value to use
      */
     public void setFieldPrivate(boolean fieldPrivate) {
@@ -387,49 +380,49 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
 
     /**
      * Sets whether this RtfField is in a table
-     * 
+     *
      * @param inTable <code>True</code> if this RtfField is in a table, <code>false</code> otherwise
      */
     public void setInTable(boolean inTable) {
         this.inTable = inTable;
     }
-    
+
     /**
      * Gets whether this <code>RtfField</code> is in a table.
-     * 
+     *
      * @return <code>True</code> if this <code>RtfField</code> is in a table, <code>false</code> otherwise
      * @since 2.1.0
      */
     public boolean isInTable() {
         return this.inTable;
     }
-    
+
     /**
      * Sets whether this RtfField is in a header
-     * 
+     *
      * @param inHeader <code>True</code> if this RtfField is in a header, <code>false</code> otherwise
      */
     public void setInHeader(boolean inHeader) {
         this.inHeader = inHeader;
     }
-    
+
     /**
      * Gets whether this <code>RtfField</code> is in a header.
-     * 
+     *
      * @return <code>True</code> if this <code>RtfField</code> is in a header, <code>false</code> otherwise
      * @since 2.1.0
      */
     public boolean isInHeader() {
         return this.inHeader;
     }
-    
+
     /**
      * An RtfField is never empty.
      */
     public boolean isEmpty() {
         return false;
     }
-    
+
     /**
      * Override setFont to perform the correct font handling.
      */

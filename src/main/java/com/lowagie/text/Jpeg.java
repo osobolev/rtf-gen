@@ -58,48 +58,70 @@ import java.net.URL;
  * An <CODE>Jpeg</CODE> is the representation of a graphic element (JPEG)
  * that has to be inserted into the document
  *
- * @see		Element
- * @see		Image
+ * @see        Element
+ * @see        Image
  */
 
 public class Jpeg extends Image {
-    
+
     // public static final membervariables
-    
-    /** This is a type of marker. */
+
+    /**
+     * This is a type of marker.
+     */
     public static final int NOT_A_MARKER = -1;
-    
-    /** This is a type of marker. */
+
+    /**
+     * This is a type of marker.
+     */
     public static final int VALID_MARKER = 0;
-    
-    /** Acceptable Jpeg markers. */
+
+    /**
+     * Acceptable Jpeg markers.
+     */
     public static final int[] VALID_MARKERS = {0xC0, 0xC1, 0xC2};
-    
-    /** This is a type of marker. */
+
+    /**
+     * This is a type of marker.
+     */
     public static final int UNSUPPORTED_MARKER = 1;
-    
-    /** Unsupported Jpeg markers. */
+
+    /**
+     * Unsupported Jpeg markers.
+     */
     public static final int[] UNSUPPORTED_MARKERS = {0xC3, 0xC5, 0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF};
-    
-    /** This is a type of marker. */
+
+    /**
+     * This is a type of marker.
+     */
     public static final int NOPARAM_MARKER = 2;
-    
-    /** Jpeg markers without additional parameters. */
+
+    /**
+     * Jpeg markers without additional parameters.
+     */
     public static final int[] NOPARAM_MARKERS = {0xD0, 0xD1, 0xD2, 0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD8, 0x01};
-    
-    /** Marker value */
+
+    /**
+     * Marker value
+     */
     public static final int M_APP0 = 0xE0;
-    /** Marker value */
+    /**
+     * Marker value
+     */
     public static final int M_APP2 = 0xE2;
-    /** Marker value */
+    /**
+     * Marker value
+     */
     public static final int M_APPE = 0xEE;
-    
-    /** sequence that is used in all Jpeg files */
+
+    /**
+     * sequence that is used in all Jpeg files
+     */
     public static final byte JFIF_ID[] = {0x4A, 0x46, 0x49, 0x46, 0x00};
-    
+
     private byte[][] icc;
     // Constructors
-    
+
     Jpeg(Image image) {
         super(image);
     }
@@ -107,64 +129,64 @@ public class Jpeg extends Image {
     /**
      * Constructs a <CODE>Jpeg</CODE>-object, using an <VAR>url</VAR>.
      *
-     * @param		url			the <CODE>URL</CODE> where the image can be found
      * @throws BadElementException
      * @throws IOException
+     * @param        url            the <CODE>URL</CODE> where the image can be found
      */
     public Jpeg(URL url) throws BadElementException, IOException {
         super(url);
         processParameters();
     }
-    
+
     /**
      * Constructs a <CODE>Jpeg</CODE>-object from memory.
      *
-     * @param		img		the memory image
      * @throws BadElementException
      * @throws IOException
+     * @param        img        the memory image
      */
-    
+
     public Jpeg(byte[] img) throws BadElementException, IOException {
-        super((URL)null);
+        super((URL) null);
         rawData = img;
         originalData = img;
         processParameters();
     }
-    
+
     /**
      * Constructs a <CODE>Jpeg</CODE>-object from memory.
      *
-     * @param		img			the memory image.
-     * @param		width		the width you want the image to have
-     * @param		height		the height you want the image to have
      * @throws BadElementException
      * @throws IOException
+     * @param        img            the memory image.
+     * @param        width        the width you want the image to have
+     * @param        height        the height you want the image to have
      */
-    
+
     public Jpeg(byte[] img, float width, float height) throws BadElementException, IOException {
         this(img);
         scaledWidth = width;
         scaledHeight = height;
     }
-    
+
     // private static methods
-    
+
     /**
      * Reads a short from the <CODE>InputStream</CODE>.
      *
-     * @param	is		the <CODE>InputStream</CODE>
-     * @return	an int
      * @throws IOException
+     * @param    is        the <CODE>InputStream</CODE>
+     * @return an int
      */
     private static final int getShort(InputStream is) throws IOException {
         return (is.read() << 8) + is.read();
     }
-    
+
     /**
      * Returns a type of marker.
      *
-     * @param	marker      an int
-     * @return	a type: <VAR>VALID_MARKER</CODE>, <VAR>UNSUPPORTED_MARKER</VAR> or <VAR>NOPARAM_MARKER</VAR>
+     * @param    marker an int
+     * @return a type: <VAR>VALID_MARKER</CODE>, <VAR>UNSUPPORTED_MARKER</VAR> or <VAR>NOPARAM_MARKER</VAR>
      */
     private static final int marker(int marker) {
         for (int i = 0; i < VALID_MARKERS.length; i++) {
@@ -184,11 +206,12 @@ public class Jpeg extends Image {
         }
         return NOT_A_MARKER;
     }
-    
+
     // private methods
-    
+
     /**
      * This method checks if the image is a valid JPEG and processes some parameters.
+     *
      * @throws BadElementException
      * @throws IOException
      */
@@ -198,15 +221,14 @@ public class Jpeg extends Image {
         InputStream is = null;
         try {
             String errorID;
-            if (rawData == null){
+            if (rawData == null) {
                 is = url.openStream();
                 errorID = url.toString();
-            }
-            else{
+            } else {
                 is = new java.io.ByteArrayInputStream(rawData);
                 errorID = "Byte array";
             }
-            if (is.read() != 0xFF || is.read() != 0xD8)	{
+            if (is.read() != 0xFF || is.read() != 0xD8) {
                 throw new BadElementException(errorID + " is not a valid JPEG-file.");
             }
             boolean firstPass = true;
@@ -246,10 +268,9 @@ public class Jpeg extends Image {
                         if (units == 1) {
                             dpiX = dx;
                             dpiY = dy;
-                        }
-                        else if (units == 2) {
-                            dpiX = (int)(dx * 2.54f + 0.5f);
-                            dpiY = (int)(dy * 2.54f + 0.5f);
+                        } else if (units == 2) {
+                            dpiX = (int) (dx * 2.54f + 0.5f);
+                            dpiY = (int) (dy * 2.54f + 0.5f);
                         }
                         Utilities.skip(is, len - 2 - bcomp.length - 7);
                         continue;
@@ -258,7 +279,7 @@ public class Jpeg extends Image {
                         len = getShort(is) - 2;
                         byte[] byteappe = new byte[len];
                         for (int k = 0; k < len; ++k) {
-                            byteappe[k] = (byte)is.read();
+                            byteappe[k] = (byte) is.read();
                         }
                         if (byteappe.length >= 12) {
                             String appe = new String(byteappe, 0, 5, "ISO-8859-1");
@@ -272,7 +293,7 @@ public class Jpeg extends Image {
                         len = getShort(is) - 2;
                         byte[] byteapp2 = new byte[len];
                         for (int k = 0; k < len; ++k) {
-                            byteapp2[k] = (byte)is.read();
+                            byteapp2[k] = (byte) is.read();
                         }
                         if (byteapp2.length >= 14) {
                             String app2 = new String(byteapp2, 0, 11, "ISO-8859-1");
@@ -300,17 +321,14 @@ public class Jpeg extends Image {
                         colorspace = is.read();
                         bpc = 8;
                         break;
-                    }
-                    else if (markertype == UNSUPPORTED_MARKER) {
+                    } else if (markertype == UNSUPPORTED_MARKER) {
                         throw new BadElementException(errorID + ": unsupported JPEG marker: " + marker);
-                    }
-                    else if (markertype != NOPARAM_MARKER) {
+                    } else if (markertype != NOPARAM_MARKER) {
                         Utilities.skip(is, getShort(is) - 2);
                     }
                 }
             }
-        }
-        finally {
+        } finally {
             if (is != null) {
                 is.close();
             }
@@ -333,11 +351,10 @@ public class Jpeg extends Image {
                 total += icc[k].length - 14;
             }
             try {
-            	ICC_Profile icc_prof = ICC_Profile.getInstance(ficc);
-            	tagICC(icc_prof);
-            }
-            catch(IllegalArgumentException e) {
-            	// ignore ICC profile if it's invalid.
+                ICC_Profile icc_prof = ICC_Profile.getInstance(ficc);
+                tagICC(icc_prof);
+            } catch (IllegalArgumentException e) {
+                // ignore ICC profile if it's invalid.
             }
             icc = null;
         }
