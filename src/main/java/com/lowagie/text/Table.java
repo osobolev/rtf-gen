@@ -1440,6 +1440,7 @@ public class Table extends Rectangle implements LargeElement {
      * @deprecated As of iText 2.0.7, replaced by {@link #getDefaultCell()},
      * scheduled for removal at 2.2.0
      */
+    @Deprecated
     public Cell getDefaultLayout() {
         return getDefaultCell();
     }
@@ -1452,6 +1453,7 @@ public class Table extends Rectangle implements LargeElement {
      * @deprecated As of iText 2.0.7, replaced by {@link #setDefaultCell(Cell)},
      * scheduled for removal at 2.2.0
      */
+    @Deprecated
     public void setDefaultLayout(Cell value) {
         defaultCell = value;
     }

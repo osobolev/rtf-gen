@@ -506,6 +506,7 @@ public class Paragraph extends Phrase {
      * @deprecated As of iText 2.1.5, replaced by {@link #getSpacingBefore()},
      * scheduled for removal at 2.3.0
      */
+    @Deprecated
     public float spacingBefore() {
         return getSpacingBefore();
     }
@@ -517,6 +518,7 @@ public class Paragraph extends Phrase {
      * @deprecated As of iText 2.1.5, replaced by {@link #getSpacingAfter()},
      * scheduled for removal at 2.3.0
      */
+    @Deprecated
     public float spacingAfter() {
         return spacingAfter;
     }
