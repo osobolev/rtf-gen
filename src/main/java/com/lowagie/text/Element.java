@@ -185,11 +185,6 @@ public interface Element {
      */
     int TABLE = 22;
 
-    /**
-     * This is a possible type of <CODE>Element</CODE>.
-     */
-    int PTABLE = 23;
-
     // static membervariables (annotations)
 
     /**

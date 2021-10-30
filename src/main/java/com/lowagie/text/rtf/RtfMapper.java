@@ -160,7 +160,6 @@ public class RtfMapper {
             rtfElements.add(new RtfChapter(rtfDoc, (Chapter) element));
             break;
         case Element.TABLE:
-        case Element.PTABLE:
             try {
                 rtfElements.add(new RtfTable(rtfDoc, (Table) element));
             } catch (ClassCastException e) {
