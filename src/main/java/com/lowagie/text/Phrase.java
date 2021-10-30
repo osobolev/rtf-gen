@@ -425,10 +425,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * @return true if the leading is defined
      */
     public boolean hasLeading() {
-        if (Float.isNaN(leading)) {
-            return false;
-        }
-        return true;
+        return !Float.isNaN(leading);
     }
 
     /**
@@ -464,10 +461,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
             return true;
         case 1:
             Element element = get(0);
-            if (element.type() == Element.CHUNK && ((Chunk) element).isEmpty()) {
-                return true;
-            }
-            return false;
+            return element.type() == Element.CHUNK && ((Chunk) element).isEmpty();
         default:
             return false;
         }

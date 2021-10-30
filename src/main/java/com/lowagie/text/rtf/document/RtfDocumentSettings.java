@@ -251,8 +251,8 @@ public class RtfDocumentSettings {
         case RtfDataCache.CACHE_DISK:
             this.dataCacheStyle = RtfDataCache.CACHE_DISK;
             break;
-        default:
         case RtfDataCache.CACHE_MEMORY:
+        default:
             this.dataCacheStyle = RtfDataCache.CACHE_MEMORY;
             break;
         }

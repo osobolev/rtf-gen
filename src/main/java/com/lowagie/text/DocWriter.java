@@ -215,10 +215,7 @@ public abstract class DocWriter implements DocListener {
      * @return <CODE>true</CODE> if the page was added, <CODE>false</CODE> if not.
      */
     public boolean newPage() {
-        if (!open) {
-            return false;
-        }
-        return true;
+        return open;
     }
 
     /**
