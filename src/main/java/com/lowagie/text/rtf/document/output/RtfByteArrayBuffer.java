@@ -51,6 +51,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A RtfByteArrayBuffer works much like {@link ByteArrayOutputStream} but is cheaper and faster in most cases
@@ -61,7 +63,7 @@ import java.io.OutputStream;
  */
 public final class RtfByteArrayBuffer extends OutputStream {
 
-    private final java.util.List arrays = new java.util.ArrayList();
+    private final List arrays = new ArrayList();
     private byte[] buffer;
     private int pos = 0;
     private int size = 0;

@@ -52,8 +52,11 @@ package com.lowagie.text;
 import com.lowagie.text.pdf.codec.CCITTG4Encoder;
 
 import javax.imageio.ImageIO;
+import java.awt.Color;
 import java.awt.color.ICC_Profile;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.image.PixelGrabber;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -447,7 +450,7 @@ public abstract class Image extends Rectangle {
      * @throws BadElementException on error
      * @throws IOException         on error
      */
-    public static Image getInstance(java.awt.Image image, java.awt.Color color,
+    public static Image getInstance(java.awt.Image image, Color color,
                                     boolean forceBW) throws BadElementException, IOException {
 
         if (image instanceof BufferedImage) {
@@ -457,7 +460,7 @@ public abstract class Image extends Rectangle {
             }
         }
 
-        java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(image,
+        PixelGrabber pg = new PixelGrabber(image,
             0, 0, -1, -1, true);
         try {
             pg.grabPixels();
@@ -465,7 +468,7 @@ public abstract class Image extends Rectangle {
             throw new IOException(
                 "java.awt.Image Interrupted waiting for pixels!");
         }
-        if ((pg.getStatus() & java.awt.image.ImageObserver.ABORT) != 0) {
+        if ((pg.getStatus() & ImageObserver.ABORT) != 0) {
             throw new IOException("java.awt.Image fetch aborted or errored");
         }
         int w = pg.getWidth();
@@ -613,7 +616,7 @@ public abstract class Image extends Rectangle {
      * @throws BadElementException on error
      * @throws IOException         on error
      */
-    public static Image getInstance(java.awt.Image image, java.awt.Color color)
+    public static Image getInstance(java.awt.Image image, Color color)
         throws BadElementException, IOException {
         return getInstance(image, color, false);
     }

@@ -53,6 +53,9 @@
  */
 package com.lowagie.text;
 
+import java.io.PrintStream;
+import java.io.PrintWriter;
+
 /**
  * The ExceptionConverter changes a checked exception into an
  * unchecked exception.
@@ -143,7 +146,7 @@ public class ExceptionConverter extends RuntimeException {
      *
      * @param s
      */
-    public void printStackTrace(java.io.PrintStream s) {
+    public void printStackTrace(PrintStream s) {
         synchronized (s) {
             s.print(prefix);
             ex.printStackTrace(s);
@@ -155,7 +158,7 @@ public class ExceptionConverter extends RuntimeException {
      *
      * @param s
      */
-    public void printStackTrace(java.io.PrintWriter s) {
+    public void printStackTrace(PrintWriter s) {
         synchronized (s) {
             s.print(prefix);
             ex.printStackTrace(s);
