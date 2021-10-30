@@ -104,7 +104,7 @@ public class Chunk implements Element {
     /**
      * This is the content of this chunk of text.
      */
-    protected StringBuffer content = null;
+    protected StringBuilder content = null;
 
     /**
      * This is the <CODE>Font</CODE> of this chunk of text.
@@ -122,7 +122,7 @@ public class Chunk implements Element {
      * Empty constructor.
      */
     public Chunk() {
-        this.content = new StringBuffer();
+        this.content = new StringBuilder();
         this.font = new Font();
     }
 
@@ -133,7 +133,7 @@ public class Chunk implements Element {
      */
     public Chunk(Chunk ck) {
         if (ck.content != null) {
-            content = new StringBuffer(ck.content.toString());
+            content = new StringBuilder(ck.content.toString());
         }
         if (ck.font != null) {
             font = new Font(ck.font);
@@ -151,7 +151,7 @@ public class Chunk implements Element {
      * @param font    the font
      */
     public Chunk(String content, Font font) {
-        this.content = new StringBuffer(content);
+        this.content = new StringBuilder(content);
         this.font = font;
     }
 
@@ -172,7 +172,7 @@ public class Chunk implements Element {
      * @param font the font
      */
     public Chunk(char c, Font font) {
-        this.content = new StringBuffer();
+        this.content = new StringBuilder();
         this.content.append(c);
         this.font = font;
     }
@@ -272,9 +272,9 @@ public class Chunk implements Element {
      * appends some text to this <CODE>Chunk</CODE>.
      *
      * @param string <CODE>String</CODE>
-     * @return a <CODE>StringBuffer</CODE>
+     * @return a <CODE>StringBuilder</CODE>
      */
-    public StringBuffer append(String string) {
+    public StringBuilder append(String string) {
         return content.append(string);
     }
 

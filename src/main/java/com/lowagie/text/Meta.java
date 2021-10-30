@@ -74,7 +74,7 @@ public class Meta implements Element {
     /**
      * This is the content of the Meta-information.
      */
-    private StringBuffer content;
+    private StringBuilder content;
 
     // constructors
 
@@ -86,7 +86,7 @@ public class Meta implements Element {
      */
     Meta(int type, String content) {
         this.type = type;
-        this.content = new StringBuffer(content);
+        this.content = new StringBuilder(content);
     }
 
     /**
@@ -97,7 +97,7 @@ public class Meta implements Element {
      */
     public Meta(String tag, String content) {
         this.type = getType(tag);
-        this.content = new StringBuffer(content);
+        this.content = new StringBuilder(content);
     }
 
     // implementation of the Element-methods
@@ -157,9 +157,9 @@ public class Meta implements Element {
      * appends some text to this <CODE>Meta</CODE>.
      *
      * @param    string a <CODE>String</CODE>
-     * @return a <CODE>StringBuffer</CODE>
+     * @return a <CODE>StringBuilder</CODE>
      */
-    public StringBuffer append(String string) {
+    public StringBuilder append(String string) {
         return content.append(string);
     }
 
