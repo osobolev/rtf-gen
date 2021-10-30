@@ -352,17 +352,13 @@ public class RtfDocumentSettings {
     public boolean setProtection(int level, String pwd) {
         boolean result = false;
         if (this.protectionHash == null) {
-            if (!setProtectionLevel(level)) {
-                result = false;
-            } else {
+            if (setProtectionLevel(level)) {
                 protectionHash = RtfProtection.generateHash(pwd);
                 result = true;
             }
         } else {
             if (this.protectionHash.equals(RtfProtection.generateHash(pwd))) {
-                if (!setProtectionLevel(level)) {
-                    result = false;
-                } else {
+                if (setProtectionLevel(level)) {
                     protectionHash = RtfProtection.generateHash(pwd);
                     result = true;
                 }

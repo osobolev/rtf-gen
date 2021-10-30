@@ -702,9 +702,6 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
      * @since 2.1.3
      */
     public RtfListLevel getListLevel(int index) {
-        if (listLevels != null) {
-            return this.listLevels.get(index);
-        } else
-            return null;
+        return this.listLevels.get(index);
     }
 }
