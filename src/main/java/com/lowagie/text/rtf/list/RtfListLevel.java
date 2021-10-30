@@ -441,8 +441,8 @@ public class RtfListLevel extends RtfElement implements RtfExtendedElement {
             result.write(intToByteArray(255));
             break;
         default:    // catch all for other unsupported types
-            if (this.listType >= RtfListLevel.LIST_TYPE_BASE) {
-                result.write(intToByteArray(this.listType - RtfListLevel.LIST_TYPE_BASE));
+            if (this.listType >= LIST_TYPE_BASE) {
+                result.write(intToByteArray(this.listType - LIST_TYPE_BASE));
             }
             break;
         }
@@ -499,8 +499,8 @@ public class RtfListLevel extends RtfElement implements RtfExtendedElement {
             result.write(intToByteArray(255));
             break;
         default:    // catch all for other unsupported types
-            if (this.listType >= RtfListLevel.LIST_TYPE_BASE) {
-                result.write(intToByteArray(this.listType - RtfListLevel.LIST_TYPE_BASE));
+            if (this.listType >= LIST_TYPE_BASE) {
+                result.write(intToByteArray(this.listType - LIST_TYPE_BASE));
             }
             break;
         }

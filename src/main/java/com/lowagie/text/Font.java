@@ -295,15 +295,15 @@ public class Font implements Comparable {
     public String getFamilyname() {
         String tmp = "unknown";
         switch (getFamily()) {
-        case Font.COURIER:
+        case COURIER:
             return FontFactory.COURIER;
-        case Font.HELVETICA:
+        case HELVETICA:
             return FontFactory.HELVETICA;
-        case Font.TIMES_ROMAN:
+        case TIMES_ROMAN:
             return FontFactory.TIMES_ROMAN;
-        case Font.SYMBOL:
+        case SYMBOL:
             return FontFactory.SYMBOL;
-        case Font.ZAPFDINGBATS:
+        case ZAPFDINGBATS:
             return FontFactory.ZAPFDINGBATS;
         }
         return tmp;

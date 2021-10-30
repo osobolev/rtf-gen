@@ -663,7 +663,7 @@ public class Chunk implements Element {
     public Image getImage() {
         if (attributes == null)
             return null;
-        Object[] obj = (Object[]) attributes.get(Chunk.IMAGE);
+        Object[] obj = (Object[]) attributes.get(IMAGE);
         if (obj == null)
             return null;
         else {

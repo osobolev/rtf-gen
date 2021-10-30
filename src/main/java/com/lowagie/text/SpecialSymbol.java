@@ -88,7 +88,7 @@ public class SpecialSymbol {
      * @return a SYMBOL version of a character
      */
     public static Chunk get(char c, Font font) {
-        char greek = SpecialSymbol.getCorrespondingSymbol(c);
+        char greek = getCorrespondingSymbol(c);
         if (greek == ' ') {
             return new Chunk(String.valueOf(c), font);
         }

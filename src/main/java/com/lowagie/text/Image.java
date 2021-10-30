@@ -333,7 +333,7 @@ public abstract class Image extends Rectangle {
      */
     public static Image getInstance(int width, int height, int components,
                                     int bpc, byte[] data) throws BadElementException {
-        return Image.getInstance(width, height, components, bpc, data, null);
+        return getInstance(width, height, components, bpc, data, null);
     }
 
     /**
@@ -370,7 +370,7 @@ public abstract class Image extends Rectangle {
     public static Image getInstance(int width, int height, boolean reverseBits,
                                     int typeCCITT, int parameters, byte[] data)
         throws BadElementException {
-        return Image.getInstance(width, height, reverseBits, typeCCITT,
+        return getInstance(width, height, reverseBits, typeCCITT,
             parameters, data, null);
     }
 
@@ -426,7 +426,7 @@ public abstract class Image extends Rectangle {
                 "Transparency length must be equal to (componentes * 2)");
         if (components == 1 && bpc == 1) {
             byte[] g4 = CCITTG4Encoder.compress(data, width, height);
-            return Image.getInstance(width, height, false, Image.CCITTG4,
+            return getInstance(width, height, false, Image.CCITTG4,
                 Image.CCITT_BLACKIS1, g4, transparency);
         }
         Image img = new ImgRaw(width, height, components, bpc, data);
@@ -529,7 +529,7 @@ public abstract class Image extends Rectangle {
                         wMarker = 0;
                 }
             }
-            return Image.getInstance(w, h, 1, 1, pixelsByte, transparency);
+            return getInstance(w, h, 1, 1, pixelsByte, transparency);
         } else {
             byte[] pixelsByte = new byte[w * h * 3];
             byte[] smask = null;
@@ -589,9 +589,9 @@ public abstract class Image extends Rectangle {
                 else
                     smask = null;
             }
-            Image img = Image.getInstance(w, h, 3, 8, pixelsByte, transparency);
+            Image img = getInstance(w, h, 3, 8, pixelsByte, transparency);
             if (smask != null) {
-                Image sm = Image.getInstance(w, h, 1, 8, smask);
+                Image sm = getInstance(w, h, 1, 8, smask);
                 try {
                     sm.makeMask();
                     img.setImageMask(sm);
@@ -615,7 +615,7 @@ public abstract class Image extends Rectangle {
      */
     public static Image getInstance(java.awt.Image image, java.awt.Color color)
         throws BadElementException, IOException {
-        return Image.getInstance(image, color, false);
+        return getInstance(image, color, false);
     }
 
     // copy constructor

@@ -98,7 +98,7 @@ public class Meta implements Element {
      * @param    content        the content
      */
     public Meta(String tag, String content) {
-        this.type = Meta.getType(tag);
+        this.type = getType(tag);
         this.content = new StringBuffer(content);
     }
 
