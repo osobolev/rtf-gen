@@ -73,21 +73,17 @@ import java.util.Date;
  * </OL>
  * Example: <BLOCKQUOTE>
  *
- * <PRE>// creation of the document with a certain size and certain margins
- * <STRONG>Document document = new Document(PageSize.A4, 50, 50, 50, 50);
- * </STRONG> try {
+ * <PRE>
+ * // creation of the document with a certain size and certain margins
+ * <STRONG>Document document = new Document(PageSize.A4, 50, 50, 50, 50);</STRONG>
  * // creation of the different writers
- * HtmlWriter.getInstance(<STRONG>document </STRONG>, System.out);
- * PdfWriter.getInstance(<STRONG>document </STRONG>, new FileOutputStream("text.pdf"));
+ * RtfWriter.getInstance(<STRONG>document</STRONG>, new FileOutputStream("text.rtf"));
  * // we add some meta information to the document
  * <STRONG>document.addAuthor("Bruno Lowagie"); </STRONG>
  * <STRONG>document.addSubject("This is the result of a Test."); </STRONG>
  * // we open the document for writing
  * <STRONG>document.open(); </STRONG>
  * <STRONG>document.add(new Paragraph("Hello world"));</STRONG>
- * } catch(DocumentException de) {
- * System.err.println(de.getMessage());
- * }
  * <STRONG>document.close();</STRONG>
  * </PRE>
  *
