@@ -48,6 +48,8 @@
  */
 package com.lowagie.text;
 
+import java.awt.Color;
+
 /**
  * If you are using True Type fonts, you can declare the paths of the different ttf- and ttc-files
  * to this static class first and then create fonts in your code using one of the static getFont-method
@@ -86,5 +88,65 @@ public final class FontFactory {
      * Creates new FontFactory
      */
     private FontFactory() {
+    }
+
+    /**
+     * Constructs a <CODE>Font</CODE>-object.
+     *
+     * @return the Font constructed based on the parameters
+     * @param    fontname the name of the font
+     * @param    size     the size of this font
+     * @param    style     the style of this font
+     * @param    color     the <CODE>Color</CODE> of this font.
+     */
+    public static Font getFont(String fontname, float size, int style, Color color) {
+        int family = Font.getFamilyIndex(fontname);
+        return new Font(family, size, style, color);
+    }
+
+    /**
+     * Constructs a <CODE>Font</CODE>-object.
+     *
+     * @return the Font constructed based on the parameters
+     * @param    fontname the name of the font
+     * @param    size     the size of this font
+     * @param    color     the <CODE>Color</CODE> of this font.
+     * @since 2.1.0
+     */
+    public static Font getFont(String fontname, float size, Color color) {
+        return getFont(fontname, size, Font.UNDEFINED, color);
+    }
+
+    /**
+     * Constructs a <CODE>Font</CODE>-object.
+     *
+     * @return the Font constructed based on the parameters
+     * @param    fontname the name of the font
+     * @param    size     the size of this font
+     * @param    style     the style of this font
+     */
+    public static Font getFont(String fontname, float size, int style) {
+        return getFont(fontname, size, style, null);
+    }
+
+    /**
+     * Constructs a <CODE>Font</CODE>-object.
+     *
+     * @return the Font constructed based on the parameters
+     * @param    fontname the name of the font
+     * @param    size     the size of this font
+     */
+    public static Font getFont(String fontname, float size) {
+        return getFont(fontname, size, Font.UNDEFINED, null);
+    }
+
+    /**
+     * Constructs a <CODE>Font</CODE>-object.
+     *
+     * @return the Font constructed based on the parameters
+     * @param    fontname the name of the font
+     */
+    public static Font getFont(String fontname) {
+        return getFont(fontname, Font.UNDEFINED, Font.UNDEFINED, null);
     }
 }
