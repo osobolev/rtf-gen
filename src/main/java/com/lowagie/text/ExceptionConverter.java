@@ -60,4 +60,8 @@ public class ExceptionConverter extends RuntimeException {
     public ExceptionConverter(Exception ex) {
         super(ex);
     }
+
+    public Exception getException() {
+        return (Exception) getCause();
+    }
 }
