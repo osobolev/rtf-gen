@@ -106,7 +106,7 @@ public class HtmlWriter extends DocWriter {
     /**
      * This is the current font of the HTML.
      */
-    protected ArrayDeque<Font> currentfont = new ArrayDeque<>();
+    protected final ArrayDeque<Font> currentfont = new ArrayDeque<>();
 
     /**
      * This is the standard font of the HTML.
