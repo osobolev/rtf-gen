@@ -320,6 +320,25 @@ public class Image extends Rectangle {
         this.alignment = alignment;
     }
 
+    /**
+     * Gets the alternative text for the image.
+     *
+     * @return a <CODE>String</CODE>
+     */
+    public String getAlt() {
+        return alt;
+    }
+
+    /**
+     * Sets the alternative information for the image.
+     *
+     * @param alt
+     *            the alternative information
+     */
+    public void setAlt(String alt) {
+        this.alt = alt;
+    }
+
     // width and height
 
     /**
