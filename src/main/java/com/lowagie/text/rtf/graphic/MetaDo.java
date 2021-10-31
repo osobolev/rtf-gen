@@ -46,7 +46,7 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-package com.lowagie.text.pdf.codec.wmf;
+package com.lowagie.text.rtf.graphic;
 
 import com.lowagie.text.Image;
 
@@ -55,14 +55,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class MetaDo {
+final class MetaDo {
 
-    public static final int META_SETMAPMODE = 0x0103;
-    public static final int META_SETWINDOWORG = 0x020B;
-    public static final int META_SETWINDOWEXT = 0x020C;
-    public static final int META_DIBSTRETCHBLT = 0x0b41;
+    private static final int META_SETMAPMODE = 0x0103;
+    private static final int META_SETWINDOWORG = 0x020B;
+    private static final int META_SETWINDOWEXT = 0x020C;
+    private static final int META_DIBSTRETCHBLT = 0x0b41;
 
-    public static byte[] wrapBMP(Image image) throws IOException {
+    static byte[] wrapBMP(Image image) throws IOException {
         if (image.getOriginalType() != Image.ORIGINAL_BMP)
             throw new IOException("Only BMP can be wrapped in WMF.");
         byte[] data;
@@ -120,12 +120,12 @@ public class MetaDo {
         return os.toByteArray();
     }
 
-    public static void writeWord(OutputStream os, int v) throws IOException {
+    private static void writeWord(OutputStream os, int v) throws IOException {
         os.write(v & 0xff);
         os.write((v >>> 8) & 0xff);
     }
 
-    public static void writeDWord(OutputStream os, int v) throws IOException {
+    private static void writeDWord(OutputStream os, int v) throws IOException {
         writeWord(os, v & 0xffff);
         writeWord(os, (v >>> 16) & 0xffff);
     }

@@ -48,8 +48,6 @@
  */
 package com.lowagie.text;
 
-import com.lowagie.text.pdf.GrayColor;
-
 import java.awt.*;
 import java.util.Collections;
 import java.util.List;
@@ -499,7 +497,7 @@ public class Rectangle implements Element {
      * @param value the new grayscale value
      */
     public void setGrayFill(float value) {
-        backgroundColor = new GrayColor(value);
+        backgroundColor = GrayColor.create(value);
     }
 
 //	 METHODS TO GET/SET THE BORDER:

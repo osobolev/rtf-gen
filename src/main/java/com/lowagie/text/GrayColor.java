@@ -46,22 +46,22 @@
  * you aren't using an obsolete version:
  * http://www.lowagie.com/iText/
  */
-package com.lowagie.text.pdf;
+package com.lowagie.text;
 
 import java.awt.Color;
 
 /**
  * @author Paulo Soares (psoares@consiste.pt)
  */
-public class GrayColor extends Color {
+final class GrayColor extends Color {
 
     private static final long serialVersionUID = -6571835680819282746L;
 
     private final float gray;
 
-    private GrayColor(float normalized, boolean empty) {
+    private GrayColor(float normalized) {
         super(normalized, normalized, normalized);
-        gray = normalized;
+        this.gray = normalized;
     }
 
     private static float normalize(float value) {
@@ -72,11 +72,11 @@ public class GrayColor extends Color {
         return value;
     }
 
-    public GrayColor(float floatGray) {
-        this(normalize(floatGray), true);
+    static GrayColor create(float floatGray) {
+        return new GrayColor(normalize(floatGray));
     }
 
-    public float getGray() {
+    float getGray() {
         return gray;
     }
 
