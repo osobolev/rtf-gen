@@ -138,12 +138,12 @@ public class RtfTOCEntry extends RtfField {
     /**
      * unused
      */
-    protected void writeFieldInstContent(OutputStream out) throws IOException {
+    protected void writeFieldInstContent(OutputStream out) {
     }
 
     /**
      * unused
      */
-    protected void writeFieldResultContent(OutputStream out) throws IOException {
+    protected void writeFieldResultContent(OutputStream out) {
     }
 }

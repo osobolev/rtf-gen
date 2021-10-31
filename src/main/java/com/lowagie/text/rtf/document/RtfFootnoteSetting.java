@@ -97,7 +97,7 @@ public class RtfFootnoteSetting extends RtfElement implements RtfExtendedElement
      * unused
      */
     @Override
-    public void writeContent(OutputStream out) throws IOException {
+    public void writeContent(OutputStream out) {
     }
 
     /**

@@ -439,7 +439,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * unused
      */
-    public void writeContent(OutputStream out) throws IOException {
+    public void writeContent(OutputStream out) {
     }
 
     /**

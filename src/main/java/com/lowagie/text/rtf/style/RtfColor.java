@@ -186,7 +186,7 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * unused
      */
-    public void writeContent(OutputStream out) throws IOException {
+    public void writeContent(OutputStream out) {
     }
 
     /**

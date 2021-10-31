@@ -130,7 +130,7 @@ public class RtfDocument extends RtfElement {
     /**
      * unused
      */
-    public void writeContent(OutputStream out) throws IOException {
+    public void writeContent(OutputStream out) {
     }
 
     /**

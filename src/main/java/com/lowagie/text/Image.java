@@ -210,7 +210,7 @@ public class Image extends Rectangle {
      * @throws MalformedURLException
      * @throws IOException
      */
-    public static Image getInstance(URL url) throws BadElementException, MalformedURLException, IOException {
+    public static Image getInstance(URL url) throws MalformedURLException, IOException {
         ImageInfo info;
         try (InputStream is = url.openStream()) {
             info = readImage(is);
@@ -228,7 +228,7 @@ public class Image extends Rectangle {
      * @throws MalformedURLException
      * @throws IOException
      */
-    public static Image getInstance(String filename) throws BadElementException, MalformedURLException, IOException {
+    public static Image getInstance(String filename) throws MalformedURLException, IOException {
         Path path = Paths.get(filename);
         byte[] data = Files.readAllBytes(path);
         ImageInfo info = readImage(new ByteArrayInputStream(data));
@@ -244,7 +244,7 @@ public class Image extends Rectangle {
      * @throws MalformedURLException
      * @throws IOException
      */
-    public static Image getInstance(byte[] imgb) throws BadElementException, MalformedURLException, IOException {
+    public static Image getInstance(byte[] imgb) throws MalformedURLException, IOException {
         ImageInfo info = readImage(new ByteArrayInputStream(imgb));
         return new Image(null, imgb, info);
     }

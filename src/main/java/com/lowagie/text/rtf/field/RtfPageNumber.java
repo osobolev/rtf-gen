@@ -122,6 +122,6 @@ public class RtfPageNumber extends RtfField {
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
-    protected void writeFieldResultContent(OutputStream result) throws IOException {
+    protected void writeFieldResultContent(OutputStream result) {
     }
 }

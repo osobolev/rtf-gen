@@ -141,7 +141,7 @@ public class RtfProtectionSetting extends RtfElement {
      *
      * @since 2.1.1
      */
-    public void writeContent(OutputStream result) throws IOException {
+    public void writeContent(OutputStream result) {
     }
 
     /**

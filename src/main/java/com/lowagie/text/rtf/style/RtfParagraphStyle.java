@@ -681,13 +681,13 @@ public class RtfParagraphStyle extends RtfFont {
      * @param result The <code>OutputStream</code> that nothing is written to
      * @throws IOException On i/o errors.
      */
-    public void writeEnd(OutputStream result) throws IOException {
+    public void writeEnd(OutputStream result) {
     }
 
     /**
      * unused
      */
-    public void writeContent(OutputStream out) throws IOException {
+    public void writeContent(OutputStream out) {
     }
 
     /**

@@ -77,16 +77,13 @@ public class RtfPictureList extends RtfElement implements RtfExtendedElement {
     /* (non-Javadoc)
      * @see com.lowagie.text.rtf.RtfElement#writeContent(java.io.OutputStream)
      */
-    public void writeContent(OutputStream out) throws IOException {
-        // TODO Auto-generated method stub
-
+    public void writeContent(OutputStream out) {
     }
 
     /* (non-Javadoc)
      * @see com.lowagie.text.rtf.RtfExtendedElement#writeDefinition(java.io.OutputStream)
      */
     public void writeDefinition(OutputStream result) throws IOException {
-        // TODO Auto-generated method stub
         result.write(OPEN_GROUP);
         result.write(LIST_LEVEL_PICTURE);
         // if there are elements, write the \shppictlist here

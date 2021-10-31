@@ -575,7 +575,7 @@ public class RtfListLevel extends RtfElement implements RtfExtendedElement {
     /**
      * unused
      */
-    public void writeContent(OutputStream result) throws IOException {
+    public void writeContent(OutputStream result) {
     }
 
     /**
