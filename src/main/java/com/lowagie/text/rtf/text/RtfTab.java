@@ -46,7 +46,7 @@
  *
  * If you didn't download this code from the following link, you should check if
  * you aren't using an obsolete version:
- * http://www.lowagie.com/iText/
+ * https://github.com/osobolev/itext-rtf
  */
 package com.lowagie.text.rtf.text;
 
