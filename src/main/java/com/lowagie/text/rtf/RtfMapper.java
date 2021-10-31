@@ -132,6 +132,9 @@ public class RtfMapper {
         case Element.ANNOTATION:
             rtfElements.add(new RtfAnnotation(rtfDoc, (Annotation) element));
             break;
+        case Element.FOOTNOTE:
+            rtfElements.add(new RtfFootnote(rtfDoc, (Footnote) element));
+            break;
         case Element.IMAGE:
             rtfElements.add(new RtfImage(rtfDoc, (Image) element));
             break;

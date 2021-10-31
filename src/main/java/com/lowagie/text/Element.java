@@ -217,6 +217,11 @@ public interface Element {
      */
     int YMARK = 55;
 
+    /**
+     * This is a possible type of <CODE>Element</CODE>.
+     */
+    int FOOTNOTE = 56;
+
     // static membervariables (alignment)
 
     /**
