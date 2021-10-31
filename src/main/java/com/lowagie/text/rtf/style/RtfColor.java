@@ -205,13 +205,9 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * Writes the beginning of this RtfColor
      */
-    public void writeBegin(OutputStream result) {
-        try {
-            result.write(COLOR_NUMBER);
-            result.write(intToByteArray(colorNumber));
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+    public void writeBegin(OutputStream result) throws IOException {
+        result.write(COLOR_NUMBER);
+        result.write(intToByteArray(colorNumber));
     }
 
     /**

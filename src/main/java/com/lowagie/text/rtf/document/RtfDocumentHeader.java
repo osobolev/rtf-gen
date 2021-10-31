@@ -164,26 +164,22 @@ public class RtfDocumentHeader extends RtfElement {
      * Writes the contents of the document header area.
      */
     public void writeContent(OutputStream result) throws IOException {
-        try {
-            // This is so that all color, font and similar information is processed once, before
-            // the header section is written.
-            writeSectionDefinition(new RtfNilOutputStream());
+        // This is so that all color, font and similar information is processed once, before
+        // the header section is written.
+        writeSectionDefinition(new RtfNilOutputStream());
 
-            this.codePage.writeDefinition(result);
-            this.fontList.writeDefinition(result);
-            this.colorList.writeDefinition(result);
-            this.stylesheetList.writeDefinition(result);
-            this.listTable.writeDefinition(result);
-            this.generator.writeContent(result);
-            this.infoGroup.writeContent(result);
-            this.protectionSetting.writeDefinition(result);
-            this.pageSetting.writeDefinition(result);
-            this.footnoteSetting.writeDefinition(result);
+        this.codePage.writeDefinition(result);
+        this.fontList.writeDefinition(result);
+        this.colorList.writeDefinition(result);
+        this.stylesheetList.writeDefinition(result);
+        this.listTable.writeDefinition(result);
+        this.generator.writeContent(result);
+        this.infoGroup.writeContent(result);
+        this.protectionSetting.writeDefinition(result);
+        this.pageSetting.writeDefinition(result);
+        this.footnoteSetting.writeDefinition(result);
 
-            writeSectionDefinition(result);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+        writeSectionDefinition(result);
     }
 
     /**
@@ -191,26 +187,22 @@ public class RtfDocumentHeader extends RtfElement {
      *
      * @param result
      */
-    public void writeSectionDefinition(OutputStream result) {
-        try {
-            RtfHeaderFooterGroup header = convertHeaderFooter(this.header, RtfHeaderFooter.TYPE_HEADER);
-            RtfHeaderFooterGroup footer = convertHeaderFooter(this.footer, RtfHeaderFooter.TYPE_FOOTER);
-            if (header.hasTitlePage() || footer.hasTitlePage()) {
-                result.write(TITLE_PAGE);
-                header.setHasTitlePage();
-                footer.setHasTitlePage();
-            }
-            if (header.hasFacingPages() || footer.hasFacingPages()) {
-                result.write(FACING_PAGES);
-                header.setHasFacingPages();
-                footer.setHasFacingPages();
-            }
-            footer.writeContent(result);
-            header.writeContent(result);
-            pageSetting.writeSectionDefinition(result);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+    public void writeSectionDefinition(OutputStream result) throws IOException {
+        RtfHeaderFooterGroup header = convertHeaderFooter(this.header, RtfHeaderFooter.TYPE_HEADER);
+        RtfHeaderFooterGroup footer = convertHeaderFooter(this.footer, RtfHeaderFooter.TYPE_FOOTER);
+        if (header.hasTitlePage() || footer.hasTitlePage()) {
+            result.write(TITLE_PAGE);
+            header.setHasTitlePage();
+            footer.setHasTitlePage();
         }
+        if (header.hasFacingPages() || footer.hasFacingPages()) {
+            result.write(FACING_PAGES);
+            header.setHasFacingPages();
+            footer.setHasFacingPages();
+        }
+        footer.writeContent(result);
+        header.writeContent(result);
+        pageSetting.writeSectionDefinition(result);
     }
 
     /**

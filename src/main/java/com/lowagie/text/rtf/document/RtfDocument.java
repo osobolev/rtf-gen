@@ -141,16 +141,12 @@ public class RtfDocument extends RtfElement {
      *
      * @param out The <code>OutputStream</code> to write the RTF document to.
      */
-    public void writeDocument(OutputStream out) {
-        try {
-            out.write(OPEN_GROUP);
-            out.write(RTF_DOCUMENT);
-            this.documentHeader.writeContent(out);
-            this.data.writeTo(out);
-            out.write(CLOSE_GROUP);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+    public void writeDocument(OutputStream out) throws IOException {
+        out.write(OPEN_GROUP);
+        out.write(RTF_DOCUMENT);
+        this.documentHeader.writeContent(out);
+        this.data.writeTo(out);
+        out.write(CLOSE_GROUP);
     }
 
     /**
