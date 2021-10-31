@@ -222,6 +222,17 @@ public class ListItem extends Paragraph {
         }
     }
 
+    /**
+     * Sets the indentation of this paragraph on the left side.
+     *
+     * @param    indentation        the new indentation
+     */
+    public void setIndentationLeft(float indentation, boolean autoindent) {
+        if (!autoindent) {
+            setIndentationLeft(indentation);
+        }
+    }
+
     // methods to retrieve information
 
     /**
