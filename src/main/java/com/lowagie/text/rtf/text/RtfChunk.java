@@ -55,7 +55,7 @@ import com.lowagie.text.rtf.document.RtfDocument;
 import com.lowagie.text.rtf.style.RtfColor;
 import com.lowagie.text.rtf.style.RtfFont;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.IOException;
 import java.io.OutputStream;
 

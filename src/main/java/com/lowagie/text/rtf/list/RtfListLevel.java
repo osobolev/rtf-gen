@@ -61,7 +61,7 @@ import com.lowagie.text.rtf.style.RtfFontList;
 import com.lowagie.text.rtf.style.RtfParagraphStyle;
 import com.lowagie.text.rtf.text.RtfParagraph;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.IOException;
 import java.io.OutputStream;
 

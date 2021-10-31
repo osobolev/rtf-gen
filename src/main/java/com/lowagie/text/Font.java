@@ -48,7 +48,7 @@
  */
 package com.lowagie.text;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Objects;
 
 /**

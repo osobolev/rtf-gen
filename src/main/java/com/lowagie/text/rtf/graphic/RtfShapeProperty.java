@@ -6,7 +6,8 @@ import com.lowagie.text.ExceptionConverter;
 import com.lowagie.text.Image;
 import com.lowagie.text.rtf.RtfAddableElement;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Point;
 import java.io.IOException;
 import java.io.OutputStream;
 

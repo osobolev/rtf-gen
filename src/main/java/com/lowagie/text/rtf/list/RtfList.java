@@ -48,8 +48,6 @@
  */
 package com.lowagie.text.rtf.list;
 
-import com.lowagie.text.Font;
-import com.lowagie.text.List;
 import com.lowagie.text.*;
 import com.lowagie.text.factories.RomanAlphabetFactory;
 import com.lowagie.text.factories.RomanNumberFactory;
@@ -61,7 +59,7 @@ import com.lowagie.text.rtf.style.RtfFont;
 import com.lowagie.text.rtf.style.RtfFontList;
 import com.lowagie.text.rtf.text.RtfParagraph;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.InvalidParameterException;
