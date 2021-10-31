@@ -356,22 +356,14 @@ public class RtfDocument extends RtfElement {
         }
     }
 
-    private RtfLogger logger = new RtfLoggerSimple();
-
-    public RtfLogger getLogger() {
-        return logger;
-    }
-
-    public void setLogger(RtfLogger logger) {
-        this.logger = logger;
-    }
-
     public final void log(String message, Throwable error) {
+        RtfLogger logger = getDocumentSettings().getLogger();
         logger.warn(message);
         logger.error(error);
     }
 
     public final void log(Throwable error) {
+        RtfLogger logger = getDocumentSettings().getLogger();
         logger.error(error);
     }
 }

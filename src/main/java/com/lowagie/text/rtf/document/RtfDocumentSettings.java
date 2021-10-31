@@ -50,6 +50,8 @@ package com.lowagie.text.rtf.document;
 
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.document.output.RtfDataCache;
+import com.lowagie.text.rtf.document.output.RtfLogger;
+import com.lowagie.text.rtf.document.output.RtfLoggerSimple;
 import com.lowagie.text.rtf.style.RtfParagraphStyle;
 
 /**
@@ -560,5 +562,15 @@ public class RtfDocumentSettings {
      */
     public boolean isImageWrittenAsBinary() {
         return this.imageWrittenAsBinary;
+    }
+
+    private RtfLogger logger = new RtfLoggerSimple();
+
+    public RtfLogger getLogger() {
+        return logger;
+    }
+
+    public void setLogger(RtfLogger logger) {
+        this.logger = logger;
     }
 }
