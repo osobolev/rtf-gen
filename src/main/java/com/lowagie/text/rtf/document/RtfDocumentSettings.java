@@ -394,17 +394,19 @@ public class RtfDocumentSettings {
         boolean result = false;
         switch (level) {
         case RtfProtection.LEVEL_NONE:
-            if (this.protectionHash == null) {
-                break;
+            if (this.protectionHash != null) {
+                result = true;
             }
+            break;
         case RtfProtection.LEVEL_ANNOTPROT:
         case RtfProtection.LEVEL_FORMPROT:
         case RtfProtection.LEVEL_REVPROT:
         case RtfProtection.LEVEL_READPROT:
-            this.protectionLevel = level;
             result = true;
             break;
-        default:
+        }
+        if (result) {
+            this.protectionLevel = level;
         }
         return result;
     }
