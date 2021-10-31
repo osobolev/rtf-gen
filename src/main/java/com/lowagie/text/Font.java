@@ -48,6 +48,8 @@
  */
 package com.lowagie.text;
 
+import com.lowagie.text.html.Markup;
+
 import java.awt.Color;
 import java.util.Objects;
 
@@ -461,22 +463,19 @@ public class Font {
      */
     public static int getStyleValue(String style) {
         int s = 0;
-        if (style.contains("normal")) {
-            s |= NORMAL;
-        }
-        if (style.contains("bold")) {
+        if (style.contains(Markup.CSS_VALUE_BOLD)) {
             s |= BOLD;
         }
-        if (style.contains("italic")) {
+        if (style.contains(Markup.CSS_VALUE_ITALIC)) {
             s |= ITALIC;
         }
-        if (style.contains("oblique")) {
+        if (style.contains(Markup.CSS_VALUE_OBLIQUE)) {
             s |= ITALIC;
         }
-        if (style.contains("underline")) {
+        if (style.contains(Markup.CSS_VALUE_UNDERLINE)) {
             s |= UNDERLINE;
         }
-        if (style.contains("line-through")) {
+        if (style.contains(Markup.CSS_VALUE_LINETHROUGH)) {
             s |= STRIKETHRU;
         }
         return s;
