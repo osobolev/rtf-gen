@@ -80,9 +80,9 @@ public class RtfFootnoteSetting extends RtfElement implements RtfExtendedElement
     private static final byte[] FOOTNOTE_ANCHOR = DocWriter.getISOBytes("\\chftnsep");
 
     /**
-     * The page width to use
+     * Starting number for footnotes
      */
-    private final int footnoteStart = 1;
+    private int footnoteStart = 1;
 
     /**
      * Constructs a new RtfPageSetting object belonging to a RtfDocument.
@@ -91,6 +91,24 @@ public class RtfFootnoteSetting extends RtfElement implements RtfExtendedElement
      */
     public RtfFootnoteSetting(RtfDocument doc) {
         super(doc);
+    }
+
+    /**
+     * Gets the starting number for footnotes.
+     *
+     * @return the starting number for footnotes
+     */
+    public int getFootnoteStart() {
+        return footnoteStart;
+    }
+
+    /**
+     * Sets the starting number for footnotes.
+     *
+     * @param footnoteStart the starting number for footnotes
+     */
+    public void setFootnoteStart(int footnoteStart) {
+        this.footnoteStart = footnoteStart;
     }
 
     /**

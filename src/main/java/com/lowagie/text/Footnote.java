@@ -48,9 +48,6 @@
  */
 package com.lowagie.text;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * A <CODE>Footnote</CODE> is a little note that can be added at the bottom of a
  * page.

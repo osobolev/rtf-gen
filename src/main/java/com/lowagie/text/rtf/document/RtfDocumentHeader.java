@@ -264,6 +264,15 @@ public class RtfDocumentHeader extends RtfElement {
     }
 
     /**
+     * Gets the RtfFootnoteSetting object of this RtfDocument
+     *
+     * @return The RtfFootnoteSetting object
+     */
+    public RtfFootnoteSetting getFootnoteSetting() {
+        return this.footnoteSetting;
+    }
+
+    /**
      * Adds an RtfInfoElement to the list of RtfInfoElements
      *
      * @param rtfInfoElement The RtfInfoElement to add
