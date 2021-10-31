@@ -60,6 +60,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
 
@@ -228,8 +229,10 @@ public class Image extends Rectangle {
      * @throws IOException
      */
     public static Image getInstance(String filename) throws BadElementException, MalformedURLException, IOException {
-        byte[] data = Files.readAllBytes(Paths.get(filename));
-        return getInstance(data);
+        Path path = Paths.get(filename);
+        byte[] data = Files.readAllBytes(path);
+        ImageInfo info = readImage(new ByteArrayInputStream(data));
+        return new Image(path.toUri().toURL(), data, info);
     }
 
     /**
