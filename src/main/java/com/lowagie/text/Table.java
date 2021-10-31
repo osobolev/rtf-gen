@@ -975,7 +975,7 @@ public class Table extends Rectangle implements LargeElement {
      * @return dimension
      * @since 2.1.0 (was made private in 2.0.3)
      */
-    public Object getElement(int row, int column) {
+    public Element getElement(int row, int column) {
         return rows.get(row).getCell(column);
     }
 
@@ -1128,7 +1128,7 @@ public class Table extends Rectangle implements LargeElement {
                         // need to change this to work out how many cols to span
                         for (int k = 0; k < lDummyTable.getDimension().height; k++) {
                             for (int l = 0; l < lDummyTable.getDimension().width; l++) {
-                                Object lDummyElement = lDummyTable.getElement(k, l);
+                                Element lDummyElement = lDummyTable.getElement(k, l);
                                 if (lDummyElement != null) {
                                     int col = lDummyColumn + l;
 

@@ -104,7 +104,7 @@ public class Row implements Element {
     /**
      * This is the array of Objects (<CODE>Cell</CODE> or <CODE>Table</CODE>).
      */
-    protected Object[] cells;
+    protected Element[] cells;
 
     /**
      * This is the vertical alignment.
@@ -121,7 +121,7 @@ public class Row implements Element {
     protected Row(int columns) {
         this.columns = columns;
         reserved = new boolean[columns];
-        cells = new Object[columns];
+        cells = new Element[columns];
         currentColumn = 0;
     }
 
@@ -190,7 +190,7 @@ public class Row implements Element {
         }
         columns--;
         boolean[] newReserved = new boolean[columns];
-        Object[] newCells = new Cell[columns];
+        Element[] newCells = new Cell[columns];
 
         for (int i = 0; i < column; i++) {
             newReserved[i] = reserved[i];
@@ -220,7 +220,7 @@ public class Row implements Element {
      * @return the column position the <CODE>Cell</CODE> was added,
      * or <CODE>-1</CODE> if the <CODE>element</CODE> couldn't be added.
      */
-    int addElement(Object element) {
+    int addElement(Element element) {
         return addElement(element, currentColumn);
     }
 
@@ -232,7 +232,7 @@ public class Row implements Element {
      * @return the column position the <CODE>Cell</CODE> was added,
      * or <CODE>-1</CODE> if the <CODE>Cell</CODE> couldn't be added.
      */
-    int addElement(Object element, int column) {
+    int addElement(Element element, int column) {
         if (element == null) throw new NullPointerException("addCell - null argument");
         if ((column < 0) || (column > columns)) throw new IndexOutOfBoundsException("addCell - illegal column argument");
         if (!((getObjectID(element) == CELL) || (getObjectID(element) == TABLE))) throw new IllegalArgumentException("addCell - only Cells or Tables allowed");
@@ -255,7 +255,7 @@ public class Row implements Element {
      * @param aElement the cell to add.
      * @param column   the position where to add the cell.
      */
-    void setElement(Object aElement, int column) {
+    void setElement(Element aElement, int column) {
         if (reserved[column]) throw new IllegalArgumentException("setElement - position already taken");
 
         cells[column] = aElement;
@@ -343,7 +343,7 @@ public class Row implements Element {
      * @return the <CODE>Cell</CODE>,<CODE>Table</CODE> or <VAR>Object</VAR> if the column was
      * reserved or null if empty.
      */
-    public Object getCell(int column) {
+    public Element getCell(int column) {
         if ((column < 0) || (column > columns)) {
             throw new IndexOutOfBoundsException("getCell at illegal index :" + column + " max is " + columns);
         }
