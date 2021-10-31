@@ -53,6 +53,7 @@ import com.lowagie.text.rtf.document.RtfDocument;
 import com.lowagie.text.rtf.document.RtfDocumentSettings;
 import com.lowagie.text.rtf.text.RtfNewPage;
 
+import java.io.IOException;
 import java.io.OutputStream;
 
 /**
@@ -157,7 +158,7 @@ public class RtfWriter2 extends DocWriter {
      * Closes the RtfDocument. This causes the document to be written
      * to the specified OutputStream
      */
-    public void close() {
+    public void close() throws IOException  {
         if (open) {
             rtfDoc.writeDocument(os);
             super.close();

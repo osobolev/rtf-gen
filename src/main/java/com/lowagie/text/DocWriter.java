@@ -288,15 +288,11 @@ public abstract class DocWriter implements DocListener {
      * Signals that the <CODE>Document</CODE> was closed and that no other
      * <CODE>Elements</CODE> will be added.
      */
-    public void close() {
+    public void close() throws IOException {
         open = false;
-        try {
-            os.flush();
-            if (closeStream)
-                os.close();
-        } catch (IOException ioe) {
-            throw new ExceptionConverter(ioe);
-        }
+        os.flush();
+        if (closeStream)
+            os.close();
     }
 
     // methods

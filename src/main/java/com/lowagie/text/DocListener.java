@@ -48,6 +48,8 @@
  */
 package com.lowagie.text;
 
+import java.io.IOException;
+
 /**
  * A class that implements <CODE>DocListener</CODE> will perform some
  * actions when some actions are performed on a <CODE>Document</CODE>.
@@ -72,7 +74,7 @@ public interface DocListener extends ElementListener, AutoCloseable {
      * <p>
      * The outputstream of every writer implementing <CODE>DocListener</CODE> will be closed.
      */
-    void close(); // [L2]
+    void close() throws IOException; // [L2]
 
     /**
      * Signals that an new page has to be started.

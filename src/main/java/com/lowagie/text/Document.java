@@ -48,6 +48,7 @@
  */
 package com.lowagie.text;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -442,7 +443,7 @@ public class Document implements DocListener {
      * Once all the content has been written in the body, you have to close the
      * body. After that nothing can be written to the body anymore.
      */
-    public void close() {
+    public void close() throws IOException {
         if (!close) {
             open = false;
             close = true;
