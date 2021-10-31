@@ -44,7 +44,7 @@
  *
  * If you didn't download this code from the following link, you should check if
  * you aren't using an obsolete version:
- * https://github.com/osobolev/itext-rtf
+ * https://github.com/osobolev/rtf-gen
  *
  * Some methods in this class were contributed by Geert Poels, Kris Jespers and
  * Steve Ogryzek. Check the CVS repository.
