@@ -176,7 +176,7 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
                 this.content[0] = par;
             }
         } catch (DocumentException de) {
-            de.printStackTrace();
+            doc.log(de);
         }
     }
 
@@ -198,7 +198,7 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
                 try {
                     this.content[i] = this.document.getMapper().mapElement((Element) this.content[i])[0];
                 } catch (DocumentException de) {
-                    de.printStackTrace();
+                    doc.log(de);
                 }
             }
             if (this.content[i] instanceof RtfBasicElement) {
@@ -232,7 +232,7 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
             this.content[0] = doc.getMapper().mapElement(par)[0];
             ((RtfBasicElement) this.content[0]).setInHeader(true);
         } catch (DocumentException de) {
-            de.printStackTrace();
+            doc.log(de);
         }
     }
 
@@ -274,7 +274,7 @@ public class RtfHeaderFooter extends HeaderFooter implements RtfBasicElement {
                         ((RtfBasicElement) this.content[i]).setInHeader(true);
                     }
                 } catch (DocumentException de) {
-                    de.printStackTrace();
+                    doc.log(de);
                 }
             }
         }

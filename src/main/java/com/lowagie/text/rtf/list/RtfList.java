@@ -335,7 +335,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
                     items.add(rtfElement);
                 }
             } catch (DocumentException de) {
-                de.printStackTrace();
+                doc.log(de);
             }
         }
     }

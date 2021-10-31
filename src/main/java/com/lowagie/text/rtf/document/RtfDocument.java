@@ -52,10 +52,7 @@ import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfBasicElement;
 import com.lowagie.text.rtf.RtfElement;
 import com.lowagie.text.rtf.RtfMapper;
-import com.lowagie.text.rtf.document.output.RtfDataCache;
-import com.lowagie.text.rtf.document.output.RtfDiskCache;
-import com.lowagie.text.rtf.document.output.RtfEfficientMemoryCache;
-import com.lowagie.text.rtf.document.output.RtfMemoryCache;
+import com.lowagie.text.rtf.document.output.*;
 import com.lowagie.text.rtf.graphic.RtfImage;
 
 import java.io.IOException;
@@ -170,8 +167,7 @@ public class RtfDocument extends RtfElement {
                 throw new RuntimeException("unknown");
             }
         } catch (IOException ioe) {
-            System.err.println("Could not initialize disk cache. Using memory cache.");
-            ioe.printStackTrace();
+            log("Could not initialize disk cache. Using memory cache.", ioe);
             this.data = new RtfMemoryCache();
         }
     }
@@ -193,7 +189,7 @@ public class RtfDocument extends RtfElement {
                 this.lastElementWritten = element;
             }
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            log(ioe);
         }
     }
 
@@ -358,5 +354,24 @@ public class RtfDocument extends RtfElement {
         if (this.getDocumentSettings().isOutputDebugLineBreaks()) {
             result.write('\n');
         }
+    }
+
+    private RtfLogger logger = new RtfLoggerSimple();
+
+    public RtfLogger getLogger() {
+        return logger;
+    }
+
+    public void setLogger(RtfLogger logger) {
+        this.logger = logger;
+    }
+
+    public final void log(String message, Throwable error) {
+        logger.warn(message);
+        logger.error(error);
+    }
+
+    public final void log(Throwable error) {
+        logger.error(error);
     }
 }

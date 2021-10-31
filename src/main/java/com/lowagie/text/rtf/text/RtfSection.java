@@ -119,7 +119,7 @@ public class RtfSection extends RtfElement {
 
             updateIndentation(section.getIndentationLeft(), section.getIndentationRight(), section.getIndentation());
         } catch (DocumentException de) {
-            de.printStackTrace();
+            doc.log(de);
         }
     }
 

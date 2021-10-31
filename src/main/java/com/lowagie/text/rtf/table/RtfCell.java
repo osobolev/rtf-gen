@@ -280,7 +280,7 @@ public class RtfCell extends Cell implements RtfExtendedElement {
                     }
                 }
             } catch (DocumentException de) {
-                de.printStackTrace();
+                document.log(de);
             }
         }
         if (container != null) {
@@ -291,7 +291,7 @@ public class RtfCell extends Cell implements RtfExtendedElement {
                     this.content.add(rtfElement);
                 }
             } catch (DocumentException de) {
-                de.printStackTrace();
+                document.log(de);
             }
         }
     }

@@ -144,7 +144,7 @@ public class RtfInfoElement extends RtfElement {
         }
         result.write(DELIMITER);
         if (infoType == Meta.CREATIONDATE) {
-            result.write(DocWriter.getISOBytes(convertDate(content)));
+            result.write(DocWriter.getISOBytes(convertDate(content, document)));
         } else {
             document.filterSpecialChar(result, content, false, false);
         }
@@ -158,14 +158,14 @@ public class RtfInfoElement extends RtfElement {
      * @param date The date formated by iText
      * @return The date formated for rtf
      */
-    private static String convertDate(String date) {
+    private static String convertDate(String date, RtfDocument document) {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         try {
             Date creationDate = sdf.parse(date);
             sdf = new SimpleDateFormat("\\'yr'yyyy\\'mo'MM\\'dy'dd\\'hr'HH\\'min'mm\\'sec'ss");
             return sdf.format(creationDate);
         } catch (ParseException pe) {
-            pe.printStackTrace();
+            document.log(pe);
             return "";
         }
     }
