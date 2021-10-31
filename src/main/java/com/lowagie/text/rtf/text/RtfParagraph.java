@@ -117,6 +117,7 @@ public class RtfParagraph extends RtfPhrase {
                 RtfBasicElement[] rtfElements = doc.getMapper().mapElement(chunk);
                 chunks.addAll(Arrays.asList(rtfElements));
             } catch (DocumentException de) {
+                // ignore
             }
         }
     }

@@ -132,6 +132,7 @@ public class RtfPhrase extends RtfElement {
                 RtfBasicElement[] rtfElements = doc.getMapper().mapElement(chunk);
                 chunks.addAll(Arrays.asList(rtfElements));
             } catch (DocumentException de) {
+                // ignore
             }
         }
     }

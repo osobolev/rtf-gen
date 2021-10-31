@@ -228,6 +228,7 @@ public class HtmlWriter extends DocWriter {
                         writeHeader(h);
                     }
                 } catch (ClassCastException cce) {
+                    // ignore
                 }
                 return true;
             case Element.SUBJECT:

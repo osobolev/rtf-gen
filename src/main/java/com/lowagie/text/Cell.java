@@ -206,6 +206,7 @@ public class Cell extends Rectangle implements TextElementArray {
         try {
             addElement(new Paragraph(content));
         } catch (BadElementException bee) {
+            // ignore
         }
     }
 

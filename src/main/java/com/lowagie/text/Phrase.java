@@ -369,6 +369,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
                     return true;
                 }
             } catch (ClassCastException cce) {
+                // ignore
             }
         }
         Chunk newChunk = new Chunk(c, f);

@@ -107,6 +107,7 @@ public class RtfFootnote extends RtfPhrase {
                 RtfBasicElement[] rtfElements = doc.getMapper().mapElement(chunk);
                 Collections.addAll(chunks, rtfElements);
             } catch (DocumentException de) {
+                // ignore
             }
         }
     }
