@@ -158,11 +158,15 @@ public class RtfWriter2 extends DocWriter {
      * Closes the RtfDocument. This causes the document to be written
      * to the specified OutputStream
      */
-    public void close() throws IOException  {
+    public void close() {
         if (open) {
-            rtfDoc.writeDocument(os);
-            super.close();
-            this.rtfDoc = new RtfDocument();
+            try {
+                rtfDoc.writeDocument(os);
+                super.close();
+                this.rtfDoc = new RtfDocument();
+            } catch (IOException ex) {
+                throw new ExceptionConverter(ex);
+            }
         }
     }
 

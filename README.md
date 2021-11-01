@@ -14,5 +14,4 @@ RTF API is mostly the same as the original iText-2.1.7 API, but it is not binary
 Differences in RTF API:
 - many FontFactory and Image methods are removed
 - PDF features removed: hyphenation, PDF tables, annotations, split characters, separator chunks
-- close() methods throw IOException
 - logging of errors can be configured with RtfWriter2.getDocumentSettings().setLogger(...)
