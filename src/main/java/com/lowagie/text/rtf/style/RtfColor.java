@@ -227,6 +227,7 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
      * @return <code>True</code> if red, green and blue values of the two colors match,
      * <code>false</code> otherwise.
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof RtfColor)) {
             return false;
@@ -242,6 +243,7 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
      *
      * @return The hash code of this RtfColor
      */
+    @Override
     public int hashCode() {
         return (this.red << 16) | (this.green << 8) | this.blue;
     }

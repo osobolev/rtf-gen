@@ -702,6 +702,7 @@ public class RtfParagraphStyle extends RtfFont {
      * Tests whether two RtfParagraphStyles are equal. Equality
      * is determined via the name.
      */
+    @Override
     public boolean equals(Object o) {
         if (!(o instanceof RtfParagraphStyle)) {
             return false;
@@ -713,6 +714,7 @@ public class RtfParagraphStyle extends RtfFont {
     /**
      * Gets the hash code of this RtfParagraphStyle.
      */
+    @Override
     public int hashCode() {
         return this.styleName.hashCode();
     }

@@ -362,6 +362,7 @@ public class RectangleReadOnly extends Rectangle {
      * @return String version of the most important rectangle properties
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         StringBuilder buf = new StringBuilder("RectangleReadOnly: ");
         buf.append(getWidth());

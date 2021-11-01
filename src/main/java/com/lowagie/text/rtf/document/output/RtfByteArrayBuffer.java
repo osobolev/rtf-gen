@@ -90,6 +90,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
         buffer = new byte[n];
     }
 
+    @Override
     public String toString() {
         return "RtfByteArrayBuffer: size=" + size() + " #arrays=" + arrays.size() + " pos=" + pos;
     }

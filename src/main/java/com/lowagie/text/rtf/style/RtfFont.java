@@ -451,6 +451,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * @param obj The RtfFont to compare with this RtfFont
      * @return <code>True</code> if the RtfFonts are equal, <code>false</code> otherwise
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof RtfFont)) {
             return false;
@@ -466,6 +467,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
      *
      * @return The hash code of this RtfFont
      */
+    @Override
     public int hashCode() {
         return (this.fontName + this.fontSize + "-" + this.fontStyle).hashCode();
     }

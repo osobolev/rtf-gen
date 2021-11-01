@@ -930,6 +930,7 @@ public class Rectangle implements Element {
      * @return a String representation of the rectangle
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         StringBuilder buf = new StringBuilder("Rectangle: ");
         buf.append(getWidth());

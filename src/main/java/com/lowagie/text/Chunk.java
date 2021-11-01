@@ -314,6 +314,7 @@ public class Chunk implements Element {
      *
      * @return a <CODE>String</CODE>
      */
+    @Override
     public String toString() {
         return getContent();
     }
