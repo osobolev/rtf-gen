@@ -454,10 +454,12 @@ public class HtmlWriter extends DocWriter {
             write(HtmlTags.TYPE, Markup.HTML_VALUE_JAVASCRIPT);
             os.write(GT);
             addTabs(2);
-            write(new String(BEGINCOMMENT) + "\n");
+            os.write(BEGINCOMMENT);
+            write("\n");
             write(header.getContent());
             addTabs(2);
-            write("//" + new String(ENDCOMMENT));
+            write("//");
+            os.write(ENDCOMMENT);
             addTabs(2);
             writeEnd(HtmlTags.SCRIPT);
         }
