@@ -263,12 +263,12 @@ public class RtfDocument extends RtfElement {
                 //escape
                 out.write(FSC_BACKSLASH);
                 out.write(c);
-            } else if ((c == '$') && (len - k >= FSC_NEWPAGE.length) && subMatch(str, k, FSC_NEWPAGE)) {
+            } else if (c == '$' && len - k >= FSC_NEWPAGE.length && subMatch(str, k, FSC_NEWPAGE)) {
                 out.write(FSC_PAGE_PAR);
                 k += FSC_NEWPAGE.length - 1;
             } else {
                 if ((c > 0xff) || ((c > 'z') && alwaysUseUniCode)) {
-                    if (useHex && (c <= 0xff)) {
+                    if (useHex && c <= 0xff) {
                         //encode as 2 char hex string 
                         out.write(FSC_HEX_PREFIX);
                         out.write(RtfImage.byte2charLUT, c * 2, 2);

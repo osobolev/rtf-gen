@@ -322,9 +322,9 @@ public class Chunk implements Element {
      * space.
      */
     public boolean isEmpty() {
-        return (content.toString().trim().length() == 0)
-               && (content.toString().indexOf('\n') == -1)
-               && (attributes == null);
+        return content.toString().trim().length() == 0
+               && content.toString().indexOf('\n') == -1
+               && attributes == null;
     }
 
     // attributes
@@ -366,8 +366,9 @@ public class Chunk implements Element {
      * @return this <CODE>Chunk</CODE>
      */
     private Chunk setAttribute(String name, Object obj) {
-        if (attributes == null)
+        if (attributes == null) {
             attributes = new HashMap<>();
+        }
         attributes.put(name, obj);
         return this;
     }
@@ -442,8 +443,9 @@ public class Chunk implements Element {
      */
     public Chunk setUnderline(Color color, float thickness, float thicknessMul,
                               float yPosition, float yPositionMul, int cap) {
-        if (attributes == null)
+        if (attributes == null) {
             attributes = new HashMap<>();
+        }
         Object[] obj = {
             color,
             new float[] {thickness, thicknessMul, yPosition, yPositionMul, cap}

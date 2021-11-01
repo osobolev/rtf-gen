@@ -61,8 +61,8 @@ public class RomanAlphabetFactory {
      * 1 = a, 2 = b, ..., 26 = z, 27 = aa, 28 = ab,...
      */
     public static String getString(int index) {
-        if (index < 1) throw new NumberFormatException(
-            "You can't translate a negative number into an alphabetical value.");
+        if (index < 1)
+            throw new NumberFormatException("You can't translate a negative number into an alphabetical value.");
 
         index--;
         int bytes = 1;

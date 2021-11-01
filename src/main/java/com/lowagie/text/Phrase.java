@@ -259,7 +259,8 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * @throws ClassCastException    when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
      */
     public void add(int index, Element o) {
-        if (o == null) return;
+        if (o == null)
+            return;
         try {
             if (o.type() == Element.CHUNK) {
                 Chunk chunk = (Chunk) o;
@@ -291,7 +292,8 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * @throws ClassCastException    when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
      */
     public boolean add(Element o) {
-        if (o == null) return false;
+        if (o == null)
+            return false;
         try {
             switch (o.type()) {
             case Element.CHUNK:
@@ -361,8 +363,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
             try {
                 Chunk previous = (Chunk) get(size() - 1);
                 if (!previous.hasAttributes()
-                    && (f == null
-                        || f.same(previous.getFont()))
+                    && (f == null || f.same(previous.getFont()))
                     && !"".equals(previous.getContent().trim())
                     && !"".equals(c.trim())) {
                     previous.append(c);

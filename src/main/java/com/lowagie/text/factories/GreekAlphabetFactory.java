@@ -99,7 +99,8 @@ public class GreekAlphabetFactory {
      * @return the letter combination
      */
     public static String getString(int index, boolean lowercase) {
-        if (index < 1) return "";
+        if (index < 1)
+            return "";
         index--;
 
         int bytes = 1;
@@ -116,7 +117,9 @@ public class GreekAlphabetFactory {
         while (bytes > 0) {
             bytes--;
             value[bytes] = (char) (c % 24);
-            if (value[bytes] > 16) value[bytes]++;
+            if (value[bytes] > 16) {
+                value[bytes]++;
+            }
             value[bytes] += lowercase ? 945 : 913;
             value[bytes] = SpecialSymbol.getCorrespondingSymbol(value[bytes]);
             c /= 24;

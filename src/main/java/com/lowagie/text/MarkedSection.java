@@ -186,8 +186,9 @@ public class MarkedSection extends MarkedObject {
      * @param    title    the new title
      */
     public void setTitle(MarkedObject title) {
-        if (title.element instanceof Paragraph)
+        if (title.element instanceof Paragraph) {
             this.title = title;
+        }
     }
 
     /**

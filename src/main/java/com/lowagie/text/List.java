@@ -311,10 +311,11 @@ public class List implements TextElementArray {
             if (numbered || lettered) {
                 Chunk chunk = new Chunk(preSymbol, symbol.getFont());
                 int index = first + list.size();
-                if (lettered)
+                if (lettered) {
                     chunk.append(RomanAlphabetFactory.getString(index, lowercase));
-                else
+                } else {
                     chunk.append(String.valueOf(index));
+                }
                 chunk.append(postSymbol);
                 item.setListSymbol(chunk);
             } else {

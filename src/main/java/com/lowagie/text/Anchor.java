@@ -230,8 +230,9 @@ public class Anchor extends Phrase {
             }
             if (localDestination) {
                 chunk.setLocalGoto(reference.substring(1));
-            } else if (reference != null)
+            } else if (reference != null) {
                 chunk.setAnchor(reference);
+            }
             tmp.add(chunk);
         }
         return tmp;

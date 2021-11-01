@@ -402,7 +402,8 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
                     break;
                 } else if (rtfElement instanceof RtfListItem) {
                     RtfListItem rli = (RtfListItem) rtfElement;
-                    if (rli.writeDefinition(result)) break;
+                    if (rli.writeDefinition(result))
+                        break;
                 }
             }
         }

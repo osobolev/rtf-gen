@@ -292,8 +292,9 @@ public abstract class DocWriter implements DocListener {
         try {
             open = false;
             os.flush();
-            if (closeStream)
+            if (closeStream) {
                 os.close();
+            }
         } catch (IOException ex) {
             throw new ExceptionConverter(ex);
         }
@@ -313,8 +314,9 @@ public abstract class DocWriter implements DocListener {
             return null;
         int len = text.length();
         byte[] b = new byte[len];
-        for (int k = 0; k < len; ++k)
+        for (int k = 0; k < len; ++k) {
             b[k] = (byte) text.charAt(k);
+        }
         return b;
     }
 
@@ -440,7 +442,8 @@ public abstract class DocWriter implements DocListener {
      */
     protected boolean writeMarkupAttributes(Properties markup)
         throws IOException {
-        if (markup == null) return false;
+        if (markup == null)
+            return false;
         for (String name : markup.stringPropertyNames()) {
             write(name, markup.getProperty(name));
         }

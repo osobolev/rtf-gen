@@ -655,10 +655,11 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * @return the bookmark title
      */
     public Paragraph getBookmarkTitle() {
-        if (bookmarkTitle == null)
+        if (bookmarkTitle == null) {
             return getTitle();
-        else
+        } else {
             return new Paragraph(bookmarkTitle);
+        }
     }
 
     /**

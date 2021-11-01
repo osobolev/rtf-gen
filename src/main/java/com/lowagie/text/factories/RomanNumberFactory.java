@@ -140,7 +140,9 @@ public class RomanNumberFactory {
             }
             // look for the next digit that can be used in a special way
             int j = pos;
-            while (!roman[++j].pre) ;
+            while (!roman[++j].pre) {
+                // empty loop body
+            }
 
             // does the special notation apply?
             if (index + roman[j].value >= dig.value) {

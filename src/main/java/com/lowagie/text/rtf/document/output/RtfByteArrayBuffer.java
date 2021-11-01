@@ -80,7 +80,8 @@ public final class RtfByteArrayBuffer extends OutputStream {
      * @param bufferSize desired initial size in bytes
      */
     public RtfByteArrayBuffer(int bufferSize) {
-        if ((bufferSize <= 0) || (bufferSize > 1 << 30)) throw new IllegalArgumentException("bufferSize " + bufferSize);
+        if ((bufferSize <= 0) || (bufferSize > 1 << 30))
+            throw new IllegalArgumentException("bufferSize " + bufferSize);
 
         int n = 1 << 5;
         while (n < bufferSize) {
@@ -116,9 +117,11 @@ public final class RtfByteArrayBuffer extends OutputStream {
     }
 
     private void flushBuffer(int reqSize) {
-        if (reqSize < 0) throw new IllegalArgumentException();
+        if (reqSize < 0)
+            throw new IllegalArgumentException();
 
-        if (pos == 0) return;
+        if (pos == 0)
+            return;
 
         if (pos == buffer.length) {
             //add old buffer, alloc new (possibly larger) buffer
@@ -128,7 +131,8 @@ public final class RtfByteArrayBuffer extends OutputStream {
             int MAX = Math.max(1, size >> 24) << 16;
             while (newSize < MAX) {
                 newSize <<= 1;
-                if (newSize >= reqSize) break;
+                if (newSize >= reqSize)
+                    break;
             }
             buffer = new byte[newSize];
         } else {
@@ -148,7 +152,9 @@ public final class RtfByteArrayBuffer extends OutputStream {
     public void write(int b) {
         buffer[pos] = (byte) b;
         size++;
-        if (++pos == buffer.length) flushBuffer();
+        if (++pos == buffer.length) {
+            flushBuffer();
+        }
     }
 
     /**
@@ -157,7 +163,8 @@ public final class RtfByteArrayBuffer extends OutputStream {
      * @param src
      */
     public void write(byte[] src) {
-        if (src == null) throw new NullPointerException();
+        if (src == null)
+            throw new NullPointerException();
 
         if (src.length < buffer.length - pos) {
             System.arraycopy(src, 0, buffer, pos, src.length);
@@ -176,8 +183,10 @@ public final class RtfByteArrayBuffer extends OutputStream {
      * @param len
      */
     public void write(byte[] src, int off, int len) {
-        if (src == null) throw new NullPointerException();
-        if ((off < 0) || (off > src.length) || (len < 0) || ((off + len) > src.length) || ((off + len) < 0)) throw new IndexOutOfBoundsException();
+        if (src == null)
+            throw new NullPointerException();
+        if ((off < 0) || (off > src.length) || (len < 0) || ((off + len) > src.length) || ((off + len) < 0))
+            throw new IndexOutOfBoundsException();
 
         writeLoop(src, off, len);
     }
@@ -191,7 +200,9 @@ public final class RtfByteArrayBuffer extends OutputStream {
             off += n;
             pos += n;
             size += n;
-            if (pos == buffer.length) flushBuffer(len);
+            if (pos == buffer.length) {
+                flushBuffer(len);
+            }
         }
     }
 
@@ -203,15 +214,19 @@ public final class RtfByteArrayBuffer extends OutputStream {
      * @throws IOException
      */
     public long write(InputStream in) throws IOException {
-        if (in == null) throw new NullPointerException();
+        if (in == null)
+            throw new NullPointerException();
 
         long sizeStart = size;
         while (true) {
             int n = in.read(buffer, pos, buffer.length - pos);
-            if (n < 0) break;
+            if (n < 0)
+                break;
             pos += n;
             size += n;
-            if (pos == buffer.length) flushBuffer();
+            if (pos == buffer.length) {
+                flushBuffer();
+            }
         }
         return size - sizeStart;
     }
@@ -222,12 +237,14 @@ public final class RtfByteArrayBuffer extends OutputStream {
      * @param a
      */
     public void append(byte[] a) {
-        if (a == null) throw new NullPointerException();
-        if (a.length == 0) return;
+        if (a == null)
+            throw new NullPointerException();
+        if (a.length == 0)
+            return;
 
         if (a.length <= 8) {
             write(a, 0, a.length);
-        } else if ((a.length <= 16) && (pos > 0) && ((buffer.length - pos) > a.length)) {
+        } else if (a.length <= 16 && pos > 0 && buffer.length - pos > a.length) {
             write(a, 0, a.length);
         } else {
             flushBuffer();
@@ -242,7 +259,8 @@ public final class RtfByteArrayBuffer extends OutputStream {
      * @param a
      */
     public void append(byte[][] a) {
-        if (a == null) throw new NullPointerException();
+        if (a == null)
+            throw new NullPointerException();
 
         for (byte[] src : a) {
             append(src);
@@ -272,7 +290,9 @@ public final class RtfByteArrayBuffer extends OutputStream {
             System.arraycopy(src, 0, r, off, src.length);
             off += src.length;
         }
-        if (pos > 0) System.arraycopy(buffer, 0, r, off, pos);
+        if (pos > 0) {
+            System.arraycopy(buffer, 0, r, off, pos);
+        }
         return r;
     }
 
@@ -283,11 +303,14 @@ public final class RtfByteArrayBuffer extends OutputStream {
      * @throws IOException
      */
     public void writeTo(OutputStream out) throws IOException {
-        if (out == null) throw new NullPointerException();
+        if (out == null)
+            throw new NullPointerException();
 
         for (byte[] src : arrays) {
             out.write(src);
         }
-        if (pos > 0) out.write(buffer, 0, pos);
+        if (pos > 0) {
+            out.write(buffer, 0, pos);
+        }
     }
 }

@@ -242,7 +242,9 @@ public class SimpleCell extends Rectangle implements TextElementArray {
      * @param colspan The colspan to set.
      */
     public void setColspan(int colspan) {
-        if (colspan > 0) this.colspan = colspan;
+        if (colspan > 0) {
+            this.colspan = colspan;
+        }
     }
 
     /**

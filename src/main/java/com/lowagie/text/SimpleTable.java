@@ -111,7 +111,8 @@ public class SimpleTable extends Rectangle implements TextElementArray {
      * @throws BadElementException
      */
     public Table createTable() throws BadElementException {
-        if (content.isEmpty()) throw new BadElementException("Trying to create a table without rows.");
+        if (content.isEmpty())
+            throw new BadElementException("Trying to create a table without rows.");
         SimpleCell row = content.get(0);
         SimpleCell cell;
         int columns = 0;
@@ -133,8 +134,12 @@ public class SimpleTable extends Rectangle implements TextElementArray {
                 cell = (SimpleCell) element;
                 table.addCell(cell.createCell(row));
                 if (cell.getColspan() == 1) {
-                    if (cell.getWidth() > 0) widths[pos] = cell.getWidth();
-                    if (cell.getWidthpercentage() > 0) widthpercentages[pos] = cell.getWidthpercentage();
+                    if (cell.getWidth() > 0) {
+                        widths[pos] = cell.getWidth();
+                    }
+                    if (cell.getWidthpercentage() > 0) {
+                        widthpercentages[pos] = cell.getWidthpercentage();
+                    }
                 }
                 pos += cell.getColspan();
             }

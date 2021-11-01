@@ -379,10 +379,11 @@ public class Font {
         if (style == UNDEFINED) {
             style = NORMAL;
         }
-        if (family == SYMBOL || family == ZAPFDINGBATS)
+        if (family == SYMBOL || family == ZAPFDINGBATS) {
             return style;
-        else
+        } else {
             return style & ~BOLDITALIC;
+        }
     }
 
     /**
@@ -449,8 +450,9 @@ public class Font {
      * @param style A <CODE>String</CODE> representing a certain style.
      */
     public void setStyle(String style) {
-        if (this.style == UNDEFINED)
+        if (this.style == UNDEFINED) {
             this.style = NORMAL;
+        }
         this.style |= getStyleValue(style);
     }
 
@@ -535,7 +537,8 @@ public class Font {
      * @return a <CODE>Font</CODE>
      */
     public Font difference(Font font) {
-        if (font == null) return this;
+        if (font == null)
+            return this;
         // size
         float dSize = font.size;
         if (dSize == UNDEFINED) {
@@ -546,10 +549,12 @@ public class Font {
         int style1 = this.style;
         int style2 = font.getStyle();
         if (style1 != UNDEFINED || style2 != UNDEFINED) {
-            if (style1 == UNDEFINED)
+            if (style1 == UNDEFINED) {
                 style1 = 0;
-            if (style2 == UNDEFINED)
+            }
+            if (style2 == UNDEFINED) {
                 style2 = 0;
+            }
             dStyle = style1 | style2;
         }
         // color

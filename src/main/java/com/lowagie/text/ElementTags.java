@@ -736,34 +736,26 @@ public class ElementTags {
      * @return an alignment value (one of the ALIGN_ constants of the Element interface)
      */
     public static int alignmentValue(String alignment) {
-        if (alignment == null) return Element.ALIGN_UNDEFINED;
-        if (ALIGN_CENTER.equalsIgnoreCase(alignment)) {
+        if (alignment == null)
+            return Element.ALIGN_UNDEFINED;
+        if (ALIGN_CENTER.equalsIgnoreCase(alignment))
             return Element.ALIGN_CENTER;
-        }
-        if (ALIGN_LEFT.equalsIgnoreCase(alignment)) {
+        if (ALIGN_LEFT.equalsIgnoreCase(alignment))
             return Element.ALIGN_LEFT;
-        }
-        if (ALIGN_RIGHT.equalsIgnoreCase(alignment)) {
+        if (ALIGN_RIGHT.equalsIgnoreCase(alignment))
             return Element.ALIGN_RIGHT;
-        }
-        if (ALIGN_JUSTIFIED.equalsIgnoreCase(alignment)) {
+        if (ALIGN_JUSTIFIED.equalsIgnoreCase(alignment))
             return Element.ALIGN_JUSTIFIED;
-        }
-        if (ALIGN_JUSTIFIED_ALL.equalsIgnoreCase(alignment)) {
+        if (ALIGN_JUSTIFIED_ALL.equalsIgnoreCase(alignment))
             return Element.ALIGN_JUSTIFIED_ALL;
-        }
-        if (ALIGN_TOP.equalsIgnoreCase(alignment)) {
+        if (ALIGN_TOP.equalsIgnoreCase(alignment))
             return Element.ALIGN_TOP;
-        }
-        if (ALIGN_MIDDLE.equalsIgnoreCase(alignment)) {
+        if (ALIGN_MIDDLE.equalsIgnoreCase(alignment))
             return Element.ALIGN_MIDDLE;
-        }
-        if (ALIGN_BOTTOM.equalsIgnoreCase(alignment)) {
+        if (ALIGN_BOTTOM.equalsIgnoreCase(alignment))
             return Element.ALIGN_BOTTOM;
-        }
-        if (ALIGN_BASELINE.equalsIgnoreCase(alignment)) {
+        if (ALIGN_BASELINE.equalsIgnoreCase(alignment))
             return Element.ALIGN_BASELINE;
-        }
         return Element.ALIGN_UNDEFINED;
     }
 }

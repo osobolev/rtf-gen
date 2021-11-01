@@ -579,8 +579,9 @@ public class Rectangle implements Element {
      *             One of <CODE>LEFT, RIGHT, TOP, BOTTOM</CODE>
      */
     public void enableBorderSide(int side) {
-        if (border == UNDEFINED)
+        if (border == UNDEFINED) {
             border = 0;
+        }
         border |= side;
     }
 
@@ -591,8 +592,9 @@ public class Rectangle implements Element {
      *             One of <CODE>LEFT, RIGHT, TOP, BOTTOM</CODE>
      */
     public void disableBorderSide(int side) {
-        if (border == UNDEFINED)
+        if (border == UNDEFINED) {
             border = 0;
+        }
         border &= ~side;
     }
 
@@ -640,10 +642,11 @@ public class Rectangle implements Element {
      */
     private void updateBorderBasedOnWidth(float width, int side) {
         useVariableBorders = true;
-        if (width > 0)
+        if (width > 0) {
             enableBorderSide(side);
-        else
+        } else {
             disableBorderSide(side);
+        }
     }
 
     /**
@@ -874,34 +877,48 @@ public class Rectangle implements Element {
      * @param rect <CODE>Rectangle</CODE> to copy from
      */
     public void softCloneNonPositionParameters(Rectangle rect) {
-        if (rect.rotation != 0)
+        if (rect.rotation != 0) {
             this.rotation = rect.rotation;
-        if (rect.backgroundColor != null)
+        }
+        if (rect.backgroundColor != null) {
             this.backgroundColor = rect.backgroundColor;
-        if (rect.border != UNDEFINED)
+        }
+        if (rect.border != UNDEFINED) {
             this.border = rect.border;
-        if (useVariableBorders)
+        }
+        if (useVariableBorders) {
             this.useVariableBorders = rect.useVariableBorders;
-        if (rect.borderWidth != UNDEFINED)
+        }
+        if (rect.borderWidth != UNDEFINED) {
             this.borderWidth = rect.borderWidth;
-        if (rect.borderWidthLeft != UNDEFINED)
+        }
+        if (rect.borderWidthLeft != UNDEFINED) {
             this.borderWidthLeft = rect.borderWidthLeft;
-        if (rect.borderWidthRight != UNDEFINED)
+        }
+        if (rect.borderWidthRight != UNDEFINED) {
             this.borderWidthRight = rect.borderWidthRight;
-        if (rect.borderWidthTop != UNDEFINED)
+        }
+        if (rect.borderWidthTop != UNDEFINED) {
             this.borderWidthTop = rect.borderWidthTop;
-        if (rect.borderWidthBottom != UNDEFINED)
+        }
+        if (rect.borderWidthBottom != UNDEFINED) {
             this.borderWidthBottom = rect.borderWidthBottom;
-        if (rect.borderColor != null)
+        }
+        if (rect.borderColor != null) {
             this.borderColor = rect.borderColor;
-        if (rect.borderColorLeft != null)
+        }
+        if (rect.borderColorLeft != null) {
             this.borderColorLeft = rect.borderColorLeft;
-        if (rect.borderColorRight != null)
+        }
+        if (rect.borderColorRight != null) {
             this.borderColorRight = rect.borderColorRight;
-        if (rect.borderColorTop != null)
+        }
+        if (rect.borderColorTop != null) {
             this.borderColorTop = rect.borderColorTop;
-        if (rect.borderColorBottom != null)
+        }
+        if (rect.borderColorBottom != null) {
             this.borderColorBottom = rect.borderColorBottom;
+        }
     }
 
     /**

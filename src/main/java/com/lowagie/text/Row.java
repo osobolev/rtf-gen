@@ -195,7 +195,7 @@ public class Row implements Element {
         for (int i = 0; i < column; i++) {
             newReserved[i] = reserved[i];
             newCells[i] = cells[i];
-            if (newCells[i] != null && (i + ((Cell) newCells[i]).getColspan() > column)) {
+            if (newCells[i] != null && i + ((Cell) newCells[i]).getColspan() > column) {
                 ((Cell) newCells[i]).setColspan(((Cell) cells[i]).getColspan() - 1);
             }
         }
@@ -233,9 +233,12 @@ public class Row implements Element {
      * or <CODE>-1</CODE> if the <CODE>Cell</CODE> couldn't be added.
      */
     int addElement(Element element, int column) {
-        if (element == null) throw new NullPointerException("addCell - null argument");
-        if ((column < 0) || (column > columns)) throw new IndexOutOfBoundsException("addCell - illegal column argument");
-        if (!((getObjectID(element) == CELL) || (getObjectID(element) == TABLE))) throw new IllegalArgumentException("addCell - only Cells or Tables allowed");
+        if (element == null)
+            throw new NullPointerException("addCell - null argument");
+        if ((column < 0) || (column > columns))
+            throw new IndexOutOfBoundsException("addCell - illegal column argument");
+        if (!((getObjectID(element) == CELL) || (getObjectID(element) == TABLE)))
+            throw new IllegalArgumentException("addCell - only Cells or Tables allowed");
 
         int lColspan = element instanceof Cell ? ((Cell) element).getColspan() : 1;
 
@@ -256,7 +259,8 @@ public class Row implements Element {
      * @param column   the position where to add the cell.
      */
     void setElement(Element aElement, int column) {
-        if (reserved[column]) throw new IllegalArgumentException("setElement - position already taken");
+        if (reserved[column])
+            throw new IllegalArgumentException("setElement - position already taken");
 
         cells[column] = aElement;
         if (aElement != null) {
@@ -282,7 +286,8 @@ public class Row implements Element {
      * @return <CODE>true</CODE> if the column was reserved, <CODE>false</CODE> if not.
      */
     boolean reserve(int column, int size) {
-        if ((column < 0) || ((column + size) > columns)) throw new IndexOutOfBoundsException("reserve - incorrect column/size");
+        if ((column < 0) || ((column + size) > columns))
+            throw new IndexOutOfBoundsException("reserve - incorrect column/size");
 
         for (int i = column; i < column + size; i++) {
             if (reserved[i]) {
@@ -316,9 +321,12 @@ public class Row implements Element {
      * @return the type-id of the element in the row
      */
     int getElementID(int column) {
-        if (cells[column] == null) return NULL;
-        else if (cells[column] instanceof Cell) return CELL;
-        else if (cells[column] instanceof Table) return TABLE;
+        if (cells[column] == null)
+            return NULL;
+        if (cells[column] instanceof Cell)
+            return CELL;
+        if (cells[column] instanceof Table)
+            return TABLE;
 
         return -1;
     }
@@ -330,9 +338,12 @@ public class Row implements Element {
      * @return the type-id of an object
      */
     private static int getObjectID(Object element) {
-        if (element == null) return NULL;
-        else if (element instanceof Cell) return CELL;
-        else if (element instanceof Table) return TABLE;
+        if (element == null)
+            return NULL;
+        if (element instanceof Cell)
+            return CELL;
+        if (element instanceof Table)
+            return TABLE;
         return -1;
     }
 

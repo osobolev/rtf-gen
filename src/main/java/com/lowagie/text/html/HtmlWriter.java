@@ -585,7 +585,8 @@ public class HtmlWriter extends DocWriter {
                 return;
             }
 
-            if (chunk.isEmpty()) return;
+            if (chunk.isEmpty())
+                return;
             Map<String, Object> attributes = chunk.getAttributes();
             if (attributes != null && attributes.get(Chunk.NEWPAGE) != null) {
                 return;
@@ -632,7 +633,9 @@ public class HtmlWriter extends DocWriter {
         case Element.PHRASE: {
             Phrase phrase = (Phrase) element;
             styleAttributes = new Properties();
-            if (phrase.hasLeading()) styleAttributes.setProperty(Markup.CSS_KEY_LINEHEIGHT, phrase.getLeading() + "pt");
+            if (phrase.hasLeading()) {
+                styleAttributes.setProperty(Markup.CSS_KEY_LINEHEIGHT, phrase.getLeading() + "pt");
+            }
 
             // start tag
             addTabs(indent);
@@ -654,7 +657,9 @@ public class HtmlWriter extends DocWriter {
         case Element.ANCHOR: {
             Anchor anchor = (Anchor) element;
             styleAttributes = new Properties();
-            if (anchor.hasLeading()) styleAttributes.setProperty(Markup.CSS_KEY_LINEHEIGHT, anchor.getLeading() + "pt");
+            if (anchor.hasLeading()) {
+                styleAttributes.setProperty(Markup.CSS_KEY_LINEHEIGHT, anchor.getLeading() + "pt");
+            }
 
             // start tag
             addTabs(indent);
@@ -682,7 +687,9 @@ public class HtmlWriter extends DocWriter {
         case Element.PARAGRAPH: {
             Paragraph paragraph = (Paragraph) element;
             styleAttributes = new Properties();
-            if (paragraph.hasLeading()) styleAttributes.setProperty(Markup.CSS_KEY_LINEHEIGHT, paragraph.getTotalLeading() + "pt");
+            if (paragraph.hasLeading()) {
+                styleAttributes.setProperty(Markup.CSS_KEY_LINEHEIGHT, paragraph.getTotalLeading() + "pt");
+            }
             // start tag
             addTabs(indent);
             writeStart(HtmlTags.DIV);
@@ -737,7 +744,9 @@ public class HtmlWriter extends DocWriter {
         case Element.LISTITEM: {
             ListItem listItem = (ListItem) element;
             styleAttributes = new Properties();
-            if (listItem.hasLeading()) styleAttributes.setProperty(Markup.CSS_KEY_LINEHEIGHT, listItem.getTotalLeading() + "pt");
+            if (listItem.hasLeading()) {
+                styleAttributes.setProperty(Markup.CSS_KEY_LINEHEIGHT, listItem.getTotalLeading() + "pt");
+            }
 
             // start tag
             addTabs(indent);
@@ -938,7 +947,9 @@ public class HtmlWriter extends DocWriter {
                 depth = 5;
             }
             Properties styleAttributes = new Properties();
-            if (section.getTitle().hasLeading()) styleAttributes.setProperty(Markup.CSS_KEY_LINEHEIGHT, section.getTitle().getTotalLeading() + "pt");
+            if (section.getTitle().hasLeading()) {
+                styleAttributes.setProperty(Markup.CSS_KEY_LINEHEIGHT, section.getTitle().getTotalLeading() + "pt");
+            }
             // start tag
             addTabs(indent);
             writeStart(HtmlTags.H[depth]);
@@ -972,7 +983,8 @@ public class HtmlWriter extends DocWriter {
      * @throws IOException
      */
     protected void write(Font font, Properties styleAttributes) throws IOException {
-        if (font == null || !isOtherFont(font) /* || styleAttributes == null*/) return;
+        if (font == null || !isOtherFont(font) /* || styleAttributes == null*/)
+            return;
         write(" ");
         write(HtmlTags.STYLE);
         write("=\"");

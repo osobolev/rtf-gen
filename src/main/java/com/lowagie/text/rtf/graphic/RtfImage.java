@@ -202,7 +202,8 @@ public class RtfImage extends RtfElement {
                     try (InputStream imageIn = image.getUrl().openStream()) {
                         if (imageType == Image.ORIGINAL_WMF) { //remove the placeable header first
                             for (int k = 0; k < WMF_PLACEABLE_HEADER_SIZE; k++) {
-                                if (imageIn.read() < 0) throw new EOFException("while removing wmf placeable header");
+                                if (imageIn.read() < 0)
+                                    throw new EOFException("while removing wmf placeable header");
                             }
                         }
                         bab.write(imageIn);
@@ -235,7 +236,9 @@ public class RtfImage extends RtfElement {
             for (int x = 0; x < 16; x++) {
                 byte2charLUT[((k * 16) + x) * 2] = byte2charLUT[(((x * 16) + k) * 2) + 1] = (byte) c;
             }
-            if (++c == ':') c = 'a';
+            if (++c == ':') {
+                c = 'a';
+            }
         }
     }
 
@@ -256,7 +259,9 @@ public class RtfImage extends RtfElement {
                 }
             }
         }
-        if (cnt > 0) bab.write('\n');
+        if (cnt > 0) {
+            bab.write('\n');
+        }
     }
 
     /**

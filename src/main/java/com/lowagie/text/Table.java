@@ -606,8 +606,9 @@ public class Table extends Rectangle implements LargeElement {
      */
     public void setWidths(int[] widths) throws DocumentException {
         float[] tb = new float[widths.length];
-        for (int k = 0; k < widths.length; ++k)
+        for (int k = 0; k < widths.length; ++k) {
             tb[k] = widths[k];
+        }
         setWidths(tb);
     }
 
@@ -630,7 +631,9 @@ public class Table extends Rectangle implements LargeElement {
      */
     public void setTableFitsPage(boolean fitPage) {
         this.tableFitsPage = fitPage;
-        if (fitPage) setCellsFitPage(true);
+        if (fitPage) {
+            setCellsFitPage(true);
+        }
     }
 
     /**
@@ -717,16 +720,24 @@ public class Table extends Rectangle implements LargeElement {
      * @throws BadElementException
      */
     public void addCell(Cell aCell, Point aLocation) throws BadElementException {
-        if (aCell == null) throw new NullPointerException("addCell - cell has null-value");
-        if (aLocation == null) throw new NullPointerException("addCell - point has null-value");
-        if (aCell.isTable()) insertTable((Table) aCell.getElements().next(), aLocation);
+        if (aCell == null)
+            throw new NullPointerException("addCell - cell has null-value");
+        if (aLocation == null)
+            throw new NullPointerException("addCell - point has null-value");
+        if (aCell.isTable()) {
+            insertTable((Table) aCell.getElements().next(), aLocation);
+        }
 
-        if (aLocation.x < 0) throw new BadElementException("row coordinate of location must be >= 0");
-        if ((aLocation.y <= 0) && (aLocation.y > columns)) throw new BadElementException("column coordinate of location must be >= 0 and < nr of columns");
+        if (aLocation.x < 0)
+            throw new BadElementException("row coordinate of location must be >= 0");
+        if (aLocation.y <= 0 && aLocation.y > columns)
+            throw new BadElementException("column coordinate of location must be >= 0 and < nr of columns");
         if (!isValidLocation(aCell, aLocation))
             throw new BadElementException("Adding a cell at the location (" + aLocation.x + "," + aLocation.y + ") with a colspan of " + aCell.getColspan() + " and a rowspan of " + aCell.getRowspan() + " is illegal (beyond boundaries/overlapping).");
 
-        if (aCell.getBorder() == UNDEFINED) aCell.setBorder(defaultCell.getBorder());
+        if (aCell.getBorder() == UNDEFINED) {
+            aCell.setBorder(defaultCell.getBorder());
+        }
         aCell.fill();
         placeCell(rows, aCell, aLocation);
         setCurrentLocationToNextValidPosition(aLocation);
@@ -815,7 +826,8 @@ public class Table extends Rectangle implements LargeElement {
      * @param aTable the table you want to insert
      */
     public void insertTable(Table aTable) {
-        if (aTable == null) throw new NullPointerException("insertTable - table has null-value");
+        if (aTable == null)
+            throw new NullPointerException("insertTable - table has null-value");
         insertTable(aTable, curPosition);
     }
 
@@ -828,7 +840,8 @@ public class Table extends Rectangle implements LargeElement {
      * @param column The column where the <CODE>Cell</CODE> will be added
      */
     public void insertTable(Table aTable, int row, int column) {
-        if (aTable == null) throw new NullPointerException("insertTable - table has null-value");
+        if (aTable == null)
+            throw new NullPointerException("insertTable - table has null-value");
         insertTable(aTable, new Point(row, column));
     }
 
@@ -840,15 +853,15 @@ public class Table extends Rectangle implements LargeElement {
      * @param aLocation a <CODE>Point</CODE>
      */
     public void insertTable(Table aTable, Point aLocation) {
-
-        if (aTable == null) throw new NullPointerException("insertTable - table has null-value");
-        if (aLocation == null) throw new NullPointerException("insertTable - point has null-value");
+        if (aTable == null)
+            throw new NullPointerException("insertTable - table has null-value");
+        if (aLocation == null)
+            throw new NullPointerException("insertTable - point has null-value");
         mTableInserted = true;
         aTable.complete();
 
-        if (aLocation.y > columns) {
+        if (aLocation.y > columns)
             throw new IllegalArgumentException("insertTable -- wrong columnposition(" + aLocation.y + ") of location; max =" + columns);
-        }
 
         int rowCount = aLocation.x + 1 - rows.size();
         if (rowCount > 0) {   //create new rows ?
@@ -1120,7 +1133,8 @@ public class Table extends Rectangle implements LargeElement {
                             float wt = 0;
                             while (ct < lDummyWidths[j]) {
                                 wt += lDummyColumnWidths[j][ct++];
-                                if (Math.abs(wb - wt) < 0.0001) break;
+                                if (Math.abs(wb - wt) < 0.0001)
+                                    break;
                             }
                         }
                         colMap[cb] = lDummyColumn + ct;
@@ -1299,10 +1313,7 @@ public class Table extends Rectangle implements LargeElement {
             } else {
                 j++;
             }
-        }
-        while (
-            (i < rows.size()) && (j < columns) && rows.get(i).isReserved(j)
-        );
+        } while (i < rows.size() && j < columns && rows.get(i).isReserved(j));
         curPosition = new Point(i, j);
     }
 

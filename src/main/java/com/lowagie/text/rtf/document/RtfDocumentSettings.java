@@ -414,7 +414,8 @@ public class RtfDocumentSettings {
      * @since 2.1.1
      */
     public void setPasswordHash(String pwd) {
-        if (pwd != null && pwd.length() != 8) return;
+        if (pwd != null && pwd.length() != 8)
+            return;
         this.protectionHash = pwd;
     }
 

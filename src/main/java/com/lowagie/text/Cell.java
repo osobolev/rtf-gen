@@ -359,8 +359,12 @@ public class Cell extends Rectangle implements TextElementArray {
      */
     public String getWidthAsString() {
         String w = String.valueOf(width);
-        if (w.endsWith(".0")) w = w.substring(0, w.length() - 2);
-        if (percentage) w += "%";
+        if (w.endsWith(".0")) {
+            w = w.substring(0, w.length() - 2);
+        }
+        if (percentage) {
+            w += "%";
+        }
         return w;
     }
 
@@ -607,7 +611,9 @@ public class Cell extends Rectangle implements TextElementArray {
      * Otherwise it might not be shown in the table.
      */
     void fill() {
-        if (size() == 0) arrayList.add(new Paragraph(0));
+        if (size() == 0) {
+            arrayList.add(new Paragraph(0));
+        }
     }
 
     /**
@@ -616,8 +622,7 @@ public class Cell extends Rectangle implements TextElementArray {
      * @return true if the only element in this cell is a table
      */
     public boolean isTable() {
-        return (size() == 1)
-               && (arrayList.get(0).type() == Element.TABLE);
+        return size() == 1 && arrayList.get(0).type() == Element.TABLE;
     }
 
     /**
@@ -648,7 +653,8 @@ public class Cell extends Rectangle implements TextElementArray {
             if (Float.isNaN(leading)) {
                 setLeading(list.getTotalLeading());
             }
-            if (list.isEmpty()) return;
+            if (list.isEmpty())
+                return;
             arrayList.add(element);
             return;
         case Element.ANCHOR:
@@ -658,11 +664,13 @@ public class Cell extends Rectangle implements TextElementArray {
             if (Float.isNaN(leading)) {
                 setLeading(p.getLeading());
             }
-            if (p.isEmpty()) return;
+            if (p.isEmpty())
+                return;
             arrayList.add(element);
             return;
         case Element.CHUNK:
-            if (((Chunk) element).isEmpty()) return;
+            if (((Chunk) element).isEmpty())
+                return;
             arrayList.add(element);
             return;
         case Element.TABLE:

@@ -188,10 +188,18 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     private void writeFieldBegin(OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         result.write(FIELD);
-        if (fieldDirty) result.write(FIELD_DIRTY);
-        if (fieldEdit) result.write(FIELD_EDIT);
-        if (fieldLocked) result.write(FIELD_LOCKED);
-        if (fieldPrivate) result.write(FIELD_PRIVATE);
+        if (fieldDirty) {
+            result.write(FIELD_DIRTY);
+        }
+        if (fieldEdit) {
+            result.write(FIELD_EDIT);
+        }
+        if (fieldLocked) {
+            result.write(FIELD_LOCKED);
+        }
+        if (fieldPrivate) {
+            result.write(FIELD_PRIVATE);
+        }
     }
 
     /**

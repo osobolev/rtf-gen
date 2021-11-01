@@ -556,7 +556,7 @@ public class Annotation implements Element {
     public String title() {
         String s = (String) annotationAttributes.get(TITLE);
         if (s == null)
-            s = "";
+            return "";
         return s;
     }
 
@@ -568,7 +568,7 @@ public class Annotation implements Element {
     public String content() {
         String s = (String) annotationAttributes.get(CONTENT);
         if (s == null)
-            s = "";
+            return "";
         return s;
     }
 

@@ -70,12 +70,14 @@ final class MetaDo {
             try (InputStream imgIn = image.getUrl().openStream()) {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 int b;
-                while ((b = imgIn.read()) != -1)
+                while ((b = imgIn.read()) != -1) {
                     out.write(b);
+                }
                 data = out.toByteArray();
             }
-        } else
+        } else {
             data = image.getOriginalData();
+        }
         int sizeBmpWords = (data.length - 14 + 1) >>> 1;
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         // write metafile header
@@ -113,8 +115,9 @@ final class MetaDo {
         writeWord(os, 0);
         writeWord(os, 0);
         os.write(data, 14, data.length - 14);
-        if ((data.length & 1) == 1)
+        if ((data.length & 1) == 1) {
             os.write(0);
+        }
         writeDWord(os, 3);
         writeWord(os, 0);
         return os.toByteArray();
