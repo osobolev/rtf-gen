@@ -129,8 +129,8 @@ public final class RtfByteArrayBuffer extends OutputStream {
             arrays.add(buffer);
             int newSize = buffer.length;
             buffer = null;
-            int MAX = Math.max(1, size >> 24) << 16;
-            while (newSize < MAX) {
+            int max = Math.max(1, size >> 24) << 16;
+            while (newSize < max) {
                 newSize <<= 1;
                 if (newSize >= reqSize)
                     break;
@@ -289,7 +289,6 @@ public final class RtfByteArrayBuffer extends OutputStream {
     public byte[] toByteArray() {
         byte[] r = new byte[size];
         int off = 0;
-        int n = arrays.size();
         for (byte[] src : arrays) {
             System.arraycopy(src, 0, r, off, src.length);
             off += src.length;
