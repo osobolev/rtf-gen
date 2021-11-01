@@ -161,12 +161,14 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     /**
      * unused
      */
+    @Override
     public void writeContent(OutputStream out) {
     }
 
     /**
      * Writes the page size / page margin definition
      */
+    @Override
     public void writeDefinition(OutputStream result) throws IOException {
         result.write(PAGE_WIDTH);
         result.write(intToByteArray(pageWidth));

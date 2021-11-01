@@ -130,6 +130,7 @@ public class RtfDocument extends RtfElement {
     /**
      * unused
      */
+    @Override
     public void writeContent(OutputStream out) {
     }
 

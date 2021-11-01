@@ -266,6 +266,7 @@ public class Document implements DocListener {
      * </CODE> if not
      * @throws DocumentException when a document isn't open yet, or has been closed
      */
+    @Override
     public boolean add(Element element) throws DocumentException {
         if (close) {
             throw new DocumentException(
@@ -298,6 +299,7 @@ public class Document implements DocListener {
      * Meta-information anymore. You have to open the document before you can
      * begin to add content to the body of the document.
      */
+    @Override
     public void open() {
         if (!close) {
             open = true;
@@ -316,6 +318,7 @@ public class Document implements DocListener {
      * @param pageSize the new pagesize
      * @return a <CODE>boolean</CODE>
      */
+    @Override
     public boolean setPageSize(Rectangle pageSize) {
         this.pageSize = pageSize;
         for (DocListener listener : listeners) {
@@ -333,6 +336,7 @@ public class Document implements DocListener {
      * @param marginBottom the margin on the bottom
      * @return a <CODE>boolean</CODE>
      */
+    @Override
     public boolean setMargins(float marginLeft, float marginRight,
                               float marginTop, float marginBottom) {
         this.marginLeft = marginLeft;
@@ -352,6 +356,7 @@ public class Document implements DocListener {
      * @return <CODE>true</CODE> if the page was added, <CODE>false</CODE>
      * if not.
      */
+    @Override
     public boolean newPage() {
         if (!open || close) {
             return false;
@@ -367,6 +372,7 @@ public class Document implements DocListener {
      *
      * @param header the new header
      */
+    @Override
     public void setHeader(HeaderFooter header) {
         this.header = header;
         for (DocListener listener : listeners) {
@@ -377,6 +383,7 @@ public class Document implements DocListener {
     /**
      * Resets the header of this document.
      */
+    @Override
     public void resetHeader() {
         this.header = null;
         for (DocListener listener : listeners) {
@@ -389,6 +396,7 @@ public class Document implements DocListener {
      *
      * @param footer the new footer
      */
+    @Override
     public void setFooter(HeaderFooter footer) {
         this.footer = footer;
         for (DocListener listener : listeners) {
@@ -399,6 +407,7 @@ public class Document implements DocListener {
     /**
      * Resets the footer of this document.
      */
+    @Override
     public void resetFooter() {
         this.footer = null;
         for (DocListener listener : listeners) {
@@ -409,6 +418,7 @@ public class Document implements DocListener {
     /**
      * Sets the page number to 0.
      */
+    @Override
     public void resetPageCount() {
         pageN = 0;
         for (DocListener listener : listeners) {
@@ -421,6 +431,7 @@ public class Document implements DocListener {
      *
      * @param pageN the new page number
      */
+    @Override
     public void setPageCount(int pageN) {
         this.pageN = pageN;
         for (DocListener listener : listeners) {
@@ -443,6 +454,7 @@ public class Document implements DocListener {
      * Once all the content has been written in the body, you have to close the
      * body. After that nothing can be written to the body anymore.
      */
+    @Override
     public void close() {
         if (!close) {
             open = false;
@@ -795,6 +807,7 @@ public class Document implements DocListener {
      * @param marginMirroring <CODE>true</CODE> to mirror the margins
      * @return always <CODE>true</CODE>
      */
+    @Override
     public boolean setMarginMirroring(boolean marginMirroring) {
         this.marginMirroring = marginMirroring;
         for (DocListener listener : listeners) {
@@ -812,6 +825,7 @@ public class Document implements DocListener {
      * @return always <CODE>true</CODE>
      * @since 2.1.6
      */
+    @Override
     public boolean setMarginMirroringTopBottom(boolean marginMirroringTopBottom) {
         this.marginMirroringTopBottom = marginMirroringTopBottom;
         for (DocListener listener : listeners) {

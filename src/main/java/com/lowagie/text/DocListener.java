@@ -72,6 +72,7 @@ public interface DocListener extends ElementListener, AutoCloseable {
      * <p>
      * The outputstream of every writer implementing <CODE>DocListener</CODE> will be closed.
      */
+    @Override
     void close(); // [L2]
 
     /**

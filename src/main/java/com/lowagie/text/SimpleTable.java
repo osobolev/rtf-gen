@@ -222,6 +222,7 @@ public class SimpleTable extends Rectangle implements TextElementArray {
     /**
      * @return Returns the width.
      */
+    @Override
     public float getWidth() {
         return width;
     }
@@ -250,6 +251,7 @@ public class SimpleTable extends Rectangle implements TextElementArray {
     /**
      * @see com.lowagie.text.Element#type()
      */
+    @Override
     public int type() {
         return Element.TABLE;
     }
@@ -258,6 +260,7 @@ public class SimpleTable extends Rectangle implements TextElementArray {
      * @since iText 2.0.8
      * @see com.lowagie.text.Element#isNestable()
      */
+    @Override
     public boolean isNestable() {
         return true;
     }
@@ -265,6 +268,7 @@ public class SimpleTable extends Rectangle implements TextElementArray {
     /**
      * @see com.lowagie.text.TextElementArray#add(Element)
      */
+    @Override
     public boolean add(Element o) {
         try {
             addElement((SimpleCell) o);

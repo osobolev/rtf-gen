@@ -95,6 +95,7 @@ public class RtfTableOfContents extends RtfField {
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
+    @Override
     protected void writeFieldInstContent(OutputStream result) throws IOException {
         result.write(DocWriter.getISOBytes(FIELD_INST));
     }
@@ -105,6 +106,7 @@ public class RtfTableOfContents extends RtfField {
      * @param out The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
+    @Override
     protected void writeFieldResultContent(OutputStream out) throws IOException {
         document.filterSpecialChar(out, defaultText, true, true);
     }

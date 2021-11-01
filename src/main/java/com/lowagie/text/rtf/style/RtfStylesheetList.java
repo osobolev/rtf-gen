@@ -89,6 +89,7 @@ public class RtfStylesheetList extends RtfElement implements RtfExtendedElement 
     /**
      * unused
      */
+    @Override
     public void writeContent(OutputStream out) {
     }
 
@@ -141,6 +142,7 @@ public class RtfStylesheetList extends RtfElement implements RtfExtendedElement 
     /**
      * Writes the definition of the stylesheet list.
      */
+    @Override
     public void writeDefinition(OutputStream result) throws IOException {
         result.write(DocWriter.getISOBytes("{"));
         result.write(DocWriter.getISOBytes("\\stylesheet"));

@@ -106,12 +106,14 @@ public class RtfListTable extends RtfElement implements RtfExtendedElement {
     /**
      * unused
      */
+    @Override
     public void writeContent(OutputStream out) {
     }
 
     /**
      * Writes the list and list override tables.
      */
+    @Override
     public void writeDefinition(OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         result.write(LIST_TABLE);

@@ -453,6 +453,7 @@ public class RtfParagraphStyle extends RtfFont {
      *
      * @param fontName The font name to use
      */
+    @Override
     public void setFontName(String fontName) {
         this.modified |= MODIFIED_FONT_NAME;
         super.setFontName(fontName);
@@ -463,6 +464,7 @@ public class RtfParagraphStyle extends RtfFont {
      *
      * @param fontSize The font size to use.
      */
+    @Override
     public void setSize(float fontSize) {
         this.modified |= MODIFIED_FONT_SIZE;
         super.setSize(fontSize);
@@ -473,6 +475,7 @@ public class RtfParagraphStyle extends RtfFont {
      *
      * @param fontStyle The font style to use.
      */
+    @Override
     public void setStyle(int fontStyle) {
         this.modified |= MODIFIED_FONT_STYLE;
         super.setStyle(fontStyle);
@@ -483,6 +486,7 @@ public class RtfParagraphStyle extends RtfFont {
      *
      * @param color The Color to use.
      */
+    @Override
     public void setColor(Color color) {
         this.modified |= MODIFIED_FONT_COLOR;
         super.setColor(color);
@@ -648,6 +652,7 @@ public class RtfParagraphStyle extends RtfFont {
     /**
      * Writes the definition of this RtfParagraphStyle for the stylesheet list.
      */
+    @Override
     public void writeDefinition(OutputStream result) throws IOException {
         result.write(DocWriter.getISOBytes("{"));
         result.write(DocWriter.getISOBytes("\\style"));
@@ -669,6 +674,7 @@ public class RtfParagraphStyle extends RtfFont {
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException On i/o errors.
      */
+    @Override
     public void writeBegin(OutputStream result) throws IOException {
         result.write(DocWriter.getISOBytes("\\s"));
         result.write(intToByteArray(this.styleNumber));
@@ -681,12 +687,14 @@ public class RtfParagraphStyle extends RtfFont {
      * @param result The <code>OutputStream</code> that nothing is written to
      * @throws IOException On i/o errors.
      */
+    @Override
     public void writeEnd(OutputStream result) {
     }
 
     /**
      * unused
      */
+    @Override
     public void writeContent(OutputStream out) {
     }
 

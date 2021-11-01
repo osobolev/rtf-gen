@@ -82,6 +82,7 @@ public class RtfDiskCache implements RtfDataCache {
     /**
      * Gets the BufferedOutputStream to write to.
      */
+    @Override
     public OutputStream getOutputStream() {
         return this.data;
     }
@@ -89,6 +90,7 @@ public class RtfDiskCache implements RtfDataCache {
     /**
      * Writes the content of the temporary file into the OutputStream.
      */
+    @Override
     public void writeTo(OutputStream target) throws IOException {
         this.data.close();
         try (BufferedInputStream tempIn = new BufferedInputStream(new FileInputStream(this.tempFile))) {

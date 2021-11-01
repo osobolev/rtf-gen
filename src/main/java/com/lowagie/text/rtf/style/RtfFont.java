@@ -324,6 +324,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * Writes the font definition
      */
+    @Override
     public void writeDefinition(OutputStream result) throws IOException {
         result.write(FONT_FAMILY);
         result.write(FONT_CHARSET);
@@ -439,6 +440,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * unused
      */
+    @Override
     public void writeContent(OutputStream out) {
     }
 
@@ -492,6 +494,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * @see com.lowagie.text.Font#getFamilyname()
      */
+    @Override
     public String getFamilyname() {
         return this.fontName;
     }
@@ -499,6 +502,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * @see com.lowagie.text.Font#setFamily(String)
      */
+    @Override
     public void setFamily(String family) {
         super.setFamily(family);
         setToDefaultFamily(family);
@@ -544,6 +548,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * @see com.lowagie.text.Font#setSize(float)
      */
+    @Override
     public void setSize(float size) {
         super.setSize(size);
         this.fontSize = (int) getSize();
@@ -561,6 +566,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * @see com.lowagie.text.Font#setStyle(int)
      */
+    @Override
     public void setStyle(int style) {
         super.setStyle(style);
         this.fontStyle = getStyle();
@@ -569,6 +575,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * @see com.lowagie.text.Font#setStyle(String)
      */
+    @Override
     public void setStyle(String style) {
         super.setStyle(style);
         fontStyle = getStyle();
@@ -606,6 +613,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
      *
      * @param doc The RtfDocument to use
      */
+    @Override
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
         if (document != null) {
@@ -621,6 +629,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
      *
      * @param inTable
      */
+    @Override
     public void setInTable(boolean inTable) {
     }
 
@@ -629,12 +638,14 @@ public class RtfFont extends Font implements RtfExtendedElement {
      *
      * @param inHeader
      */
+    @Override
     public void setInHeader(boolean inHeader) {
     }
 
     /**
      * @see com.lowagie.text.Font#setColor(Color)
      */
+    @Override
     public void setColor(Color color) {
         super.setColor(color);
         if (color != null) {
@@ -647,6 +658,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
     /**
      * @see com.lowagie.text.Font#setColor(int, int, int)
      */
+    @Override
     public void setColor(int red, int green, int blue) {
         super.setColor(red, green, blue);
         this.color = new RtfColor(document, red, green, blue);
@@ -659,6 +671,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
      * @param font The surrounding font
      * @return A RtfFont
      */
+    @Override
     public Font difference(Font font) {
         String dFamilyname = font.getFamilyname();
         if (dFamilyname == null || "".equals(dFamilyname.trim()) || "unknown".equalsIgnoreCase(dFamilyname.trim())) {
@@ -697,6 +710,7 @@ public class RtfFont extends Font implements RtfExtendedElement {
      *
      * @since 2.1.0
      */
+    @Override
     public boolean isStandardFont() {
         return false;
     }

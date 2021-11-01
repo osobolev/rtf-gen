@@ -264,6 +264,7 @@ public class List implements TextElementArray {
      * @param    listener    an <CODE>ElementListener</CODE>
      * @return    <CODE>true</CODE> if the element was processed successfully
      */
+    @Override
     public boolean process(ElementListener listener) {
         try {
             for (Element element : list) {
@@ -280,6 +281,7 @@ public class List implements TextElementArray {
      *
      * @return a type
      */
+    @Override
     public int type() {
         return Element.LIST;
     }
@@ -289,6 +291,7 @@ public class List implements TextElementArray {
      *
      * @return an <CODE>ArrayList</CODE>
      */
+    @Override
     public java.util.List<Element> getChunks() {
         java.util.List<Element> tmp = new ArrayList<>();
         for (Element element : list) {
@@ -305,6 +308,7 @@ public class List implements TextElementArray {
      * @return true if adding the object succeeded
      * @param    o        the object to add.
      */
+    @Override
     public boolean add(Element o) {
         if (o instanceof ListItem) {
             ListItem item = (ListItem) o;
@@ -585,6 +589,7 @@ public class List implements TextElementArray {
      * @since iText 2.0.8
      * @see com.lowagie.text.Element#isContent()
      */
+    @Override
     public boolean isContent() {
         return true;
     }
@@ -593,6 +598,7 @@ public class List implements TextElementArray {
      * @since iText 2.0.8
      * @see com.lowagie.text.Element#isNestable()
      */
+    @Override
     public boolean isNestable() {
         return true;
     }

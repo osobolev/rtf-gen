@@ -105,6 +105,7 @@ public class RtfInfoGroup extends RtfElement {
     /**
      * Writes the RTF information group and its elements.
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         result.write(INFO_GROUP);

@@ -280,8 +280,8 @@ public class RtfImage extends RtfElement {
     /**
      * Writes the RtfImage content
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
-
         if (this.topLevelElement) {
             result.write(RtfParagraph.PARAGRAPH_DEFAULTS);
             switch (alignment) {

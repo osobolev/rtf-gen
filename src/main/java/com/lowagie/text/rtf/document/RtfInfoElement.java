@@ -117,6 +117,7 @@ public class RtfInfoElement extends RtfElement {
     /**
      * Writes the content of one RTF information element.
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         switch (infoType) {

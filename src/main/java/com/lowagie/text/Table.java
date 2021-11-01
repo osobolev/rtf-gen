@@ -329,6 +329,7 @@ public class Table extends Rectangle implements LargeElement {
      * @param listener an <CODE>ElementListener</CODE>
      * @return <CODE>true</CODE> if the element was processed successfully
      */
+    @Override
     public boolean process(ElementListener listener) {
         try {
             return listener.add(this);
@@ -342,6 +343,7 @@ public class Table extends Rectangle implements LargeElement {
      *
      * @return a type
      */
+    @Override
     public int type() {
         return Element.TABLE;
     }
@@ -350,6 +352,7 @@ public class Table extends Rectangle implements LargeElement {
      * @since iText 2.0.8
      * @see com.lowagie.text.Element#isNestable()
      */
+    @Override
     public boolean isNestable() {
         return true;
     }
@@ -520,6 +523,7 @@ public class Table extends Rectangle implements LargeElement {
      *
      * @return the table width
      */
+    @Override
     public float getWidth() {
         return width;
     }
@@ -1396,6 +1400,7 @@ public class Table extends Rectangle implements LargeElement {
      * @since iText 2.0.8
      * @see com.lowagie.text.LargeElement#flushContent()
      */
+    @Override
     public void flushContent() {
         this.setNotAddedYet(false);
         List<Row> headerrows = new ArrayList<>();
@@ -1409,6 +1414,7 @@ public class Table extends Rectangle implements LargeElement {
      * @since iText 2.0.8
      * @see com.lowagie.text.LargeElement#isComplete()
      */
+    @Override
     public boolean isComplete() {
         return complete;
     }
@@ -1417,6 +1423,7 @@ public class Table extends Rectangle implements LargeElement {
      * @since iText 2.0.8
      * @see com.lowagie.text.LargeElement#setComplete(boolean)
      */
+    @Override
     public void setComplete(boolean complete) {
         this.complete = complete;
     }

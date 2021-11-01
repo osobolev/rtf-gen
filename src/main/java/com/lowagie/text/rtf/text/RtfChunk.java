@@ -134,6 +134,7 @@ public class RtfChunk extends RtfElement {
      * Writes the content of this RtfChunk. First the font information
      * is written, then the content, and then more font information
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         if (this.background != null) {
             result.write(OPEN_GROUP);
@@ -167,6 +168,7 @@ public class RtfChunk extends RtfElement {
      *
      * @param doc The RtfDocument to use
      */
+    @Override
     public void setRtfDocument(RtfDocument doc) {
         super.setRtfDocument(doc);
         this.font.setRtfDocument(this.document);

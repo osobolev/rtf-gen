@@ -86,12 +86,14 @@ public class RtfCodePage extends RtfElement implements RtfExtendedElement {
     /**
      * unused
      */
+    @Override
     public void writeContent(OutputStream out) {
     }
 
     /**
      * Writes the selected codepage
      */
+    @Override
     public void writeDefinition(OutputStream result) throws IOException {
         result.write(ANSI);
         result.write(ANSI_CODEPAGE);

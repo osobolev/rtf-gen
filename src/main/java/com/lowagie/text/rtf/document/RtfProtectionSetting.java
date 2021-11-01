@@ -141,6 +141,7 @@ public class RtfProtectionSetting extends RtfElement {
      *
      * @since 2.1.1
      */
+    @Override
     public void writeContent(OutputStream result) {
     }
 

@@ -99,6 +99,7 @@ public class RtfAnchor extends RtfField {
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
+    @Override
     protected void writeFieldInstContent(OutputStream result) throws IOException {
         result.write(HYPERLINK);
         result.write(DELIMITER);
@@ -112,6 +113,7 @@ public class RtfAnchor extends RtfField {
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
+    @Override
     protected void writeFieldResultContent(OutputStream result) throws IOException {
         content.writeContent(result);
     }

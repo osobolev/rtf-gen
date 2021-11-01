@@ -93,11 +93,13 @@ public abstract class RtfAddableElement extends Chunk implements RtfBasicElement
     /**
      * Writes the element content to the given output stream.
      */
+    @Override
     public abstract void writeContent(OutputStream out) throws IOException;
 
     /**
      * Sets the RtfDocument this RtfAddableElement belongs to.
      */
+    @Override
     public void setRtfDocument(RtfDocument doc) {
         this.doc = doc;
     }
@@ -105,6 +107,7 @@ public abstract class RtfAddableElement extends Chunk implements RtfBasicElement
     /**
      * Sets whether this RtfAddableElement is contained in a table.
      */
+    @Override
     public void setInTable(boolean inTable) {
         this.inTable = inTable;
     }
@@ -112,6 +115,7 @@ public abstract class RtfAddableElement extends Chunk implements RtfBasicElement
     /**
      * Sets whether this RtfAddableElement is contained in a header/footer.
      */
+    @Override
     public void setInHeader(boolean inHeader) {
         this.inHeader = inHeader;
     }
@@ -130,6 +134,7 @@ public abstract class RtfAddableElement extends Chunk implements RtfBasicElement
     /**
      * RtfAddableElement subclasses are never assumed to be empty.
      */
+    @Override
     public boolean isEmpty() {
         return false;
     }

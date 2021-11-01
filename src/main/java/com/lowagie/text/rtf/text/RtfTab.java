@@ -132,6 +132,7 @@ public class RtfTab extends RtfAddableElement {
     /**
      * Writes the tab settings.
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         switch (this.type) {
         case TAB_CENTER_ALIGN:

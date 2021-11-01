@@ -343,6 +343,7 @@ public class RtfRow extends RtfElement {
     /**
      * Writes the content of this RtfRow
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         writeRowDefinition(result);
 

@@ -91,6 +91,7 @@ public class RtfListItem extends RtfParagraph {
     /**
      * Writes the content of this RtfListItem.
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         if (this.paragraphStyle.getSpacingBefore() > 0) {
             result.write(RtfParagraphStyle.SPACING_BEFORE);

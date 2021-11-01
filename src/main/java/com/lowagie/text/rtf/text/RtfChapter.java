@@ -79,6 +79,7 @@ public class RtfChapter extends RtfSection {
     /**
      * Writes the RtfChapter and its contents
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         if (this.document.getLastElementWritten() != null && !(this.document.getLastElementWritten() instanceof RtfChapter)) {
             result.write(DocWriter.getISOBytes("\\page"));

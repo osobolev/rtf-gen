@@ -174,6 +174,7 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
      *
      * @param doc The RtfDocument to use
      */
+    @Override
     public void setRtfDocument(RtfDocument doc) {
         this.document = doc;
         this.font.setRtfDocument(this.document);
@@ -282,6 +283,7 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
      * @param result The <code>OutputStream</code> to write to.
      * @throws IOException on i/o errors.
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         this.font.writeBegin(result);
         writeFieldBegin(result);
@@ -390,6 +392,7 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
      *
      * @param inTable <code>True</code> if this RtfField is in a table, <code>false</code> otherwise
      */
+    @Override
     public void setInTable(boolean inTable) {
         this.inTable = inTable;
     }
@@ -409,6 +412,7 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
      *
      * @param inHeader <code>True</code> if this RtfField is in a header, <code>false</code> otherwise
      */
+    @Override
     public void setInHeader(boolean inHeader) {
         this.inHeader = inHeader;
     }
@@ -426,6 +430,7 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * An RtfField is never empty.
      */
+    @Override
     public boolean isEmpty() {
         return false;
     }
@@ -433,6 +438,7 @@ public abstract class RtfField extends Chunk implements RtfBasicElement {
     /**
      * Override setFont to perform the correct font handling.
      */
+    @Override
     public void setFont(Font font) {
         super.setFont(font);
         this.font = new RtfFont(this.document, font);

@@ -386,6 +386,7 @@ public class RtfListLevel extends RtfElement implements RtfExtendedElement {
         this.alignment = alignment;
     }
 
+    @Override
     public void writeDefinition(OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         result.write(LIST_LEVEL);
@@ -575,6 +576,7 @@ public class RtfListLevel extends RtfElement implements RtfExtendedElement {
     /**
      * unused
      */
+    @Override
     public void writeContent(OutputStream result) {
     }
 

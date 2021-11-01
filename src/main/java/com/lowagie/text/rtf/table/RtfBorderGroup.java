@@ -197,6 +197,7 @@ public class RtfBorderGroup extends RtfElement {
     /**
      * Writes the borders of this RtfBorderGroup
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         for (RtfBorder rtfBorder : this.borders.values()) {
             rtfBorder.writeContent(result);

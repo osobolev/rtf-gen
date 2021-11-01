@@ -186,12 +186,14 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
     /**
      * unused
      */
+    @Override
     public void writeContent(OutputStream out) {
     }
 
     /**
      * Write the definition part of this RtfColor.
      */
+    @Override
     public void writeDefinition(OutputStream result) throws IOException {
         result.write(COLOR_RED);
         result.write(intToByteArray(red));
@@ -285,6 +287,7 @@ public class RtfColor extends RtfElement implements RtfExtendedElement {
      *
      * @param doc The RtfDocument to use
      */
+    @Override
     public void setRtfDocument(RtfDocument doc) {
         super.setRtfDocument(doc);
         if (document != null) {

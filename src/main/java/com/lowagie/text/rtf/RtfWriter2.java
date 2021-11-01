@@ -99,6 +99,7 @@ public class RtfWriter2 extends DocWriter {
      *
      * @param hf The HeaderFooter to use
      */
+    @Override
     public void setHeader(HeaderFooter hf) {
         this.rtfDoc.getDocumentHeader().setHeader(hf);
     }
@@ -106,6 +107,7 @@ public class RtfWriter2 extends DocWriter {
     /**
      * Resets the header
      */
+    @Override
     public void resetHeader() {
         this.rtfDoc.getDocumentHeader().setHeader(null);
     }
@@ -115,6 +117,7 @@ public class RtfWriter2 extends DocWriter {
      *
      * @param hf The HeaderFooter to use
      */
+    @Override
     public void setFooter(HeaderFooter hf) {
         this.rtfDoc.getDocumentHeader().setFooter(hf);
     }
@@ -122,6 +125,7 @@ public class RtfWriter2 extends DocWriter {
     /**
      * Resets the footer
      */
+    @Override
     public void resetFooter() {
         this.rtfDoc.getDocumentHeader().setFooter(null);
     }
@@ -131,12 +135,14 @@ public class RtfWriter2 extends DocWriter {
      *
      * @param i Unused
      */
+    @Override
     public void setPageCount(int i) {
     }
 
     /**
      * This method is not supported in the RtfWriter
      */
+    @Override
     public void resetPageCount() {
     }
 
@@ -149,6 +155,7 @@ public class RtfWriter2 extends DocWriter {
     /**
      * Opens the RtfDocument
      */
+    @Override
     public void open() {
         super.open();
         this.rtfDoc.open();
@@ -158,6 +165,7 @@ public class RtfWriter2 extends DocWriter {
      * Closes the RtfDocument. This causes the document to be written
      * to the specified OutputStream
      */
+    @Override
     public void close() {
         if (open) {
             try {
@@ -177,6 +185,7 @@ public class RtfWriter2 extends DocWriter {
      * @return <code>false</code>
      * @throws DocumentException
      */
+    @Override
     public boolean add(Element element) throws DocumentException {
         if (pause) {
             return false;
@@ -199,6 +208,7 @@ public class RtfWriter2 extends DocWriter {
      *
      * @return <code>false</code>
      */
+    @Override
     public boolean newPage() {
         rtfDoc.add(new RtfNewPage(rtfDoc));
         return true;
@@ -213,6 +223,7 @@ public class RtfWriter2 extends DocWriter {
      * @param bottom The bottom margin
      * @return <code>false</code>
      */
+    @Override
     public boolean setMargins(float left, float right, float top, float bottom) {
         rtfDoc.getDocumentHeader().getPageSetting().setMarginLeft((int) (left * RtfElement.TWIPS_FACTOR));
         rtfDoc.getDocumentHeader().getPageSetting().setMarginRight((int) (right * RtfElement.TWIPS_FACTOR));
@@ -227,6 +238,7 @@ public class RtfWriter2 extends DocWriter {
      * @param rect A Rectangle representing the page
      * @return <code>false</code>
      */
+    @Override
     public boolean setPageSize(Rectangle rect) {
         rtfDoc.getDocumentHeader().getPageSetting().setPageSize(rect);
         return true;

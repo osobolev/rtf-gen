@@ -126,6 +126,7 @@ public class RtfSection extends RtfElement {
     /**
      * Write this RtfSection and its contents
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         result.write(RtfParagraph.PARAGRAPH);
         if (this.title != null) {
@@ -142,6 +143,7 @@ public class RtfSection extends RtfElement {
      *
      * @param inTable <code>True</code> if this RtfSection is in a table, <code>false</code> otherwise
      */
+    @Override
     public void setInTable(boolean inTable) {
         super.setInTable(inTable);
         for (RtfBasicElement rbe : this.items) {
@@ -155,6 +157,7 @@ public class RtfSection extends RtfElement {
      *
      * @param inHeader <code>True</code> if this RtfSection is in a header, <code>false</code> otherwise
      */
+    @Override
     public void setInHeader(boolean inHeader) {
         super.setInHeader(inHeader);
         for (RtfBasicElement rbe : this.items) {

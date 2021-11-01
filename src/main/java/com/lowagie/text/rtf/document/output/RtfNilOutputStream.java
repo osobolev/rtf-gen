@@ -83,6 +83,7 @@ public final class RtfNilOutputStream extends OutputStream {
     /**
      * Write an int. The size is incremented, but the actual data is thrown away.
      */
+    @Override
     public void write(int b) {
         size++;
     }
@@ -90,6 +91,7 @@ public final class RtfNilOutputStream extends OutputStream {
     /**
      * Write a <code>byte[]</code>. The size is incremented, but the actual data is thrown away.
      */
+    @Override
     public void write(byte[] b, int off, int len) {
         if (b == null) {
             throw new NullPointerException();

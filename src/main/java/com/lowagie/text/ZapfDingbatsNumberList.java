@@ -110,6 +110,7 @@ public class ZapfDingbatsNumberList extends List {
      * @return true if adding the object succeeded
      * @param    o    the object to add.
      */
+    @Override
     public boolean add(Element o) {
         if (o instanceof ListItem) {
             ListItem item = (ListItem) o;

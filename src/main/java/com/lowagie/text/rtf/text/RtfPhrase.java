@@ -142,6 +142,7 @@ public class RtfPhrase extends RtfElement {
      * then if the RtfPhrase is in a RtfCell a marker for this is written and finally
      * the RtfChunks of this RtfPhrase are written.
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         result.write(PARAGRAPH_DEFAULTS);
         result.write(PLAIN);
@@ -163,6 +164,7 @@ public class RtfPhrase extends RtfElement {
      *
      * @param inTable <code>True</code> if this RtfPhrase is in a table, <code>false</code> otherwise
      */
+    @Override
     public void setInTable(boolean inTable) {
         super.setInTable(inTable);
         for (RtfBasicElement chunk : this.chunks) {
@@ -176,6 +178,7 @@ public class RtfPhrase extends RtfElement {
      *
      * @param inHeader <code>True</code> if this RtfPhrase is in a header, <code>false</code> otherwise
      */
+    @Override
     public void setInHeader(boolean inHeader) {
         super.setInHeader(inHeader);
         for (RtfBasicElement chunk : this.chunks) {
@@ -189,6 +192,7 @@ public class RtfPhrase extends RtfElement {
      *
      * @param doc The RtfDocument to use
      */
+    @Override
     public void setRtfDocument(RtfDocument doc) {
         super.setRtfDocument(doc);
         for (RtfBasicElement chunk : this.chunks) {

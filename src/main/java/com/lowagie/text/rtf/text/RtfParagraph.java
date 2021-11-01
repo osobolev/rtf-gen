@@ -135,6 +135,7 @@ public class RtfParagraph extends RtfPhrase {
      * Writes the content of this RtfParagraph. First paragraph specific data is written
      * and then the RtfChunks of this RtfParagraph are added.
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         result.write(PARAGRAPH_DEFAULTS);
         result.write(PLAIN);

@@ -421,6 +421,7 @@ public class RtfBorder extends RtfElement {
     /**
      * Writes the RtfBorder settings
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         if (this.borderStyle == BORDER_NONE || this.borderPosition == NO_BORDER || this.borderWidth == 0) {
             return;

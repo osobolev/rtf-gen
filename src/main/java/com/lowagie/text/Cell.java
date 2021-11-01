@@ -235,6 +235,7 @@ public class Cell extends Rectangle implements TextElementArray {
      * @param    listener    an <CODE>ElementListener</CODE>
      * @return    <CODE>true</CODE> if the element was processed successfully
      */
+    @Override
     public boolean process(ElementListener listener) {
         try {
             return listener.add(this);
@@ -248,6 +249,7 @@ public class Cell extends Rectangle implements TextElementArray {
      *
      * @return a type
      */
+    @Override
     public int type() {
         return Element.CELL;
     }
@@ -257,6 +259,7 @@ public class Cell extends Rectangle implements TextElementArray {
      *
      * @return an <CODE>ArrayList</CODE>
      */
+    @Override
     public java.util.List<Element> getChunks() {
         java.util.List<Element> tmp = new ArrayList<>();
         for (Element element : arrayList) {
@@ -348,6 +351,7 @@ public class Cell extends Rectangle implements TextElementArray {
     /**
      * Gets the width.
      */
+    @Override
     public float getWidth() {
         return width;
     }
@@ -725,6 +729,7 @@ public class Cell extends Rectangle implements TextElementArray {
      * @param o the object to add
      * @return always <CODE>true</CODE>
      */
+    @Override
     public boolean add(Element o) {
         try {
             this.addElement(o);
@@ -757,6 +762,7 @@ public class Cell extends Rectangle implements TextElementArray {
      *
      * @return NA
      */
+    @Override
     public float getTop() {
         throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
     }
@@ -766,6 +772,7 @@ public class Cell extends Rectangle implements TextElementArray {
      *
      * @return NA
      */
+    @Override
     public float getBottom() {
         throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
     }
@@ -775,6 +782,7 @@ public class Cell extends Rectangle implements TextElementArray {
      *
      * @return NA
      */
+    @Override
     public float getLeft() {
         throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
     }
@@ -784,6 +792,7 @@ public class Cell extends Rectangle implements TextElementArray {
      *
      * @return NA
      */
+    @Override
     public float getRight() {
         throw new UnsupportedOperationException("Dimensions of a Cell can't be calculated. See the FAQ.");
     }

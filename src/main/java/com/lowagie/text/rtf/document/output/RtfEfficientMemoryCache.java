@@ -74,6 +74,7 @@ public class RtfEfficientMemoryCache implements RtfDataCache {
     /**
      * Gets the OutputStream.
      */
+    @Override
     public OutputStream getOutputStream() {
         return bab;
     }
@@ -81,6 +82,7 @@ public class RtfEfficientMemoryCache implements RtfDataCache {
     /**
      * Writes the content of the buffer into the OutputStream.
      */
+    @Override
     public void writeTo(OutputStream target) throws IOException {
         bab.writeTo(target);
     }

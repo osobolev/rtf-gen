@@ -199,6 +199,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * @param    listener    an <CODE>ElementListener</CODE>
      * @return    <CODE>true</CODE> if the element was processed successfully
      */
+    @Override
     public boolean process(ElementListener listener) {
         try {
             for (Element element : this) {
@@ -215,6 +216,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      *
      * @return a type
      */
+    @Override
     public int type() {
         return Element.PHRASE;
     }
@@ -224,6 +226,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      *
      * @return an <CODE>ArrayList</CODE>
      */
+    @Override
     public java.util.List<Element> getChunks() {
         java.util.List<Element> tmp = new ArrayList<>();
         for (Element element : this) {
@@ -236,6 +239,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * @since iText 2.0.8
      * @see com.lowagie.text.Element#isContent()
      */
+    @Override
     public boolean isContent() {
         return true;
     }
@@ -244,6 +248,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * @since iText 2.0.8
      * @see com.lowagie.text.Element#isNestable()
      */
+    @Override
     public boolean isNestable() {
         return true;
     }
@@ -258,6 +263,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * @param    o an object of type <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
      * @throws ClassCastException    when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
      */
+    @Override
     public void add(int index, Element o) {
         if (o == null)
             return;
@@ -291,6 +297,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * @return a boolean
      * @throws ClassCastException    when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
      */
+    @Override
     public boolean add(Element o) {
         if (o == null)
             return false;
@@ -337,6 +344,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * @return    <CODE>true</CODE> if the action succeeded, <CODE>false</CODE> if not.
      * @throws ClassCastException    when you try to add something that isn't a <CODE>Chunk</CODE>, <CODE>Anchor</CODE> or <CODE>Phrase</CODE>
      */
+    @Override
     public boolean addAll(Collection<? extends Element> collection) {
         for (Element element : collection) {
             this.add(element);
@@ -457,6 +465,7 @@ public class Phrase extends ArrayList<Element> implements TextElementArray {
      * @return    <CODE>false</CODE> if the <CODE>Phrase</CODE>
      * contains more than one or more non-empty<CODE>Chunk</CODE>s.
      */
+    @Override
     public boolean isEmpty() {
         switch (size()) {
         case 0:

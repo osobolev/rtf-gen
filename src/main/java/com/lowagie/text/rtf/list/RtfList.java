@@ -347,6 +347,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
      * @throws IOException
      * @since 2.1.3
      */
+    @Override
     public void writeDefinition(OutputStream result) throws IOException {
         result.write(OPEN_GROUP);
         result.write(LIST);
@@ -414,6 +415,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
      *
      * @since 2.1.3
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         if (!this.inTable) {
             result.write(OPEN_GROUP);
@@ -565,6 +567,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
      * @param inTable <code>True</code> if this RtfList is in a table, <code>false</code> otherwise
      * @since 2.1.3
      */
+    @Override
     public void setInTable(boolean inTable) {
         super.setInTable(inTable);
         for (RtfBasicElement item : this.items) {
@@ -582,6 +585,7 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
      * @param inHeader <code>True</code> if this RtfList is in a header, <code>false</code> otherwise
      * @since 2.1.3
      */
+    @Override
     public void setInHeader(boolean inHeader) {
         super.setInHeader(inHeader);
         for (RtfBasicElement item : this.items) {

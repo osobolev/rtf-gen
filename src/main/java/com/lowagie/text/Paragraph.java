@@ -227,6 +227,7 @@ public class Paragraph extends Phrase {
      *
      * @return a type
      */
+    @Override
     public int type() {
         return Element.PARAGRAPH;
     }
@@ -239,6 +240,7 @@ public class Paragraph extends Phrase {
      * @return true is adding the object succeeded
      * @param    o object		the object to add.
      */
+    @Override
     public boolean add(Element o) {
         if (o instanceof List) {
             List list = (List) o;
@@ -301,6 +303,7 @@ public class Paragraph extends Phrase {
     /**
      * @see com.lowagie.text.Phrase#setLeading(float)
      */
+    @Override
     public void setLeading(float fixedLeading) {
         this.leading = fixedLeading;
         this.multipliedLeading = 0;

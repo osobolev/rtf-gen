@@ -163,6 +163,7 @@ public class RtfDocumentHeader extends RtfElement {
     /**
      * Writes the contents of the document header area.
      */
+    @Override
     public void writeContent(OutputStream result) throws IOException {
         // This is so that all color, font and similar information is processed once, before
         // the header section is written.

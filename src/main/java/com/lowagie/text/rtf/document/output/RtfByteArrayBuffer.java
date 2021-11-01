@@ -149,6 +149,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
      *
      * @param b
      */
+    @Override
     public void write(int b) {
         buffer[pos] = (byte) b;
         size++;
@@ -162,6 +163,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
      *
      * @param src
      */
+    @Override
     public void write(byte[] src) {
         if (src == null)
             throw new NullPointerException();
@@ -182,6 +184,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
      * @param off
      * @param len
      */
+    @Override
     public void write(byte[] src, int off, int len) {
         if (src == null)
             throw new NullPointerException();

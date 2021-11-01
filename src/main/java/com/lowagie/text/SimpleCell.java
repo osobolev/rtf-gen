@@ -414,6 +414,7 @@ public class SimpleCell extends Rectangle implements TextElementArray {
     /**
      * @return Returns the width.
      */
+    @Override
     public float getWidth() {
         return width;
     }
@@ -491,6 +492,7 @@ public class SimpleCell extends Rectangle implements TextElementArray {
     /**
      * @see com.lowagie.text.TextElementArray#add(Element)
      */
+    @Override
     public boolean add(Element o) {
         try {
             addElement(o);
@@ -505,6 +507,7 @@ public class SimpleCell extends Rectangle implements TextElementArray {
     /**
      * @see com.lowagie.text.Element#type()
      */
+    @Override
     public int type() {
         return Element.CELL;
     }

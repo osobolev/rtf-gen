@@ -207,6 +207,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * @param    listener        the <CODE>ElementListener</CODE>
      * @return    <CODE>true</CODE> if the element was processed successfully
      */
+    @Override
     public boolean process(ElementListener listener) {
         try {
             for (Element element : this) {
@@ -223,6 +224,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      *
      * @return a type
      */
+    @Override
     public int type() {
         return Element.SECTION;
     }
@@ -252,6 +254,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      *
      * @return an <CODE>ArrayList</CODE>
      */
+    @Override
     public java.util.List<Element> getChunks() {
         java.util.List<Element> tmp = new ArrayList<>();
         for (Element element : this) {
@@ -264,6 +267,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * @since iText 2.0.8
      * @see com.lowagie.text.Element#isContent()
      */
+    @Override
     public boolean isContent() {
         return true;
     }
@@ -272,6 +276,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * @since iText 2.0.8
      * @see com.lowagie.text.Element#isNestable()
      */
+    @Override
     public boolean isNestable() {
         return false;
     }
@@ -286,6 +291,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * @param    o an object of type <CODE>Paragraph</CODE>, <CODE>List</CODE> or <CODE>Table</CODE>=
      * @throws ClassCastException if the object is not a <CODE>Paragraph</CODE>, <CODE>List</CODE> or <CODE>Table</CODE>
      */
+    @Override
     public void add(int index, Element o) {
         if (isAddedCompletely()) {
             throw new IllegalStateException("This LargeElement has already been added to the Document.");
@@ -309,6 +315,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * @return a boolean
      * @throws ClassCastException if the object is not a <CODE>Paragraph</CODE>, <CODE>List</CODE>, <CODE>Table</CODE> or <CODE>Section</CODE>
      */
+    @Override
     public boolean add(Element o) {
         if (isAddedCompletely()) {
             throw new IllegalStateException("This LargeElement has already been added to the Document.");
@@ -341,6 +348,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * @return    <CODE>true</CODE> if the action succeeded, <CODE>false</CODE> if not.
      * @throws ClassCastException if one of the objects isn't a <CODE>Paragraph</CODE>, <CODE>List</CODE>, <CODE>Table</CODE>
      */
+    @Override
     public boolean addAll(Collection<? extends Element> collection) {
         for (Element element : collection) {
             this.add(element);
@@ -736,6 +744,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * @since iText 2.0.8
      * @see com.lowagie.text.LargeElement#flushContent()
      */
+    @Override
     public void flushContent() {
         setNotAddedYet(false);
         title = null;
@@ -758,6 +767,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * @since iText 2.0.8
      * @see com.lowagie.text.LargeElement#isComplete()
      */
+    @Override
     public boolean isComplete() {
         return complete;
     }
@@ -766,6 +776,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * @since iText 2.0.8
      * @see com.lowagie.text.LargeElement#setComplete(boolean)
      */
+    @Override
     public void setComplete(boolean complete) {
         this.complete = complete;
     }

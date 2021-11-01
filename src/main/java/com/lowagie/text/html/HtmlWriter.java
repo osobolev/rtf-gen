@@ -185,6 +185,7 @@ public class HtmlWriter extends DocWriter {
      *
      * @return <CODE>true</CODE> if this action succeeded, <CODE>false</CODE> if not.
      */
+    @Override
     public boolean newPage() {
         try {
             writeStart(HtmlTags.DIV);
@@ -207,6 +208,7 @@ public class HtmlWriter extends DocWriter {
      * @return <CODE>true</CODE> if the element was added, <CODE>false</CODE> if not.
      * @throws DocumentException when a document isn't open yet, or has been closed
      */
+    @Override
     public boolean add(Element element) throws DocumentException {
         if (pause) {
             return false;
@@ -290,6 +292,7 @@ public class HtmlWriter extends DocWriter {
      * <p>
      * The <CODE>HEAD</CODE>-section of the HTML-document is written.
      */
+    @Override
     public void open() {
         super.open();
         try {
@@ -334,6 +337,7 @@ public class HtmlWriter extends DocWriter {
      * Signals that the <CODE>Document</CODE> was closed and that no other
      * <CODE>Elements</CODE> will be added.
      */
+    @Override
     public void close() {
         try {
             initFooter(); // line added by David Freels
@@ -527,6 +531,7 @@ public class HtmlWriter extends DocWriter {
      *
      * @param header the new header
      */
+    @Override
     public void setHeader(HeaderFooter header) {
         this.header = header;
     }
@@ -536,6 +541,7 @@ public class HtmlWriter extends DocWriter {
      *
      * @param footer the new footer
      */
+    @Override
     public void setFooter(HeaderFooter footer) {
         this.footer = footer;
     }
