@@ -518,7 +518,7 @@ public class Section extends ArrayList<Element> implements TextElementArray, Lar
      * <p>
      * If the numberdepth is 0, the sections will not be numbered. If the numberdepth
      * is 1, the section will be numbered with their own number. If the numberdepth is
-     * higher (for instance x > 1), the numbers of x - 1 parents will be shown.
+     * higher (for instance x &gt; 1), the numbers of x - 1 parents will be shown.
      *
      * @param    numberDepth        the new numberDepth
      */

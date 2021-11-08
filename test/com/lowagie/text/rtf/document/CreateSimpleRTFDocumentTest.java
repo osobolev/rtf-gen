@@ -20,7 +20,7 @@ public class CreateSimpleRTFDocumentTest {
 
     @Test
     public void createDocument() throws IOException, DocumentException {
-        File outputFile = new File("target/CreateSimpleRTFDocumentTest.rtf");
+        File outputFile = new File("build/CreateSimpleRTFDocumentTest.rtf");
 
         // Delete output file if it already exists
         if (outputFile.exists()) {
