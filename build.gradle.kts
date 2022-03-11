@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.osobolev"
-version = "1.0.2"
+version = "1.0.3"
 
 dependencies {
     testImplementation("junit:junit:4.13.2")
