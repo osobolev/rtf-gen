@@ -2,6 +2,7 @@ description = "RTF generation library"
 
 plugins {
     `module-lib`
+    id("com.github.ben-manes.versions") version "0.44.0"
 }
 
 group = "io.github.osobolev"
