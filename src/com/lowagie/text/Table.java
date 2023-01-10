@@ -148,6 +148,8 @@ import java.util.List;
  */
 public class Table extends Rectangle implements LargeElement {
 
+    public static final float NO_OFFSET = -1;
+
     // membervariables
 
     /**

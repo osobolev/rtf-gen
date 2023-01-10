@@ -119,6 +119,10 @@ public class RtfTable extends RtfElement {
      * The offset from the previous text
      */
     private int offset = -1;
+    /**
+     * Whether to insert empty paragraph before this table
+     */
+    private boolean insertParagraph = true;
 
     /**
      * Constructs a RtfTable based on a Table for a RtfDocument.
@@ -161,7 +165,11 @@ public class RtfTable extends RtfElement {
         this.cellsFitToPage = table.isCellsFitPage();
         this.tableFitToPage = table.isTableFitsPage();
         if (!Float.isNaN(table.getOffset())) {
-            this.offset = (int) (table.getOffset() * 2);
+            if (table.getOffset() < 0) {
+                this.insertParagraph = false;
+            } else {
+                this.offset = (int) (table.getOffset() * 2);
+            }
         }
     }
 
@@ -170,7 +178,7 @@ public class RtfTable extends RtfElement {
      */
     @Override
     public void writeContent(OutputStream result) throws IOException {
-        if (!inHeader) {
+        if (!inHeader && insertParagraph) {
             if (this.offset != -1) {
                 result.write(RtfFont.FONT_SIZE);
                 result.write(intToByteArray(this.offset));
@@ -179,7 +187,6 @@ public class RtfTable extends RtfElement {
         }
 
         for (RtfElement re : this.rows) {
-            //.result.write(re.write());
             re.writeContent(result);
         }
 
