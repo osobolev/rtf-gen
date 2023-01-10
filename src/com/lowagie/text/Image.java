@@ -135,12 +135,12 @@ public class Image extends Rectangle {
     /**
      * This is the width of the image without rotation.
      */
-    private final float plainWidth;
+    private float plainWidth;
 
     /**
      * This is the width of the image without rotation.
      */
-    private final float plainHeight;
+    private float plainHeight;
 
     public Image(URL url, byte[] originalData, int width, int height, int originalType) {
         super(width, height);
@@ -362,6 +362,67 @@ public class Image extends Rectangle {
      */
     public float getPlainHeight() {
         return plainHeight;
+    }
+
+    /**
+     * Scale the image to an absolute width and an absolute height.
+     *
+     * @param newWidth the new width
+     * @param newHeight the new height
+     */
+    public void scaleAbsolute(float newWidth, float newHeight) {
+        plainWidth = newWidth;
+        plainHeight = newHeight;
+    }
+
+    /**
+     * Scale the image to an absolute width.
+     *
+     * @param newWidth the new width
+     */
+    public void scaleAbsoluteWidth(float newWidth) {
+        plainWidth = newWidth;
+    }
+
+    /**
+     * Scale the image to an absolute height.
+     *
+     * @param newHeight the new height
+     */
+    public void scaleAbsoluteHeight(float newHeight) {
+        plainHeight = newHeight;
+    }
+
+    /**
+     * Scale the image to a certain percentage.
+     *
+     * @param percent the scaling percentage
+     */
+    public void scalePercent(float percent) {
+        scalePercent(percent, percent);
+    }
+
+    /**
+     * Scale the width and height of an image to a certain percentage.
+     *
+     * @param percentX the scaling percentage of the width
+     * @param percentY the scaling percentage of the height
+     */
+    public void scalePercent(float percentX, float percentY) {
+        plainWidth = (getWidth() * percentX) / 100f;
+        plainHeight = (getHeight() * percentY) / 100f;
+    }
+
+    /**
+     * Scales the image so that it fits a certain width and height.
+     *
+     * @param fitWidth the width to fit
+     * @param fitHeight the height to fit
+     */
+    public void scaleToFit(float fitWidth, float fitHeight) {
+        float percentX = (fitWidth * 100) / getWidth();
+        float percentY = (fitHeight * 100) / getHeight();
+        scalePercent(Math.min(percentX, percentY));
     }
 
     /**
