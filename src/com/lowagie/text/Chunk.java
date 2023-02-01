@@ -151,7 +151,7 @@ public class Chunk implements Element {
      * @param font    the font
      */
     public Chunk(String content, Font font) {
-        this.content = new StringBuilder(content);
+        this.content = new StringBuilder(content == null ? "" : content);
         this.font = font;
     }
 
