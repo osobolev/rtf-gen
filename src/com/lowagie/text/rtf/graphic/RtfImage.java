@@ -200,7 +200,7 @@ public class RtfImage extends RtfElement {
                 final int WMF_PLACEABLE_HEADER_SIZE = 22;
                 if (iod == null) {
                     try (InputStream imageIn = image.getUrl().openStream()) {
-                        if (imageType == Image.ORIGINAL_WMF) { //remove the placeable header first
+                        if (imageType == Image.ORIGINAL_WMF) { // remove the placeable header first
                             for (int k = 0; k < WMF_PLACEABLE_HEADER_SIZE; k++) {
                                 if (imageIn.read() < 0)
                                     throw new EOFException("while removing wmf placeable header");
@@ -211,7 +211,7 @@ public class RtfImage extends RtfElement {
                 } else {
 
                     if (imageType == Image.ORIGINAL_WMF) {
-                        //remove the placeable header
+                        // remove the placeable header
                         bab.write(iod, WMF_PLACEABLE_HEADER_SIZE, iod.length - WMF_PLACEABLE_HEADER_SIZE);
                     } else {
                         bab.append(iod);
@@ -228,7 +228,7 @@ public class RtfImage extends RtfElement {
     /**
      * lookup table used for converting bytes to hex chars.
      */
-    public static final byte[] byte2charLUT = new byte[512]; //'0001020304050607 ... fafbfcfdfeff'
+    public static final byte[] byte2charLUT = new byte[512]; // '0001020304050607 ... fafbfcfdfeff'
 
     static {
         char c = '0';
@@ -343,7 +343,7 @@ public class RtfImage extends RtfElement {
         }
 
         if (this.document.getDocumentSettings().isImageWrittenAsBinary()) {
-            //binary
+            // binary
             result.write('\n');
             result.write(PICTURE_BINARY_DATA);
             result.write(intToByteArray(imageDataSize()));
@@ -356,7 +356,7 @@ public class RtfImage extends RtfElement {
                 }
             }
         } else {
-            //hex encoded
+            // hex encoded
             result.write(DELIMITER);
             result.write('\n');
             writeImageDataHexEncoded(result);

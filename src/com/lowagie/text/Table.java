@@ -870,7 +870,7 @@ public class Table extends Rectangle implements LargeElement {
             throw new IllegalArgumentException("insertTable -- wrong columnposition(" + aLocation.y + ") of location; max =" + columns);
 
         int rowCount = aLocation.x + 1 - rows.size();
-        if (rowCount > 0) {   //create new rows ?
+        if (rowCount > 0) {   // create new rows?
             for (int i = 0; i < rowCount; i++) {
                 rows.add(new Row(columns));
             }
@@ -1220,8 +1220,7 @@ public class Table extends Rectangle implements LargeElement {
      */
     private boolean isValidLocation(Cell aCell, Point aLocation) {
         // rowspan not beyond last column
-        if (aLocation.x < rows.size())        // if false : new location is already at new, not-yet-created area so no check
-        {
+        if (aLocation.x < rows.size()) {       // if false : new location is already at new, not-yet-created area so no check
             if ((aLocation.y + aCell.getColspan()) > columns) {
                 return false;
             }

@@ -210,7 +210,7 @@ public class RtfDocument extends RtfElement {
      * @return A random int
      */
     public int getRandomInt() {
-        while (true){
+        while (true) {
             int newInt = (int) (Math.random() * Integer.MAX_VALUE);
             if (this.previousRandomInts.add(newInt))
                 return newInt;
@@ -252,7 +252,7 @@ public class RtfDocument extends RtfElement {
         for (int k = 0; k < len; k++) {
             char c = str.charAt(k);
             if (c < 0x20) {
-                //allow return and tab only
+                // allow return and tab only
                 if (c == '\n') {
                     out.write(softLineBreaks ? FSC_LINE : FSC_PAR);
                 } else if (c == '\t') {
@@ -261,7 +261,7 @@ public class RtfDocument extends RtfElement {
                     out.write('?');
                 }
             } else if ((c == '\\') || (c == '{') || (c == '}')) {
-                //escape
+                // escape
                 out.write(FSC_BACKSLASH);
                 out.write(c);
             } else if (c == '$' && len - k >= FSC_NEWPAGE.length && subMatch(str, k, FSC_NEWPAGE)) {
@@ -270,11 +270,11 @@ public class RtfDocument extends RtfElement {
             } else {
                 if ((c > 0xff) || ((c > 'z') && alwaysUseUniCode)) {
                     if (useHex && c <= 0xff) {
-                        //encode as 2 char hex string 
+                        // encode as 2 char hex string
                         out.write(FSC_HEX_PREFIX);
                         out.write(RtfImage.byte2charLUT, c * 2, 2);
                     } else {
-                        //encode as decimal, signed short value
+                        // encode as decimal, signed short value
                         out.write(FSC_UNI_PREFIX);
                         String s = Short.toString((short) c);
                         for (int x = 0; x < s.length(); x++) {

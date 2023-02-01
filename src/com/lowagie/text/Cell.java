@@ -555,7 +555,7 @@ public class Cell extends Rectangle implements TextElementArray {
         groupChange = value;
     }
 
-// arraylist stuff
+    // arraylist stuff
 
     /**
      * Gets the number of <CODE>Element</CODE>s in the Cell.

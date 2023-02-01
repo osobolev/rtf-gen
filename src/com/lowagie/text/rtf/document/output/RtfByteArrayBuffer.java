@@ -125,7 +125,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
             return;
 
         if (pos == buffer.length) {
-            //add old buffer, alloc new (possibly larger) buffer
+            // add old buffer, alloc new (possibly larger) buffer
             arrays.add(buffer);
             int newSize = buffer.length;
             buffer = null;
@@ -137,7 +137,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
             }
             buffer = new byte[newSize];
         } else {
-            //copy buffer contents to newly allocated buffer
+            // copy buffer contents to newly allocated buffer
             byte[] c = new byte[pos];
             System.arraycopy(buffer, 0, c, 0, pos);
             arrays.add(c);

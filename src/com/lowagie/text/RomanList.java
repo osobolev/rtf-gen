@@ -55,7 +55,7 @@ import com.lowagie.text.factories.RomanNumberFactory;
  */
 public class RomanList extends List {
 
-// constructors
+    // constructors
 
     /**
      * Initialization
@@ -84,7 +84,7 @@ public class RomanList extends List {
         this.lowercase = lowercase;
     }
 
-// overridden method
+    // overridden method
 
     /**
      * Adds an <CODE>Object</CODE> to the <CODE>List</CODE>.

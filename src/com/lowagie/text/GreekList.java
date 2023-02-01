@@ -55,7 +55,7 @@ import com.lowagie.text.factories.GreekAlphabetFactory;
  */
 public class GreekList extends List {
 
-// constructors
+    // constructors
 
     /**
      * Initialization
@@ -87,7 +87,7 @@ public class GreekList extends List {
         setGreekFont();
     }
 
-// helper method
+    // helper method
 
     /**
      * change the font to SYMBOL
@@ -97,7 +97,7 @@ public class GreekList extends List {
         symbol.setFont(FontFactory.getFont(FontFactory.SYMBOL, fontsize, Font.NORMAL));
     }
 
-// overridden method
+    // overridden method
 
     /**
      * Adds an <CODE>Object</CODE> to the <CODE>List</CODE>.

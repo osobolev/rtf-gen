@@ -505,7 +505,7 @@ public class Rectangle implements Element {
         backgroundColor = GrayColor.create(value);
     }
 
-//	 METHODS TO GET/SET THE BORDER:
+    // METHODS TO GET/SET THE BORDER:
 
     /**
      * Returns the exact type of the border.
