@@ -229,18 +229,18 @@ public class RtfDocument extends RtfElement {
     /**
      * Writes the given string to the given {@link OutputStream} encoding the string characters.
      *
-     * @param out            destination OutputStream
-     * @param str            string to write
-     * @param useHex         if <code>true</code> hex encoding characters is preferred to unicode encoding if possible
-     * @param softLineBreaks if <code>true</code> return characters are written as soft line breaks
+     * @param out              destination OutputStream
+     * @param str              string to write
+     * @param useHex           if <code>true</code> hex encoding characters is preferred to unicode encoding if possible
+     * @param alwaysUseUniCode if <code>true</code> then always translate characters past 'z' into unicode representations
+     * @param softLineBreaks   if <code>true</code> return characters are written as soft line breaks
      * @throws IOException
      */
-    public void filterSpecialChar(OutputStream out, String str, boolean useHex, boolean softLineBreaks) throws IOException {
+    public static void writeString(OutputStream out, String str, boolean useHex, boolean alwaysUseUniCode, boolean softLineBreaks) throws IOException {
         if (out == null) {
             throw new NullPointerException("null OutpuStream");
         }
 
-        boolean alwaysUseUniCode = this.documentSettings.isAlwaysUseUnicode();
         if (str == null) {
             return;
         }
@@ -287,6 +287,20 @@ public class RtfDocument extends RtfElement {
                 }
             }
         }
+    }
+
+    /**
+     * Writes the given string to the given {@link OutputStream} encoding the string characters.
+     *
+     * @param out            destination OutputStream
+     * @param str            string to write
+     * @param useHex         if <code>true</code> hex encoding characters is preferred to unicode encoding if possible
+     * @param softLineBreaks if <code>true</code> return characters are written as soft line breaks
+     * @throws IOException
+     */
+    public void filterSpecialChar(OutputStream out, String str, boolean useHex, boolean softLineBreaks) throws IOException {
+        boolean alwaysUseUniCode = this.documentSettings.isAlwaysUseUnicode();
+        writeString(out, str, useHex, alwaysUseUniCode, softLineBreaks);
     }
 
     /**
