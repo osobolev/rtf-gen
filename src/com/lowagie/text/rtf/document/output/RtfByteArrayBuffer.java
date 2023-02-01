@@ -274,7 +274,7 @@ public final class RtfByteArrayBuffer extends OutputStream {
     /**
      * Returns the internal list of byte array buffers without copying the buffer contents.
      *
-     * @return number of bytes written
+     * @return written bytes
      */
     public byte[][] toByteArrayArray() {
         flushBuffer();

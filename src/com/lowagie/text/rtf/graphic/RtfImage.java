@@ -190,9 +190,7 @@ public class RtfImage extends RtfElement {
      * @throws DocumentException If an error occurs accessing the image content
      */
     private byte[][] getImageData(Image image) throws DocumentException {
-        RtfByteArrayBuffer bab = new RtfByteArrayBuffer();
-
-        try {
+        try (RtfByteArrayBuffer bab = new RtfByteArrayBuffer()) {
             if (imageType == Image.ORIGINAL_BMP) {
                 bab.append(MetaDo.wrapBMP(image));
             } else {
