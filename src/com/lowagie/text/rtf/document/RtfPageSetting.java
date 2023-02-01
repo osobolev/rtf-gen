@@ -191,18 +191,12 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
     public void writeSectionDefinition(OutputStream result) throws IOException {
         if (landscape) {
             result.write(LANDSCAPE);
-            result.write(SECTION_PAGE_WIDTH);
-            result.write(intToByteArray(pageWidth));
-            result.write(SECTION_PAGE_HEIGHT);
-            result.write(intToByteArray(pageHeight));
-            this.document.outputDebugLinebreak(result);
-        } else {
-            result.write(SECTION_PAGE_WIDTH);
-            result.write(intToByteArray(pageWidth));
-            result.write(SECTION_PAGE_HEIGHT);
-            result.write(intToByteArray(pageHeight));
-            this.document.outputDebugLinebreak(result);
         }
+        result.write(SECTION_PAGE_WIDTH);
+        result.write(intToByteArray(pageWidth));
+        result.write(SECTION_PAGE_HEIGHT);
+        result.write(intToByteArray(pageHeight));
+        this.document.outputDebugLinebreak(result);
         result.write(SECTION_MARGIN_LEFT);
         result.write(intToByteArray(marginLeft));
         result.write(SECTION_MARGIN_RIGHT);
