@@ -49,6 +49,8 @@
 package com.lowagie.text;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -297,8 +299,8 @@ public class Anchor extends Phrase {
      */
     public URL getUrl() {
         try {
-            return new URL(reference);
-        } catch (MalformedURLException mue) {
+            return new URI(reference).toURL();
+        } catch (URISyntaxException | MalformedURLException mue) {
             return null;
         }
     }
