@@ -1,8 +1,12 @@
+import com.vanniktech.maven.publish.JavaLibrary
+import com.vanniktech.maven.publish.JavadocJar
+
 description = "RTF generation library"
 
 plugins {
-    `module-lib`
     id("com.github.ben-manes.versions") version "0.45.0"
+    id("com.vanniktech.maven.publish") version "0.35.0"
+    `module-lib`
 }
 
 group = "io.github.osobolev"
@@ -12,7 +16,18 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 }
 
-(publishing.publications["mavenJava"] as MavenPublication).pom {
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
+
+    coordinates("${project.group}", "${project.name}", "${project.version}")
+    configure(JavaLibrary(
+        javadocJar = JavadocJar.Javadoc(),
+        sourcesJar = true
+    ))
+}
+
+mavenPublishing.pom {
     name.set("${project.group}:${project.name}")
     description.set("RTF generation library derived from iText-2.1.7. All PDF features and RTF parsing are removed. Code is modernized for Java 8.")
     url.set("https://github.com/osobolev/rtf-gen")
