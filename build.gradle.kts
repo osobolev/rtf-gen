@@ -4,7 +4,7 @@ import com.vanniktech.maven.publish.JavadocJar
 description = "RTF generation library"
 
 plugins {
-    id("com.github.ben-manes.versions") version "0.45.0"
+    id("com.github.ben-manes.versions") version "0.53.0"
     id("com.vanniktech.maven.publish") version "0.35.0"
     `module-lib`
 }
