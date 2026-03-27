@@ -128,7 +128,6 @@ public final class RtfByteArrayBuffer extends OutputStream {
             // add old buffer, alloc new (possibly larger) buffer
             arrays.add(buffer);
             int newSize = buffer.length;
-            buffer = null;
             int max = Math.max(1, size >> 24) << 16;
             while (newSize < max) {
                 newSize <<= 1;
