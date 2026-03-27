@@ -3,13 +3,13 @@ package com.lowagie.text.rtf.document;
 import com.lowagie.text.*;
 import com.lowagie.text.rtf.RtfWriter2;
 import com.lowagie.text.rtf.style.RtfFont;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test creation of a simple RTF document.
@@ -24,7 +24,7 @@ public class CreateSimpleRTFDocumentTest {
 
         // Delete output file if it already exists
         if (outputFile.exists()) {
-            assertTrue("Could NOT delete existing output file!", outputFile.delete());
+            assertTrue(outputFile.delete(), "Could NOT delete existing output file!");
         }
 
         // Create a document using A4 paper format
@@ -53,6 +53,6 @@ public class CreateSimpleRTFDocumentTest {
 
         // Write document to OUTPUT_FILE.
         rtf.close();
-        assertTrue("RTF document was NOT created!", outputFile.exists());
+        assertTrue(outputFile.exists(), "RTF document was NOT created!");
     }
 }

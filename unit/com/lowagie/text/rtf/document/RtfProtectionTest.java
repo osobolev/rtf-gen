@@ -54,7 +54,7 @@ package com.lowagie.text.rtf.document;
 
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfTestBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

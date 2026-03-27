@@ -52,8 +52,8 @@ package com.lowagie.text.rtf;
 
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.document.RtfDocument;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -91,7 +91,7 @@ public class RtfTestBase {
      */
     protected static void assertEquals(String pattern, ByteArrayOutputStream out) throws IOException {
         out.close();
-        Assert.assertEquals(pattern, out.toString());
+        Assertions.assertEquals(pattern, out.toString());
     }
 
     /**

@@ -14,7 +14,8 @@ group = "io.github.osobolev"
 version = "1.0.5"
 
 dependencies {
-    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 mavenPublishing {
@@ -54,5 +55,17 @@ mavenPublishing.pom {
         connection.set("scm:git:https://github.com/osobolev/rtf-gen.git")
         developerConnection.set("scm:git:https://github.com/osobolev/rtf-gen.git")
         url.set("https://github.com/osobolev/rtf-gen")
+    }
+}
+
+tasks.withType(com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask::class).configureEach {
+    resolutionStrategy {
+        componentSelection {
+            all(Action<com.github.benmanes.gradle.versions.updates.resolutionstrategy.ComponentSelectionWithCurrent> {
+                if (candidate.version.contains("-M")) {
+                    reject("Milestone version")
+                }
+            })
+        }
     }
 }
