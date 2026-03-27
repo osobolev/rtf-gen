@@ -399,9 +399,9 @@ public class RtfPageSetting extends RtfElement implements RtfExtendedElement {
             return true;
         }
         if (!rotate && guessFormat(pageSize, true)) {
-            int x = pageWidth;
+            int tmp = pageWidth;
             pageWidth = pageHeight;
-            pageHeight = x;
+            pageHeight = tmp;
             return true;
         }
         return false;
