@@ -136,7 +136,7 @@ public class RtfParagraphStyle extends RtfFont {
      */
     public static final RtfParagraphStyle STYLE_HEADING_3 = new RtfParagraphStyle("heading 3", "Normal");
 
-    /**
+    /*
      * Initializes the properties of the styles.
      */
     static {
