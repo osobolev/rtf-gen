@@ -486,7 +486,7 @@ public class List implements TextElementArray {
      * @return a <CODE>leading</CODE>
      */
     public float getTotalLeading() {
-        if (list.size() < 1) {
+        if (list.isEmpty()) {
             return -1;
         }
         ListItem item = (ListItem) list.get(0);
