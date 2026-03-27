@@ -50,10 +50,8 @@ package com.lowagie.text;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -152,34 +150,33 @@ public class Image extends Rectangle {
 
     private static final class ImageInfo {
 
-        final BufferedImage image;
+        final int width;
+        final int height;
         final int type;
 
-        ImageInfo(BufferedImage image, int type) {
-            this.image = image;
+        ImageInfo(int width, int height, int type) {
+            this.width = width;
+            this.height = height;
             this.type = type;
         }
     }
 
     private Image(URL url, byte[] originalData, ImageInfo info) {
-        this(url, originalData, info.image.getWidth(), info.image.getHeight(), info.type);
+        this(url, originalData, info.width, info.height, info.type);
     }
 
-    private static ImageInfo readImage(Object input) throws IOException {
+    private static ImageInfo readImage(InputStream input) throws IOException {
         try (ImageInputStream iis = ImageIO.createImageInputStream(input)) {
             if (iis == null)
                 throw new IIOException("Can't create an ImageInputStream!");
             Iterator<ImageReader> readers = ImageIO.getImageReaders(iis);
-            if (readers.hasNext()) {
-                ImageReader reader = readers.next();
-                ImageReadParam param = reader.getDefaultReadParam();
+            if (!readers.hasNext())
+                throw new IOException("Cannot detect image format");
+            ImageReader reader = readers.next();
+            try {
                 reader.setInput(iis, true, true);
-                BufferedImage bi;
-                try {
-                    bi = reader.read(0, param);
-                } finally {
-                    reader.dispose();
-                }
+                int width = reader.getWidth(0);
+                int height = reader.getHeight(0);
                 String format = reader.getFormatName();
                 int type;
                 if ("gif".equalsIgnoreCase(format)) {
@@ -193,9 +190,9 @@ public class Image extends Rectangle {
                 } else {
                     type = ORIGINAL_NONE;
                 }
-                return new ImageInfo(bi, type);
-            } else {
-                throw new IOException("Cannot detect image format");
+                return new ImageInfo(width, height, type);
+            } finally {
+                reader.dispose();
             }
         }
     }
