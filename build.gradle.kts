@@ -13,11 +13,6 @@ plugins {
 group = "io.github.osobolev"
 version = "1.0.5"
 
-dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-}
-
 mavenPublishing {
     publishToMavenCentral()
     signAllPublications()
