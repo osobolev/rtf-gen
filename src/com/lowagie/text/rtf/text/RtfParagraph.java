@@ -52,7 +52,6 @@ import com.lowagie.text.*;
 import com.lowagie.text.rtf.RtfBasicElement;
 import com.lowagie.text.rtf.RtfElement;
 import com.lowagie.text.rtf.document.RtfDocument;
-import com.lowagie.text.rtf.graphic.RtfImage;
 import com.lowagie.text.rtf.style.RtfFont;
 import com.lowagie.text.rtf.style.RtfParagraphStyle;
 
@@ -110,8 +109,6 @@ public class RtfParagraph extends RtfPhrase {
             Element chunk = paragraph.get(i);
             if (chunk instanceof Chunk) {
                 ((Chunk) chunk).setFont(baseFont.difference(((Chunk) chunk).getFont()));
-            } else if (chunk instanceof RtfImage) {
-                ((RtfImage) chunks.get(i)).setAlignment(this.paragraphStyle.getAlignment());
             }
             try {
                 RtfBasicElement[] rtfElements = doc.getMapper().mapElement(chunk);
