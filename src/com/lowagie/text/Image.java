@@ -56,7 +56,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
@@ -222,9 +221,7 @@ public class Image extends Rectangle {
      */
     public static Image getInstance(String filename) throws IOException {
         Path path = Paths.get(filename);
-        byte[] data = Files.readAllBytes(path);
-        ImageInfo info = readImage(new ByteArrayInputStream(data));
-        return new Image(path.toUri().toURL(), data, info);
+        return getInstance(path.toUri().toURL());
     }
 
     /**
