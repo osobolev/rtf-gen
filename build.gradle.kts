@@ -54,13 +54,8 @@ mavenPublishing.pom {
 }
 
 tasks.withType(com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask::class).configureEach {
-    resolutionStrategy {
-        componentSelection {
-            all(Action<com.github.benmanes.gradle.versions.updates.resolutionstrategy.ComponentSelectionWithCurrent> {
-                if (candidate.version.contains("-M")) {
-                    reject("Milestone version")
-                }
-            })
-        }
+    rejectVersionIf {
+        candidate.version.contains("-M") ||
+        candidate.version.contains("-RC")
     }
 }
