@@ -24,31 +24,31 @@ mavenPublishing {
 }
 
 mavenPublishing.pom {
-    name.set("${project.group}:${project.name}")
-    description.set("RTF generation library derived from iText-2.1.7. All PDF features and RTF parsing are removed. Code is modernized for Java 8.")
-    url.set("https://github.com/osobolev/rtf-gen")
+    name = "${project.group}:${project.name}"
+    description = "RTF generation library derived from iText-2.1.7. All PDF features and RTF parsing are removed. Code is modernized for Java 8."
+    url = "https://github.com/osobolev/rtf-gen"
     licenses {
         license {
-            name.set("GNU General Lesser Public License (LGPL) version 3.0")
-            url.set("http://www.gnu.org/licenses/lgpl.html")
-            distribution.set("repo")
+            name = "GNU General Lesser Public License (LGPL) version 3.0"
+            url = "http://www.gnu.org/licenses/lgpl.html"
+            distribution = "repo"
         }
         license {
-            name.set("Mozilla Public License Version 2.0")
-            url.set("http://www.mozilla.org/MPL/2.0/")
-            distribution.set("repo")
+            name = "Mozilla Public License Version 2.0"
+            url = "http://www.mozilla.org/MPL/2.0/"
+            distribution = "repo"
         }
     }
     developers {
         developer {
-            name.set("Oleg Sobolev")
-            organizationUrl.set("https://github.com/osobolev")
+            name = "Oleg Sobolev"
+            organizationUrl = "https://github.com/osobolev"
         }
     }
     scm {
-        connection.set("scm:git:https://github.com/osobolev/rtf-gen.git")
-        developerConnection.set("scm:git:https://github.com/osobolev/rtf-gen.git")
-        url.set("https://github.com/osobolev/rtf-gen")
+        connection = "scm:git:https://github.com/osobolev/rtf-gen.git"
+        developerConnection = "scm:git:https://github.com/osobolev/rtf-gen.git"
+        url = "https://github.com/osobolev/rtf-gen"
     }
 }
 
