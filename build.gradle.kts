@@ -10,7 +10,6 @@ plugins {
 }
 
 group = "io.github.osobolev"
-version = "1.0.7"
 
 mavenPublishing {
     publishToMavenCentral()
